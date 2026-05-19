@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>제주 렌터카 안전경로 비교</title>
+
+<link rel="stylesheet"
+href="https://unpkg.com/leaflet/dist/leaflet.css"/>
+
+<style>
+
+body{
+    margin:0;
+    font-family:Arial,sans-serif;
+}
+
+#map{
+    width:100%;
+    height:100vh;
+}
+
+.panel{
+
+    position:absolute;
+    top:10px;
+    left:10px;
+
+    z-index:1000;
+
+    background:white;
+
+    padding:15px;
+
+    border-radius:12px;
+
+    width:330px;
+
+    box-shadow:0 0 10px rgba(0,0,0,0.25);
+
+}
+
+select,button{
+
+    width:100%;
+
+    padding:10px;
+
+    margin-top:8px;
+
+    border-radius:8px;
+
+    border:1px solid #ccc;
+
+}
+
+button{
+
+    background:#111;
+    color:white;
+
+    cursor:pointer;
+
+}
+
+.card{
+
+    margin-top:10px;
+
+    padding:10px;
+
+    border-radius:10px;
+
+    background:#f5f5f5;
+
+}
+
+.red{
+    border-left:6px solid red;
+}
+
+.green{
+    border-left:6px solid green;
+}
+
+.small{
+
+    font-size:12px;
+    color:#666;
+
+    margin-top:8px;
+
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="panel">
+
+    <b>제주 렌터카 안전경로 비교</b>
+
+    <br><br>
+
+    출발지
+
+    <select id="start">
+
+        <option value="126.5312,33.4996">제주공항</option>
+        <option value="126.9347,33.4629">성산일출봉</option>
+        <option value="126.4128,33.2498">중문관광단지</option>
+        <option value="126.3108,33.4628">애월해안도로</option>
+        <option value="126.2412,33.3938">협재해수욕장</option>
+        <option value="126.6682,33.5435">함덕해수욕장</option>
+        <option value="126.5638,33.2499">서귀포매일올레시장</option>
+        <option value="126.4625,33.3580">1100고지</option>
+        <option value="126.9280,33.4738">성산항</option>
+        <option value="126.3695,33.2895">카멜리아힐</option>
+        <option value="126.2898,33.3060">오설록 티뮤지엄</option>
+
+    </select>
+
+    목적지
+
+    <select id="end">
+
+        <option value="126.9347,33.4629">성산일출봉</option>
+        <option value="126.4128,33.2498">중문관광단지</option>
+        <option value="126.3108,33.4628">애월해안도로</option>
+        <option value="126.2412,33.3938">협재해수욕장</option>
+        <option value="126.6682,33.5435">함덕해수욕장</option>
+        <option value="126.5638,33.2499">서귀포매일올레시장</option>
+        <option value="126.4625,33.3580">1100고지</option>
+        <option value="126.9280,33.4738">성산항</option>
+        <option value="126.3695,33.2895">카멜리아힐</option>
+        <option value="126.2898,33.3060">오설록 티뮤지엄</option>
+
+    </select>
+
+    <button onclick="drawRoutes()">
+        안전경로 비교하기
+    </button>
+
+    <div id="info"></div>
+
+    <div class="small">
+
+        ※ 현재 사고건수는 시연용 예시입니다.<br>
+        실제 사고데이터 기반으로 수정 가능합니다.
+
+    </div>
+
+</div>
+
+<div id="map"></div>
+
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
+<script>
+
+const apiKey =
+"eyJvcmciOiI1YjNjZTM1OTc4NTExMTAwMDFjZjYyNDgiLCJpZCI6ImVkN2QwYzg1M2JlNjRhMjliZWY0ZGUxYTBhMGMzM2Q0IiwiaCI6Im11cm11cjY0In0=";
+
+const map = L.map('map').setView([33.38,126.55],10);
+
+L.tileLayer(
+'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+{
+attribution:'© OpenStreetMap contributors'
+}
+).addTo(map);
+
+let routeLayer;
+
+async function drawRoutes(){
+
+    if(routeLayer){
+        map.removeLayer(routeLayer);
+    }
+
+    routeLayer = L.layerGroup().addTo(map);
+
+    const startSelect =
+    document.getElementById("start");
+
+    const endSelect =
+    document.getElementById("end");
+
+    const startName =
+    startSelect.options[startSelect.selectedIndex].text;
+
+    const endName =
+    endSelect.options[endSelect.selectedIndex].text;
+
+    const startValue =
+    startSelect.value.split(",");
+
+    const endValue =
+    endSelect.value.split(",");
+
+    const startLng =
+    parseFloat(startValue[0]);
+
+    const startLat =
+    parseFloat(startValue[1]);
+
+    const endLng =
+    parseFloat(endValue[0]);
+
+    const endLat =
+    parseFloat(endValue[1]);
+
+    if(startLng===endLng && startLat===endLat){
+
+        alert("출발지와 목적지가 같습니다.");
+
+        return;
+
+    }
+
+    document.getElementById("info").innerHTML =
+    "경로를 불러오는 중입니다...";
+
+    const body = {
+
+        coordinates:[
+            [startLng,startLat],
+            [endLng,endLat]
+        ],
+
+        alternative_routes:{
+            target_count:2,
+            weight_factor:2,
+            share_factor:0.6
+        }
+
+    };
+
+    try{
+
+        const response = await fetch(
+
+        "https://api.openrouteservice.org/v2/directions/driving-car/geojson",
+
+        {
+
+            method:"POST",
+
+            headers:{
+
+                "Authorization":apiKey,
+                "Content-Type":"application/json"
+
+            },
+
+            body:JSON.stringify(body)
+
+        });
+
+        if(!response.ok){
+
+            const errorText =
+            await response.text();
+
+            alert(
+            "경로 불러오기 실패!\n\n"+
+            errorText
+            );
+
+            document.getElementById("info").innerHTML =
+            "경로 불러오기 실패";
+
+            return;
+
+        }
+
+        const data =
+        await response.json();
+
+        if(!data.features ||
+           data.features.length===0){
+
+            alert("경로 데이터를 찾지 못했어요.");
+
+            return;
+
+        }
+
+        const routes =
+        data.features;
+
+        const colors =
+        ["red","green"];
+
+        const accidents =
+        [23,7];
+
+        const risks =
+        ["높음","낮음"];
+
+        const reasons = [
+
+            "교차로·급차선 변경 많음",
+            "비교적 단순한 도로"
+
+        ];
+
+        document.getElementById("info").innerHTML =
+
+        "<b>"+startName+
+        " → "+
+        endName+
+        "</b>";
+
+        let allCoords = [];
+
+        routes.forEach((route,index)=>{
+
+            const coords =
+            route.geometry.coordinates.map(
+            c=>[c[1],c[0]]
+            );
+
+            allCoords =
+            allCoords.concat(coords);
+
+            const distanceKm =
+            (
+            route.properties.summary.distance
+            /1000
+            ).toFixed(1);
+
+            const durationMin =
+            Math.round(
+            route.properties.summary.duration
+            /60
+            );
+
+            L.polyline(coords,{
+
+                color:colors[index] || "blue",
+
+                weight:7,
+
+                opacity:0.8
+
+            })
+
+            .addTo(routeLayer)
+
+            .bindPopup(
+
+                "<b>"+(index+1)+"코스</b><br>"+
+
+                "거리: "+
+                distanceKm+
+                "km<br>"+
+
+                "예상시간: "+
+                durationMin+
+                "분<br>"+
+
+                "사고 데이터: "+
+                (accidents[index] || 0)+
+                "건<br>"+
+
+                "위험도: "+
+                (risks[index] || "보통")+
+                "<br>"+
+
+                "위험요인: "+
+                (reasons[index] || "정보 없음")
+
+            );
+
+            const card =
+            document.createElement("div");
+
+            card.className =
+            "card " +
+            (index===0 ? "red":"green");
+
+            card.innerHTML =
+
+            "<b>"+(index+1)+"코스</b><br>"+
+
+            "거리: "+
+            distanceKm+
+            "km<br>"+
+
+            "예상시간: "+
+            durationMin+
+            "분<br>"+
+
+            "사고 데이터: "+
+            (accidents[index] || 0)+
+            "건<br>"+
+
+            "위험도: "+
+            (risks[index] || "보통")+
+            "<br>"+
+
+            "위험요인: "+
+            (reasons[index] || "정보 없음");
+
+            document.getElementById("info")
+            .appendChild(card);
+
+        });
+
+        L.marker([startLat,startLng])
+
+        .addTo(routeLayer)
+
+        .bindPopup(
+        "출발지: "+startName
+        );
+
+        L.marker([endLat,endLng])
+
+        .addTo(routeLayer)
+
+        .bindPopup(
+        "목적지: "+endName
+        );
+
+        map.fitBounds(
+
+            L.latLngBounds(allCoords),
+
+            {
+                padding:[40,40]
+            }
+
+        );
+
+    }
+
+    catch(error){
+
+        alert(
+        "오류가 발생했어요.\n\n"+
+        error.message
+        );
+
+        document.getElementById("info").innerHTML =
+        "오류 발생";
+
+    }
+
+}
+
+</script>
+
+</body>
+</html>
