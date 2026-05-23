@@ -437,9 +437,10 @@ function getCardColor(level){
   return "green";
 }
 
-  function shortReasons(reasonText){
+ function shortReasons(reasonText){
   return reasonText
-    .split(" / ")
+    .split(",")
+    .map(item => item.trim())
     .slice(0,3)
     .join(" · ");
 }
