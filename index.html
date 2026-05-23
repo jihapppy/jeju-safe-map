@@ -343,9 +343,7 @@ async function drawRoutes(){
         "위험점수: "+risk.score+"점<br>"+
         "통과 위험권역: "+risk.zoneNames+"<br>"+
         "주요 위험요인: "+risk.reasons;
-        
-
-      document.getElementById("info").appendChild(card);
+        document.getElementById("info").appendChild(card);
     });
 
     L.marker([startLat,startLng])
