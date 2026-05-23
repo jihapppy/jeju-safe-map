@@ -330,8 +330,7 @@ async function drawRoutes(){
         "예상시간: "+durationMin+"분<br>"+
         "위험도: "+risk.icon+" "+risk.level+"<br>"+
         "통과 위험권역: "+risk.zoneNames+"<br>"+
-        "주요 위험요인: "+risk.reasons
-      );
+        "주요 위험요인: "+shortReasons(risk.reasons);
 
       const card = document.createElement("div");
       card.className = "card " + (index === 0 ? "red" : "green");
@@ -343,7 +342,8 @@ async function drawRoutes(){
         "위험도: <b>"+risk.icon+" "+risk.level+"</b><br>"+
         "위험점수: "+risk.score+"점<br>"+
         "통과 위험권역: "+risk.zoneNames+"<br>"+
-        "주요 위험요인: "+risk.reasons;
+        "주요 위험요인: "+shortReasons(risk.reasons);
+        
 
       document.getElementById("info").appendChild(card);
     });
@@ -435,6 +435,13 @@ function getCardColor(level){
   if(level === "높음") return "red";
   if(level === "중간") return "orange";
   return "green";
+}
+
+  function shortReasons(reasonText){
+  return reasonText
+    .split(" / ")
+    .slice(0,3)
+    .join(" · ");
 }
 </script>
 
