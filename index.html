@@ -437,15 +437,17 @@ function getCardColor(level){
   return "green";
 }
 
-  function deg2rad(deg){
-  return deg * (Math.PI/180);
+  function shortReasons(reasonText){
+  return reasonText
+    .split("/")
+    .join(",")
+    .split(",")
+    .map(item => item.trim())
+    .filter(item => item.length > 0)
+    .slice(0,3)
+    .join(" · ");
 }
 
-function getCardColor(level){
-  if(level === "높음") return "red";
-  if(level === "중간") return "orange";
-  return "green";
-}
 </script>
 
 </body>
