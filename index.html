@@ -334,7 +334,7 @@ async function drawRoutes(){
       );
 
       const card = document.createElement("div");
-      card.className = "card " + getCardColor(risk.level);
+      card.className = "card " + (index === 0 ? "red" : "green");
 
       card.innerHTML =
         "<b>"+(index+1)+"코스</b><br>"+
