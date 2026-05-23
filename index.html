@@ -330,20 +330,22 @@ async function drawRoutes(){
         "예상시간: "+durationMin+"분<br>"+
         "위험도: "+risk.icon+" "+risk.level+"<br>"+
         "통과 위험권역: "+risk.zoneNames+"<br>"+
-        "주요 위험요인: "+risk.reasons;
+        "주요 위험요인: "+shortReasons(risk.reasons)
+        );
 
       const card = document.createElement("div");
       card.className = "card " + (index === 0 ? "red" : "green");
 
-      card.innerHTML =
-        "<b>"+(index+1)+"코스</b><br>"+
-        "거리: "+distanceKm+"km<br>"+
-        "예상시간(실시간 교통 미반영): "+durationMin+"분<br>"+
-        "위험도: <b>"+risk.icon+" "+risk.level+"</b><br>"+
-        "위험점수: "+risk.score+"점<br>"+
-        "통과 위험권역: "+risk.zoneNames+"<br>"+
-        "주요 위험요인: "+risk.reasons;
-        document.getElementById("info").appendChild(card);
+card.innerHTML =
+  "<b>"+(index+1)+"코스</b><br>"+
+  "거리: "+distanceKm+"km<br>"+
+  "예상시간(실시간 교통 미반영): "+durationMin+"분<br>"+
+  "위험도: <b>"+risk.icon+" "+risk.level+"</b><br>"+
+  "위험점수: "+risk.score+"점<br>"+
+  "통과 위험권역: "+risk.zoneNames+"<br>"+
+  "주요 위험요인: "+shortReasons(risk.reasons);
+
+document.getElementById("info").appendChild(card);
     });
 
     L.marker([startLat,startLng])
@@ -435,6 +437,15 @@ function getCardColor(level){
   return "green";
 }
 
+  function deg2rad(deg){
+  return deg * (Math.PI/180);
+}
+
+function getCardColor(level){
+  if(level === "높음") return "red";
+  if(level === "중간") return "orange";
+  return "green";
+}
 </script>
 
 </body>
