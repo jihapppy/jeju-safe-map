@@ -305,7 +305,35 @@ async function drawRoutes(){
     }
 
     const routes = data.features;
-    const colors = ["red","green"];
+
+const routeRisks = routes.map(route => {
+  const coords = route.geometry.coordinates.map(c => [c[1], c[0]]);
+  return analyzeRouteRisk(coords);
+});
+
+let colors = [];
+
+if(routeRisks.length === 2){
+
+  if(routeRisks[0].score > routeRisks[1].score){
+
+      colors = ["red","green"];
+
+  }else if(routeRisks[0].score < routeRisks[1].score){
+
+      colors = ["green","red"];
+
+  }else{
+
+      colors = ["orange","orange"];
+
+  }
+
+}else{
+
+  colors = ["blue"];
+
+}
 
     document.getElementById("info").innerHTML =
       "<b>"+startName+" → "+endName+"</b>";
