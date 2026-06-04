@@ -303,42 +303,6 @@ async function searchAddress(){
 }
   
 
-  document.getElementById("info").innerHTML = "주소를 좌표로 변환하는 중입니다...";
-
-  try{
-    const url =
-      "https://api.openrouteservice.org/geocode/search?api_key=" +
-      apiKey +
-      "&text=" + encodeURIComponent(address) +
-      "&boundary.country=KR";
-
-    const response = await fetch(url);
-    const data = await response.json();
-
-    if(!data.features || data.features.length === 0){
-      alert("주소를 찾지 못했어요. 장소명을 조금 더 정확히 입력해주세요.");
-      document.getElementById("info").innerHTML = "";
-      return;
-    }
-
-    const coords = data.features[0].geometry.coordinates;
-
-    customStart = {
-      lng: coords[0],
-      lat: coords[1]
-    };
-
-    customStartName = address;
-    document.getElementById("startSelect").value = "";
-
-    document.getElementById("info").innerHTML =
-      "출발지가 '" + address + "'(으)로 설정되었습니다.";
-
-  }catch(error){
-    alert("주소 변환 중 오류가 발생했어요.\n\n" + error.message);
-  }
-}
-
 async function drawRoutes(){
   if(routeLayer){
     map.removeLayer(routeLayer);
