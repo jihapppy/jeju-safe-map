@@ -203,6 +203,7 @@ let customStartName = null;
   
 let lastStart = null;
 let lastEnd = null;
+  let recommendedRoute = 0;
   
 const dangerZones = [
   { name:"공항권", lat:33.4996, lng:126.5312, radiusKm:4, score:3, reason:"렌터카 인수 직후 초행운전, 급차선 변경" },
@@ -347,6 +348,7 @@ lastEnd = {
   lng: endLng,
   name: endName
 };
+  recommendedRoute = recommendedIndex;
 
   if(startLng === endLng && startLat === endLat){
     alert("출발지와 목적지가 같습니다.");
@@ -455,11 +457,41 @@ lastEnd = {
 
       document.getElementById("info").appendChild(card);
     });
-    
-const naverBtn = document.createElement("button");
-naverBtn.innerHTML = "네이버지도에서 목적지 길안내";
-naverBtn.onclick = openNaverMap;
-document.getElementById("info").appendChild(naverBtn);
+let recommendedIndex = 0;
+
+if(routeRisks.length === 2){
+
+    if(routeRisks[0].score > routeRisks[1].score){
+        recommendedIndex = 1;
+    }else{
+        recommendedIndex = 0;
+    }
+
+}
+
+const guide = document.createElement("div");
+
+guide.className = "card green";
+
+guide.innerHTML =
+  "<b>🟢 추천 안전경로</b><br>" +
+  (recommendedIndex + 1) +
+  "코스는 상대적으로 위험도가 낮아 추천되는 경로입니다.";
+
+document.getElementById("info").appendChild(guide);
+
+const safeBtn = document.createElement("button");
+
+safeBtn.innerHTML =
+    "🟢 추천 안전경로 길안내";
+
+safeBtn.onclick = function(){
+
+    openNaverMap(recommendedIndex);
+
+};
+
+document.getElementById("info").appendChild(safeBtn);
     L.marker([startLat,startLng])
       .addTo(routeLayer)
       .bindPopup("출발지: "+startName);
@@ -548,7 +580,7 @@ function getCardColorByLine(color){
   if(color === "green") return "green";
   return "blue";
 }
-  function openNaverMap(){
+  function openNaverMap(routeIndex){
   if(!lastStart || !lastEnd){
     alert("먼저 안전경로를 분석해주세요.");
     return;
