@@ -483,6 +483,15 @@ safeBtn.onclick = function(){
 };
 
 document.getElementById("info").appendChild(safeBtn);
+    const tmapBtn = document.createElement("button");
+
+tmapBtn.innerHTML = "🔵 TMAP 길안내";
+
+tmapBtn.onclick = function(){
+  openTmap();
+};
+
+document.getElementById("info").appendChild(tmapBtn);
     L.marker([startLat,startLng])
       .addTo(routeLayer)
       .bindPopup("출발지: "+startName);
@@ -590,6 +599,22 @@ function getCardColorByLine(color){
     "&appname=" + encodeURIComponent(appname);
 
   window.location.href = url;
+}
+  function openTmap(){
+
+  if(!lastEnd){
+    alert("먼저 안전경로를 분석해주세요.");
+    return;
+  }
+
+  const url =
+    "tmap://route?" +
+    "goalx=" + lastEnd.lng +
+    "&goaly=" + lastEnd.lat +
+    "&goalname=" + encodeURIComponent(lastEnd.name);
+
+  window.location.href = url;
+
 }
 </script>
 
