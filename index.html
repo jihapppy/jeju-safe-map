@@ -254,8 +254,12 @@ async function searchAddress(){
     const url =
       "https://api.openrouteservice.org/geocode/search?api_key=" +
       apiKey +
-      "&text=" + encodeURIComponent(address) +
-      "&boundary.country=KR&size=5";
+     "&text=" + encodeURIComponent(address + " 제주") +
+"&boundary.rect.min_lon=126.10" +
+"&boundary.rect.min_lat=33.10" +
+"&boundary.rect.max_lon=126.98" +
+"&boundary.rect.max_lat=33.60" +
+"&size=5";
 
     const response = await fetch(url);
     const data = await response.json();
