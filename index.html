@@ -477,7 +477,7 @@ guide.innerHTML =
 document.getElementById("info").appendChild(guide);
 
 const safeBtn = document.createElement("button");
-safeBtn.innerHTML = "🟢 추천 안전경로 길안내";
+safeBtn.innerHTML = "🟢 네이버지도 길안내";
 safeBtn.onclick = function(){
   openNaverMap(recommendedIndex);
 };
@@ -492,6 +492,16 @@ tmapBtn.onclick = function(){
 };
 
 document.getElementById("info").appendChild(tmapBtn);
+    const notice = document.createElement("div");
+
+notice.style.fontSize = "13px";
+notice.style.color = "#666";
+notice.style.marginTop = "10px";
+
+notice.innerHTML =
+  "* 가장 안전한 추천 경로로 안내됩니다.";
+
+document.getElementById("info").appendChild(notice);
     L.marker([startLat,startLng])
       .addTo(routeLayer)
       .bindPopup("출발지: "+startName);
