@@ -200,7 +200,10 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 let routeLayer;
 let customStart = null;
 let customStartName = null;
-
+  
+let lastStart = null;
+let lastEnd = null;
+  
 const dangerZones = [
   { name:"공항권", lat:33.4996, lng:126.5312, radiusKm:4, score:3, reason:"렌터카 인수 직후 초행운전, 급차선 변경" },
   { name:"제주시 도심권", lat:33.5000, lng:126.5200, radiusKm:5, score:3, reason:"도심 교차로 밀집, 보행자·차량 혼재" },
@@ -333,6 +336,17 @@ async function drawRoutes(){
   const endLng = parseFloat(endValue[0]);
   const endLat = parseFloat(endValue[1]);
   const endName = endSelect.options[endSelect.selectedIndex].text;
+  lastStart = {
+  lat: startLat,
+  lng: startLng,
+  name: startName
+};
+
+lastEnd = {
+  lat: endLat,
+  lng: endLng,
+  name: endName
+};
 
   if(startLng === endLng && startLat === endLat){
     alert("출발지와 목적지가 같습니다.");
@@ -441,7 +455,11 @@ async function drawRoutes(){
 
       document.getElementById("info").appendChild(card);
     });
-
+    
+const naverBtn = document.createElement("button");
+naverBtn.innerHTML = "네이버지도 길안내";
+naverBtn.onclick = openNaverMap;
+document.getElementById("info").appendChild(naverBtn);
     L.marker([startLat,startLng])
       .addTo(routeLayer)
       .bindPopup("출발지: "+startName);
@@ -529,6 +547,26 @@ function getCardColorByLine(color){
   if(color === "red") return "red";
   if(color === "green") return "green";
   return "blue";
+}
+  function openNaverMap(){
+  if(!lastStart || !lastEnd){
+    alert("먼저 안전경로를 분석해주세요.");
+    return;
+  }
+
+  const appname = "https://jihapppy.github.io/jeju-safe-map";
+
+  const url =
+    "nmap://route/car?" +
+    "slat=" + lastStart.lat +
+    "&slng=" + lastStart.lng +
+    "&sname=" + encodeURIComponent(lastStart.name) +
+    "&dlat=" + lastEnd.lat +
+    "&dlng=" + lastEnd.lng +
+    "&dname=" + encodeURIComponent(lastEnd.name) +
+    "&appname=" + encodeURIComponent(appname);
+
+  window.location.href = url;
 }
 </script>
 
