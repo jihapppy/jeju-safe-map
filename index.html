@@ -421,58 +421,55 @@ lastEnd = {
 
     let allCoords = [];
 
-    routes.forEach((route,index)=>{
-      const coords = route.geometry.coordinates.map(c=>[c[1],c[0]]);
-      allCoords = allCoords.concat(coords);
+routes.forEach((route,index)=>{
+  const coords = route.geometry.coordinates.map(c=>[c[1],c[0]]);
+  allCoords = allCoords.concat(coords);
 
-      const distanceKm = (route.properties.summary.distance / 1000).toFixed(1);
-      const durationMin = Math.round(route.properties.summary.duration / 60);
+  const distanceKm = (route.properties.summary.distance / 1000).toFixed(1);
+  const durationMin = Math.round(route.properties.summary.duration / 60);
 
-      const risk = routeRisks[index];
+  const risk = routeRisks[index];
 
-      L.polyline(coords,{
-        color:colors[index] || "blue",
-        weight:7,
-        opacity:0.85
-      })
-      .addTo(routeLayer)
-      .bindPopup(
-        "<b>"+(index+1)+"코스</b><br>"+
-        "거리: "+distanceKm+"km<br>"+
-        "예상시간: "+durationMin+"분<br>"+
-        "위험도: "+risk.icon+" "+risk.level+"<br>"+
-        "통과 위험권역: "+risk.zoneNames
-      );
+  L.polyline(coords,{
+    color:colors[index] || "blue",
+    weight:7,
+    opacity:0.85
+  })
+  .addTo(routeLayer)
+  .bindPopup(
+    "<b>"+(index+1)+"코스</b><br>"+
+    "거리: "+distanceKm+"km<br>"+
+    "예상시간: "+durationMin+"분<br>"+
+    "위험도: "+risk.icon+" "+risk.level+"<br>"+
+    "통과 위험권역: "+risk.zoneNames
+  );
 
-      const card = document.createElement("div");
-      card.className = "card " + getCardColorByLine(colors[index]);
+  const card = document.createElement("div");
+  card.className = "card " + getCardColorByLine(colors[index]);
 
-      card.innerHTML =
-        "<b>"+(index+1)+"코스</b><br>"+
-        "거리: "+distanceKm+"km<br>"+
-        "예상시간(실시간 교통 미반영): "+durationMin+"분<br>"+
-        "위험도: <b>"+risk.icon+" "+risk.level+"</b><br>"+
-        "통과 위험권역: "+risk.zoneNames+"<br>"+
-        "주요 위험요인: "+risk.reasons;
+  card.innerHTML =
+    "<b>"+(index+1)+"코스</b><br>"+
+    "거리: "+distanceKm+"km<br>"+
+    "예상시간(실시간 교통 미반영): "+durationMin+"분<br>"+
+    "위험도: <b>"+risk.icon+" "+risk.level+"</b><br>"+
+    "통과 위험권역: "+risk.zoneNames+"<br>"+
+    "주요 위험요인: "+risk.reasons;
 
-      document.getElementById("info").appendChild(card);
-    });
+  document.getElementById("info").appendChild(card);
+});
+
 let recommendedIndex = 0;
 
 if(routeRisks.length === 2){
-
-    if(routeRisks[0].score > routeRisks[1].score){
-        recommendedIndex = 1;
-    }else{
-        recommendedIndex = 0;
-    }
-
+  if(routeRisks[0].score > routeRisks[1].score){
+    recommendedIndex = 1;
+  }else{
+    recommendedIndex = 0;
+  }
 }
 
 const guide = document.createElement("div");
-
 guide.className = "card green";
-
 guide.innerHTML =
   "<b>🟢 추천 안전경로</b><br>" +
   (recommendedIndex + 1) +
@@ -481,14 +478,9 @@ guide.innerHTML =
 document.getElementById("info").appendChild(guide);
 
 const safeBtn = document.createElement("button");
-
-safeBtn.innerHTML =
-    "🟢 추천 안전경로 길안내";
-
+safeBtn.innerHTML = "🟢 추천 안전경로 길안내";
 safeBtn.onclick = function(){
-
-    openNaverMap(recommendedIndex);
-
+  openNaverMap(recommendedIndex);
 };
 
 document.getElementById("info").appendChild(safeBtn);
