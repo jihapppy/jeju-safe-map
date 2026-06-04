@@ -3,157 +3,142 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>제주 렌터카 안전경로 비교</title>
+<title>제주 렌터카 안전경로 안내</title>
 <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"/>
 
 <style>
-    .hodoongi{
-    position:absolute;
-    top:10px;
-    right:15px;
-    width:65px;
-    height:auto;
-}
-    h2{
-    margin:0;
-    font-size:24px;
-    font-weight:700;
-    color:#0b3d2e;
-}
-    
 body { margin:0; font-family:Arial,sans-serif; }
 #map { width:100%; height:100vh; }
 
 .panel {
-    position:absolute;
-    top:14px;
-    left:14px;
-    z-index:1000;
-    background:rgba(255,255,255,0.96);
-    padding:18px;
-    border-radius:18px;
-    width:360px;
-    box-shadow:0 8px 24px rgba(0,0,0,0.22);
+  position:absolute; top:14px; left:14px; z-index:1000;
+  background:rgba(255,255,255,0.96); padding:16px;
+  border-radius:18px; width:360px;
+  box-shadow:0 8px 24px rgba(0,0,0,0.22);
 }
-select, button {
+
+.hodoongi{
+  position:absolute; top:10px; right:15px;
+  width:60px; height:auto;
+}
+
+h2{
+  margin:0 70px 12px 0;
+  font-size:21px;
+  color:#0b3d2e;
+}
+
+label{
+  display:block;
+  margin-top:8px;
+  font-size:13px;
+  font-weight:bold;
+}
+
+select, input, button {
   width:100%;
   padding:10px;
-  margin-top:8px;
-  border-radius:8px;
+  margin-top:6px;
+  border-radius:10px;
   border:1px solid #ccc;
+  font-size:14px;
+  box-sizing:border-box;
 }
-.hodoongi{
-    position:absolute;
-    top:15px;
-    right:15px;
-    width:70px;
-    height:auto;
+
+button {
+  background:#0b3d2e;
+  color:white;
+  font-weight:bold;
+  border:none;
+  cursor:pointer;
 }
-button{
-    background:#0b3d2e;
-    color:white;
-    font-weight:bold;
-    border:none;
-    border-radius:12px;
+
+.sub-btn{
+  background:#f1f5f3;
+  color:#0b3d2e;
+  border:1px solid #b7c7bf;
 }
 
 .card {
   margin-top:10px;
-  padding:10px;
-  border-radius:10px;
-  background:#f5f5f5;
+  padding:12px;
+  border-radius:14px;
+  background:#fff;
+  box-shadow:0 3px 10px rgba(0,0,0,0.08);
+  line-height:1.55;
+  font-size:14px;
 }
 
-.red { border-left:6px solid red; }
-.orange { border-left:6px solid orange; }
-.green { border-left:6px solid green; }
+.red { border-left:7px solid #e53935; }
+.green { border-left:7px solid #43a047; }
+.blue { border-left:7px solid #1e88e5; }
 
 .small {
-  font-size:12px;
+  font-size:11px;
   color:#666;
-  margin-top:8px;
+  margin-top:10px;
+  line-height:1.4;
 }
 
 @media (max-width:768px){
-  .panel {
-    top:auto;
-    bottom:0;
-    left:0;
-    width:calc(100% - 30px);
-    max-height:42vh;
-    overflow-y:auto;
-    border-radius:16px 16px 0 0;
-    padding:12px 15px;
-  }
-
-  .card {
-    font-size:13px;
-    padding:8px;
-  }
-
-  select, button {
-    padding:8px;
-    font-size:13px;
-  }
-}
-
-  @media (max-width:768px){
-
-.panel{
-    top:auto;
-    bottom:0;
-    left:0;
+  .panel{
+    top:auto; bottom:0; left:0;
     width:calc(100% - 28px);
-    max-height:45vh;
+    max-height:48vh;
     overflow-y:auto;
     border-radius:22px 22px 0 0;
-}
+    padding:14px;
+  }
 
+  .hodoongi{ width:52px; }
+  h2{ font-size:19px; margin-right:60px; }
+  .card{ font-size:13px; }
 }
-
 </style>
 </head>
 
 <body>
 
 <div class="panel">
+  <img src="hodoongi.png" class="hodoongi">
 
-<img src="hodoongi.png" class="hodoongi">
+  <h2>🚗 제주 렌터카 안전경로 안내</h2>
 
-<h2>🚗 제주 렌터카 안전경로 비교</h2>
-
-<br><br>
-
-  출발지
-  <select id="start">
- <option value="126.4936,33.5071">제주공항</option>
- <option value="126.5340,33.5160">제주항</option>
- <option value="126.4128,33.2498">중문관광단지</option>
- <option value="126.9347,33.4589">성산일출봉</option>
- <option value="126.2412,33.3938">협재해수욕장</option>
-  </select>
-
-  목적지
-  <select id="end">
+  <label>출발지 선택</label>
+  <select id="startSelect">
+    <option value="126.4936,33.5071">제주공항</option>
+    <option value="126.4128,33.2498">중문관광단지</option>
     <option value="126.9347,33.4589">성산일출봉</option>
-<option value="126.4128,33.2498">중문관광단지</option>
-<option value="126.2412,33.3938">협재해수욕장</option>
-<option value="126.6695,33.5435">함덕해수욕장</option>
-<option value="126.2895,33.3059">오설록</option>
-<option value="126.3708,33.2896">카멜리아힐</option>
-<option value="126.4625,33.3580">1100고지</option>
-<option value="126.5703,33.3617">한라산 성판악</option>
-<option value="126.9309,33.4242">섭지코지</option>
-<option value="126.9278,33.4327">아쿠아플라넷</option>
-    
+    <option value="126.2412,33.3938">협재해수욕장</option>
+    <option value="126.5703,33.3617">한라산 성판악</option>
   </select>
 
-  <button onclick="drawRoutes()">안전경로 비교하기</button>
+  <button class="sub-btn" onclick="useCurrentLocation()">📍 현재 위치 사용</button>
+
+  <label>또는 주소 입력</label>
+  <input id="addressInput" type="text" placeholder="예: 제주신라호텔, 메종글래드 제주">
+  <button class="sub-btn" onclick="useAddress()">주소를 출발지로 사용</button>
+
+  <label>목적지 선택</label>
+  <select id="endSelect">
+    <option value="126.9347,33.4589">성산일출봉</option>
+    <option value="126.4128,33.2498">중문관광단지</option>
+    <option value="126.2412,33.3938">협재해수욕장</option>
+    <option value="126.6695,33.5435">함덕해수욕장</option>
+    <option value="126.2895,33.3059">오설록</option>
+    <option value="126.3708,33.2896">카멜리아힐</option>
+    <option value="126.4625,33.3580">1100고지</option>
+    <option value="126.5703,33.3617">한라산 성판악</option>
+    <option value="126.7146,33.4912">비자림</option>
+    <option value="126.6267,33.4386">사려니숲길</option>
+  </select>
+
+  <button onclick="drawRoutes()">안전경로 분석하기</button>
 
   <div id="info"></div>
 
   <div class="small">
-    ※ 위험도는 TAAS 사고분포도와 도로특성을 종합해 낮음·중간·높음으로 구분한 참고 정보입니다.
+    ※ 본 서비스는 사고분포 및 도로환경 정보를 참고하여 안전한 경로 선택을 지원하기 위한 참고용 정보입니다.
   </div>
 </div>
 
@@ -171,97 +156,88 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 }).addTo(map);
 
 let routeLayer;
+let customStart = null;
+let customStartName = null;
 
 const dangerZones = [
-  {
-    name:"공항권",
-    lat:33.4996,
-    lng:126.5312,
-    radiusKm:4,
-    score:3,
-    reason:"렌터카 인수 직후 초행운전, 급차선 변경, 교차로 혼잡"
-  },
-  {
-    name:"제주시 도심권",
-    lat:33.5000,
-    lng:126.5200,
-    radiusKm:5,
-    score:3,
-    reason:"도심 교차로 밀집, 보행자·차량 혼재"
-  },
-  {
-    name:"애월해안권",
-    lat:33.4628,
-    lng:126.3108,
-    radiusKm:5,
-    score:2,
-    reason:"해안경관 주시로 인한 전방주시태만 우려"
-  },
-  {
-    name:"함덕·조천권",
-    lat:33.5435,
-    lng:126.6682,
-    radiusKm:5,
-    score:2,
-    reason:"해수욕장 주변 보행자·주정차 차량 혼재"
-  },
-  {
-    name:"김녕·월정권",
-    lat:33.5560,
-    lng:126.7950,
-    radiusKm:5,
-    score:2,
-    reason:"해안도로 구간, 관광지 진출입 차량 주의"
-  },
-  {
-    name:"성산 진입권",
-    lat:33.4629,
-    lng:126.9347,
-    radiusKm:5,
-    score:2,
-    reason:"관광버스·렌터카 혼재, 교차로 통행 주의"
-  },
-  {
-    name:"중문권",
-    lat:33.2498,
-    lng:126.4128,
-    radiusKm:5,
-    score:3,
-    reason:"관광지 진출입 혼잡, 급감속·차로변경 주의"
-  },
-  {
-    name:"서귀포 도심권",
-    lat:33.2499,
-    lng:126.5638,
-    radiusKm:5,
-    score:3,
-    reason:"도심 교차로 및 보행자 혼재"
-  },
-  {
-    name:"협재·한림권",
-    lat:33.3938,
-    lng:126.2412,
-    radiusKm:5,
-    score:2,
-    reason:"해수욕장 진입부, 주정차·보행자 주의"
-  },
-  {
-    name:"중산간도로권",
-    lat:33.4200,
-    lng:126.6400,
-    radiusKm:12,
-    score:1,
-    reason:"사고밀집도는 낮으나 초행길·제한속도 주의"
-  },
-  {
-    name:"산악도로권",
-    lat:33.3580,
-    lng:126.4625,
-    radiusKm:8,
-    score:2,
-    reason:"급커브, 안개, 기상변화 주의"
-  }
+  { name:"공항권", lat:33.4996, lng:126.5312, radiusKm:4, score:3, reason:"렌터카 인수 직후 초행운전, 급차선 변경" },
+  { name:"제주시 도심권", lat:33.5000, lng:126.5200, radiusKm:5, score:3, reason:"도심 교차로 밀집, 보행자·차량 혼재" },
+  { name:"함덕·조천권", lat:33.5435, lng:126.6682, radiusKm:5, score:2, reason:"해수욕장 주변 보행자·주정차 차량 혼재" },
+  { name:"김녕·월정권", lat:33.5560, lng:126.7950, radiusKm:5, score:2, reason:"해안도로 구간, 관광지 진출입 차량 주의" },
+  { name:"성산 진입권", lat:33.4629, lng:126.9347, radiusKm:5, score:2, reason:"관광버스·렌터카 혼재, 교차로 통행 주의" },
+  { name:"중문권", lat:33.2498, lng:126.4128, radiusKm:5, score:3, reason:"관광지 진출입 혼잡, 급감속·차로변경 주의" },
+  { name:"협재·한림권", lat:33.3938, lng:126.2412, radiusKm:5, score:2, reason:"해수욕장 진입부, 주정차·보행자 주의" },
+  { name:"중산간도로권", lat:33.4200, lng:126.6400, radiusKm:12, score:1, reason:"초행길·제한속도 주의" },
+  { name:"산악도로권", lat:33.3580, lng:126.4625, radiusKm:8, score:2, reason:"급커브, 안개, 기상변화 주의" },
+  { name:"서부 관광권", lat:33.3059, lng:126.2895, radiusKm:6, score:2, reason:"관광지 진입부, 급감속·주정차 주의" }
 ];
+
+function useCurrentLocation(){
+  if(!navigator.geolocation){
+    alert("현재 위치 기능을 지원하지 않는 브라우저입니다.");
+    return;
+  }
+
+  document.getElementById("info").innerHTML = "현재 위치를 확인하는 중입니다...";
+
+  navigator.geolocation.getCurrentPosition(
+    function(position){
+      customStart = {
+        lng: position.coords.longitude,
+        lat: position.coords.latitude
+      };
+      customStartName = "현재 위치";
+      document.getElementById("info").innerHTML = "출발지가 현재 위치로 설정되었습니다.";
+    },
+    function(){
+      alert("현재 위치를 가져오지 못했어요. 위치 권한을 허용해주세요.");
+      document.getElementById("info").innerHTML = "";
+    }
+  );
+}
+
+async function useAddress(){
+  const address = document.getElementById("addressInput").value.trim();
+
+  if(address === ""){
+    alert("주소나 장소명을 입력해주세요.");
+    return;
+  }
+
+  document.getElementById("info").innerHTML = "주소를 좌표로 변환하는 중입니다...";
+
+  try{
+    const url =
+      "https://api.openrouteservice.org/geocode/search?api_key=" +
+      apiKey +
+      "&text=" + encodeURIComponent(address) +
+      "&boundary.country=KR";
+
+    const response = await fetch(url);
+    const data = await response.json();
+
+    if(!data.features || data.features.length === 0){
+      alert("주소를 찾지 못했어요. 장소명을 조금 더 정확히 입력해주세요.");
+      document.getElementById("info").innerHTML = "";
+      return;
+    }
+
+    const coords = data.features[0].geometry.coordinates;
+
+    customStart = {
+      lng: coords[0],
+      lat: coords[1]
+    };
+
+    customStartName = address;
+
+    document.getElementById("info").innerHTML =
+      "출발지가 '" + address + "'(으)로 설정되었습니다.";
+
+  }catch(error){
+    alert("주소 변환 중 오류가 발생했어요.\n\n" + error.message);
+  }
+}
 
 async function drawRoutes(){
   if(routeLayer){
@@ -270,21 +246,27 @@ async function drawRoutes(){
 
   routeLayer = L.layerGroup().addTo(map);
 
-  const startSelect = document.getElementById("start");
-  const endSelect = document.getElementById("end");
+  let startLng, startLat, startName;
 
-  const startName = startSelect.options[startSelect.selectedIndex].text;
-  const endName = endSelect.options[endSelect.selectedIndex].text;
+  if(customStart){
+    startLng = customStart.lng;
+    startLat = customStart.lat;
+    startName = customStartName;
+  }else{
+    const startSelect = document.getElementById("startSelect");
+    const startValue = startSelect.value.split(",");
+    startLng = parseFloat(startValue[0]);
+    startLat = parseFloat(startValue[1]);
+    startName = startSelect.options[startSelect.selectedIndex].text;
+  }
 
-  const startValue = startSelect.value.split(",");
+  const endSelect = document.getElementById("endSelect");
   const endValue = endSelect.value.split(",");
-
-  const startLng = parseFloat(startValue[0]);
-  const startLat = parseFloat(startValue[1]);
   const endLng = parseFloat(endValue[0]);
   const endLat = parseFloat(endValue[1]);
+  const endName = endSelect.options[endSelect.selectedIndex].text;
 
-  if(startLng===endLng && startLat===endLat){
+  if(startLng === endLng && startLat === endLat){
     alert("출발지와 목적지가 같습니다.");
     return;
   }
@@ -331,34 +313,24 @@ async function drawRoutes(){
 
     const routes = data.features;
 
-const routeRisks = routes.map(route => {
-  const coords = route.geometry.coordinates.map(c => [c[1], c[0]]);
-  return analyzeRouteRisk(coords);
-});
+    const routeRisks = routes.map(route => {
+      const coords = route.geometry.coordinates.map(c => [c[1], c[0]]);
+      return analyzeRouteRisk(coords);
+    });
 
-let colors = [];
+    let colors = [];
 
-if(routeRisks.length === 2){
-
-  if(routeRisks[0].score > routeRisks[1].score){
-
-      colors = ["red","green"];
-
-  }else if(routeRisks[0].score < routeRisks[1].score){
-
-      colors = ["green","red"];
-
-  }else{
-
-      colors = ["orange","orange"];
-
-  }
-
-}else{
-
-  colors = ["blue"];
-
-}
+    if(routeRisks.length === 2){
+      if(routeRisks[0].score > routeRisks[1].score){
+        colors = ["red","green"];
+      }else if(routeRisks[0].score < routeRisks[1].score){
+        colors = ["green","red"];
+      }else{
+        colors = ["blue","blue"];
+      }
+    }else{
+      colors = ["blue"];
+    }
 
     document.getElementById("info").innerHTML =
       "<b>"+startName+" → "+endName+"</b>";
@@ -372,12 +344,12 @@ if(routeRisks.length === 2){
       const distanceKm = (route.properties.summary.distance / 1000).toFixed(1);
       const durationMin = Math.round(route.properties.summary.duration / 60);
 
-      const risk = analyzeRouteRisk(coords);
+      const risk = routeRisks[index];
 
       L.polyline(coords,{
         color:colors[index] || "blue",
         weight:7,
-        opacity:0.8
+        opacity:0.85
       })
       .addTo(routeLayer)
       .bindPopup(
@@ -385,22 +357,21 @@ if(routeRisks.length === 2){
         "거리: "+distanceKm+"km<br>"+
         "예상시간: "+durationMin+"분<br>"+
         "위험도: "+risk.icon+" "+risk.level+"<br>"+
-        "통과 위험권역: "+risk.zoneNames+"<br>"+
-        "주요 위험요인: "+shortReasons(risk.reasons)
-        );
+        "통과 위험권역: "+risk.zoneNames
+      );
 
       const card = document.createElement("div");
-      card.className = "card " + (index === 0 ? "red" : "green");
+      card.className = "card " + getCardColorByLine(colors[index]);
 
-card.innerHTML =
-  "<b>"+(index+1)+"코스</b><br>"+
-  "거리: "+distanceKm+"km<br>"+
-  "예상시간(실시간 교통 미반영): "+durationMin+"분<br>"+
-  "위험도: <b>"+risk.icon+" "+risk.level+"</b><br>"+
-  "통과 위험권역: "+risk.zoneNames+"<br>"+
-  "주요 위험요인: "+shortReasons(risk.reasons);
+      card.innerHTML =
+        "<b>"+(index+1)+"코스</b><br>"+
+        "거리: "+distanceKm+"km<br>"+
+        "예상시간(실시간 교통 미반영): "+durationMin+"분<br>"+
+        "위험도: <b>"+risk.icon+" "+risk.level+"</b><br>"+
+        "통과 위험권역: "+risk.zoneNames+"<br>"+
+        "주요 위험요인: "+risk.reasons;
 
-document.getElementById("info").appendChild(card);
+      document.getElementById("info").appendChild(card);
     });
 
     L.marker([startLat,startLng])
@@ -415,7 +386,7 @@ document.getElementById("info").appendChild(card);
       padding:[40,40]
     });
 
-  } catch(error){
+  }catch(error){
     alert("오류가 발생했어요.\n\n"+error.message);
   }
 }
@@ -439,10 +410,10 @@ function analyzeRouteRisk(coords){
   let level = "낮음";
   let icon = "🟢";
 
-  if(score >= 12){
+  if(score >= 8){
     level = "높음";
     icon = "🔴";
-  } else if(score >= 6){
+  }else if(score >= 4){
     level = "중간";
     icon = "🟡";
   }
@@ -486,23 +457,11 @@ function deg2rad(deg){
   return deg * (Math.PI/180);
 }
 
-function getCardColor(level){
-  if(level === "높음") return "red";
-  if(level === "중간") return "orange";
-  return "green";
+function getCardColorByLine(color){
+  if(color === "red") return "red";
+  if(color === "green") return "green";
+  return "blue";
 }
-
-  function shortReasons(reasonText){
-  return reasonText
-    .split("/")
-    .join(",")
-    .split(",")
-    .map(item => item.trim())
-    .filter(item => item.length > 0)
-    .slice(0,3)
-    .join(" · ");
-}
-
 </script>
 
 </body>
