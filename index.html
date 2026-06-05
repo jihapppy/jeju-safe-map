@@ -176,7 +176,7 @@ button {
 </select>
 
   <label>목적지 선택</label>
-  <select id="endSelect">
+ <select id="endSelect" onchange="clearCustomEnd()">
     <option value="126.9347,33.4589">성산일출봉</option>
     <option value="126.4128,33.2498">중문관광단지</option>
     <option value="126.2412,33.3938">협재해수욕장</option>
@@ -746,6 +746,18 @@ function getCardColorByLine(color){
 
   }catch(error){
     alert("목적지 검색 중 오류가 발생했어요.\n\n" + error.message);
+  }
+}
+  function clearCustomEnd(){
+  const endSelect = document.getElementById("endSelect");
+
+  if(endSelect.value !== ""){
+    customEnd = null;
+    customEndName = null;
+    document.getElementById("destinationInput").value = "";
+    document.getElementById("destinationResults").innerHTML = "";
+    document.getElementById("info").innerHTML =
+      "목적지가 주요 관광지로 설정되었습니다.";
   }
 }
 </script>
