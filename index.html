@@ -188,6 +188,14 @@ button {
     <option value="126.7146,33.4912">비자림</option>
     <option value="126.6267,33.4386">사려니숲길</option>
   </select>
+  <label>또는 목적지 직접 검색</label>
+
+<div class="address-row">
+  <input id="destinationInput" type="text" placeholder="예: 프릳츠, 노형로 231, 제주신라호텔">
+  <button class="mini-btn" onclick="searchDestination()">검색</button>
+</div>
+
+<div id="destinationResults"></div>
 
   <button onclick="drawRoutes()">안전경로 분석하기</button>
 
