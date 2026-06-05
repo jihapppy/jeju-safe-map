@@ -701,7 +701,7 @@ function getCardColorByLine(color){
   try{
     const response = await fetch(
       "https://dapi.kakao.com/v2/local/search/keyword.json?query=" +
-      encodeURIComponent("제주 " + keyword),
+     encodeURIComponent(keyword),
       {
         headers:{
           Authorization:"KakaoAK " + kakaoKey
