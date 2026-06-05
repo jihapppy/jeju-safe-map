@@ -650,6 +650,22 @@ function getCardColorByLine(color){
   window.location.href = url;
 
 }
+  function openKakaoNavi(){
+
+  if(!lastEnd){
+    alert("먼저 안전경로를 분석해주세요.");
+    return;
+  }
+
+  const url =
+    "kakaonavi://navigate?" +
+    "name=" + encodeURIComponent(lastEnd.name) +
+    "&x=" + lastEnd.lng +
+    "&y=" + lastEnd.lat;
+
+  window.location.href = url;
+
+}
 </script>
 
 </body>
