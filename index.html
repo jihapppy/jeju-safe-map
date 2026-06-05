@@ -157,9 +157,12 @@ button {
 </button>
 
 <div class="address-row">
-  <input id="addressInput" type="text" placeholder="예: 제주신라호텔, 메종글래드 제주">
-  <button class="mini-btn" onclick="searchAddress()">검색</button>
+ <div class="address-row">
+  <input id="startInput" type="text" placeholder="예: 성산일출봉, 비자림, 윗세오">
+  <button class="mini-btn" onclick="searchStartPlace()">검색</button>
 </div>
+
+<div id="startResults"></div>
 
 <div id="addressResults"></div>
   
@@ -268,14 +271,6 @@ function useCurrentLocation(){
   );
 }
 
-async function searchAddress(){
-  const address = document.getElementById("addressInput").value.trim();
-  const resultBox = document.getElementById("addressResults");
-
-  if(address === ""){
-    alert("주소나 장소명을 입력해주세요.");
-    return;
-  }
 
   resultBox.innerHTML = "주소를 검색하는 중입니다...";
 
@@ -317,14 +312,14 @@ data.documents.forEach(place => {
   lat: coords[1]
 };
 
-        customEndName = name;
+       customStartName = name;
 
-        document.getElementById("startSelect").value = "";
-        document.getElementById("addressInput").value = name;
-        resultBox.innerHTML = "";
+document.getElementById("startSelect").value = "";
+document.getElementById("startInput").value = name;
+resultBox.innerHTML = "";
 
-        document.getElementById("info").innerHTML =
-          "출발지가 '" + name + "'(으)로 설정되었습니다.";
+document.getElementById("info").innerHTML =
+  "출발지가 '" + name + "'(으)로 설정되었습니다.";
       };
 
       resultBox.appendChild(div);
@@ -758,6 +753,69 @@ console.log("검색 함수 실행");
     document.getElementById("destinationResults").innerHTML = "";
     document.getElementById("info").innerHTML =
       "목적지가 주요 관광지로 설정되었습니다.";
+  }
+}
+  async function searchStartPlace(){
+
+  const keyword = document.getElementById("startInput").value.trim();
+
+  if(keyword === ""){
+    alert("출발지를 입력해주세요.");
+    return;
+  }
+
+  const resultBox = document.getElementById("startResults");
+  resultBox.innerHTML = "검색중...";
+
+  try{
+    const response = await fetch(
+      "https://dapi.kakao.com/v2/local/search/keyword.json?query=" +
+      encodeURIComponent("제주 " + keyword),
+      {
+        headers:{
+          Authorization:"KakaoAK " + kakaoKey
+        }
+      }
+    );
+
+    const data = await response.json();
+
+    resultBox.innerHTML = "";
+
+    if(!data.documents || data.documents.length === 0){
+      resultBox.innerHTML = "검색 결과가 없습니다.";
+      return;
+    }
+
+    data.documents.forEach(place=>{
+      const div = document.createElement("div");
+      div.className = "address-result";
+
+      div.innerHTML =
+        "<b>" + place.place_name + "</b><br>" +
+        (place.road_address_name || place.address_name || "");
+
+      div.onclick = function(){
+        customStart = {
+          lat: parseFloat(place.y),
+          lng: parseFloat(place.x)
+        };
+
+        customStartName = place.place_name;
+
+        document.getElementById("startInput").value = place.place_name;
+        document.getElementById("startSelect").value = "";
+        resultBox.innerHTML = "";
+
+        document.getElementById("info").innerHTML =
+          "출발지가 '" + place.place_name + "'(으)로 설정되었습니다.";
+      };
+
+      resultBox.appendChild(div);
+    });
+
+  }catch(error){
+    alert("출발지 검색 중 오류가 발생했어요.\n\n" + error.message);
   }
 }
 </script>
