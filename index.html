@@ -223,6 +223,8 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 let routeLayer;
 let customStart = null;
 let customStartName = null;
+  let customEnd = null;
+let customEndName = null;
   
 let lastStart = null;
 let lastEnd = null;
@@ -355,11 +357,19 @@ async function drawRoutes(){
     startName = startSelect.options[startSelect.selectedIndex].text;
   }
 
+ let endLng, endLat, endName;
+
+if(customEnd){
+  endLng = customEnd.lng;
+  endLat = customEnd.lat;
+  endName = customEndName;
+}else{
   const endSelect = document.getElementById("endSelect");
   const endValue = endSelect.value.split(",");
-  const endLng = parseFloat(endValue[0]);
-  const endLat = parseFloat(endValue[1]);
-  const endName = endSelect.options[endSelect.selectedIndex].text;
+  endLng = parseFloat(endValue[0]);
+  endLat = parseFloat(endValue[1]);
+  endName = endSelect.options[endSelect.selectedIndex].text;
+}
   lastStart = {
   lat: startLat,
   lng: startLng,
