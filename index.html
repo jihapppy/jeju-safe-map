@@ -506,6 +506,16 @@ tmapBtn.onclick = function(){
 };
 
 document.getElementById("info").appendChild(tmapBtn);
+
+  const kakaoBtn = document.createElement("button");
+
+kakaoBtn.innerHTML = "🟡 카카오내비 길안내";
+
+kakaoBtn.onclick = function(){
+  openKakaoNavi();
+};
+
+document.getElementById("info").appendChild(kakaoBtn);
     const notice = document.createElement("div");
 
 notice.style.fontSize = "13px";
