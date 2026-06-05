@@ -272,66 +272,77 @@ function useCurrentLocation(){
 }
 
 
-  resultBox.innerHTML = "주소를 검색하는 중입니다...";
+ async function searchStartPlace(){
+
+  const keyword = document.getElementById("startInput").value.trim();
+
+  if(keyword === ""){
+    alert("출발지를 입력해주세요.");
+    return;
+  }
+
+  const resultBox = document.getElementById("startResults");
+  resultBox.innerHTML = "검색중...";
 
   try{
-    const url =
-      "https://api.openrouteservice.org/geocode/search?api_key=" +
-      apiKey +
-     "&text=" + encodeURIComponent(address + " 제주") +
-"&boundary.rect.min_lon=126.10" +
-"&boundary.rect.min_lat=33.10" +
-"&boundary.rect.max_lon=126.98" +
-"&boundary.rect.max_lat=33.60" +
-"&size=5";
-console.log("카카오 요청 시작");
-    const response = await fetch(url);
+
+    const response = await fetch(
+      "https://dapi.kakao.com/v2/local/search/keyword.json?query=" +
+      encodeURIComponent(keyword),
+      {
+        headers:{
+          Authorization:"KakaoAK " + kakaoKey
+        }
+      }
+    );
+
     const data = await response.json();
-    console.log("카카오 응답", data);
-    console.log("카카오 응답:", data);
 
     if(!data.documents || data.documents.length === 0){
-  resultBox.innerHTML = "검색 결과가 없습니다.";
-  return;
-}
+      resultBox.innerHTML = "검색 결과가 없습니다.";
+      return;
+    }
 
-resultBox.innerHTML = "";
+    resultBox.innerHTML = "";
 
-data.documents.forEach(place => {
-  const coords = [parseFloat(place.x), parseFloat(place.y)];
-  const name = place.place_name || "장소 후보";
+    data.documents.forEach(place => {
 
       const div = document.createElement("div");
       div.className = "address-result";
+
       div.innerHTML =
-  "<b>" + name + "</b><br>" +
-  (place.road_address_name || place.address_name || "");
+        "<b>" + place.place_name + "</b><br>" +
+        (place.road_address_name || place.address_name || "");
+
       div.onclick = function(){
-       customStart = {
-  lng: coords[0],
-  lat: coords[1]
-};
 
-       customStartName = name;
+        customStart = {
+          lng: parseFloat(place.x),
+          lat: parseFloat(place.y)
+        };
 
-document.getElementById("startSelect").value = "";
-document.getElementById("startInput").value = name;
-resultBox.innerHTML = "";
+        customStartName = place.place_name;
 
-document.getElementById("info").innerHTML =
-  "출발지가 '" + name + "'(으)로 설정되었습니다.";
+        document.getElementById("startSelect").value = "";
+        document.getElementById("startInput").value = place.place_name;
+
+        resultBox.innerHTML = "";
+
+        document.getElementById("info").innerHTML =
+          "출발지가 '" + place.place_name + "'(으)로 설정되었습니다.";
       };
 
       resultBox.appendChild(div);
+
     });
 
   }catch(error){
-    alert("주소 검색 중 오류가 발생했어요.\n\n" + error.message);
-  }
-}
-  
 
-async function drawRoutes(){
+    alert("출발지 검색 중 오류가 발생했어요.\n\n" + error.message);
+
+  }
+
+}
   if(routeLayer){
     map.removeLayer(routeLayer);
   }
