@@ -682,23 +682,25 @@ function getCardColorByLine(color){
   window.location.href = url;
 
 }
-  function openKakaoNavi(){
+function openKakaoNavi(){
+
+  alert("카카오내비 함수 실행");
 
   if(!lastEnd){
     alert("먼저 안전경로를 분석해주세요.");
     return;
   }
 
-  const url =
-    "kakaonavi://navigate?" +
-    "name=" + encodeURIComponent(lastEnd.name) +
-    "&x=" + lastEnd.lng +
-    "&y=" + lastEnd.lat;
-
-  window.location.href = url;
+  Kakao.Navi.start({
+    name: lastEnd.name,
+    x: Number(lastEnd.lng),
+    y: Number(lastEnd.lat),
+    coordType: "wgs84"
+  });
 
 }
-  async function searchDestination(){
+
+async function searchDestination(){
 console.log("검색 함수 실행");
   const keyword = document.getElementById("destinationInput").value.trim();
 
