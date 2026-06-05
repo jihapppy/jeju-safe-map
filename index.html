@@ -292,6 +292,7 @@ async function searchAddress(){
 
     const response = await fetch(url);
     const data = await response.json();
+    console.log("카카오 응답:", data);
 
     if(!data.features || data.features.length === 0){
       resultBox.innerHTML = "검색 결과가 없습니다.";
