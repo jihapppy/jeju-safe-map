@@ -289,36 +289,35 @@ async function searchAddress(){
 "&boundary.rect.max_lon=126.98" +
 "&boundary.rect.max_lat=33.60" +
 "&size=5";
-
+console.log("카카오 요청 시작");
     const response = await fetch(url);
     const data = await response.json();
+    console.log("카카오 응답", data);
     console.log("카카오 응답:", data);
 
-    if(!data.features || data.features.length === 0){
-      resultBox.innerHTML = "검색 결과가 없습니다.";
-      return;
-    }
+    if(!data.documents || data.documents.length === 0){
+  resultBox.innerHTML = "검색 결과가 없습니다.";
+  return;
+}
 
-    resultBox.innerHTML = "";
+resultBox.innerHTML = "";
 
-    data.features.forEach(feature => {
-      const coords = feature.geometry.coordinates;
-      const name =
-        feature.properties.label ||
-        feature.properties.name ||
-        "주소 후보";
+data.documents.forEach(place => {
+  const coords = [parseFloat(place.x), parseFloat(place.y)];
+  const name = place.place_name || "장소 후보";
 
       const div = document.createElement("div");
       div.className = "address-result";
-      div.innerHTML = name;
-
+      div.innerHTML =
+  "<b>" + name + "</b><br>" +
+  (place.road_address_name || place.address_name || "");
       div.onclick = function(){
-        customStart = {
-          lng: coords[0],
-          lat: coords[1]
-        };
+        customEnd = {
+  lng: coords[0],
+  lat: coords[1]
+};
 
-        customStartName = name;
+        customEndName = name;
 
         document.getElementById("startSelect").value = "";
         document.getElementById("addressInput").value = name;
