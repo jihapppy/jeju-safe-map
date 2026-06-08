@@ -148,24 +148,22 @@ button {
 <body>
 
 <div class="panel">
-  <img src="hodoongi.png" class="hodoongi">
+  <img src="hodoongi.png.png" class="hodoongi">
 
   <h2>🚗 제주 렌터카 안전경로 안내</h2>
 
-  <label>출발지 설정</label>
-
-  <button class="sub-btn" onclick="useCurrentLocation()">
-    📍 현재 위치 사용
-  </button>
-
-  <label>또는 출발지 직접 검색</label>
+  <label>🚗 출발지</label>
 
   <div class="address-row">
-    <input id="startInput" type="text" placeholder="예: 메종글래드, 노형로 231">
+    <input id="startInput" type="text" placeholder="예: 메종글래드 제주, 노형로 231">
     <button class="mini-btn" onclick="searchStartPlace()">검색</button>
   </div>
 
   <div id="startResults"></div>
+
+  <button class="sub-btn" onclick="useCurrentLocation()">
+    📍 현재 위치 사용
+  </button>
 
   <label>또는 주요 출발지 선택</label>
 
@@ -178,9 +176,19 @@ button {
     <option value="126.6206,33.3841">한라산 성판악 탐방안내소</option>
   </select>
 
-  <label>목적지 선택</label>
+  <label>🎯 목적지</label>
+
+  <div class="address-row">
+    <input id="destinationInput" type="text" placeholder="예: 프릳츠 제주성산점, 제주신라호텔">
+    <button class="mini-btn" onclick="searchDestination()">검색</button>
+  </div>
+
+  <div id="destinationResults"></div>
+
+  <label>또는 인기 관광지 선택</label>
 
   <select id="endSelect" onchange="clearCustomEnd()">
+    <option value="">-- 인기 관광지 선택 --</option>
     <option value="126.9347,33.4589">성산일출봉</option>
     <option value="126.4128,33.2498">중문관광단지</option>
     <option value="126.2412,33.3938">협재해수욕장</option>
@@ -193,16 +201,7 @@ button {
     <option value="126.6267,33.4386">사려니숲길</option>
   </select>
 
-  <label>또는 목적지 직접 검색</label>
-
-  <div class="address-row">
-    <input id="destinationInput" type="text" placeholder="예: 프릳츠, 노형로 231, 제주신라호텔">
-    <button class="mini-btn" onclick="searchDestination()">검색</button>
-  </div>
-
-  <div id="destinationResults"></div>
-
-  <button onclick="drawRoutes()">안전경로 분석하기</button>
+  <button onclick="drawRoutes()">🟢 안전경로 분석하기</button>
 
   <div id="info"></div>
 
@@ -350,6 +349,10 @@ function useCurrentLocation(){
 
 }
   async function drawRoutes(){
+    if(!customEnd && document.getElementById("endSelect").value === ""){
+  alert("목적지를 선택해주세요.");
+  return;
+}
   if(routeLayer){
     map.removeLayer(routeLayer);
   }
