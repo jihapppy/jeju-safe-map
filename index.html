@@ -379,7 +379,7 @@ fetch("jeju_regions.geojson")
   .then(res => res.json())
   .then(data => {
     console.log(data.features[0].properties);
-    L.geoJSON(data, {
+    const geoLayer = L.geoJSON(data, {
       style: function(feature){
         const name =
           feature.properties.adm_nm ||
@@ -437,6 +437,7 @@ layer.bindPopup(`
 `);
       }
     }).addTo(map);
+    map.fitBounds(geoLayer.getBounds());
   });
 const legend = L.control({ position: "bottomright" });
 
