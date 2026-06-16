@@ -427,7 +427,27 @@ layer.bindPopup(`
       }
     }).addTo(map);
   });
+const legend = L.control({ position: "bottomright" });
 
+legend.onAdd = function () {
+
+  const div = L.DomUtil.create("div", "risk-legend");
+
+  div.innerHTML = `
+    <div style="font-weight:bold;">사고위험도</div>
+    <div>🔴 매우높음</div>
+    <div>🟠 높음</div>
+    <div>🟡 보통</div>
+    <div>🟢 낮음</div>
+    <div style="font-size:11px;color:#666;">
+      ※ 사고건수·EPDO 반영
+    </div>
+  `;
+
+  return div;
+};
+
+legend.addTo(map);
 let routeLayer;
 let customStart = null;
 let customStartName = null;
