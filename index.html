@@ -249,7 +249,7 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
   "제주시 도심권": { color:"#d7191c", level:"매우높음", count:132, epdo:581 },
   "공항권": { color:"#d7191c", level:"매우높음", count:53, epdo:261 },
 
-  "서귀포 도심권": { color:"#f28e2b", level:"높음", count:57, epdo:259 },
+  "서귀포 도심권": { color:"#d7191c", level:"매우높음", count:57, epdo:259 },
   "애월권": { color:"#f28e2b", level:"높음", count:38, epdo:215 },
   "안덕·서부중산간권": { color:"#f28e2b", level:"높음", count:35, epdo:223 },
 
@@ -327,6 +327,7 @@ function getJejuRegion(name){
     name.includes("영천") ||
     name.includes("토평") ||
     name.includes("상효") ||
+     name.includes("대륜") ||
     name.includes("하효")
   ) return "서귀포 도심권";
 
