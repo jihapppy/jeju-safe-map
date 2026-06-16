@@ -716,6 +716,9 @@ lastEnd = {
       "<b>"+startName+" → "+endName+"</b>";
 
     let allCoords = [];
+    let routeCards = [];
+let routeSummaries = [];
+
 
 routes.forEach((route,index)=>{
   const coords = route.geometry.coordinates.map(c=>[c[1],c[0]]);
@@ -751,7 +754,12 @@ routes.forEach((route,index)=>{
     "통과 위험권역: "+risk.zoneNames+"<br>"+
     "주요 위험요인: "+risk.reasons;
 
-  document.getElementById("info").appendChild(card);
+  routeCards[index] = card;
+routeSummaries[index] = {
+  distanceKm: distanceKm,
+  durationMin: durationMin,
+  risk: risk
+};
 });
 
 let recommendedIndex = 0;
@@ -764,12 +772,17 @@ if(routeRisks.length === 2){
   }
 }
 
+const recommend = routeSummaries[recommendedIndex];
+
 const guide = document.createElement("div");
 guide.className = "card green";
 guide.innerHTML =
   "<b>🟢 추천 안전경로</b><br>" +
-  (recommendedIndex + 1) +
-  "코스는 상대적으로 위험도가 낮아 추천되는 경로입니다.";
+  "<b>" + (recommendedIndex + 1) + "코스 추천</b><br>" +
+  "거리: " + recommend.distanceKm + "km<br>" +
+  "예상시간: " + recommend.durationMin + "분<br>" +
+  "위험도: <b>" + recommend.risk.icon + " " + recommend.risk.level + "</b><br>" +
+  "<span style='color:#666;'>아래 버튼을 눌러 바로 길안내를 시작하세요.</span>";
 
 document.getElementById("info").appendChild(guide);
 
@@ -780,6 +793,14 @@ safeBtn.onclick = function(){
 };
 
 document.getElementById("info").appendChild(safeBtn);
+    const detailTitle = document.createElement("div");
+detailTitle.className = "card";
+detailTitle.innerHTML = "<b>📊 경로 상세정보</b>";
+document.getElementById("info").appendChild(detailTitle);
+
+routeCards.forEach(card => {
+  document.getElementById("info").appendChild(card);
+});
     const tmapBtn = document.createElement("button");
 
 tmapBtn.innerHTML = "🔵 TMAP 길안내";
