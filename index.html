@@ -263,49 +263,137 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 function getJejuRegion(name){
   if(!name) return "기타";
 
-  if(name.includes("용담") || name.includes("도두") || name.includes("이호")) return "공항권";
-
+  // ① 공항권
   if(
-    name.includes("연동") || name.includes("노형") || name.includes("도남") ||
-    name.includes("이도") || name.includes("삼도") || name.includes("아라") ||
-    name.includes("오라") || name.includes("건입")
+    name.includes("용담") ||
+    name.includes("도두") ||
+    name.includes("이호")
+  ) return "공항권";
+
+  // ② 제주시 도심권
+  if(
+    name.includes("연동") ||
+    name.includes("노형") ||
+    name.includes("도남") ||
+    name.includes("이도") ||
+    name.includes("삼도") ||
+    name.includes("아라") ||
+    name.includes("오라") ||
+    name.includes("건입") ||
+    name.includes("일도")
   ) return "제주시 도심권";
 
-  if(name.includes("함덕") || name.includes("조천") || name.includes("북촌") || name.includes("삼양") || name.includes("화북")) return "함덕·조천권";
-
-  if(name.includes("김녕") || name.includes("월정") || name.includes("평대") || name.includes("세화") || name.includes("하도")) return "김녕·월정권";
-
-  if(name.includes("성산") || name.includes("섭지") || name.includes("고성") || name.includes("아쿠아")) return "성산권";
-
-  if(name.includes("애월") || name.includes("곽지") || name.includes("하귀") || name.includes("외도") || name.includes("해안") || name.includes("광령") || name.includes("유수암")) return "애월권";
-
-  if(name.includes("협재") || name.includes("금능") || name.includes("한림") || name.includes("대정") || name.includes("모슬포") || name.includes("판포")) return "협재·한림권";
-
-  if(name.includes("중문") || name.includes("색달") || name.includes("예래") || name.includes("강정") || name.includes("대포")) return "중문권";
-
+  // ③ 함덕·조천권
   if(
-    name.includes("서귀") || name.includes("동홍") || name.includes("서홍") ||
-    name.includes("천지") || name.includes("중앙") || name.includes("정방") ||
-    name.includes("송산") || name.includes("토평") || name.includes("상효") ||
-    name.includes("하효") || name.includes("남원") || name.includes("태흥") ||
-    name.includes("위미") || name.includes("신례")
+    name.includes("조천읍") ||
+    name.includes("함덕") ||
+    name.includes("북촌") ||
+    name.includes("삼양") ||
+    name.includes("화북")
+  ) return "함덕·조천권";
+
+  // ④ 김녕·월정권
+  if(
+    name.includes("구좌읍") ||
+    name.includes("김녕") ||
+    name.includes("월정") ||
+    name.includes("평대") ||
+    name.includes("세화") ||
+    name.includes("하도") ||
+    name.includes("종달")
+  ) return "김녕·월정권";
+
+  // ⑤ 성산권
+  if(
+    name.includes("성산읍") ||
+    name.includes("성산") ||
+    name.includes("섭지") ||
+    name.includes("고성")
+  ) return "성산권";
+
+  // ⑥ 애월권
+  if(
+    name.includes("애월읍") ||
+    name.includes("애월") ||
+    name.includes("곽지") ||
+    name.includes("하귀") ||
+    name.includes("외도") ||
+    name.includes("해안") ||
+    name.includes("광령") ||
+    name.includes("유수암")
+  ) return "애월권";
+
+  // ⑦ 협재·한림권
+  if(
+    name.includes("한림읍") ||
+    name.includes("협재") ||
+    name.includes("금능") ||
+    name.includes("한림") ||
+    name.includes("대정읍") ||
+    name.includes("대정") ||
+    name.includes("모슬포") ||
+    name.includes("판포")
+  ) return "협재·한림권";
+
+  // ⑧ 중문권
+  if(
+    name.includes("중문") ||
+    name.includes("색달") ||
+    name.includes("예래") ||
+    name.includes("강정") ||
+    name.includes("대포")
+  ) return "중문권";
+
+  // ⑨ 서귀포 도심권
+  if(
+    name.includes("서귀포시") ||
+    name.includes("동홍") ||
+    name.includes("서홍") ||
+    name.includes("천지") ||
+    name.includes("중앙") ||
+    name.includes("정방") ||
+    name.includes("송산") ||
+    name.includes("토평") ||
+    name.includes("상효") ||
+    name.includes("하효") ||
+    name.includes("남원읍") ||
+    name.includes("남원") ||
+    name.includes("태흥") ||
+    name.includes("위미") ||
+    name.includes("신례")
   ) return "서귀포 도심권";
 
+  // ⑩ 서부 중산간권
   if(
-    name.includes("새별") || name.includes("금악") || name.includes("오설록") ||
-    name.includes("카멜리아") || name.includes("덕수") || name.includes("동광") ||
-    name.includes("안덕") || name.includes("서광") || name.includes("저지")
+    name.includes("안덕면") ||
+    name.includes("안덕") ||
+    name.includes("덕수") ||
+    name.includes("동광") ||
+    name.includes("서광") ||
+    name.includes("금악") ||
+    name.includes("오설록") ||
+    name.includes("카멜리아") ||
+    name.includes("저지")
   ) return "서부 중산간권";
 
+  // ⑪ 동부 중산간권
   if(
-    name.includes("봉개") || name.includes("교래") || name.includes("선흘") ||
-    name.includes("송당") || name.includes("비자림") || name.includes("사려니") ||
-    name.includes("구좌")
+    name.includes("봉개") ||
+    name.includes("교래") ||
+    name.includes("선흘") ||
+    name.includes("송당") ||
+    name.includes("비자림") ||
+    name.includes("사려니")
   ) return "동부 중산간권";
 
+  // ⑫ 한라산권
   if(
-    name.includes("성판악") || name.includes("1100") || name.includes("영실") ||
-    name.includes("돈내코") || name.includes("어리목") || name.includes("어승생")
+    name.includes("성판악") ||
+    name.includes("1100") ||
+    name.includes("영실") ||
+    name.includes("돈내코") ||
+    name.includes("어리목") ||
+    name.includes("어승생")
   ) return "한라산권";
 
   return "기타";
