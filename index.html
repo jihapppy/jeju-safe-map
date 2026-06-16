@@ -225,17 +225,8 @@ button {
     📍 현재 위치 사용
   </button>
 
-  <label>또는 주요 출발지 선택</label>
 
-  <select id="startSelect" onchange="clearCustomStart()">
-    <option value="">-- 주요 출발지 선택 --</option>
-    <option value="126.4936,33.5071">제주공항</option>
-    <option value="126.4128,33.2498">중문관광단지</option>
-    <option value="126.9347,33.4589">성산일출봉</option>
-    <option value="126.2412,33.3938">협재해수욕장</option>
-    <option value="126.6206,33.3841">한라산 성판악 탐방안내소</option>
-  </select>
-
+ 
   <label>🎯 목적지</label>
 
   <div class="address-row">
@@ -621,17 +612,14 @@ function useCurrentLocation(){
 
   let startLng, startLat, startName;
 
-  if(customStart){
-    startLng = customStart.lng;
-    startLat = customStart.lat;
-    startName = customStartName;
-  }else{
-    const startSelect = document.getElementById("startSelect");
-    const startValue = startSelect.value.split(",");
-    startLng = parseFloat(startValue[0]);
-    startLat = parseFloat(startValue[1]);
-    startName = startSelect.options[startSelect.selectedIndex].text;
-  }
+  if(!customStart){
+    alert("출발지를 검색하거나 현재 위치를 선택해주세요.");
+    return;
+}
+
+startLng = customStart.lng;
+startLat = customStart.lat;
+startName = customStartName;
 
  let endLng, endLat, endName;
 
