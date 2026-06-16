@@ -245,6 +245,26 @@ const map = L.map('map').setView([33.38,126.55],10);
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
   attribution:'© OpenStreetMap contributors'
 }).addTo(map);
+  fetch("jeju_regions.geojson")
+  .then(res => res.json())
+  .then(data => {
+
+    L.geoJSON(data, {
+
+      style: function(feature){
+
+        return {
+          color:"#333",
+          weight:1,
+          fillColor:"#ffcc00",
+          fillOpacity:0.3
+        };
+
+      }
+
+    }).addTo(map);
+
+  });
 
 let routeLayer;
 let customStart = null;
