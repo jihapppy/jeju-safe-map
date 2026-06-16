@@ -793,15 +793,8 @@ safeBtn.onclick = function(){
 };
 
 document.getElementById("info").appendChild(safeBtn);
-    const detailTitle = document.createElement("div");
-detailTitle.className = "card";
-detailTitle.innerHTML = "<b>📊 경로 상세정보</b>";
-document.getElementById("info").appendChild(detailTitle);
 
-routeCards.forEach(card => {
-  document.getElementById("info").appendChild(card);
-});
-    const tmapBtn = document.createElement("button");
+const tmapBtn = document.createElement("button");
 
 tmapBtn.innerHTML = "🔵 TMAP 길안내";
 
@@ -811,7 +804,8 @@ tmapBtn.onclick = function(){
 
 document.getElementById("info").appendChild(tmapBtn);
 
-  const kakaoBtn = document.createElement("button");
+
+const kakaoBtn = document.createElement("button");
 
 kakaoBtn.innerHTML = "🟡 카카오내비 길안내";
 
@@ -820,6 +814,17 @@ kakaoBtn.onclick = function(){
 };
 
 document.getElementById("info").appendChild(kakaoBtn);
+
+
+const detailTitle = document.createElement("div");
+detailTitle.className = "card";
+detailTitle.innerHTML = "<b>📊 경로 상세정보</b>";
+
+document.getElementById("info").appendChild(detailTitle);
+
+routeCards.forEach(card => {
+  document.getElementById("info").appendChild(card);
+});
     const notice = document.createElement("div");
 
 notice.style.fontSize = "13px";
