@@ -319,26 +319,24 @@ if(window.Kakao){
 
 const map = L.map('map').setView([33.36,126.54],9);
 
-L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
-  attribution:'© OpenStreetMap © CARTO',
-  subdomains:'abcd',
-  maxZoom:20
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+  attribution:'© OpenStreetMap contributors'
 }).addTo(map);
-
+  
 const regionRisk = {
-  "제주시 도심권": { color:"#d7191c", level:"매우높음", count:132, epdo:581 },
-  "공항권": { color:"#d7191c", level:"매우높음", count:53, epdo:261 },
-  "서귀포 도심권": { color:"#d7191c", level:"매우높음", count:57, epdo:259 },
-  "애월권": { color:"#f28e2b", level:"높음", count:38, epdo:215 },
-  "안덕·서부중산간권": { color:"#f28e2b", level:"높음", count:35, epdo:223 },
-  "동부중산간권": { color:"#ffd966", level:"보통", count:30, epdo:162 },
-  "한림·한경·대정권": { color:"#ffd966", level:"보통", count:24, epdo:107 },
-  "성산·표선권": { color:"#ffd966", level:"보통", count:15, epdo:100 },
-  "조천권": { color:"#ffd966", level:"보통", count:17, epdo:93 },
-  "구좌권": { color:"#ffd966", level:"보통", count:16, epdo:80 },
-  "남원권": { color:"#ffd966", level:"보통", count:16, epdo:85 },
-  "한라산권": { color:"#ffd966", level:"보통", count:16, epdo:85 },
-  "중문권": { color:"#91cf60", level:"낮음", count:14, epdo:79 }
+  "제주시 도심권": { color:"#e76f6f", level:"매우높음", count:132, epdo:581 },
+  "공항권": { color:"#e76f6f", level:"매우높음", count:53, epdo:261 },
+  "서귀포 도심권": { color:"#e76f6f", level:"매우높음", count:57, epdo:259 },
+  "애월권": { color:"#f4a261", level:"높음", count:38, epdo:215 },
+  "안덕·서부중산간권": { color:"#f4a261", level:"높음", count:35, epdo:223 },
+  "동부중산간권": { color"#f6e58d", level:"보통", count:30, epdo:162 },
+  "한림·한경·대정권": { color:"#f6e58d", level:"보통", count:24, epdo:107 },
+  "성산·표선권": { color:"#f6e58d", level:"보통", count:15, epdo:100 },
+  "조천권": { color:"#f6e58d", level:"보통", count:17, epdo:93 },
+  "구좌권": { color:"#f6e58d", level:"보통", count:16, epdo:80 },
+  "남원권": { color:"#f6e58d", level:"보통", count:16, epdo:85 },
+  "한라산권": { color:"#f6e58d", level:"보통", count:16, epdo:85 },
+  "중문권": { color:"#95d5b2", level:"낮음", count:14, epdo:79 }
 };
 
 const regionTips = {
@@ -452,11 +450,11 @@ fetch("jeju_regions.geojson")
         const risk = regionRisk[region];
 
         return {
-          color:"#333",
-          weight:1,
-          fillColor: risk ? risk.color : "#cccccc",
-          fillOpacity: risk ? 0.45 : 0.15
-        };
+  color:"#ffffff",
+  weight:2,
+  fillColor: risk ? risk.color : "#cccccc",
+  fillOpacity: risk ? 0.68 : 0.2
+};
       },
 
       onEachFeature: function(feature, layer){
@@ -476,7 +474,12 @@ fetch("jeju_regions.geojson")
 
         layer.bindPopup(`
           <div style="min-width:230px; line-height:1.6;">
-            <b style="font-size:16px;">${risk ? risk.level : "미분류"} · ${region}</b><br>
+           <b style="font-size:17px;color:#073f31;">
+${risk ? risk.level : "미분류"} 위험지역
+</b><br>
+<span style="font-size:15px;font-weight:bold;">
+${region}
+</span>
             <span style="color:#666;">${name}</span><br><br>
 
             <b>⚠ 이런 점을 주의하세요</b><br>
