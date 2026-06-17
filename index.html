@@ -279,128 +279,73 @@ const map = L.map('map').setView([33.36,126.54],9);
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
   attribution:'© OpenStreetMap contributors'
 }).addTo(map);
-  const regionRisk = {
+const regionRisk = {
   "제주시 도심권": { color:"#d7191c", level:"매우높음", count:132, epdo:581 },
   "공항권": { color:"#d7191c", level:"매우높음", count:53, epdo:261 },
-
   "서귀포 도심권": { color:"#d7191c", level:"매우높음", count:57, epdo:259 },
   "애월권": { color:"#f28e2b", level:"높음", count:38, epdo:215 },
   "안덕·서부중산간권": { color:"#f28e2b", level:"높음", count:35, epdo:223 },
-
+  "동부중산간권": { color:"#ffd966", level:"보통", count:30, epdo:162 },
   "한림·한경·대정권": { color:"#ffd966", level:"보통", count:24, epdo:107 },
   "성산·표선권": { color:"#ffd966", level:"보통", count:15, epdo:100 },
   "조천권": { color:"#ffd966", level:"보통", count:17, epdo:93 },
   "구좌권": { color:"#ffd966", level:"보통", count:16, epdo:80 },
   "남원권": { color:"#ffd966", level:"보통", count:16, epdo:85 },
-    "동부중산간권": { color:"#ffd966", level:"보통", count:30, epdo:162 },
   "한라산권": { color:"#ffd966", level:"보통", count:16, epdo:85 },
-
   "중문권": { color:"#91cf60", level:"낮음", count:14, epdo:79 }
 };
 
- const regionTips = {
+const regionTips = {
   "공항권": {
-    warnings:[
-      "차대차 충돌 및 추돌사고 비중이 높습니다.",
-      "교차로 및 진출입 구간 사고가 자주 발생합니다.",
-      "렌터카 인수 직후 운전 중 사고가 발생할 수 있습니다."
-    ],
+    warnings:["차대차 충돌 및 추돌사고 비중이 높습니다.","교차로 및 진출입 구간 사고가 자주 발생합니다.","렌터카 인수 직후 운전 중 사고가 발생할 수 있습니다."],
     tip:"출발 전 방향지시등, 와이퍼, 기어 위치를 먼저 확인하세요."
   },
   "제주시 도심권": {
-    warnings:[
-      "신호위반 사고 비중이 다른 권역보다 높습니다.",
-      "교차로 사고가 자주 발생합니다.",
-      "보행자와 차량이 혼재된 구간이 많습니다."
-    ],
+    warnings:["신호위반 사고 비중이 다른 권역보다 높습니다.","교차로 사고가 자주 발생합니다.","보행자와 차량이 혼재된 구간이 많습니다."],
     tip:"신호 변경 시 무리하게 진입하지 말고 충분히 감속하세요."
   },
   "서귀포 도심권": {
-    warnings:[
-      "교차로 내 사고 비중이 높습니다.",
-      "보행자 관련 사고가 발생하고 있습니다.",
-      "도심 혼잡구간에서 사고가 집중됩니다."
-    ],
+    warnings:["교차로 내 사고 비중이 높습니다.","보행자 관련 사고가 발생하고 있습니다.","도심 혼잡구간에서 사고가 집중됩니다."],
     tip:"교차로 진입 전 속도를 줄이고 보행자를 먼저 확인하세요."
   },
   "애월권": {
-    warnings:[
-      "해안도로 및 관광지 주변 사고가 자주 발생합니다.",
-      "중앙선 침범 사고가 일부 발생하고 있습니다.",
-      "주간 시간대 사고가 집중됩니다."
-    ],
+    warnings:["해안도로 및 관광지 주변 사고가 자주 발생합니다.","중앙선 침범 사고가 일부 발생하고 있습니다.","주간 시간대 사고가 집중됩니다."],
     tip:"바다 풍경에 시선을 빼앗기지 말고 전방을 주시하세요."
   },
   "한림·한경·대정권": {
-    warnings:[
-      "교차로 사고 비중이 높습니다.",
-      "관광지 주변 차량 진출입이 많습니다.",
-      "신호위반 사고가 일부 발생합니다."
-    ],
+    warnings:["교차로 사고 비중이 높습니다.","관광지 주변 차량 진출입이 많습니다.","신호위반 사고가 일부 발생합니다."],
     tip:"목적지 진입을 위해 급하게 차선을 변경하지 마세요."
   },
   "구좌권": {
-    warnings:[
-      "추돌사고 비중이 높습니다.",
-      "중앙선 침범 사고가 일부 발생합니다.",
-      "해안도로 주행 중 사고가 발생하고 있습니다."
-    ],
+    warnings:["추돌사고 비중이 높습니다.","중앙선 침범 사고가 일부 발생합니다.","해안도로 주행 중 사고가 발생하고 있습니다."],
     tip:"앞차와 충분한 안전거리를 유지하세요."
   },
   "조천권": {
-    warnings:[
-      "추돌사고 비중이 높습니다.",
-      "교차로 접근 구간 사고가 자주 발생합니다.",
-      "신호위반 사고가 일부 발생합니다."
-    ],
+    warnings:["추돌사고 비중이 높습니다.","교차로 접근 구간 사고가 자주 발생합니다.","신호위반 사고가 일부 발생합니다."],
     tip:"관광지 진입 전 미리 차선을 확인하세요."
   },
   "남원권": {
-    warnings:[
-      "해안도로 및 마을 진출입 구간 사고가 발생하고 있습니다.",
-      "주간 시간대 사고가 집중됩니다.",
-      "관광지 이동 중 전방주시가 필요합니다."
-    ],
+    warnings:["해안도로 및 마을 진출입 구간 사고가 발생하고 있습니다.","주간 시간대 사고가 집중됩니다.","관광지 이동 중 전방주시가 필요합니다."],
     tip:"마을 진입부와 해안도로에서는 속도를 줄이고 주변 차량을 확인하세요."
   },
   "성산·표선권": {
-    warnings:[
-      "관광지 진출입 구간 사고가 자주 발생합니다.",
-      "교차로 사고 비중이 높습니다.",
-      "대부분 주간 시간대에 발생합니다."
-    ],
+    warnings:["관광지 진출입 구간 사고가 자주 발생합니다.","교차로 사고 비중이 높습니다.","대부분 주간 시간대에 발생합니다."],
     tip:"길을 놓치더라도 급차로 변경보다 다음 교차로를 이용하세요."
   },
   "중문권": {
-    warnings:[
-      "관광지·숙박시설 진출입 차량이 많습니다.",
-      "차량 단독사고가 일부 발생합니다.",
-      "교차로 및 합류구간 사고에 유의하세요."
-    ],
+    warnings:["관광지·숙박시설 진출입 차량이 많습니다.","차량 단독사고가 일부 발생합니다.","교차로 및 합류구간 사고에 유의하세요."],
     tip:"목적지 진입 전 충분히 감속하세요."
   },
   "안덕·서부중산간권": {
-    warnings:[
-      "중앙선 침범 사고가 일부 발생합니다.",
-      "곡선구간 및 단일로 사고 비중이 높습니다.",
-      "차량 단독사고가 발생하고 있습니다."
-    ],
+    warnings:["중앙선 침범 사고가 일부 발생합니다.","곡선구간 및 단일로 사고 비중이 높습니다.","차량 단독사고가 발생하고 있습니다."],
     tip:"커브구간에서는 충분히 감속하세요."
   },
   "동부중산간권": {
-    warnings:[
-      "교차로 및 단일로 사고가 고르게 발생합니다.",
-      "추돌사고 비중이 비교적 높습니다.",
-      "대부분 주간 시간대에 발생합니다."
-    ],
+    warnings:["교차로 및 단일로 사고가 고르게 발생합니다.","추돌사고 비중이 비교적 높습니다.","대부분 주간 시간대에 발생합니다."],
     tip:"전방주시와 안전거리 확보에 유의하세요."
   },
   "한라산권": {
-    warnings:[
-      "중앙선 침범 사고 비중이 상대적으로 높습니다.",
-      "곡선 및 경사구간 사고가 발생합니다.",
-      "기상 변화가 잦은 구간입니다."
-    ],
+    warnings:["중앙선 침범 사고 비중이 상대적으로 높습니다.","곡선 및 경사구간 사고가 발생합니다.","기상 변화가 잦은 구간입니다."],
     tip:"충분히 감속하고 엔진브레이크를 활용하세요."
   }
 };
@@ -408,100 +353,39 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 function getJejuRegion(name){
   if(!name) return "기타";
 
-  // ① 공항권
-  if(
-    name.includes("용담") ||
-    name.includes("도두") ||
-    name.includes("이호")
-  ) return "공항권";
+  if(name.includes("용담") || name.includes("도두") || name.includes("이호")) return "공항권";
 
-  // ② 제주시 도심권
-  if(
-    name.includes("연동") ||
-    name.includes("노형") ||
-    name.includes("도남") ||
-    name.includes("이도") ||
-    name.includes("삼도") ||
-    name.includes("일도") ||
-    name.includes("아라") ||
-    name.includes("오라") ||
-    name.includes("건입")
-  ) return "제주시 도심권";
+  if(name.includes("연동") || name.includes("노형") || name.includes("도남") || name.includes("이도") ||
+     name.includes("삼도") || name.includes("일도") || name.includes("아라") || name.includes("오라") ||
+     name.includes("건입")) return "제주시 도심권";
 
-  // ③ 애월권
-  if(
-    name.includes("애월읍") ||
-    name.includes("외도") ||
-    name.includes("해안")
-  ) return "애월권";
+  if(name.includes("애월읍") || name.includes("외도") || name.includes("해안")) return "애월권";
 
-  // ④ 한림·한경·대정권
-  if(
-    name.includes("한림읍") ||
-    name.includes("한경면") ||
-    name.includes("대정읍")
-  ) return "한림·한경·대정권";
+  if(name.includes("한림읍") || name.includes("한경면") || name.includes("대정읍")) return "한림·한경·대정권";
 
-  // ⑤ 안덕·서부중산간권
-  if(
-    name.includes("안덕면")
-  ) return "안덕·서부중산간권";
+  if(name.includes("안덕면")) return "안덕·서부중산간권";
 
-  // ⑥ 중문권
-  if(
-    name.includes("중문") ||
-    name.includes("예래") ||
-    name.includes("대천") ||
-    name.includes("강정") ||
-    name.includes("대포") ||
-    name.includes("색달")
-  ) return "중문권";
+  if(name.includes("중문") || name.includes("예래") || name.includes("대천") || name.includes("강정") ||
+     name.includes("대포") || name.includes("색달")) return "중문권";
 
-  // ⑦ 서귀포 도심권
-  if(
-    name.includes("동홍") ||
-    name.includes("서홍") ||
-    name.includes("천지") ||
-    name.includes("중앙") ||
-    name.includes("정방") ||
-    name.includes("송산") ||
-    name.includes("효돈") ||
-    name.includes("영천") ||
-    name.includes("토평") ||
-    name.includes("상효") ||
-     name.includes("대륜") ||
-    name.includes("하효")
-  ) return "서귀포 도심권";
+  if(name.includes("동홍") || name.includes("서홍") || name.includes("천지") || name.includes("중앙") ||
+     name.includes("정방") || name.includes("송산") || name.includes("효돈") || name.includes("영천") ||
+     name.includes("토평") || name.includes("상효") || name.includes("대륜") || name.includes("하효"))
+     return "서귀포 도심권";
 
-  // ⑧ 남원권
-  if(
-    name.includes("남원읍")
-  ) return "남원권";
+  if(name.includes("남원읍")) return "남원권";
 
-  // ⑨ 성산·표선권
-  if(
-    name.includes("성산읍") ||
-    name.includes("표선면")
-  ) return "성산·표선권";
+  if(name.includes("성산읍") || name.includes("표선면")) return "성산·표선권";
 
-  // ⑩ 구좌권
-  if(
-    name.includes("구좌읍")
-  ) return "구좌권";
+  if(name.includes("구좌읍")) return "구좌권";
 
-  // ⑪ 조천권
-  if(
-    name.includes("조천읍") ||
-    name.includes("삼양") ||
-    name.includes("화북")
-  ) return "조천권";
+  if(name.includes("조천읍") || name.includes("삼양") || name.includes("화북")) return "조천권";
 
-  // ⑫ 한라산권
-  if(
-    name.includes("봉개") ||
-    name.includes("영평") ||
-    name.includes("용강")
-  ) return "한라산권";
+  if(name.includes("봉개") || name.includes("영평") || name.includes("용강")) return "한라산권";
+
+  if(name.includes("교래") || name.includes("선흘") || name.includes("대흘") || name.includes("와흘") ||
+     name.includes("송당") || name.includes("수망") || name.includes("가시") || name.includes("녹산"))
+     return "동부중산간권";
 
   return "기타";
 }
@@ -510,7 +394,8 @@ fetch("jeju_regions.geojson")
   .then(res => res.json())
   .then(data => {
     console.log(data.features[0].properties);
-    const geoLayer = L.geoJSON(data, {
+
+    L.geoJSON(data, {
       style: function(feature){
         const name =
           feature.properties.adm_nm ||
@@ -529,6 +414,39 @@ fetch("jeju_regions.geojson")
           fillOpacity: risk ? 0.45 : 0.15
         };
       },
+
+      onEachFeature: function(feature, layer){
+        const name =
+          feature.properties.adm_nm ||
+          feature.properties.name ||
+          feature.properties.EMD_NM ||
+          feature.properties.SIG_KOR_NM ||
+          "";
+
+        const region = getJejuRegion(name);
+        const risk = regionRisk[region];
+        const tipData = regionTips[region];
+
+        const warnings = tipData ? tipData.warnings : ["해당 권역의 교통상황에 유의하세요."];
+        const safeTip = tipData ? tipData.tip : "전방주시와 감속운전을 실천하세요.";
+
+        layer.bindPopup(`
+          <div style="min-width:230px; line-height:1.6;">
+            <b style="font-size:16px;">${risk ? risk.level : "미분류"} · ${region}</b><br>
+            <span style="color:#666;">${name}</span><br><br>
+
+            <b>⚠ 이런 점을 주의하세요</b><br>
+            ${warnings.map(w => "• " + w).join("<br>")}
+
+            <br><br>
+
+            <b>💡 안전운전 Tip</b><br>
+            ${safeTip}
+          </div>
+        `);
+      }
+    }).addTo(map);
+  });
 
       onEachFeature: function(feature, layer){
         const name =
