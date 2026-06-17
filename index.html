@@ -450,24 +450,6 @@ fetch("jeju_regions.geojson")
 
 
 
-layer.bindPopup(`
-  <div style="min-width:230px; line-height:1.6;">
-    <b style="font-size:16px;">${risk ? risk.level : "미분류"} · ${region}</b><br>
-    <span style="color:#666;">${name}</span><br><br>
-
-    <b>⚠ 이런 점을 주의하세요</b><br>
-    ${warnings.map(w => "• " + w).join("<br>")}
-
-    <br><br>
-
-    <b>💡 안전운전 Tip</b><br>
-    ${safeTip}
-  </div>
-`);
-         }
-    }).addTo(map);
-  });
-
 const legend = L.control({ position: "bottomright" });
 
 legend.onAdd = function () {
