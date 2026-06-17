@@ -292,6 +292,7 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
   "조천권": { color:"#ffd966", level:"보통", count:17, epdo:93 },
   "구좌권": { color:"#ffd966", level:"보통", count:16, epdo:80 },
   "남원권": { color:"#ffd966", level:"보통", count:16, epdo:85 },
+    "동부중산간권": { color:"#ffd966", level:"보통", count:30, epdo:162 },
   "한라산권": { color:"#ffd966", level:"보통", count:16, epdo:85 },
 
   "중문권": { color:"#91cf60", level:"낮음", count:14, epdo:79 }
@@ -360,7 +361,14 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     ],
     tip:"관광지 진입 전 미리 차선을 확인하세요."
   },
-
+"남원권": {
+  warnings:[
+    "해안도로 및 마을 진출입 구간 사고가 발생하고 있습니다.",
+    "주간 시간대 사고가 집중됩니다.",
+    "관광지 이동 중 전방주시가 필요합니다."
+  ],
+  tip:"마을 진입부와 해안도로에서는 속도를 줄이고 주변 차량을 확인하세요."
+},
   "성산·표선권": {
     warnings:[
       "관광지 진출입 구간 사고가 자주 발생합니다.",
@@ -558,7 +566,10 @@ fetch("jeju_regions.geojson")
   "한라산권": "급커브·안개·기상변화가 잦은 구간으로 충분한 감속이 필요합니다."
 };
 
-const tipData = regionTips[region];
+const tipData = regionTips[region] || {
+  warnings:["해당 권역의 교통상황에 유의하세요."],
+  tip:"전방주시와 감속운전을 실천하세요."
+};
 
 layer.bindPopup(`
   <div style="min-width:230px; line-height:1.6;">
@@ -566,17 +577,14 @@ layer.bindPopup(`
     <span style="color:#666;">${name}</span><br><br>
 
     <b>⚠ 이런 점을 주의하세요</b><br>
-    ${tipData ? tipData.warnings.map(w => "• " + w).join("<br>") : "• 해당 권역의 교통상황에 유의하세요."}
+    ${tipData.warnings.map(w => "• " + w).join("<br>")}
 
     <br><br>
 
     <b>💡 안전운전 Tip</b><br>
-    ${tipData ? tipData.tip : "전방주시와 감속운전을 실천하세요."}
+    ${tipData.tip}
   </div>
 `);
-      }
-    }).addTo(map);
-  });
 const legend = L.control({ position: "bottomright" });
 
 legend.onAdd = function () {
