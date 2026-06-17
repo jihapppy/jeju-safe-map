@@ -22,15 +22,14 @@
 <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 
 <style>
-  .risk-legend{
-  background:rgba(255,255,255,0.92);
-  padding:6px 8px;
-  border-radius:8px;
-  box-shadow:0 2px 6px rgba(0,0,0,0.15);
-  line-height:1.3;
-  font-size:11px;
+html, body {
+  margin:0;
+  width:100%;
+  height:100%;
+  font-family:'Pretendard','Noto Sans KR',Arial,sans-serif;
+  background:#eef6f3;
 }
-body { margin:0; font-family:Arial,sans-serif; }
+
 #map {
   position:fixed;
   top:0;
@@ -39,70 +38,85 @@ body { margin:0; font-family:Arial,sans-serif; }
   height:100vh;
   z-index:1;
 }
+
 .panel {
   position:absolute;
-  top:14px;
-  left:14px;
+  top:20px;
+  left:20px;
   z-index:1000;
+  width:390px;
+  max-width:calc(100% - 40px);
   background:rgba(255,255,255,0.96);
-  padding:16px;
-  border-radius:18px;
-  width:360px;
-  box-shadow:0 8px 24px rgba(0,0,0,0.22);
+  padding:22px;
+  border-radius:24px;
+  box-shadow:0 12px 34px rgba(0,0,0,0.18);
 }
 
-  .address-result{
-  margin-top:6px;
-  padding:9px;
-  border:1px solid #d5ddd8;
-  border-radius:10px;
-  background:#f7faf8;
-  font-size:13px;
-  cursor:pointer;
-}
-
-.address-result:hover{
-  background:#e9f3ee;
-}
 .hodoongi{
   position:absolute;
-  width:60px;
-  top:16px;
-  right:18px;
+  width:68px;
+  top:18px;
+  right:20px;
   height:auto;
 }
+
 h2{
-  margin:0 70px 12px 0;
-  font-size:21px;
-  color:#0b3d2e;
+  margin:0 78px 10px 0;
+  font-size:24px;
+  color:#073f31;
+  line-height:1.25;
+  letter-spacing:-0.8px;
+}
+
+h2::before{
+  content:"🚗 ";
 }
 
 label{
   display:block;
-  margin-top:8px;
-  font-size:13px;
-  font-weight:bold;
+  margin-top:13px;
+  font-size:14px;
+  font-weight:800;
+  color:#073f31;
 }
 
 select, input, button {
   width:100%;
-  padding:10px;
-  margin-top:6px;
-  border-radius:10px;
-  border:1px solid #ccc;
+  height:46px;
+  padding:0 14px;
+  margin-top:7px;
+  border-radius:14px;
+  border:1px solid #cfded9;
   font-size:14px;
   box-sizing:border-box;
+  background:#fff;
+}
+
+select:focus, input:focus{
+  outline:none;
+  border-color:#0b4a38;
+  box-shadow:0 0 0 3px rgba(11,74,56,0.12);
 }
 
 button {
-  background:#0b3d2e;
+  background:#084734;
   color:white;
-  font-weight:bold;
+  font-weight:800;
   border:none;
   cursor:pointer;
 }
 
-  .address-row{
+button:hover{
+  background:#0f6048;
+}
+
+.sub-btn{
+  background:#f3faf7;
+  color:#084734;
+  border:1px solid #bdd4cc;
+}
+
+.address-row{
   display:flex;
   gap:8px;
   margin-top:8px;
@@ -113,43 +127,70 @@ button {
 }
 
 .mini-btn{
-  width:80px;
-  background:#0b3d2e;
+  width:82px;
+  background:#084734;
   color:white;
   border:none;
-  border-radius:10px;
-  font-weight:bold;
+  border-radius:14px;
+  font-weight:800;
 }
-  
-.sub-btn{
-  background:#f1f5f3;
-  color:#0b3d2e;
-  border:1px solid #b7c7bf;
+
+.address-result{
+  margin-top:7px;
+  padding:10px;
+  border:1px solid #d5ddd8;
+  border-radius:12px;
+  background:#f7faf8;
+  font-size:13px;
+  line-height:1.45;
+  cursor:pointer;
+}
+
+.address-result:hover{
+  background:#e9f3ee;
 }
 
 .card {
-  margin-top:10px;
-  padding:12px;
-  border-radius:14px;
+  margin-top:12px;
+  padding:13px 14px;
+  border-radius:16px;
   background:#fff;
-  box-shadow:0 3px 10px rgba(0,0,0,0.08);
+  box-shadow:0 4px 14px rgba(0,0,0,0.08);
   line-height:1.55;
   font-size:14px;
 }
 
-.red { border-left:7px solid #e53935; }
-.green { border-left:7px solid #43a047; }
-.blue { border-left:7px solid #1e88e5; }
+.red { border-left:7px solid #e85d5d; }
+.green { border-left:7px solid #7bc96f; }
+.blue { border-left:7px solid #4f8fd8; }
 
 .small {
-  font-size:11px;
-  color:#666;
-  margin-top:10px;
-  line-height:1.4;
+  font-size:11.5px;
+  color:#667872;
+  margin-top:12px;
+  line-height:1.45;
+}
+
+.risk-legend{
+  background:rgba(255,255,255,0.94);
+  padding:13px 15px;
+  border-radius:17px;
+  box-shadow:0 8px 22px rgba(0,0,0,0.14);
+  line-height:1.65;
+  font-size:13px;
+}
+
+.leaflet-popup-content-wrapper {
+  border-radius:18px;
+  box-shadow:0 12px 28px rgba(0,0,0,0.18);
+}
+
+.leaflet-popup-content {
+  margin:17px 19px;
+  font-size:14px;
 }
 
 @media (max-width:768px){
-
   body{
     display:flex;
     flex-direction:column;
@@ -161,7 +202,7 @@ button {
     display:block;
     position:relative !important;
     width:100% !important;
-    height:34vh !important;
+    height:36vh !important;
   }
 
   .panel{
@@ -169,38 +210,39 @@ button {
     display:block;
     position:relative !important;
     top:auto !important;
-    bottom:auto !important;
     left:auto !important;
-    right:auto !important;
     width:100% !important;
-    max-height:none !important;
-    overflow-y:visible !important;
+    max-width:100% !important;
     box-sizing:border-box;
     margin:0;
-    padding:14px;
-    border-radius:22px 22px 0 0;
+    padding:17px;
+    border-radius:24px 24px 0 0;
     box-shadow:0 -4px 18px rgba(0,0,0,0.12);
   }
 
-  .risk-legend{
-    font-size:11px;
-    padding:6px 8px;
-    line-height:1.3;
-  }
-
   .hodoongi{
-    width:52px;
+    width:54px;
+    top:18px;
+    right:18px;
   }
 
   h2{
-    font-size:19px;
-    margin-right:60px;
+    font-size:20px;
+    margin-right:62px;
+  }
+
+  select, input, button{
+    height:44px;
   }
 
   .card{
     font-size:13px;
   }
 
+  .risk-legend{
+    font-size:11px;
+    padding:7px 9px;
+  }
 }
 </style>
 </head>
