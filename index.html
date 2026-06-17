@@ -874,6 +874,10 @@ document.getElementById("info").appendChild(notice);
     map.fitBounds(L.latLngBounds(allCoords), {
       padding:[40,40]
     });
+    document.getElementById("map").scrollIntoView({
+  behavior: "smooth",
+  block: "start"
+});
 
   }catch(error){
     alert("오류가 발생했어요.\n\n"+error.message);
