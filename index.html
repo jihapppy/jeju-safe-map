@@ -505,113 +505,95 @@ function getJejuRegion(name){
 
   if(!name) return "기타";
 
-  // 공항권
+  // ① 공항권
   if(
-    name.includes("용담") ||
-    name.includes("도두") ||
-    name.includes("이호")
+    name.includes("용담1동") ||
+    name.includes("용담2동") ||
+    name.includes("도두동") ||
+    name.includes("이호동")
   ) return "공항권";
 
-  // 제주시도심권
+  // ② 제주시도심권
   if(
     name.includes("연동") ||
-    name.includes("노형") ||
-    name.includes("도남") ||
-    name.includes("이도") ||
-    name.includes("삼도") ||
-    name.includes("일도") ||
-    name.includes("아라") ||
-    name.includes("오라") ||
-    name.includes("건입")
+    name.includes("노형동") ||
+    name.includes("건입동") ||
+    name.includes("일도1동") ||
+    name.includes("일도2동") ||
+    name.includes("이도1동") ||
+    name.includes("이도2동") ||
+    name.includes("삼도1동") ||
+    name.includes("삼도2동")
   ) return "제주시도심권";
 
-  // 애월권
+  // ③ 함덕·조천권
   if(
-    name.includes("애월읍") ||
-    name.includes("외도") ||
-    name.includes("해안")
-  ) return "애월권";
+    name.includes("조천읍") ||
+    name.includes("삼양동") ||
+    name.includes("화북동")
+  ) return "함덕·조천권";
 
-  // 협재·한림권
+  // ④ 김녕·월정권
   if(
-    name.includes("한림읍") ||
-    name.includes("협재") ||
-    name.includes("금능")
-  ) return "협재·한림권";
+    name.includes("구좌읍")
+  ) return "김녕·월정권";
 
-  // 서부중산간권
-  if(
-    name.includes("한경면") ||
-    name.includes("대정읍") ||
-    name.includes("안덕면")
-  ) return "서부중산간권";
-
-  // 중문권
-  if(
-    name.includes("중문") ||
-    name.includes("예래") ||
-    name.includes("대천") ||
-    name.includes("강정") ||
-    name.includes("대포") ||
-    name.includes("색달")
-  ) return "중문권";
-
-  // 서귀포도심권
-  if(
-    name.includes("동홍") ||
-    name.includes("서홍") ||
-    name.includes("천지") ||
-    name.includes("중앙") ||
-    name.includes("정방") ||
-    name.includes("송산") ||
-    name.includes("효돈") ||
-    name.includes("영천") ||
-    name.includes("토평") ||
-    name.includes("상효") ||
-    name.includes("대륜") ||
-    name.includes("하효")
-  ) return "서귀포도심권";
-
-  // 성산권
+  // ⑤ 성산권
   if(
     name.includes("성산읍") ||
     name.includes("표선면") ||
-    name.includes("남원읍")
+    name.includes("남원읍") ||
+    name.includes("우도면")
   ) return "성산권";
 
-  // 함덕·조천권
+  // ⑥ 애월권
   if(
-    name.includes("조천읍") ||
-    name.includes("함덕") ||
-    name.includes("삼양") ||
-    name.includes("화북")
-  ) return "함덕·조천권";
+    name.includes("애월읍") ||
+    name.includes("외도동")
+  ) return "애월권";
 
-  // 김녕·월정권
+  // ⑦ 협재·한림권
   if(
-    name.includes("구좌읍") ||
-    name.includes("김녕") ||
-    name.includes("월정")
-  ) return "김녕·월정권";
+    name.includes("한림읍")
+  ) return "협재·한림권";
 
-  // 한라산권
+  // ⑧ 중문권
   if(
-    name.includes("봉개") ||
-    name.includes("영평") ||
-    name.includes("용강")
-  ) return "한라산권";
+    name.includes("중문동") ||
+    name.includes("대천동") ||
+    name.includes("예래동")
+  ) return "중문권";
 
-  // 동부중산간권
+  // ⑨ 서귀포도심권
   if(
-    name.includes("교래") ||
-    name.includes("선흘") ||
-    name.includes("대흘") ||
-    name.includes("와흘") ||
-    name.includes("송당") ||
-    name.includes("수망") ||
-    name.includes("가시") ||
-    name.includes("녹산")
+    name.includes("동홍동") ||
+    name.includes("서홍동") ||
+    name.includes("송산동") ||
+    name.includes("정방동") ||
+    name.includes("중앙동") ||
+    name.includes("천지동") ||
+    name.includes("대륜동")
+  ) return "서귀포도심권";
+
+  // ⑩ 서부중산간권
+  if(
+    name.includes("안덕면") ||
+    name.includes("대정읍") ||
+    name.includes("한경면")
+  ) return "서부중산간권";
+
+  // ⑪ 동부중산간권
+  if(
+    name.includes("영천동") ||
+    name.includes("효돈동")
   ) return "동부중산간권";
+
+  // ⑫ 한라산권
+  if(
+    name.includes("아라동") ||
+    name.includes("오라동") ||
+    name.includes("봉개동")
+  ) return "한라산권";
 
   return "기타";
 }
