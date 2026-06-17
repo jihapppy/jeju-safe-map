@@ -566,10 +566,15 @@ fetch("jeju_regions.geojson")
   "한라산권": "급커브·안개·기상변화가 잦은 구간으로 충분한 감속이 필요합니다."
 };
 
-const tipData = regionTips[region] || {
-  warnings:["해당 권역의 교통상황에 유의하세요."],
-  tip:"전방주시와 감속운전을 실천하세요."
-};
+const tipData = regionTips[region];
+
+const warnings = tipData && Array.isArray(tipData.warnings)
+  ? tipData.warnings
+  : ["해당 권역의 교통상황에 유의하세요."];
+
+const safeTip = tipData && tipData.tip
+  ? tipData.tip
+  : "전방주시와 감속운전을 실천하세요.";
 
 layer.bindPopup(`
   <div style="min-width:230px; line-height:1.6;">
@@ -577,12 +582,12 @@ layer.bindPopup(`
     <span style="color:#666;">${name}</span><br><br>
 
     <b>⚠ 이런 점을 주의하세요</b><br>
-    ${tipData.warnings.map(w => "• " + w).join("<br>")}
+    ${warnings.map(w => "• " + w).join("<br>")}
 
     <br><br>
 
     <b>💡 안전운전 Tip</b><br>
-    ${tipData.tip}
+    ${safeTip}
   </div>
 `);
 const legend = L.control({ position: "bottomright" });
