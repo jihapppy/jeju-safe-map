@@ -361,23 +361,91 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 }).addTo(map);
   
 const regionRisk = {
-  "공항권": { color:"#e76f6f", level:"매우높음", count:53, epdo:261 },
-  "제주시도심권": { color:"#e76f6f", level:"매우높음", count:132, epdo:581 },
-  "서귀포도심권": { color:"#e76f6f", level:"매우높음", count:57, epdo:259 },
 
-  "애월권": { color:"#f4a261", level:"높음", count:38, epdo:215 },
-  "서부중산간권": { color:"#f4a261", level:"높음", count:35, epdo:223 },
+  "공항권": {
+    color:"#e76f6f",
+    level:"매우높음",
+    count:53,
+    epdo:261
+  },
 
-  "동부중산간권": { color:"#f6e58d", level:"보통", count:30, epdo:162 },
-  "협재·한림권": { color:"#f6e58d", level:"보통", count:24, epdo:107 },
-  "성산권": { color:"#f6e58d", level:"보통", count:15, epdo:100 },
-  "함덕·조천권": { color:"#f6e58d", level:"보통", count:17, epdo:93 },
-  "김녕·월정권": { color:"#f6e58d", level:"보통", count:16, epdo:80 },
-  "한라산권": { color:"#f6e58d", level:"보통", count:16, epdo:85 },
+  "제주시도심권": {
+    color:"#e76f6f",
+    level:"매우높음",
+    count:132,
+    epdo:581
+  },
 
-  "중문권": { color:"#95d5b2", level:"낮음", count:14, epdo:79 }
+  "서귀포도심권": {
+    color:"#e76f6f",
+    level:"매우높음",
+    count:57,
+    epdo:259
+  },
+
+  "애월권": {
+    color:"#f4a261",
+    level:"높음",
+    count:38,
+    epdo:215
+  },
+
+  "서부중산간권": {
+    color:"#f4a261",
+    level:"높음",
+    count:35,
+    epdo:223
+  },
+
+  "동부중산간권": {
+    color:"#f6e58d",
+    level:"보통",
+    count:30,
+    epdo:162
+  },
+
+  "협재·한림권": {
+    color:"#f6e58d",
+    level:"보통",
+    count:24,
+    epdo:107
+  },
+
+  "함덕·조천권": {
+    color:"#f6e58d",
+    level:"보통",
+    count:17,
+    epdo:93
+  },
+
+  "김녕·월정권": {
+    color:"#f6e58d",
+    level:"보통",
+    count:16,
+    epdo:80
+  },
+
+  "성산권": {
+    color:"#f6e58d",
+    level:"보통",
+    count:15,
+    epdo:100
+  },
+
+  "한라산권": {
+    color:"#f6e58d",
+    level:"보통",
+    count:16,
+    epdo:85
+  },
+
+  "중문권": {
+    color:"#95d5b2",
+    level:"낮음",
+    count:14,
+    epdo:79
+  }
 };
-
 const regionTips = {
   "공항권": {
     warnings:["차대차 충돌 및 추돌사고 비중이 높습니다.","교차로 및 진출입 구간 사고가 자주 발생합니다.","렌터카 인수 직후 운전 중 사고가 발생할 수 있습니다."],
