@@ -276,9 +276,11 @@ if(window.Kakao){
 }
 
 const map = L.map('map').setView([33.36,126.54],9);
+
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
   attribution:'© OpenStreetMap contributors'
 }).addTo(map);
+
 const regionRisk = {
   "제주시 도심권": { color:"#d7191c", level:"매우높음", count:132, epdo:581 },
   "공항권": { color:"#d7191c", level:"매우높음", count:53, epdo:261 },
@@ -393,8 +395,6 @@ function getJejuRegion(name){
 fetch("jeju_regions.geojson")
   .then(res => res.json())
   .then(data => {
-    console.log(data.features[0].properties);
-
     L.geoJSON(data, {
       style: function(feature){
         const name =
@@ -448,36 +448,33 @@ fetch("jeju_regions.geojson")
     }).addTo(map);
   });
 
-
-
 const legend = L.control({ position: "bottomright" });
 
 legend.onAdd = function () {
-
   const div = L.DomUtil.create("div", "risk-legend");
 
-div.innerHTML = `
-<div style="font-weight:bold;">위험도</div>
-<div>🔴 매우높음</div>
-<div>🟠 높음</div>
-<div>🟡 보통</div>
-<div>🟢 낮음</div>
-`;
+  div.innerHTML = `
+    <div style="font-weight:bold;">위험도</div>
+    <div>🔴 매우높음</div>
+    <div>🟠 높음</div>
+    <div>🟡 보통</div>
+    <div>🟢 낮음</div>
+  `;
 
   return div;
 };
 
 legend.addTo(map);
+
 let routeLayer;
 let customStart = null;
 let customStartName = null;
-  let customEnd = null;
+let customEnd = null;
 let customEndName = null;
-  
 let lastStart = null;
 let lastEnd = null;
-  let recommendedRoute = 0;
-  
+let recommendedRoute = 0;
+
 const dangerZones = [
   { name:"공항권", lat:33.4996, lng:126.5312, radiusKm:4, score:3, reason:"렌터카 인수 직후 초행운전, 급차선 변경" },
   { name:"제주시 도심권", lat:33.5000, lng:126.5200, radiusKm:5, score:3, reason:"도심 교차로 밀집, 보행자·차량 혼재" },
@@ -505,6 +502,7 @@ function useCurrentLocation(){
         lng: position.coords.longitude,
         lat: position.coords.latitude
       };
+
       customStartName = "현재 위치";
       document.getElementById("startSelect").value = "";
       document.getElementById("info").innerHTML = "출발지가 현재 위치로 설정되었습니다.";
@@ -515,8 +513,6 @@ function useCurrentLocation(){
     }
   );
 }
-
-
  async function searchStartPlace(){
 
   const keyword = document.getElementById("startInput").value.trim();
