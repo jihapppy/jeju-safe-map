@@ -629,6 +629,7 @@ fetch("jeju_regions.geojson")
           "";
 
         const region = getJejuRegion(name);
+              console.log(name + " → " + region);
         const risk = regionRisk[region];
 
         return {
