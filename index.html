@@ -590,6 +590,10 @@ layer.bindPopup(`
     ${safeTip}
   </div>
 `);
+         }
+    }).addTo(map);
+  });
+
 const legend = L.control({ position: "bottomright" });
 
 legend.onAdd = function () {
