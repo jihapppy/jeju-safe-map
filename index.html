@@ -293,7 +293,7 @@ button:hover{
     <option value="126.6267,33.4386">사려니숲길</option>
   </select>
 
- <button class="analyze-btn" onclick="analyzeRoute()">🚦 안전경로 분석하기</button>
+ <button class="analyze-btn" onclick="drawRoutes()">🚦 안전경로 분석하기</button>
 
   <div id="info"></div>
 
@@ -550,7 +550,6 @@ function useCurrentLocation(){
       };
 
       customStartName = "현재 위치";
-      document.getElementById("startSelect").value = "";
       document.getElementById("info").innerHTML = "출발지가 현재 위치로 설정되었습니다.";
     },
     function(){
@@ -609,8 +608,6 @@ function useCurrentLocation(){
         };
 
         customStartName = place.place_name;
-
-        document.getElementById("startSelect").value = "";
         document.getElementById("startInput").value = place.place_name;
 
         resultBox.innerHTML = "";
