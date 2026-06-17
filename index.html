@@ -198,12 +198,14 @@ button:hover{
   }
 
   #map{
-    order:1;
-    display:block;
-    position:relative !important;
-    width:100% !important;
-    height:42vh !important;
-  }
+    #map{
+  order:1;
+  display:block;
+  position:relative !important;
+  width:100% !important;
+  height:55vh !important;
+  min-height:360px;
+}
 
   .panel{
     order:2;
@@ -874,6 +876,12 @@ document.getElementById("info").appendChild(notice);
     map.fitBounds(L.latLngBounds(allCoords), {
       padding:[40,40]
     });
+    setTimeout(function(){
+  document.getElementById("map").scrollIntoView({
+    behavior: "smooth",
+    block: "start"
+  });
+}, 300);
     document.getElementById("map").scrollIntoView({
   behavior: "smooth",
   block: "start"
