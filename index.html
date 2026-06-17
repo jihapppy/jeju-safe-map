@@ -558,14 +558,20 @@ fetch("jeju_regions.geojson")
   "한라산권": "급커브·안개·기상변화가 잦은 구간으로 충분한 감속이 필요합니다."
 };
 
+const tipData = regionTips[region];
+
 layer.bindPopup(`
-  <div style="min-width:210px; line-height:1.6;">
+  <div style="min-width:230px; line-height:1.6;">
     <b style="font-size:16px;">${risk ? risk.level : "미분류"} · ${region}</b><br>
     <span style="color:#666;">${name}</span><br><br>
-    <b>사고건수</b> ${risk ? risk.count : "-"}건<br>
-    <b>EPDO</b> ${risk ? risk.epdo : "-"}<br><br>
-    <b>안전운전 Tip</b><br>
-    ${regionTips[region] || "해당 권역의 교통상황에 유의하세요."}
+
+    <b>⚠ 이런 점을 주의하세요</b><br>
+    ${tipData ? tipData.warnings.map(w => "• " + w).join("<br>") : "• 해당 권역의 교통상황에 유의하세요."}
+
+    <br><br>
+
+    <b>💡 안전운전 Tip</b><br>
+    ${tipData ? tipData.tip : "전방주시와 감속운전을 실천하세요."}
   </div>
 `);
       }
