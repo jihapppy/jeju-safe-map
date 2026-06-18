@@ -1081,6 +1081,15 @@ const recommend = routeSummaries[recommendedIndex];
 
 const guide = document.createElement("div");
 guide.className = "card green";
+
+    const matchedTipKey = Object.keys(destinationTips).find(key =>
+  endName.includes(key) || key.includes(endName)
+);
+
+const mainTip = matchedTipKey
+  ? destinationTips[matchedTipKey][0]
+  : "목적지를 놓쳤다면 급차로 변경하지 말고 다음 길로 이동하세요.";
+    
 guide.innerHTML =
   "<div style='font-size:15px;font-weight:900;color:#0b4a38;'>🚦 안전경로 추천</div>" +
   "<div style='font-size:13px;color:#555;margin-top:8px;line-height:1.5;'>" +
@@ -1096,7 +1105,7 @@ guide.innerHTML =
   "</div>" +
   "<div style='margin-top:14px;padding:12px;border-radius:14px;background:#f3faf7;line-height:1.5;'>" +
   "<b>⚠ 핵심주의</b><br>" +
-  "목적지를 놓쳤다면 급차로 변경하지 말고 다음 길로 이동하세요." +
+mainTip +
   "</div>";
     
 document.getElementById("info").appendChild(guide);
