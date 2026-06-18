@@ -596,8 +596,6 @@ function getJejuRegion(name){
   // ⑤ 성산권
   if(
     name.includes("성산읍") ||
-    name.includes("표선면") ||
-    name.includes("남원읍") ||
     name.includes("우도면")
   ) return "성산권";
 
@@ -626,7 +624,9 @@ function getJejuRegion(name){
     name.includes("송산동") ||
     name.includes("정방동") ||
     name.includes("중앙동") ||
-    name.includes("천지동") ||
+    name.includes("천지동") 
+        name.includes("영천동") ||
+    name.includes("효돈동")
     name.includes("대륜동")
   ) return "서귀포도심권";
 
@@ -639,8 +639,8 @@ function getJejuRegion(name){
 
   // ⑪ 동부중산간권
   if(
-    name.includes("영천동") ||
-    name.includes("효돈동")
+     name.includes("표선면") ||
+    name.includes("남원읍") ||
   ) return "동부중산간권";
 
   // ⑫ 한라산권
