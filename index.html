@@ -1030,12 +1030,12 @@ const recommend = routeSummaries[recommendedIndex];
 const guide = document.createElement("div");
 guide.className = "card green";
 guide.innerHTML =
-  "<b> 🚦추천 안전경로</b><br>" +
+  "<b> 🚦상대적으로 안전한 경로</b><br>" +
   "<b>" + (recommendedIndex + 1) + "코스 추천</b><br>" +
   "거리: " + recommend.distanceKm + "km<br>" +
   "예상시간: " + recommend.durationMin + "분<br>" +
   "위험도: <b>" + recommend.risk.icon + " " + recommend.risk.level + "</b><br>" +
-  "<span style='color:#666;'>아래 버튼을 눌러 바로 길안내를 시작하세요.</span>";
+  "<span style='color:#666;'> 본 안내는 두 경로 중 사고밀집권역 통과가 상대적으로 적은 경로를 추천합니다.</span>";
 
 document.getElementById("info").appendChild(guide);
 
