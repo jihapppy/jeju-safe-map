@@ -1085,7 +1085,17 @@ notice.style.color = "#666";
 notice.style.marginTop = "10px";
 
 notice.innerHTML =
-  "* 가장 안전한 추천 경로로 안내됩니다.";
+  "* 본 안내는 두 경로 중 사고밀집권역 통과가 상대적으로 적은 경로를 추천합니다.";
+
+document.getElementById("info").appendChild(notice);
+    const notice = document.createElement("div");
+
+notice.style.fontSize = "13px";
+notice.style.color = "#666";
+notice.style.marginTop = "10px";
+
+notice.innerHTML =
+  "* 본 안내는 두 경로 중 사고밀집권역 통과가 상대적으로 적은 경로를 추천합니다.";
 
 document.getElementById("info").appendChild(notice);
     L.marker([startLat,startLng])
