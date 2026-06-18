@@ -617,31 +617,31 @@ function getJejuRegion(name){
     name.includes("예래동")
   ) return "중문권";
 
-  // ⑨ 서귀포도심권
-  if(
-    name.includes("동홍동") ||
-    name.includes("서홍동") ||
-    name.includes("송산동") ||
-    name.includes("정방동") ||
-    name.includes("중앙동") ||
-    name.includes("천지동") 
-        name.includes("영천동") ||
-    name.includes("효돈동")
-    name.includes("대륜동")
-  ) return "서귀포도심권";
+ // ⑨ 서귀포도심권
+if(
+  name.includes("동홍동") ||
+  name.includes("서홍동") ||
+  name.includes("송산동") ||
+  name.includes("정방동") ||
+  name.includes("중앙동") ||
+  name.includes("천지동") ||
+  name.includes("대륜동") ||
+  name.includes("영천동") ||
+  name.includes("효돈동")
+) return "서귀포도심권";
 
-  // ⑩ 서부중산간권
-  if(
-    name.includes("안덕면") ||
-    name.includes("대정읍") ||
-    name.includes("한경면")
-  ) return "서부중산간권";
+// ⑩ 서부중산간권
+if(
+  name.includes("안덕면") ||
+  name.includes("대정읍") ||
+  name.includes("한경면")
+) return "서부중산간권";
 
-  // ⑪ 동부중산간권
-  if(
-     name.includes("표선면") ||
-    name.includes("남원읍") ||
-  ) return "동부중산간권";
+// ⑪ 동부중산간권
+if(
+  name.includes("표선면") ||
+  name.includes("남원읍")
+) return "동부중산간권";
 
   // ⑫ 한라산권
   if(
