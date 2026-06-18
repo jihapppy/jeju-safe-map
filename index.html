@@ -1283,9 +1283,10 @@ resultBox.innerHTML = "검색중...";
 
         customEndName = place.place_name;
 
-        document.getElementById("endInput").value = place.place_name;
-        document.getElementById("endSelect").value = "";
-        resultBox.innerHTML = "";
+       document.getElementById("endInput").value = place.place_name;
+document.getElementById("endSelect").value = "";
+resultBox.innerHTML = "";
+resultBox.style.display = "none";
 
         document.getElementById("info").innerHTML =
           "목적지가 '" + place.place_name + "'(으)로 설정되었습니다.";
