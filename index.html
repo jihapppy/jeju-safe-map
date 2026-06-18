@@ -1250,7 +1250,7 @@ resultBox.innerHTML = "검색중...";
   try{
     const response = await fetch(
       "https://dapi.kakao.com/v2/local/search/keyword.json?query=" +
-     encodeURIComponent(keyword),
+     encodeURIComponent("제주 " + keyword),
       {
         headers:{
           Authorization:"KakaoAK " + kakaoKey
