@@ -1082,15 +1082,18 @@ const recommend = routeSummaries[recommendedIndex];
 const guide = document.createElement("div");
 guide.className = "card green";
 guide.innerHTML =
-  "<b>🚦 상대적으로 안전한 경로</b><br>" +
-  "<span style='font-size:22px;font-weight:900;'>" +
-  (recommendedIndex + 1) + "코스 추천</span><br>" +
+  "<div style='font-size:14px;font-weight:800;color:#0b4a38;'>🚦 추천 경로</div>" +
+  "<div style='font-size:30px;font-weight:900;margin-top:6px;'>" +
+  (recommendedIndex + 1) + "코스</div>" +
+  "<div style='font-size:15px;color:#333;margin-top:6px;'>" +
   recommend.distanceKm + "km · " +
   recommend.durationMin + "분 · " +
-  recommend.risk.icon + " " + recommend.risk.level + "<br><br>" +
+  recommend.risk.icon + " " + recommend.risk.level + "</div>" +
+  "<div style='margin-top:14px;padding:12px;border-radius:14px;background:#f3faf7;line-height:1.5;'>" +
   "<b>⚠ 핵심주의</b><br>" +
-  "목적지를 놓쳤다면 급차로 변경하지 말고 다음 길로 이동하세요.";
-
+  "목적지를 놓쳤다면 급차로 변경하지 말고 다음 길로 이동하세요." +
+  "</div>";
+    
 document.getElementById("info").appendChild(guide);
     if(destinationTips[endName]){
 
