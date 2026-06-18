@@ -1321,7 +1321,8 @@ resultBox.style.display = "none";
   }
 
   const resultBox = document.getElementById("startResults");
-  resultBox.innerHTML = "검색중...";
+resultBox.style.display = "block";
+resultBox.innerHTML = "검색중...";
 
   try{
     const response = await fetch(
