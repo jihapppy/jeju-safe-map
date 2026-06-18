@@ -310,7 +310,7 @@ button:hover{
 
  <div class="address-row">
   <input id="endInput" type="text" placeholder="예: 1100고지, 성산일출봉">
-  <button class="mini-btn" onclick="searchEndPlace()">검색</button>
+  <button class="mini-btn" onclick="searchDestination()">검색</button>
 </div>
 
 <div id="endResults"></div>
@@ -1236,7 +1236,7 @@ function openKakaoNavi(){
 
 async function searchDestination(){
 console.log("검색 함수 실행");
-  const keyword = document.getElementById("destinationInput").value.trim();
+  const keyword = document.getElementById("endInput").value.trim();
 
   if(keyword === ""){
     alert("목적지를 입력해주세요.");
@@ -1283,7 +1283,7 @@ resultBox.innerHTML = "검색중...";
 
         customEndName = place.place_name;
 
-        document.getElementById("destinationInput").value = place.place_name;
+        document.getElementById("endInput").value = place.place_name;
         document.getElementById("endSelect").value = "";
         resultBox.innerHTML = "";
 
@@ -1304,7 +1304,7 @@ resultBox.innerHTML = "검색중...";
   if(endSelect.value !== ""){
     customEnd = null;
     customEndName = null;
-    document.getElementById("destinationInput").value = "";
+    document.getElementById("endInput").value = "";
     document.getElementById("destinationResults").innerHTML = "";
     document.getElementById("info").innerHTML =
       "목적지가 주요 관광지로 설정되었습니다.";
