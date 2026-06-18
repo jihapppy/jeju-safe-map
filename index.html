@@ -336,7 +336,7 @@ button:hover{
   <div id="info"></div>
 
   <div class="small">
-    ※ 본 서비스는 TAAS의 사고분포 및 도로환경 정보를 참고하여 안전한 경로 선택을 지원하기 위한 참고용 정보입니다.
+    ※ 본 서비스는 TAAS 사고데이터와 사고밀집권역 분석 결과를 바탕으로 안전한 경로 선택을 지원합니다.
   </div>
 </div>
 
@@ -1164,8 +1164,6 @@ notice.style.fontSize = "13px";
 notice.style.color = "#666";
 notice.style.marginTop = "10px";
 
-notice.innerHTML =
-  "* 본 안내는 두 경로 중 사고밀집권역 통과가 상대적으로 적은 경로를 추천합니다.";
 
 document.getElementById("info").appendChild(notice);
     L.marker([startLat,startLng])
