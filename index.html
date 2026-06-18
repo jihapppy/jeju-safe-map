@@ -1090,6 +1090,18 @@ guide.innerHTML =
   "<span style='color:#666;'> 본 안내는 두 경로 중 사고밀집권역 통과가 상대적으로 적은 경로를 추천합니다.</span>";
 
 document.getElementById("info").appendChild(guide);
+    if(destinationTips[endName]){
+
+  const tipCard = document.createElement("div");
+  tipCard.className = "card";
+
+  tipCard.innerHTML =
+    "<b>📍 목적지 맞춤 안전팁</b><br><br>" +
+    "<b>" + endName + "</b><br>" +
+    "• " + destinationTips[endName].join("<br>• ");
+
+  document.getElementById("info").appendChild(tipCard);
+}
 
 const safeBtn = document.createElement("button");
 safeBtn.innerHTML = "🟢 네이버지도 길안내";
