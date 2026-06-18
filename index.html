@@ -770,8 +770,11 @@ function useCurrentLocation(){
         lat: position.coords.latitude
       };
 
-      customStartName = "현재 위치";
-      document.getElementById("info").innerHTML = "출발지가 현재 위치로 설정되었습니다.";
+     customStartName = "현재 위치";
+document.getElementById("startInput").value = "현재 위치";
+document.getElementById("startResults").innerHTML = "";
+document.getElementById("startResults").style.display = "none";
+document.getElementById("info").innerHTML = "출발지가 현재 위치로 설정되었습니다.";
     },
     function(){
       alert("현재 위치를 가져오지 못했어요. 위치 권한을 허용해주세요.");
@@ -829,9 +832,10 @@ function useCurrentLocation(){
         };
 
         customStartName = place.place_name;
-        document.getElementById("startInput").value = place.place_name;
+        ocument.getElementById("startInput").value = place.place_name;
 
-        resultBox.innerHTML = "";
+resultBox.innerHTML = "";
+resultBox.style.display = "none";
 
         document.getElementById("info").innerHTML =
           "출발지가 '" + place.place_name + "'(으)로 설정되었습니다.";
@@ -1239,8 +1243,9 @@ console.log("검색 함수 실행");
     return;
   }
 
-  const resultBox = document.getElementById("destinationResults");
-  resultBox.innerHTML = "검색중...";
+  const resultBox = document.getElementById("startResults");
+resultBox.style.display = "block";
+resultBox.innerHTML = "검색중...";
 
   try{
     const response = await fetch(
