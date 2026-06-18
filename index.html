@@ -1360,11 +1360,11 @@ resultBox.innerHTML = "검색중...";
 
         customStartName = place.place_name;
 
-        document.getElementById("startInput").value = place.place_name;
-      
-        resultBox.innerHTML = "";
+document.getElementById("startInput").value = place.place_name;
+resultBox.innerHTML = "";
+resultBox.style.display = "none";
 
-        document.getElementById("info").innerHTML =
+document.getElementById("info").innerHTML =
           "출발지가 '" + place.place_name + "'(으)로 설정되었습니다.";
       };
 
