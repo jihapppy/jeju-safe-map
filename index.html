@@ -225,6 +225,14 @@ button:hover{
   line-height:1.55;
   font-size:14px;
 }
+  .input-card{
+  margin-top:18px;
+  padding:18px;
+  border-radius:22px;
+  background:#f8fbfa;
+  border:1px solid #e3ebe7;
+  box-shadow:0 8px 22px rgba(0,0,0,0.06);
+}
 
 .red { border-left:7px solid #e85d5d; }
 .green { border-left:7px solid #7bc96f; }
@@ -376,7 +384,7 @@ button:hover{
   <img src="hodoongi.png" class="header-hodoongi">
 
 </div>
-  <div class="search-card">
+<div class="input-card">
   <label>🎯 출발지</label>
 
   <div class="address-row">
@@ -387,9 +395,10 @@ button:hover{
   <div id="startResults"></div>
 
  <button class="location-btn" onclick="useCurrentLocation()">📍 현재 위치 사용</button>
+  </div>
 
 
-
+<div class="input-card">
   <label>🎯 목적지</label>
 
  <div class="address-row">
@@ -414,7 +423,7 @@ button:hover{
     <option value="126.7146,33.4912">비자림</option>
     <option value="126.6267,33.4386">사려니숲길</option>
   </select>
-
+</div>
  <button class="analyze-btn" onclick="drawRoutes()">🚦 안전경로 분석하기</button>
     </div>
 
