@@ -316,41 +316,63 @@ button:hover{
     min-height:100vh;
   }
 
-  #map{
-    #map{
-  order:1;
-  display:block;
-  position:relative !important;
-  width:100% !important;
-  height:34vh !important;
-  min-height:250px;
-  z-index:1;
-}
- .panel{
-  position:relative !important;
-  width:100% !important;
-  max-width:none !important;
-  margin-top:-28px !important;
-  padding:22px 18px 28px !important;
-  box-sizing:border-box !important;
-  border-radius:28px 28px 0 0 !important;
-  box-shadow:0 -8px 24px rgba(0,0,0,0.12) !important;
-  z-index:2 !important;
-}
-
-  .hodoongi{
-    width:54px;
-    top:18px;
-    right:18px;
+ @media (max-width:768px){
+  html, body{
+    margin:0 !important;
+    width:100% !important;
+    min-height:100vh !important;
+    overflow-x:hidden !important;
+    background:#eef6f3 !important;
   }
 
-  h2{
-    font-size:20px;
-    margin-right:62px;
+  body{
+    display:flex;
+    flex-direction:column;
+  }
+
+  #map{
+    position:relative !important;
+    top:auto !important;
+    left:auto !important;
+    width:100% !important;
+    height:34vh !important;
+    min-height:250px !important;
+    z-index:1 !important;
+  }
+
+  .panel{
+    position:relative !important;
+    top:auto !important;
+    left:auto !important;
+    width:100% !important;
+    max-width:none !important;
+    margin-top:-28px !important;
+    padding:22px 18px 28px !important;
+    box-sizing:border-box !important;
+    border-radius:28px 28px 0 0 !important;
+    box-shadow:0 -8px 24px rgba(0,0,0,0.12) !important;
+    z-index:2 !important;
+  }
+
+  .header-hodoongi{
+    width:72px;
+  }
+
+  .title{
+    font-size:22px;
+  }
+
+  .subtitle{
+    font-size:13px;
   }
 
   select, input, button{
-    height:44px;
+    height:48px;
+  }
+
+  .analyze-btn{
+    height:62px;
+    font-size:22px;
   }
 
   .card{
