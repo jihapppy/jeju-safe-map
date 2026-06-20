@@ -53,6 +53,14 @@ html, body {
   background:#ffffff;
 border:1px solid #e6ece8;
 }
+  .search-card{
+  margin-top:15px;
+  padding:18px;
+  border-radius:20px;
+  background:#f8fbfa;
+  border:1px solid #e3ebe7;
+  box-shadow:0 4px 12px rgba(0,0,0,0.05);
+}
 
   .header-box{
   display:flex;
@@ -353,6 +361,7 @@ button:hover{
   <img src="hodoongi.png" class="header-hodoongi">
 
 </div>
+  <div class="search-card">
   <label>🎯 출발지</label>
 
   <div class="address-row">
@@ -392,6 +401,7 @@ button:hover{
   </select>
 
  <button class="analyze-btn" onclick="drawRoutes()">🚦 안전경로 분석하기</button>
+    </div>
 
   <div id="info"></div>
 
