@@ -266,6 +266,13 @@ button:hover{
 .address-result:hover{
   background:#e9f3ee;
 }
+  .drag-handle{
+  width:52px;
+  height:6px;
+  border-radius:999px;
+  background:#c5cbd1;
+  margin:0 auto 22px;
+}
 
 .card {
   margin-top:12px;
@@ -356,13 +363,30 @@ margin-top:-18px !important;
     width:72px;
   }
 
+   .analyze-main{
+  font-size:20px;
+  font-weight:900;
+}
+
+.analyze-sub{
+  font-size:12px;
+  font-weight:600;
+  opacity:.9;
+  margin-top:4px;
+}
+
   .title{
-    font-size:22px;
-  }
+  font-size:22px;
+  font-weight:900;
+  color:#0f172a;
+  line-height:1.25;
+}
 
   .subtitle{
-    font-size:13px;
-  }
+  font-size:14px;
+  color:#6b7280;
+  margin-top:6px;
+}
 
   select, input, button{
     height:48px;
@@ -390,6 +414,7 @@ margin-top:-18px !important;
 <body>
 <div id="map"></div>
 <div class="panel">
+  <div class="drag-handle"></div>
   <div class="header-box">
 
 <div class="logo-badge">K</div>
@@ -446,8 +471,10 @@ margin-top:-18px !important;
     <option value="126.6267,33.4386">사려니숲길</option>
   </select>
 </div>
- <button class="analyze-btn" onclick="drawRoutes()">🚦 안전경로 분석하기</button>
-
+<button class="analyze-btn" onclick="drawRoutes()">
+  <div class="analyze-main">🛡️ 안전경로 분석하기</div>
+  <div class="analyze-sub">위험도를 고려한 최적의 경로를 분석해드려요!</div>
+</button>
   <div id="info"></div>
 
   <div class="small">
