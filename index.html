@@ -278,6 +278,18 @@ button:hover{
   background:#c5cbd1;
   margin:0 auto 22px;
 }
+  .location-btn {
+  width: 100%;
+  height: 70px;
+  margin-top: 16px;
+  border: none;
+  border-radius: 20px;
+  background: #eefafa;
+  color: #13aaa3;
+  font-size: 20px;
+  font-weight: 800;
+  text-align: center;
+}
 
 .card {
   margin-top:12px;
@@ -437,7 +449,7 @@ margin-top:-18px !important;
 
 </div>
 <div class="input-card">
-  <label>🎯 출발지</label>
+  <label> 출발지</label>
 
   <div class="address-row">
     <input id="startInput" type="text" placeholder="예: 제주공항, 중문관광단지 ">
@@ -446,12 +458,12 @@ margin-top:-18px !important;
 
   <div id="startResults"></div>
 
- <button class="location-btn" onclick="useCurrentLocation()">📍 현재 위치 사용</button>
+<button class="location-btn" onclick="useCurrentLocation()">현재 위치 사용</button>
   </div>
 
 
 <div class="input-card">
-  <label>🎯 목적지</label>
+  <label> 목적지</label>
 
  <div class="address-row">
   <input id="endInput" type="text" placeholder="예: 1100고지, 성산일출봉">
@@ -477,7 +489,7 @@ margin-top:-18px !important;
   </select>
 </div>
 <button class="analyze-btn" onclick="drawRoutes()">
-  <div class="analyze-main">🛡️ 안전경로 분석하기</div>
+  <div class="analyze-main"> 안전경로 분석하기</div>
   <div class="analyze-sub">위험도를 고려한 최적의 경로를 분석해드려요!</div>
 </button>
   <div id="info"></div>
