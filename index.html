@@ -885,6 +885,11 @@ margin-top:-18px !important;
   background:#f1f5f9;
   color:#64748b;
 }
+  .reason-text{
+  color:#0f766e;
+  font-weight:800;
+  line-height:1.45;
+}
 </style>
 </head>
 
@@ -1631,23 +1636,31 @@ compareTable.innerHTML = `
     </div>
   </div>
 
-  <div class="compare-row">
-    <div class="compare-label">위험도</div>
-    <div class="compare-red">${r1.risk.level}</div>
-    <div class="compare-green">${r2.risk.level}</div>
+ <div class="compare-row">
+  <div class="compare-label">위험도</div>
+
+  <div>
+    <span class="risk-badge high">
+      ${r1.risk.level}
+    </span>
   </div>
 
-  <div class="compare-row">
-    <div class="compare-label">특징</div>
-  <div class="${r1Class}">
-  ${recommendedIndex === 0 ? "추천 안전경로" : "일반 경로"}
+  <div>
+    <span class="risk-badge high">
+      ${r2.risk.level}
+    </span>
+  </div>
 </div>
 
-<div class="${r2Class}">
-  ${recommendedIndex === 1 ? "추천 안전경로" : "일반 경로"}
-</div>
+ <div class="compare-row">
+    <div class="compare-label">추천 사유</div>
+    <div class="${r1Class}">
+      ${recommendedIndex === 0 ? "거리·시간 등을 고려해 추천" : "-"}
+    </div>
+    <div class="${r2Class}">
+      ${recommendedIndex === 1 ? "거리·시간 등을 고려해 추천" : "-"}
+    </div>
   </div>
-`;
 
 detailBox.appendChild(compareTable);
 document.getElementById("info").appendChild(detailBox);
