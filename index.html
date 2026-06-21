@@ -770,6 +770,13 @@ margin-top:-18px !important;
 .route-green{
   border-left:6px solid #14b8a6 !important;
 }
+  .route-detail-line-red{
+  border-left:6px solid #ef4444 !important;
+}
+
+.route-detail-line-green{
+  border-left:6px solid #14b8a6 !important;
+}
 </style>
 </head>
 
@@ -1344,13 +1351,12 @@ routes.forEach((route,index)=>{
     "통과 위험권역: "+risk.zoneNames
   );
 
-  const card = document.createElement("div");
-card.className = "card";
+ const card = document.createElement("div");
 
-card.style.borderLeft = index === 0
-  ? "6px solid #ef4444"
-  : "6px solid #14b8a6";
-
+card.className = index === 0
+  ? "card route-detail-line-red"
+  : "card route-detail-line-green";
+  
 card.innerHTML =
   "<b>"+(index+1)+"코스</b><br>"+
   "거리: "+distanceKm+"km<br>"+
