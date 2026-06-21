@@ -946,6 +946,19 @@ margin-top:-18px !important;
   background:transparent !important;
   border:none !important;
 }
+  .tour-dot{
+  font-size:18px;
+}
+
+.tour-label{
+  background:#fff;
+  padding:4px 10px;
+  border-radius:20px;
+  font-size:13px;
+  font-weight:700;
+  box-shadow:0 3px 8px rgba(0,0,0,.18);
+  white-space:nowrap;
+}
 </style>
 </head>
 
@@ -1358,7 +1371,12 @@ const dangerZones = [
   L.marker([spot.lat, spot.lng], {
     icon: L.divIcon({
       className:"tour-label-marker",
-      html:`<div class="tour-label">📍 ${spot.name}</div>`,
+      html: (
+  spot.name === "성산일출봉" ||
+  spot.name === "중문관광단지"
+)
+? `<div class="tour-label">📍 ${spot.name}</div>`
+: `<div class="tour-dot">📍</div>`
       iconSize:[120,28],
       iconAnchor:[60,14]
     })
