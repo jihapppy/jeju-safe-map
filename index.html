@@ -2,6 +2,9 @@
 <html lang="ko">
 <head>
 
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/sunn-us/SUIT/fonts/static/woff2/SUIT.css">
@@ -1226,7 +1229,7 @@ const mainTip = matchedTipKey
   : "목적지를 놓쳤다면 급차로 변경하지 말고 다음 길로 이동하세요.";
     
 guide.innerHTML =
-  "<div style='font-size:15px;font-weight:900;color:#0b4a38;'>🚦 안전경로 추천</div>" +
+  "<div style='font-size:15px;font-weight:900;color:#0b4a38;'>🛡️ 추천 안전경로</div>" +
   "<div style='font-size:13px;color:#555;margin-top:8px;line-height:1.5;'>" +
   "TAAS 사고데이터와 사고밀집권역 분석 결과를 바탕으로<br>" +
   "상대적으로 안전한 경로를 추천합니다." +
@@ -1268,30 +1271,24 @@ naviBox.className = "navi-grid";
 
 const safeBtn = document.createElement("button");
 safeBtn.className = "navi-btn";
-safeBtn.innerHTML = `
-  <span class="navi-icon">🟢</span>
-  <div><b>네이버지도</b><span>길안내</span></div>
-`;
+safeBtn.innerHTML =
+"N<br><small>네이버지도</small>";
 safeBtn.onclick = function(){
   openNaverMap(recommendedIndex);
 };
 
 const tmapBtn = document.createElement("button");
 tmapBtn.className = "navi-btn";
-tmapBtn.innerHTML = `
-  <span class="navi-icon">🔵</span>
-  <div><b>TMAP</b><span>길안내</span></div>
-`;
+tmapBtn.innerHTML =
+"T<br><small>TMAP</small>";
 tmapBtn.onclick = function(){
   openTmap();
 };
 
 const kakaoBtn = document.createElement("button");
 kakaoBtn.className = "navi-btn";
-kakaoBtn.innerHTML = `
-  <span class="navi-icon">🟡</span>
-  <div><b>카카오내비</b><span>길안내</span></div>
-`;
+kakaoBtn.innerHTML =
+"K<br><small>카카오내비</small>";
 kakaoBtn.onclick = function(){
   openKakaoNavi();
 };
@@ -1307,7 +1304,7 @@ const detailBox = document.createElement("details");
 detailBox.className = "result-card detail-card";
 
 const detailSummary = document.createElement("summary");
-detailSummary.innerHTML = "<b>📊 경로 상세정보 보기</b>";
+detailSummary.innerHTML = "<b>📊 경로 상세정보</b>";
 detailSummary.style.cursor = "pointer";
 
 detailBox.appendChild(detailSummary);
