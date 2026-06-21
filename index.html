@@ -1616,11 +1616,11 @@ compareTable.className = "compare-table-box";
 compareTable.innerHTML = `
   <div class="compare-row">
     <div class="compare-label">거리</div>
-   <div class="${r1Class}">
-  ${r1Name}<br>${r1.distanceKm}km
-</div>
+    <div class="${r1Class}">
+      ${r1Name}<br>${r1.distanceKm}km
+    </div>
     <div class="${r2Class}">
-  ${r2Name}<br>${r2.distanceKm}km
+      ${r2Name}<br>${r2.distanceKm}km
       <br><span class="compare-note">${shorterText}</span>
     </div>
   </div>
@@ -1628,31 +1628,21 @@ compareTable.innerHTML = `
   <div class="compare-row">
     <div class="compare-label">시간</div>
     <div class="${r1Class}">
-  ${r1Name}<br>${r1.durationMin}분
-</div>
-   <div class="${r2Class}">
-  ${r2Name}<br>${r2.durationMin}분
+      ${r1Name}<br>${r1.durationMin}분
+    </div>
+    <div class="${r2Class}">
+      ${r2Name}<br>${r2.durationMin}분
       <br><span class="compare-note gray">${timeText}</span>
     </div>
   </div>
 
- <div class="compare-row">
-  <div class="compare-label">위험도</div>
-
-  <div>
-    <span class="risk-badge high">
-      ${r1.risk.level}
-    </span>
+  <div class="compare-row">
+    <div class="compare-label">위험도</div>
+    <div><span class="risk-badge high">${r1.risk.level}</span></div>
+    <div><span class="risk-badge high">${r2.risk.level}</span></div>
   </div>
 
-  <div>
-    <span class="risk-badge high">
-      ${r2.risk.level}
-    </span>
-  </div>
-</div>
-
- <div class="compare-row">
+  <div class="compare-row">
     <div class="compare-label">추천 사유</div>
     <div class="${r1Class}">
       ${recommendedIndex === 0 ? "거리·시간 등을 고려해 추천" : "-"}
@@ -1661,7 +1651,7 @@ compareTable.innerHTML = `
       ${recommendedIndex === 1 ? "거리·시간 등을 고려해 추천" : "-"}
     </div>
   </div>
-
+`;
 detailBox.appendChild(compareTable);
 document.getElementById("info").appendChild(detailBox);
     
@@ -1960,9 +1950,7 @@ document.getElementById("info").innerHTML =
     alert("출발지 검색 중 오류가 발생했어요.\n\n" + error.message);
   }
 }
-  async function analyzeRoute(){
-  alert("안전경로 분석 함수가 삭제된 상태입니다. 이제 복구해야 해요.");
-}
+ 
 </script>
 
 </body>
