@@ -1580,7 +1580,8 @@ routeSummaries.forEach((summary,index)=>{
     "통과 위험권역: "+summary.risk.zoneNames
   );
 
-  const labelPoint = coords[Math.min(8, coords.length - 1)];
+ const middleIndex = Math.floor(coords.length / 2);
+const labelPoint = coords[middleIndex];
 
   L.marker(labelPoint, {
     icon: L.divIcon({
