@@ -830,6 +830,43 @@ margin-top:-18px !important;
   background:#ecfeff;
   color:#0f766e;
 }
+ .compare-box{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
+  margin-top:18px;
+  background:transparent !important;
+  box-shadow:none !important;
+  padding:0 !important;
+}
+
+.compare-course-card{
+  background:#fff !important;
+  border:1px solid #e5e7eb !important;
+  border-radius:22px !important;
+  box-shadow:0 8px 22px rgba(15,23,42,.06) !important;
+  padding:18px 16px !important;
+  margin:0 !important;
+  font-size:14px !important;
+  line-height:1.55 !important;
+  border-left:none !important;
+}
+
+.compare-course-card.course-red{
+  border-top:5px solid #ef4444 !important;
+}
+
+.compare-course-card.course-green{
+  border-top:5px solid #14b8a6 !important;
+}
+
+.compare-course-card h3,
+.compare-course-card h4,
+.compare-course-card b{
+  font-size:22px !important;
+  font-weight:900 !important;
+  margin-bottom:14px !important;
+}
 </style>
 </head>
 
@@ -1576,21 +1613,30 @@ const detailBox = document.createElement("details");
 detailBox.className = "result-card detail-card";
 
 const detailSummary = document.createElement("summary");
-detailSummary.innerHTML = "<b>📊 경로 상세정보</b>";
+detailSummary.innerHTML = "<b>📊 경로 상세 비교</b>";
 detailSummary.style.cursor = "pointer";
-
 detailBox.appendChild(detailSummary);
 
+const compareWrap = document.createElement("div");
+compareWrap.className = "compare-box";
+
 routeCards.forEach((card, index) => {
+  card.classList.add("compare-course-card");
 
   if(index === 0){
-    card.style.borderLeft = "6px solid #ef4444";
+    card.classList.add("course-red");
+    const title = card.querySelector("h3, h4, b");
+    if(title) title.innerHTML = "1코스";
   }else{
-    card.style.borderLeft = "6px solid #14b8a6";
+    card.classList.add("course-green");
+    const title = card.querySelector("h3, h4, b");
+    if(title) title.innerHTML = "2코스 ⭐ 추천";
   }
 
-  detailBox.appendChild(card);
+  compareWrap.appendChild(card);
 });
+
+detailBox.appendChild(compareWrap);
 document.getElementById("info").appendChild(detailBox);
     
     const notice = document.createElement("div");
