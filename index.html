@@ -777,6 +777,59 @@ margin-top:-18px !important;
 .route-detail-line-green{
   border-left:6px solid #14b8a6 !important;
 }
+  .route-title{
+  font-size:22px;
+  font-weight:800;
+  margin-bottom:14px;
+}
+
+.route-info{
+  font-size:18px;
+  color:#475569;
+  margin-bottom:14px;
+}
+
+.risk-badge{
+  display:inline-block;
+  padding:6px 14px;
+  border-radius:999px;
+  background:#fee2e2;
+  color:#dc2626;
+  font-weight:700;
+  margin-bottom:18px;
+}
+
+.section-label{
+  font-size:15px;
+  font-weight:700;
+  color:#475569;
+  margin-top:10px;
+  margin-bottom:8px;
+}
+
+.tag-wrap{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  margin-bottom:14px;
+}
+
+.tag{
+  padding:6px 12px;
+  border-radius:999px;
+  font-size:13px;
+  font-weight:600;
+}
+
+.zone-tag{
+  background:#eef2ff;
+  color:#334155;
+}
+
+.reason-tag{
+  background:#ecfeff;
+  color:#0f766e;
+}
 </style>
 </head>
 
@@ -1357,13 +1410,47 @@ card.className = index === 0
   ? "card route-detail-line-red"
   : "card route-detail-line-green";
   
+const routeTitle = index === 0
+  ? "🔴 일반 경로"
+  : "🟢 추천 안전경로";
+
+const zoneTags = risk.zoneNames
+  .split(",")
+  .map(z => `<span class="tag zone-tag">${z.trim()}</span>`)
+  .join("");
+
+const reasonTags = risk.reasons
+  .split("/")
+  .map(r => `<span class="tag reason-tag">${r.trim()}</span>`)
+  .join("");
+
 card.innerHTML =
-  "<b>"+(index+1)+"코스</b><br>"+
-  "거리: "+distanceKm+"km<br>"+
-  "예상시간(실시간 교통 미반영): "+durationMin+"분<br>"+
-  "위험도: <b>"+risk.icon+" "+risk.level+"</b><br>"+
-  "통과 위험권역: "+risk.zoneNames+"<br>"+
-  "주요 위험요인: "+risk.reasons;
+  `<div class="route-title">${routeTitle}</div>
+
+   <div class="route-info">
+     📏 ${distanceKm}km&nbsp;&nbsp;&nbsp;
+     ⏱ ${durationMin}분
+   </div>
+
+   <div class="risk-badge">
+     ${risk.level}
+   </div>
+
+   <div class="section-label">
+     통과권역
+   </div>
+
+   <div class="tag-wrap">
+     ${zoneTags}
+   </div>
+
+   <div class="section-label">
+     주의사항
+   </div>
+
+   <div class="tag-wrap">
+     ${reasonTags}
+   </div>`;
 
   routeCards[index] = card;
 routeSummaries[index] = {
