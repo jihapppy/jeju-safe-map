@@ -1269,25 +1269,7 @@ legend.onAdd = function () {
   return div;
 };
 
-legend.addTo(map);
-  touristSpots.forEach(spot=>{
 
-  L.marker([spot.lat, spot.lng], {
-    icon: L.divIcon({
-      className:"tour-label-marker",
-      html:`<div class="tour-label">📍 ${spot.name}</div>`,
-      iconSize:[120,28],
-      iconAnchor:[60,14]
-    })
-  })
-
-  .addTo(map)
-
-  .bindPopup(
-    "<b>"+spot.name+"</b>"
-  );
-
-});
 
 let routeLayer;
 let customStart = null;
@@ -1371,6 +1353,20 @@ const dangerZones = [
   { name:"1100고지", lat:33.3580, lng:126.4625 },
   { name:"오설록", lat:33.3059, lng:126.2895 }
 ];
+  touristSpots.forEach(spot=>{
+
+  L.marker([spot.lat, spot.lng], {
+    icon: L.divIcon({
+      className:"tour-label-marker",
+      html:`<div class="tour-label">📍 ${spot.name}</div>`,
+      iconSize:[120,28],
+      iconAnchor:[60,14]
+    })
+  })
+  .addTo(map)
+  .bindPopup("<b>"+spot.name+"</b>");
+
+});
 
 function useCurrentLocation(){
   if(!navigator.geolocation){
