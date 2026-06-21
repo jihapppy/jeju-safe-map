@@ -372,9 +372,9 @@ button {
   box-shadow:0 8px 18px rgba(0,0,0,0.07);
   border:1px solid #edf1ef;
 }
-.red { border-left:7px solid #e85d5d; }
-.green { border-left:7px solid #7bc96f; }
-.blue { border-left:7px solid #4f8fd8; }
+.red { border-left:7px solid #64748b; }
+.green { border-left:7px solid #14b8a6; }
+.blue { border-left:7px solid #64748b; }
 
 .small {
   font-size:11.5px;
@@ -861,7 +861,7 @@ margin-top:-18px !important;
 }
 
 .compare-red{
-  color:#ef4444;
+  color:#64748b;
   font-weight:900;
 }
 
@@ -1421,12 +1421,12 @@ lastEnd = {
 
     if(routeRisks.length === 2){
       if(routeRisks[0].score > routeRisks[1].score){
-        colors = ["red","green"];
-      }else if(routeRisks[0].score < routeRisks[1].score){
-        colors = ["green","red"];
-      }else{
-        colors = ["blue","blue"];
-      }
+  colors = ["#64748b","#14b8a6"];
+}else if(routeRisks[0].score < routeRisks[1].score){
+  colors = ["#14b8a6","#64748b"];
+}else{
+  colors = ["#64748b","#14b8a6"];
+}
     }else{
       colors = ["blue"];
     }
