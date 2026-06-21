@@ -1351,15 +1351,19 @@ routes.forEach((route,index)=>{
   );
 
   const card = document.createElement("div");
-  card.className = "card " + getCardColorByLine(colors[index]);
+card.className = "card";
 
-  card.innerHTML =
-    "<b>"+(index+1)+"코스</b><br>"+
-    "거리: "+distanceKm+"km<br>"+
-    "예상시간(실시간 교통 미반영): "+durationMin+"분<br>"+
-    "위험도: <b>"+risk.icon+" "+risk.level+"</b><br>"+
-    "통과 위험권역: "+risk.zoneNames+"<br>"+
-    "주요 위험요인: "+risk.reasons;
+card.style.borderLeft = index === 0
+  ? "6px solid #ef4444"
+  : "6px solid #14b8a6";
+
+card.innerHTML =
+  "<b>"+(index+1)+"코스</b><br>"+
+  "거리: "+distanceKm+"km<br>"+
+  "예상시간(실시간 교통 미반영): "+durationMin+"분<br>"+
+  "위험도: <b>"+risk.icon+" "+risk.level+"</b><br>"+
+  "통과 위험권역: "+risk.zoneNames+"<br>"+
+  "주요 위험요인: "+risk.reasons;
 
   routeCards[index] = card;
 routeSummaries[index] = {
@@ -1491,7 +1495,13 @@ detailSummary.style.cursor = "pointer";
 detailBox.appendChild(detailSummary);
 
 routeCards.forEach((card, index) => {
-  card.classList.add(index === 0 ? "route-red" : "route-green");
+
+  if(index === 0){
+    card.style.borderLeft = "6px solid #ef4444";
+  }else{
+    card.style.borderLeft = "6px solid #14b8a6";
+  }
+
   detailBox.appendChild(card);
 });
 document.getElementById("info").appendChild(detailBox);
