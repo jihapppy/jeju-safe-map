@@ -920,6 +920,32 @@ margin-top:-18px !important;
   background:transparent !important;
   border:none !important;
 }
+  .tour-label{
+  display:inline-flex;
+  align-items:center;
+
+  padding:4px 8px;
+
+  border-radius:999px;
+
+  background:rgba(255,255,255,.95);
+
+  color:#0f172a;
+
+  font-size:11px;
+  font-weight:800;
+
+  white-space:nowrap;
+
+  box-shadow:0 4px 10px rgba(0,0,0,.15);
+
+  border:1px solid #e5e7eb;
+}
+
+.tour-label-marker{
+  background:transparent !important;
+  border:none !important;
+}
 </style>
 </head>
 
@@ -1244,6 +1270,24 @@ legend.onAdd = function () {
 };
 
 legend.addTo(map);
+  touristSpots.forEach(spot=>{
+
+  L.marker([spot.lat, spot.lng], {
+    icon: L.divIcon({
+      className:"tour-label-marker",
+      html:`<div class="tour-label">📍 ${spot.name}</div>`,
+      iconSize:[120,28],
+      iconAnchor:[60,14]
+    })
+  })
+
+  .addTo(map)
+
+  .bindPopup(
+    "<b>"+spot.name+"</b>"
+  );
+
+});
 
 let routeLayer;
 let customStart = null;
@@ -1317,6 +1361,15 @@ const dangerZones = [
   { name:"중산간도로권", lat:33.4200, lng:126.6400, radiusKm:12, score:1, reason:"초행길·제한속도 주의" },
   { name:"산악도로권", lat:33.3580, lng:126.4625, radiusKm:8, score:2, reason:"급커브, 안개, 기상변화 주의" },
   { name:"서부 관광권", lat:33.3059, lng:126.2895, radiusKm:6, score:2, reason:"관광지 진입부, 급감속·주정차 주의" }
+];
+
+  const touristSpots = [
+  { name:"성산일출봉", lat:33.4589, lng:126.9347 },
+  { name:"중문관광단지", lat:33.2498, lng:126.4128 },
+  { name:"협재해수욕장", lat:33.3938, lng:126.2412 },
+  { name:"함덕해수욕장", lat:33.5435, lng:126.6695 },
+  { name:"1100고지", lat:33.3580, lng:126.4625 },
+  { name:"오설록", lat:33.3059, lng:126.2895 }
 ];
 
 function useCurrentLocation(){
