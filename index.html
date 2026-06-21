@@ -1599,17 +1599,6 @@ const r2Class = recommendedIndex === 1 ? "compare-green" : "compare-red";
 const r1Name = recommendedIndex === 0 ? "1코스 추천" : "1코스";
 const r2Name = recommendedIndex === 1 ? "2코스 추천" : "2코스";
 
-const distanceDiff = Math.abs(r1.distanceKm - r2.distanceKm).toFixed(1);
-const timeDiff = Math.abs(r1.durationMin - r2.durationMin);
-
-const shorterText = r1.distanceKm > r2.distanceKm
-  ? `${distanceDiff}km 더 짧음`
-  : `${distanceDiff}km 더 김`;
-
-const timeText = r1.durationMin < r2.durationMin
-  ? `${timeDiff}분 더 빠름`
-  : `${timeDiff}분 더 소요`;
-
 const compareTable = document.createElement("div");
 compareTable.className = "compare-table-box";
 
@@ -1619,10 +1608,9 @@ compareTable.innerHTML = `
     <div class="${r1Class}">
       ${r1Name}<br>${r1.distanceKm}km
     </div>
-    <div class="${r2Class}">
-      ${r2Name}<br>${r2.distanceKm}km
-      <br><span class="compare-note">${shorterText}</span>
-    </div>
+   <div class="${r2Class}">
+  ${r2Name}<br>${r2.distanceKm}km
+</div>
   </div>
 
   <div class="compare-row">
@@ -1630,11 +1618,10 @@ compareTable.innerHTML = `
     <div class="${r1Class}">
       ${r1Name}<br>${r1.durationMin}분
     </div>
-    <div class="${r2Class}">
-      ${r2Name}<br>${r2.durationMin}분
-      <br><span class="compare-note gray">${timeText}</span>
-    </div>
-  </div>
+   <div class="${r2Class}">
+  ${r2Name}<br>${r2.durationMin}분
+</div>
+</div>
 
   <div class="compare-row">
     <div class="compare-label">위험도</div>
