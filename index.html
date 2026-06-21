@@ -1359,30 +1359,36 @@ const dangerZones = [
 ];
 
   const touristSpots = [
-  { name:"성산일출봉", lat:33.4589, lng:126.9347 },
-  { name:"중문관광단지", lat:33.2498, lng:126.4128 },
-  { name:"협재해수욕장", lat:33.3938, lng:126.2412 },
-  { name:"함덕해수욕장", lat:33.5435, lng:126.6695 },
-  { name:"1100고지", lat:33.3580, lng:126.4625 },
-  { name:"오설록", lat:33.3059, lng:126.2895 }
+  { name:"성산일출봉", lat:33.4589, lng:126.9347, label:true },
+  { name:"중문관광단지", lat:33.2498, lng:126.4128, label:true },
+
+  { name:"함덕해수욕장", lat:33.5435, lng:126.6695, label:false },
+  { name:"협재해수욕장", lat:33.3938, lng:126.2412, label:false },
+  { name:"1100고지", lat:33.3580, lng:126.4625, label:false },
+  { name:"오설록", lat:33.3059, lng:126.2895, label:false }
 ];
   touristSpots.forEach(spot=>{
 
-  L.marker([spot.lat, spot.lng], {
-    icon: L.divIcon({
-      className:"tour-label-marker",
-     html: (
+ const marker = L.marker([spot.lat, spot.lng], {
+  icon: L.divIcon({
+    className:"tour-label-marker",
+    html: (
+      spot.name === "성산일출봉" ||
+      spot.name === "중문관광단지"
+    )
+    ? `<div class="tour-label">📍 ${spot.name}</div>`
+    : `<div class="tour-dot">📍</div>`,
+    iconSize:[120,28],
+    iconAnchor:[60,14]
+  })
+}).addTo(map);
+
+if(
   spot.name === "성산일출봉" ||
   spot.name === "중문관광단지"
-)
-? `<div class="tour-label">📍 ${spot.name}</div>`
-: `<div class="tour-dot">📍</div>`,
-iconSize:[120,28],
-iconAnchor:[60,14]
-    })
-  })
-  .addTo(map)
-  .bindPopup("<b>"+spot.name+"</b>");
+){
+  marker.bindPopup("<b>"+spot.name+"</b>");
+}
 
 });
 
@@ -1548,9 +1554,9 @@ routes.forEach((route,index)=>{
     "위험도: "+risk.icon+" "+risk.level+"<br>"+
     "통과 위험권역: "+risk.zoneNames
   );
-  const midPoint = coords[Math.floor(coords.length / 2)];
+  const labelPoint = coords[Math.min(8, coords.length - 1)];
 
-L.marker(midPoint, {
+L.marker(labelPoint, {
   icon: L.divIcon({
     className: "route-label-marker",
     html: "<div class='route-label route-label-" + (index + 1) + "'>" + (index + 1) + "코스</div>",
