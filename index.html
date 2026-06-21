@@ -377,27 +377,33 @@ button {
 }
 
 .navi-btn{
-  height:72px;
+  height:74px;
   background:#fff;
   color:#111827;
   border:1px solid #edf1ef;
   border-radius:18px;
-  font-size:18px;
+  font-size:14px;
   font-weight:900;
   box-shadow:0 6px 16px rgba(0,0,0,.07);
+    display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:10px;
+  padding:0 10px;
 }
 
 .navi-btn b{
-  display:block;
+   display:block;
   font-size:15px;
-  margin-top:4px;
+  line-height:1.1;
+  margin:0;
 }
 
 .navi-btn span{
-  display:block;
+ display:block;
   font-size:12px;
   color:#6b7280;
-  margin-top:2px;
+  margin-top:3px;
 }
 
 .detail-card summary{
@@ -1262,21 +1268,30 @@ naviBox.className = "navi-grid";
 
 const safeBtn = document.createElement("button");
 safeBtn.className = "navi-btn";
-safeBtn.innerHTML = "🟢<br><b>네이버지도</b><span>길안내</span>";
+safeBtn.innerHTML = `
+  <span class="navi-icon">🟢</span>
+  <div><b>네이버지도</b><span>길안내</span></div>
+`;
 safeBtn.onclick = function(){
   openNaverMap(recommendedIndex);
 };
 
 const tmapBtn = document.createElement("button");
 tmapBtn.className = "navi-btn";
-tmapBtn.innerHTML = "🔵<br><b>TMAP</b><span>길안내</span>";
+tmapBtn.innerHTML = `
+  <span class="navi-icon">🔵</span>
+  <div><b>TMAP</b><span>길안내</span></div>
+`;
 tmapBtn.onclick = function(){
   openTmap();
 };
 
 const kakaoBtn = document.createElement("button");
 kakaoBtn.className = "navi-btn";
-kakaoBtn.innerHTML = "🟡<br><b>카카오내비</b><span>길안내</span>";
+kakaoBtn.innerHTML = `
+  <span class="navi-icon">🟡</span>
+  <div><b>카카오내비</b><span>길안내</span></div>
+`;
 kakaoBtn.onclick = function(){
   openKakaoNavi();
 };
