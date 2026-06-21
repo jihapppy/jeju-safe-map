@@ -898,6 +898,28 @@ margin-top:-18px !important;
   display:inline-block;
   margin-right:10px;
 }
+  .route-label{
+  padding:5px 10px;
+  border-radius:999px;
+  color:#fff;
+  font-size:12px;
+  font-weight:900;
+  box-shadow:0 4px 10px rgba(0,0,0,.18);
+  white-space:nowrap;
+}
+
+.route-label-1{
+  background:#14b8a6;
+}
+
+.route-label-2{
+  background:#ef4444;
+}
+
+.route-label-marker{
+  background:transparent !important;
+  border:none !important;
+}
 </style>
 </head>
 
@@ -1471,6 +1493,16 @@ routes.forEach((route,index)=>{
     "위험도: "+risk.icon+" "+risk.level+"<br>"+
     "통과 위험권역: "+risk.zoneNames
   );
+  const midPoint = coords[Math.floor(coords.length / 2)];
+
+L.marker(midPoint, {
+  icon: L.divIcon({
+    className: "route-label-marker",
+    html: "<div class='route-label route-label-" + (index + 1) + "'>" + (index + 1) + "코스</div>",
+    iconSize: [60, 28],
+    iconAnchor: [30, 14]
+  })
+}).addTo(routeLayer);
 
 routeSummaries[index] = {
   distanceKm: distanceKm,
