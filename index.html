@@ -1503,20 +1503,22 @@ const mainTip = matchedTipKey
   : "목적지를 놓쳤다면 급차로 변경하지 말고 다음 길로 이동하세요.";
     
 guide.innerHTML =
- "<div style='font-size:18px;font-weight:800;color:#0b4a38;'>🌟 추천 안전경로</div>" +
 
-"<div style='font-size:22px;font-weight:900;margin-top:12px;color:#111827;'>" +
+"<div style='font-size:15px;font-weight:800;color:#0f766e;'>추천 경로</div>" +
+
+"<div style='font-size:28px;font-weight:900;margin-top:8px;color:#111827;'>" +
 (recommendedIndex + 1) + "코스 추천</div>" +
 
-"<div style='font-size:16px;color:#555;margin-top:8px;'>" +
-recommend.distanceKm + "km · " +
-recommend.durationMin + "분 · " +
-recommend.risk.icon + " " + recommend.risk.level +
-"</div>"+
-  "<div style='margin-top:14px;padding:12px;border-radius:14px;background:#f3faf7;line-height:1.5;'>" +
-  "<b>⚠ 핵심주의</b><br>" +
+"<div style='margin-top:14px;font-size:17px;color:#334155;line-height:1.8;'>" +
+"📏 " + recommend.distanceKm + "km<br>" +
+"⏱ " + recommend.durationMin + "분" +
+"</div>" +
+
+"<div style='margin-top:16px;padding:14px;border-radius:16px;background:#f8fafc;border:1px solid #e2e8f0;'>" +
+"<div style='font-weight:800;color:#0f172a;margin-bottom:6px;'>핵심 주의사항</div>" +
+"<div style='color:#475569;line-height:1.6;'>" +
 mainTip +
-  "</div>";
+"</div></div>";
     
 document.getElementById("info").appendChild(guide);
 const tips = destinationTips[endName] || [
