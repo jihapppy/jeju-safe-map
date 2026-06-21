@@ -202,6 +202,59 @@ label{
   font-weight:900;
   color:#111827;
 }
+  .navBtn{
+  display:flex;
+  align-items:center;
+  gap:12px;
+
+  width:100%;
+  height:85px;
+
+  background:white;
+  border:none;
+  border-radius:20px;
+
+  box-shadow:0 4px 12px rgba(0,0,0,.08);
+
+  padding:15px 18px;
+}
+  .nav-icon{
+  width:42px;
+  height:42px;
+
+  border-radius:50%;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  color:white;
+  font-weight:700;
+  font-size:22px;
+}
+
+.naver{
+  background:#03c75a;
+}
+
+.tmap{
+  background:#2f80ff;
+}
+
+.kakao{
+  background:#ffd400;
+  color:#222;
+}
+  .nav-title{
+  font-size:22px;
+  font-weight:700;
+  color:#111827;
+}
+
+.nav-sub{
+  font-size:15px;
+  color:#8a8a8a;
+}
 
 select, input, button {
   height:44px;
@@ -1326,31 +1379,46 @@ naviBox.className = "navi-grid";
 
 const safeBtn = document.createElement("button");
 safeBtn.className = "navi-btn";
-safeBtn.innerHTML =
-"N<br><small>네이버지도</small>";
+safeBtn.innerHTML = `
+<div class="nav-icon naver">N</div>
+<div>
+  <div class="nav-title">네이버지도</div>
+  <div class="nav-sub">길안내</div>
+</div>
+`;
 safeBtn.onclick = function(){
   openNaverMap(recommendedIndex);
 };
 
 const tmapBtn = document.createElement("button");
 tmapBtn.className = "navi-btn";
-tmapBtn.innerHTML =
-"T<br><small>TMAP</small>";
+tmapBtn.innerHTML = `
+<div class="nav-icon tmap">T</div>
+<div>
+  <div class="nav-title">TMAP</div>
+  <div class="nav-sub">길안내</div>
+</div>
+`;
 tmapBtn.onclick = function(){
   openTmap();
 };
 
 const kakaoBtn = document.createElement("button");
 kakaoBtn.className = "navi-btn";
-kakaoBtn.innerHTML =
-"K<br><small>카카오내비</small>";
+kakaoBtn.innerHTML = `
+<div class="nav-icon kakao">📍</div>
+<div>
+  <div class="nav-title">카카오내비</div>
+  <div class="nav-sub">길안내</div>
+</div>
+`;
 kakaoBtn.onclick = function(){
   openKakaoNavi();
 };
 
-naviBox.appendChild(safeBtn);
-naviBox.appendChild(tmapBtn);
-naviBox.appendChild(kakaoBtn);
+safeBtn.className = "navBtn";
+tmapBtn.className = "navBtn";
+kakaoBtn.className = "navBtn";
 
 document.getElementById("info").appendChild(naviBox);
 
