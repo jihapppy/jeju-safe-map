@@ -426,40 +426,67 @@ button {
 }
 
 .navi-grid{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:10px;
-  margin-top:16px;
+  display:grid !important;
+  grid-template-columns:repeat(3, 1fr) !important;
+  gap:10px !important;
+  margin-top:16px !important;
 }
 
 .navi-btn{
-  height:74px;
-  background:#fff;
-  color:#111827;
-  border:1px solid #edf1ef;
-  border-radius:18px;
-  font-size:14px;
-  font-weight:900;
-  box-shadow:0 6px 16px rgba(0,0,0,.07);
-    display:flex;
-  align-items:center;
-  justify-content:center;
-  gap:10px;
-  padding:0 10px;
+  height:64px !important;
+  min-width:0 !important;
+  padding:0 8px !important;
+  border-radius:18px !important;
+  background:#fff !important;
+  color:#111827 !important;
+
+  display:flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  gap:8px !important;
+
+  white-space:nowrap !important;
+  overflow:hidden !important;
 }
 
-.navi-btn b{
-   display:block;
-  font-size:15px;
-  line-height:1.1;
-  margin:0;
+.nav-icon{
+  width:32px !important;
+  height:32px !important;
+  min-width:32px !important;
+  border-radius:50% !important;
+
+  display:flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+
+  font-size:17px !important;
+  font-weight:900 !important;
+  color:#fff !important;
 }
 
-.navi-btn span{
- display:block;
-  font-size:12px;
-  color:#6b7280;
-  margin-top:3px;
+.naver{ background:#03c75a !important; }
+.tmap{ background:#2f80ff !important; }
+.kakao{ background:#ffd43b !important; color:#111 !important; }
+
+.nav-text{
+  display:flex !important;
+  flex-direction:column !important;
+  align-items:flex-start !important;
+  min-width:0 !important;
+  line-height:1.1 !important;
+}
+
+.nav-text b{
+  font-size:13px !important;
+  font-weight:900 !important;
+  color:#111827 !important;
+  white-space:nowrap !important;
+}
+
+.nav-text small{
+  font-size:11px !important;
+  color:#6b7280 !important;
+  white-space:nowrap !important;
 }
 
 .detail-card summary{
@@ -1311,11 +1338,11 @@ naviBox.className = "navi-grid";
 const safeBtn = document.createElement("button");
 safeBtn.className = "navi-btn";
 safeBtn.innerHTML = `
-<div class="nav-icon naver">N</div>
-<div>
-  <div class="nav-title">네이버지도</div>
-  <div class="nav-sub">길안내</div>
-</div>
+  <span class="nav-icon naver">N</span>
+  <span class="nav-text">
+    <b>네이버지도</b>
+    <small>길안내</small>
+  </span>
 `;
 safeBtn.onclick = function(){
   openNaverMap(recommendedIndex);
@@ -1324,11 +1351,11 @@ safeBtn.onclick = function(){
 const tmapBtn = document.createElement("button");
 tmapBtn.className = "navi-btn";
 tmapBtn.innerHTML = `
-<div class="nav-icon tmap">T</div>
-<div>
-  <div class="nav-title">TMAP</div>
-  <div class="nav-sub">길안내</div>
-</div>
+  <span class="nav-icon tmap">T</span>
+  <span class="nav-text">
+    <b>TMAP</b>
+    <small>길안내</small>
+  </span>
 `;
 tmapBtn.onclick = function(){
   openTmap();
@@ -1337,11 +1364,11 @@ tmapBtn.onclick = function(){
 const kakaoBtn = document.createElement("button");
 kakaoBtn.className = "navi-btn";
 kakaoBtn.innerHTML = `
-<div class="nav-icon kakao">📍</div>
-<div>
-  <div class="nav-title">카카오내비</div>
-  <div class="nav-sub">길안내</div>
-</div>
+  <span class="nav-icon kakao">K</span>
+  <span class="nav-text">
+    <b>카카오내비</b>
+    <small>길안내</small>
+  </span>
 `;
 kakaoBtn.onclick = function(){
   openKakaoNavi();
