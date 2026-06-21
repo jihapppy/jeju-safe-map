@@ -250,13 +250,13 @@ label{
   color:#222;
 }
   .nav-title{
-  font-size:22px;
+  font-size:18px;
   font-weight:700;
   color:#111827;
 }
 
 .nav-sub{
-  font-size:15px;
+  font-size:12px;
   color:#8a8a8a;
 }
 
@@ -890,6 +890,14 @@ margin-top:-18px !important;
   font-weight:800;
   line-height:1.45;
 }
+  .tip-dot{
+  width:8px;
+  height:8px;
+  background:#16b8aa;
+  border-radius:50%;
+  display:inline-block;
+  margin-right:10px;
+}
 </style>
 </head>
 
@@ -1522,9 +1530,9 @@ tipCard.className = "result-card tip-card";
 
 tipCard.innerHTML = `
   <h3>🛡 ${endName} 맞춤 안전팁</h3>
-  <p>✅ ${tips[0]}</p>
-  <p>✅ ${tips[1]}</p>
-  <p>✅ ${tips[2]}</p>
+  <p>• ${tips[0]}</p>
+  <p>• ${tips[1]}</p>
+  <p>• ${tips[2]}</p>
 `;
 
 document.getElementById("info").appendChild(tipCard);
