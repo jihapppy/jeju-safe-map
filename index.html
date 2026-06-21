@@ -768,6 +768,14 @@ margin-top:-18px !important;
   line-height:1.55 !important;
   color:#334155 !important;
 }
+
+  .route-red{
+  border-left:6px solid #ef4444 !important;
+}
+
+.route-green{
+  border-left:6px solid #14b8a6 !important;
+}
 </style>
 </head>
 
@@ -1482,10 +1490,10 @@ detailSummary.style.cursor = "pointer";
 
 detailBox.appendChild(detailSummary);
 
-routeCards.forEach(card => {
+routeCards.forEach((card, index) => {
+  card.classList.add(index === 0 ? "route-red" : "route-green");
   detailBox.appendChild(card);
 });
-
 document.getElementById("info").appendChild(detailBox);
     
     const notice = document.createElement("div");
