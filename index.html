@@ -347,6 +347,64 @@ button {
   line-height:1.45;
   margin-top:10px;
 }
+  .result-card{
+  background:#fff;
+  border-radius:22px;
+  padding:18px;
+  margin-top:16px;
+  box-shadow:0 8px 22px rgba(0,0,0,.08);
+  border:1px solid #edf1ef;
+}
+
+.tip-card h3{
+  margin:0 0 14px;
+  font-size:20px;
+  font-weight:900;
+  color:#111827;
+}
+
+.tip-card p{
+  margin:10px 0;
+  font-size:15px;
+  line-height:1.45;
+}
+
+.navi-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:10px;
+  margin-top:16px;
+}
+
+.navi-btn{
+  height:72px;
+  background:#fff;
+  color:#111827;
+  border:1px solid #edf1ef;
+  border-radius:18px;
+  font-size:18px;
+  font-weight:900;
+  box-shadow:0 6px 16px rgba(0,0,0,.07);
+}
+
+.navi-btn b{
+  display:block;
+  font-size:15px;
+  margin-top:4px;
+}
+
+.navi-btn span{
+  display:block;
+  font-size:12px;
+  color:#6b7280;
+  margin-top:2px;
+}
+
+.detail-card summary{
+  font-size:18px;
+  font-weight:900;
+  color:#111827;
+}
 
  @media (max-width:768px){
   html, body{
@@ -1180,51 +1238,58 @@ mainTip +
   "</div>";
     
 document.getElementById("info").appendChild(guide);
-    if(destinationTips[endName]){
+const tips = destinationTips[endName] || [
+  "초행길에서는 내비 안내를 미리 확인하세요.",
+  "목적지를 놓쳐도 급차로 변경하지 마세요.",
+  "교차로와 진출입 차량을 주의하세요."
+];
 
-  const tipCard = document.createElement("div");
-  tipCard.className = "card";
+const tipCard = document.createElement("div");
+tipCard.className = "result-card tip-card";
 
-  tipCard.innerHTML =
-    "<b>📍 목적지 맞춤 안전팁</b><br><br>" +
-    "<b>" + endName + "</b><br>" +
-    "• " + destinationTips[endName].join("<br>• ");
+tipCard.innerHTML = `
+  <h3>🛡 ${endName} 맞춤 안전팁</h3>
+  <p>✅ ${tips[0]}</p>
+  <p>✅ ${tips[1]}</p>
+  <p>✅ ${tips[2]}</p>
+`;
 
-  document.getElementById("info").appendChild(tipCard);
-}
+document.getElementById("info").appendChild(tipCard);
+
+
+const naviBox = document.createElement("div");
+naviBox.className = "navi-grid";
 
 const safeBtn = document.createElement("button");
-safeBtn.innerHTML = "🟢 네이버지도 길안내";
+safeBtn.className = "navi-btn";
+safeBtn.innerHTML = "🟢<br><b>네이버지도</b><span>길안내</span>";
 safeBtn.onclick = function(){
   openNaverMap(recommendedIndex);
 };
 
-document.getElementById("info").appendChild(safeBtn);
-
 const tmapBtn = document.createElement("button");
-
-tmapBtn.innerHTML = "🔵 TMAP 길안내";
-
+tmapBtn.className = "navi-btn";
+tmapBtn.innerHTML = "🔵<br><b>TMAP</b><span>길안내</span>";
 tmapBtn.onclick = function(){
   openTmap();
 };
 
-document.getElementById("info").appendChild(tmapBtn);
-
-
 const kakaoBtn = document.createElement("button");
-
-kakaoBtn.innerHTML = "🟡 카카오내비 길안내";
-
+kakaoBtn.className = "navi-btn";
+kakaoBtn.innerHTML = "🟡<br><b>카카오내비</b><span>길안내</span>";
 kakaoBtn.onclick = function(){
   openKakaoNavi();
 };
 
-document.getElementById("info").appendChild(kakaoBtn);
+naviBox.appendChild(safeBtn);
+naviBox.appendChild(tmapBtn);
+naviBox.appendChild(kakaoBtn);
+
+document.getElementById("info").appendChild(naviBox);
 
 
 const detailBox = document.createElement("details");
-detailBox.className = "card";
+detailBox.className = "result-card detail-card";
 
 const detailSummary = document.createElement("summary");
 detailSummary.innerHTML = "<b>📊 경로 상세정보 보기</b>";
