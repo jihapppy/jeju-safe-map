@@ -1371,14 +1371,14 @@ const dangerZones = [
   L.marker([spot.lat, spot.lng], {
     icon: L.divIcon({
       className:"tour-label-marker",
-      html: (
+     html: (
   spot.name === "성산일출봉" ||
   spot.name === "중문관광단지"
 )
 ? `<div class="tour-label">📍 ${spot.name}</div>`
-: `<div class="tour-dot">📍</div>`
-      iconSize:[120,28],
-      iconAnchor:[60,14]
+: `<div class="tour-dot">📍</div>`,
+iconSize:[120,28],
+iconAnchor:[60,14]
     })
   })
   .addTo(map)
