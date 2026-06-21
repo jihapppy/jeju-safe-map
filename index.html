@@ -202,21 +202,26 @@ label{
   font-weight:900;
   color:#111827;
 }
-  .navBtn{
+ .navBtn{
   display:flex;
   align-items:center;
-  gap:12px;
+  justify-content:center;
+  gap:8px;
 
   width:100%;
-  height:85px;
+  min-width:0;
 
-  background:white;
+  height:66px;
+
+  background:#fff;
   border:none;
-  border-radius:20px;
+  border-radius:18px;
 
-  box-shadow:0 4px 12px rgba(0,0,0,.08);
+  box-shadow:0 6px 18px rgba(15,23,42,.08);
 
-  padding:15px 18px;
+  padding:0 8px;
+  box-sizing:border-box;
+  overflow:hidden;
 }
   .nav-icon{
   width:42px;
@@ -426,10 +431,10 @@ button {
 }
 
 .navi-grid{
-  display:grid !important;
-  grid-template-columns:repeat(3, 1fr) !important;
-  gap:10px !important;
-  margin-top:16px !important;
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:10px;
+  width:100%;
 }
 
 .navi-btn{
@@ -663,14 +668,29 @@ margin-top:-18px !important;
 }
 
 .navi-grid{
+  display:grid !important;
+  grid-template-columns:repeat(3,minmax(0,1fr)) !important;
   gap:10px !important;
+  width:100% !important;
 }
 
 .navi-btn{
+  width:100% !important;
+  min-width:0 !important;
   height:66px !important;
+
   border-radius:18px !important;
   background:#fff !important;
   color:#0f172a !important;
+
+  display:flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  gap:8px !important;
+
+  padding:0 6px !important;
+  overflow:hidden !important;
+  box-sizing:border-box !important;
 }
 
 .navi-btn .navi-icon{
@@ -678,10 +698,15 @@ margin-top:-18px !important;
   line-height:1 !important;
 }
 
+.navi-btn span,
+.navi-btn div{
+  min-width:0 !important;
+}
+
 .detail-card summary{
   font-size:18px !important;
   color:#0f172a !important;
-} 
+}
 </style>
 </head>
 
