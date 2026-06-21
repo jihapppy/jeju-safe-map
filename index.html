@@ -1514,19 +1514,7 @@ lastEnd = {
       return analyzeRouteRisk(coords);
     });
 
-    let colors = [];
-
-if(routeRisks.length === 2){
-  if(routeRisks[0].score > routeRisks[1].score){
-    colors = ["#ef4444", "#14b8a6"]; // 1코스 일반, 2코스 추천
-  }else if(routeRisks[0].score < routeRisks[1].score){
-    colors = ["#14b8a6", "#ef4444"]; // 1코스 추천, 2코스 일반
-  }else{
-    colors = ["#14b8a6", "#ef4444"]; // 동점이면 1코스 추천
-  }
-}else{
-  colors = ["#14b8a6"];
-}
+    let colors = ["#14b8a6", "#ef4444"];
 
    document.getElementById("info").innerHTML =
   "<span class='routePath'>"+startName+
@@ -1579,14 +1567,6 @@ routeSummaries[index] = {
 });
 
 let recommendedIndex = 0;
-
-if(routeRisks.length === 2){
-  if(routeRisks[0].score > routeRisks[1].score){
-    recommendedIndex = 1;
-  }else{
-    recommendedIndex = 0;
-  }
-}
 
 const recommend = routeSummaries[recommendedIndex];
 
@@ -1699,11 +1679,11 @@ detailBox.appendChild(detailSummary);
 
 const r1 = routeSummaries[0];
 const r2 = routeSummaries[1];
-    const r1Class = recommendedIndex === 0 ? "compare-green" : "compare-red";
-const r2Class = recommendedIndex === 1 ? "compare-green" : "compare-red";
+    const r1Class = "compare-green";
+const r2Class = "compare-red";
 
-const r1Name = recommendedIndex === 0 ? "1코스 추천" : "1코스";
-const r2Name = recommendedIndex === 1 ? "2코스 추천" : "2코스";
+const r1Name = "1코스 추천";
+const r2Name = "2코스";
 
 const compareTable = document.createElement("div");
 compareTable.className = "compare-table-box";
@@ -1736,14 +1716,14 @@ compareTable.innerHTML = `
   </div>
 
   <div class="compare-row">
-    <div class="compare-label">추천 사유</div>
-    <div class="${r1Class}">
-      ${recommendedIndex === 0 ? "거리·시간 등을 고려해 추천" : "-"}
-    </div>
-    <div class="${r2Class}">
-      ${recommendedIndex === 1 ? "거리·시간 등을 고려해 추천" : "-"}
-    </div>
+  <div class="compare-label">추천 사유</div>
+  <div class="${r1Class}">
+    사고위험도를 고려한 추천경로
   </div>
+  <div class="${r2Class}">
+    일반 경로
+  </div>
+</div>
 `;
 detailBox.appendChild(compareTable);
 document.getElementById("info").appendChild(detailBox);
