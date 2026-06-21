@@ -250,13 +250,13 @@ label{
   color:#222;
 }
   .nav-title{
-  font-size:10px;
+  font-size:11px;
   font-weight:700;
   color:#111827;
 }
 
 .nav-sub{
-  font-size8px;
+  font-size:8px;
   color:#8a8a8a;
 }
 
@@ -1427,17 +1427,17 @@ lastEnd = {
 
     let colors = [];
 
-    if(routeRisks.length === 2){
-      if(routeRisks[0].score > routeRisks[1].score){
-  colors = ["#64748b","#14b8a6"];
-}else if(routeRisks[0].score < routeRisks[1].score){
-  colors = ["#14b8a6","#64748b"];
+if(routeRisks.length === 2){
+  if(routeRisks[0].score > routeRisks[1].score){
+    colors = ["#ef4444", "#14b8a6"]; // 1코스 일반, 2코스 추천
+  }else if(routeRisks[0].score < routeRisks[1].score){
+    colors = ["#14b8a6", "#ef4444"]; // 1코스 추천, 2코스 일반
+  }else{
+    colors = ["#14b8a6", "#ef4444"]; // 동점이면 1코스 추천
+  }
 }else{
-  colors = ["#64748b","#14b8a6"];
+  colors = ["#14b8a6"];
 }
-    }else{
-      colors = ["blue"];
-    }
 
    document.getElementById("info").innerHTML =
   "<span class='routePath'>"+startName+
@@ -1459,7 +1459,7 @@ routes.forEach((route,index)=>{
   const risk = routeRisks[index];
 
   L.polyline(coords,{
-    color:colors[index] || "blue",
+   color:colors[index] || "#14b8a6",
     weight:7,
     opacity:0.85
   })
@@ -1580,10 +1580,7 @@ kakaoBtn.onclick = function(){
   openKakaoNavi();
 };
 
-safeBtn.className = "navBtn";
-tmapBtn.className = "navBtn";
-kakaoBtn.className = "navBtn";
-    
+
 naviBox.appendChild(safeBtn);
 naviBox.appendChild(tmapBtn);
 naviBox.appendChild(kakaoBtn);
