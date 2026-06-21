@@ -1520,59 +1520,77 @@ lastEnd = {
       return analyzeRouteRisk(coords);
     });
 
-    let colors = ["#14b8a6", "#ef4444"];
-
-   document.getElementById("info").innerHTML =
+    document.getElementById("info").innerHTML =
   "<span class='routePath'>"+startName+
   " <span class='arrow'>→</span> "+
   endName+"</span>";
 
-    let allCoords = [];
-    let routeCards = [];
+let allCoords = [];
 let routeSummaries = [];
-
 
 routes.forEach((route,index)=>{
   const coords = route.geometry.coordinates.map(c=>[c[1],c[0]]);
-  allCoords = allCoords.concat(coords);
-
   const distanceKm = (route.properties.summary.distance / 1000).toFixed(1);
   const durationMin = Math.round(route.properties.summary.duration / 60);
-
   const risk = routeRisks[index];
 
+  routeSummaries[index] = {
+    coords: coords,
+    distanceKm: distanceKm,
+    durationMin: durationMin,
+    risk: risk
+  };
+});
+
+let recommendedIndex = 0;
+
+if(routeSummaries.length > 1){
+  recommendedIndex = routeSummaries
+    .map((r, i) => ({ ...r, index:i }))
+    .sort((a, b) => {
+      if(a.risk.score !== b.risk.score){
+        return a.risk.score - b.risk.score;
+      }
+      if(a.durationMin !== b.durationMin){
+        return a.durationMin - b.durationMin;
+      }
+      return Number(a.distanceKm) - Number(b.distanceKm);
+    })[0].index;
+}
+
+routeSummaries.forEach((summary,index)=>{
+  const coords = summary.coords;
+  allCoords = allCoords.concat(coords);
+
+  const isRecommended = index === recommendedIndex;
+  const lineColor = isRecommended ? "#14b8a6" : "#ef4444";
+  const labelClass = isRecommended ? "route-label-1" : "route-label-2";
+
   L.polyline(coords,{
-   color:colors[index] || "#14b8a6",
+    color: lineColor,
     weight:7,
     opacity:0.85
   })
   .addTo(routeLayer)
   .bindPopup(
     "<b>"+(index+1)+"코스</b><br>"+
-    "거리: "+distanceKm+"km<br>"+
-    "예상시간: "+durationMin+"분<br>"+
-    "위험도: "+risk.icon+" "+risk.level+"<br>"+
-    "통과 위험권역: "+risk.zoneNames
+    "거리: "+summary.distanceKm+"km<br>"+
+    "예상시간: "+summary.durationMin+"분<br>"+
+    "위험도: "+summary.risk.icon+" "+summary.risk.level+"<br>"+
+    "통과 위험권역: "+summary.risk.zoneNames
   );
+
   const labelPoint = coords[Math.min(8, coords.length - 1)];
 
-L.marker(labelPoint, {
-  icon: L.divIcon({
-    className: "route-label-marker",
-    html: "<div class='route-label route-label-" + (index + 1) + "'>" + (index + 1) + "코스</div>",
-    iconSize: [60, 28],
-    iconAnchor: [30, 14]
-  })
-}).addTo(routeLayer);
-
-routeSummaries[index] = {
-  distanceKm: distanceKm,
-  durationMin: durationMin,
-  risk: risk
-};
+  L.marker(labelPoint, {
+    icon: L.divIcon({
+      className: "route-label-marker",
+      html: "<div class='route-label " + labelClass + "'>" + (index + 1) + "코스</div>",
+      iconSize: [60, 28],
+      iconAnchor: [30, 14]
+    })
+  }).addTo(routeLayer);
 });
-
-let recommendedIndex = 0;
 
 const recommend = routeSummaries[recommendedIndex];
 
