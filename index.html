@@ -949,18 +949,16 @@ fetch("jeju_regions.geojson")
           "";
 
         const region = getJejuRegion(name);
-              console.log(name + " → " + region);
+        console.log(name + " → " + region);
         const risk = regionRisk[region];
 
         return {
- return {
-  color:"#ffffff",
-  weight:1.2,
-  fillColor: risk ? risk.color : "#d1d5db",
-  fillOpacity: risk ? 0.82 : 0.18
-};
+          color:"#ffffff",
+          weight:1.2,
+          fillColor: risk ? risk.color : "#d1d5db",
+          fillOpacity: risk ? 0.82 : 0.18
+        };
       }
-
     }).addTo(map);
   });
 
