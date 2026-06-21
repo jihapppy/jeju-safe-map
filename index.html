@@ -1588,6 +1588,11 @@ detailBox.appendChild(detailSummary);
 
 const r1 = routeSummaries[0];
 const r2 = routeSummaries[1];
+    const r1Class = recommendedIndex === 0 ? "compare-green" : "compare-red";
+const r2Class = recommendedIndex === 1 ? "compare-green" : "compare-red";
+
+const r1Name = recommendedIndex === 0 ? "1코스 추천" : "1코스";
+const r2Name = recommendedIndex === 1 ? "2코스 추천" : "2코스";
 
 const distanceDiff = Math.abs(r1.distanceKm - r2.distanceKm).toFixed(1);
 const timeDiff = Math.abs(r1.durationMin - r2.durationMin);
@@ -1606,16 +1611,22 @@ compareTable.className = "compare-table-box";
 compareTable.innerHTML = `
   <div class="compare-row">
     <div class="compare-label">거리</div>
-    <div class="compare-red">1코스<br>${r1.distanceKm}km</div>
-    <div class="compare-green">2코스<br>${r2.distanceKm}km
+   <div class="${r1Class}">
+  ${r1Name}<br>${r1.distanceKm}km
+</div>
+    <div class="${r2Class}">
+  ${r2Name}<br>${r2.distanceKm}km
       <br><span class="compare-note">${shorterText}</span>
     </div>
   </div>
 
   <div class="compare-row">
     <div class="compare-label">시간</div>
-    <div class="compare-red">1코스<br>${r1.durationMin}분</div>
-    <div class="compare-green">2코스<br>${r2.durationMin}분
+    <div class="${r1Class}">
+  ${r1Name}<br>${r1.durationMin}분
+</div>
+   <div class="${r2Class}">
+  ${r2Name}<br>${r2.durationMin}분
       <br><span class="compare-note gray">${timeText}</span>
     </div>
   </div>
@@ -1628,8 +1639,13 @@ compareTable.innerHTML = `
 
   <div class="compare-row">
     <div class="compare-label">특징</div>
-    <div>도심 통과·혼잡 구간 포함</div>
-    <div>추천 안전경로</div>
+  <div class="${r1Class}">
+  ${recommendedIndex === 0 ? "추천 안전경로" : "일반 경로"}
+</div>
+
+<div class="${r2Class}">
+  ${recommendedIndex === 1 ? "추천 안전경로" : "일반 경로"}
+</div>
   </div>
 `;
 
