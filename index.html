@@ -833,11 +833,15 @@ margin-top:-18px !important;
  .compare-box{
   display:grid;
   grid-template-columns:1fr 1fr;
-  gap:12px;
+  gap:16px;
   margin-top:18px;
   background:transparent !important;
   box-shadow:none !important;
   padding:0 !important;
+}
+  .compare-course-card{
+  min-width:0 !important;
+  overflow:hidden !important;
 }
 
 .compare-course-card{
@@ -866,6 +870,25 @@ margin-top:-18px !important;
   font-size:22px !important;
   font-weight:900 !important;
   margin-bottom:14px !important;
+}
+  .route-view-btn{
+  width:100%;
+  height:46px;
+  margin-top:18px;
+  border-radius:16px;
+  background:#fff;
+  font-size:16px;
+  font-weight:900;
+}
+
+.route-view-btn.red{
+  border:1.5px solid #ef4444;
+  color:#ef4444;
+}
+
+.route-view-btn.green{
+  border:1.5px solid #0f766e;
+  color:#0f766e;
 }
 </style>
 </head>
@@ -1472,22 +1495,9 @@ card.innerHTML =
    <div class="risk-badge">
      ${risk.level}
    </div>
-
-   <div class="section-label">
-     통과권역
-   </div>
-
-   <div class="tag-wrap">
-     ${zoneTags}
-   </div>
-
-   <div class="section-label">
-     주의사항
-   </div>
-
-   <div class="tag-wrap">
-     ${reasonTags}
-   </div>`;
+   <button class="route-view-btn ${index === 1 ? "green" : "red"}">
+  경로 보기 〉
+</button>`;
 
   routeCards[index] = card;
 routeSummaries[index] = {
