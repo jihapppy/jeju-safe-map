@@ -959,6 +959,202 @@ margin-top:-18px !important;
   box-shadow:0 3px 8px rgba(0,0,0,.18);
   white-space:nowrap;
 }
+
+  /* ===== 앱형 디자인 최종 덮어쓰기: 지도 유지 버전 ===== */
+
+html, body{
+  background:#f6fbfb !important;
+  overflow-x:hidden !important;
+}
+
+#map{
+  position:relative !important;
+  top:auto !important;
+  left:auto !important;
+  width:100% !important;
+  height:34vh !important;
+  min-height:280px !important;
+  z-index:1 !important;
+}
+
+.panel{
+  position:relative !important;
+  top:auto !important;
+  left:auto !important;
+  width:100% !important;
+  max-width:520px !important;
+  margin:-24px auto 0 !important;
+  padding:22px 22px 100px !important;
+  box-sizing:border-box !important;
+  border-radius:34px 34px 0 0 !important;
+  background:linear-gradient(180deg,#ffffff 0%,#f8fbfb 100%) !important;
+  box-shadow:0 -10px 30px rgba(15,23,42,.14) !important;
+  z-index:2 !important;
+}
+
+.drag-handle{
+  width:52px !important;
+  height:6px !important;
+  background:#c5cbd1 !important;
+  margin:0 auto 24px !important;
+}
+
+.header-box{
+  align-items:flex-start !important;
+  margin-bottom:22px !important;
+}
+
+.car-icon{
+  font-size:36px !important;
+  margin-top:8px !important;
+}
+
+.title{
+  font-size:28px !important;
+  font-weight:900 !important;
+  color:#111827 !important;
+  letter-spacing:-1.3px !important;
+  line-height:1.15 !important;
+  white-space:nowrap !important;
+}
+
+.subtitle{
+  font-size:15px !important;
+  color:#6b7280 !important;
+  margin-top:10px !important;
+  line-height:1.4 !important;
+}
+
+.header-hodoongi{
+  width:88px !important;
+  margin-top:-12px !important;
+}
+
+.input-card{
+  background:#fff !important;
+  border-radius:26px !important;
+  padding:22px 20px !important;
+  margin-top:20px !important;
+  border:none !important;
+  box-shadow:0 12px 30px rgba(15,23,42,.09) !important;
+}
+
+label{
+  font-size:21px !important;
+  font-weight:900 !important;
+  margin-bottom:16px !important;
+  color:#111827 !important;
+}
+
+.address-row{
+  gap:12px !important;
+}
+
+.address-row input{
+  height:58px !important;
+  border-radius:20px !important;
+  font-size:17px !important;
+  padding:0 18px !important;
+  border:1px solid #d9dee5 !important;
+}
+
+.address-row input::placeholder{
+  color:#a3a8b2 !important;
+}
+
+.mini-btn{
+  width:84px !important;
+  height:58px !important;
+  border-radius:20px !important;
+  font-size:17px !important;
+  background:#12b8b2 !important;
+  box-shadow:0 8px 18px rgba(18,184,178,.24) !important;
+}
+
+.location-btn{
+  height:58px !important;
+  margin-top:18px !important;
+  border-radius:18px !important;
+  background:#ecf8f7 !important;
+  color:#0f9f98 !important;
+  font-size:18px !important;
+}
+
+.select-divider{
+  margin:22px 0 16px !important;
+  color:#0f9f98 !important;
+  font-size:15px !important;
+}
+
+select{
+  width:100% !important;
+  height:58px !important;
+  border-radius:18px !important;
+  font-size:17px !important;
+  color:#555 !important;
+  padding:0 18px !important;
+}
+
+.analyze-btn{
+  height:78px !important;
+  margin-top:28px !important;
+  border-radius:28px !important;
+  background:linear-gradient(90deg,#12d4bf,#1674f5) !important;
+  box-shadow:0 12px 24px rgba(22,116,245,.25) !important;
+}
+
+.analyze-main{
+  font-size:25px !important;
+  font-weight:900 !important;
+}
+
+.analyze-sub{
+  font-size:15px !important;
+  margin-top:5px !important;
+}
+
+.small{
+  background:#f1f8f8 !important;
+  border-radius:24px !important;
+  padding:18px 12px !important;
+  margin-top:22px !important;
+  font-size:13px !important;
+  text-align:center !important;
+}
+
+.bottom-tab{
+  position:fixed;
+  left:50%;
+  bottom:0;
+  transform:translateX(-50%);
+  width:100%;
+  max-width:520px;
+  height:78px;
+  background:#fff;
+  border-top:1px solid #edf2f2;
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  z-index:9999;
+}
+
+.bottom-tab div{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:4px;
+  font-size:12px;
+  color:#6b7280;
+  font-weight:800;
+}
+
+.bottom-tab div:first-child{
+  color:#12aaa4;
+}
+
+.bottom-tab span{
+  font-size:24px;
+}
 </style>
 </head>
 
@@ -1034,7 +1230,12 @@ margin-top:-18px !important;
     ※ 본 서비스는 TAAS 사고데이터와 사고밀집권역 분석 결과를 바탕으로 안전한 경로 선택을 지원합니다.
   </div>
 </div>
-
+<div class="bottom-tab">
+  <div><span>🏠</span>홈</div>
+  <div><span>📍</span>지도</div>
+  <div><span>🔔</span>알림</div>
+  <div><span>⚙️</span>설정</div>
+</div>
 
 
 <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
@@ -1408,7 +1609,8 @@ function useCurrentLocation(){
       };
 
      customStartName = "현재 위치";
-document.getElementById("startInput").value = "현재 위치";
+document.getElementById("startInput").value = "";
+document.getElementById("startInput").placeholder = "현재 위치로 설정됨";
 document.getElementById("startResults").innerHTML = "";
 document.getElementById("startResults").style.display = "none";
 document.getElementById("info").innerHTML = "출발지가 현재 위치로 설정되었습니다.";
