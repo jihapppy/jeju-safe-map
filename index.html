@@ -1809,25 +1809,54 @@ guide.className = "card green";
 const mainTip = matchedTipKey
   ? destinationTips[matchedTipKey][0]
   : "목적지를 놓쳤다면 급차로 변경하지 말고 다음 길로 이동하세요.";
+
+    const otherRoute =
+  routeSummaries[recommendedIndex === 0 ? 1 : 0];
+
+const riskDiff =
+  Math.round(
+    (1 - recommend.risk.score / otherRoute.risk.score) * 100
+  );
+
+const distanceDiff =
+  Math.abs(
+    Number(recommend.distanceKm) -
+    Number(otherRoute.distanceKm)
+  ).toFixed(1);
     
 guide.innerHTML =
 
-"<div style='font-size:15px;font-weight:800;color:#0f766e;'>추천 경로</div>" +
-
-"<div style='font-size:28px;font-weight:900;margin-top:8px;color:#111827;'>" +
+"<div style='font-size:28px;font-weight:900;color:#111827;'>" +
 (recommendedIndex + 1) + "코스 추천</div>" +
 
-"<div style='margin-top:14px;font-size:17px;color:#334155;line-height:1.8;'>" +
-"📏 " + recommend.distanceKm + "km<br>" +
-"⏱ " + recommend.durationMin + "분" +
-"⚠️ 위험도 점수 " + recommend.risk.riskScoreText +
+"<div style='margin-top:16px;padding:16px;border-radius:18px;background:#f0faf8;border:1px solid #d8eeea;'>" +
+
+"<div style='font-size:18px;font-weight:900;color:#0f766e;margin-bottom:8px;'>🤖 AI 안전 추천 이유</div>" +
+
+"<div style='font-size:15px;line-height:1.7;color:#334155;'>" +
+(recommendedIndex + 1) +
+"코스는 사고심각도(EPDO)가 높은 권역 통과거리가 상대적으로 짧고,<br>" +
+"전체 위험점수가 더 낮게 분석되어 안전경로로 추천됩니다." +
 "</div>" +
 
-"<div style='margin-top:16px;padding:14px;border-radius:16px;background:#f8fafc;border:1px solid #e2e8f0;'>" +
-"<div style='font-weight:800;color:#0f172a;margin-bottom:6px;'>핵심 주의사항</div>" +
-"<div style='color:#475569;line-height:1.6;'>" +
-mainTip +
-"</div></div>";
+"<div style='display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:16px;'>" +
+
+"<div style='background:#fff;border-radius:14px;padding:12px;border:1px solid #e5e7eb;'>" +
+"<div style='font-size:14px;font-weight:800;color:#0f766e;'>🛣 거리 비교</div>" +
+"<div style='margin-top:6px;font-size:15px;font-weight:700;color:#334155;'>" +
+distanceDiff + "km 차이" +
+"</div>" +
+"</div>" +
+
+"<div style='background:#fff;border-radius:14px;padding:12px;border:1px solid #e5e7eb;'>" +
+"<div style='font-size:14px;font-weight:800;color:#0f766e;'>🛡 위험도 비교</div>" +
+"<div style='margin-top:6px;font-size:15px;font-weight:700;color:#334155;'>" +
+riskDiff + "% 낮음" +
+"</div>" +
+"</div>" +
+
+"</div>" +
+"</div>";
     
 document.getElementById("info").appendChild(guide);
 const tips = destinationTips[endName] || [
