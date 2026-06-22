@@ -1912,7 +1912,7 @@ kakaoBtn.className = "navi-btn";
 kakaoBtn.innerHTML = `
   <span class="nav-icon kakao">K</span>
   <span class="nav-text">
-    <b>카카오내비</b>
+    <b>카카오맵</b>
     <small>길안내</small>
   </span>
 `;
@@ -2202,19 +2202,19 @@ function getCardColorByLine(color){
 }
 function openKakaoNavi(){
 
-  if(!lastEnd){
+  if(!lastStart || !lastEnd){
     alert("먼저 안전경로를 분석해주세요.");
     return;
   }
 
-  if(!window.Kakao){
-    alert("카카오 SDK를 불러오지 못했습니다.");
-    return;
-  }
+  const url =
+    "https://map.kakao.com/link/to/" +
+    encodeURIComponent(lastEnd.name) + "," +
+    lastEnd.lat + "," +
+    lastEnd.lng;
 
-  if(!Kakao.isInitialized()){
-    Kakao.init(kakaoJsKey);
-  }
+  window.location.href = url;
+}
 
   if(!Kakao.Navi){
     alert("카카오내비 기능을 사용할 수 없습니다. 카카오 Developers에서 플랫폼/도메인 설정을 확인해주세요.");
