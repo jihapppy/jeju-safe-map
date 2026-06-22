@@ -1908,11 +1908,11 @@ detailBox.appendChild(detailSummary);
 
 const r1 = routeSummaries[0];
 const r2 = routeSummaries[1];
-    const r1Class = "compare-green";
-const r2Class = "compare-red";
+   const r1Class = recommendedIndex === 0 ? "compare-green" : "compare-red";
+const r2Class = recommendedIndex === 1 ? "compare-green" : "compare-red";
 
-const r1Name = "1코스 추천";
-const r2Name = "2코스";
+const r1Name = recommendedIndex === 0 ? "1코스 추천" : "1코스";
+const r2Name = recommendedIndex === 1 ? "2코스 추천" : "2코스";
 
 const compareTable = document.createElement("div");
 compareTable.className = "compare-table-box";
