@@ -1938,11 +1938,18 @@ compareTable.innerHTML = `
 </div>
 </div>
 
-  <div class="compare-row">
-    <div class="compare-label">위험도</div>
-    <div><span class="risk-badge high">${r1.risk.level}</span></div>
-    <div><span class="risk-badge high">${r2.risk.level}</span></div>
+<div class="compare-row">
+  <div class="compare-label">위험도</div>
+  <div>
+    <span class="risk-badge high">${r1.risk.level}</span><br>
+    ${r1.risk.riskScoreText}
   </div>
+  <div>
+    <span class="risk-badge high">${r2.risk.level}</span><br>
+    ${r2.risk.riskScoreText}
+  </div>
+</div>
+
 
   <div class="compare-row">
   <div class="compare-label">추천 사유</div>
@@ -1988,18 +1995,46 @@ document.getElementById("info").appendChild(notice);
 }
 
 function analyzeRouteRisk(coords){
-  let passedZones = [];
+  let zoneStats = {};
+  let totalScore = 0;
+  let totalDistanceKm = 0;
 
-  dangerZones.forEach(zone=>{
-    const passed = coords.some(point=>{
-      const d = getDistanceKm(point[0], point[1], zone.lat, zone.lng);
-      return d <= zone.radiusKm;
+  for(let i = 0; i < coords.length - 1; i++){
+    const p1 = coords[i];
+    const p2 = coords[i + 1];
+
+    const segmentKm = getDistanceKm(p1[0], p1[1], p2[0], p2[1]);
+    totalDistanceKm += segmentKm;
+
+    const midLat = (p1[0] + p2[0]) / 2;
+    const midLng = (p1[1] + p2[1]) / 2;
+
+    dangerZones.forEach(zone=>{
+      const d = getDistanceKm(midLat, midLng, zone.lat, zone.lng);
+
+      if(d <= zone.radiusKm){
+        const segmentScore = zone.epdo * segmentKm;
+        totalScore += segmentScore;
+
+        if(!zoneStats[zone.name]){
+          zoneStats[zone.name] = {
+            name: zone.name,
+            distanceKm: 0,
+            score: 0,
+            epdo: zone.epdo,
+            count: zone.count,
+            reason: zone.reason
+          };
+        }
+
+        zoneStats[zone.name].distanceKm += segmentKm;
+        zoneStats[zone.name].score += segmentScore;
+      }
     });
+  }
 
-    if(passed){
-      passedZones.push(zone);
-    }
-  });
+  const passedZones = Object.values(zoneStats)
+    .sort((a,b)=>b.score - a.score);
 
   if(passedZones.length === 0){
     return {
@@ -2009,35 +2044,58 @@ function analyzeRouteRisk(coords){
       zoneNames:"사고밀집권역 통과 적음",
       reasons:"비교적 단순한 경로",
       totalCount:0,
-      totalEpdo:0
+      totalEpdo:0,
+      totalDistanceKm: totalDistanceKm,
+      riskScoreText:"0점",
+      zoneDetailText:"사고밀집권역 통과 적음"
     };
+  }
+
+  let level = "낮음";
+  let icon = "🟢";
+
+  if(totalScore >= 2500){
+    level = "매우높음";
+    icon = "🔴";
+  }else if(totalScore >= 1200){
+    level = "높음";
+    icon = "🟠";
+  }else if(totalScore >= 500){
+    level = "보통";
+    icon = "🟡";
   }
 
   const totalCount = passedZones.reduce((sum,z)=>sum + z.count, 0);
   const totalEpdo = passedZones.reduce((sum,z)=>sum + z.epdo, 0);
 
-  let level = "낮음";
-  let icon = "🟢";
+  const zoneNames = passedZones
+    .map(z => z.name + " " + z.distanceKm.toFixed(1) + "km")
+    .join(", ");
 
-  if(totalEpdo >= 700){
-    level = "매우높음";
-    icon = "🔴";
-  }else if(totalEpdo >= 350){
-    level = "높음";
-    icon = "🟠";
-  }else if(totalEpdo >= 150){
-    level = "보통";
-    icon = "🟡";
-  }
+  const zoneDetailText = passedZones
+    .map(z =>
+      z.name +
+      " " +
+      z.distanceKm.toFixed(1) +
+      "km × EPDO " +
+      z.epdo +
+      " = " +
+      Math.round(z.score).toLocaleString() +
+      "점"
+    )
+    .join("<br>");
 
   return {
-    score: totalEpdo,
+    score: totalScore,
     level: level,
     icon: icon,
-    zoneNames: passedZones.map(z=>z.name).join(", "),
+    zoneNames: zoneNames,
     reasons: passedZones.map(z=>z.reason).join(" / "),
     totalCount: totalCount,
-    totalEpdo: totalEpdo
+    totalEpdo: totalEpdo,
+    totalDistanceKm: totalDistanceKm,
+    riskScoreText: Math.round(totalScore).toLocaleString() + "점",
+    zoneDetailText: zoneDetailText
   };
 }
 
