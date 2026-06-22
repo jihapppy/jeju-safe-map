@@ -2207,13 +2207,26 @@ function openKakaoNavi(){
     return;
   }
 
+  if(!window.Kakao){
+    alert("카카오 SDK를 불러오지 못했습니다.");
+    return;
+  }
+
+  if(!Kakao.isInitialized()){
+    Kakao.init(kakaoJsKey);
+  }
+
+  if(!Kakao.Navi){
+    alert("카카오내비 기능을 사용할 수 없습니다. 카카오 Developers에서 플랫폼/도메인 설정을 확인해주세요.");
+    return;
+  }
+
   Kakao.Navi.start({
-    name: lastEnd.name,
+    name: lastEnd.name || "목적지",
     x: Number(lastEnd.lng),
     y: Number(lastEnd.lat),
     coordType: "wgs84"
   });
-
 }
 
 
