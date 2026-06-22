@@ -1954,10 +1954,20 @@ compareTable.innerHTML = `
   <div class="compare-row">
   <div class="compare-label">추천 사유</div>
   <div class="${r1Class}">
-    사고위험도를 고려한 추천경로
+    ${recommendedIndex === 0 ? "EPDO와 통과거리를 반영한 위험점수가 더 낮아 추천" : "비교 경로"}
   </div>
   <div class="${r2Class}">
-    일반 경로
+    ${recommendedIndex === 1 ? "EPDO와 통과거리를 반영한 위험점수가 더 낮아 추천" : "비교 경로"}
+  </div>
+</div>
+
+<div class="compare-row">
+  <div class="compare-label">계산근거</div>
+  <div style="font-size:12px;line-height:1.6;color:#475569;">
+    ${r1.risk.zoneDetailText}
+  </div>
+  <div style="font-size:12px;line-height:1.6;color:#475569;">
+    ${r2.risk.zoneDetailText}
   </div>
 </div>
 `;
