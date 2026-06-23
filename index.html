@@ -1356,6 +1356,50 @@ select{
   background:#fff;
   white-space:nowrap;
 }
+
+  /* 하단 메뉴 제거 후 화면 확장 */
+.bottom-tab{
+  display:none !important;
+}
+
+.panel{
+  top:34vh !important;
+  bottom:0 !important;
+  padding:14px 18px 20px !important;
+}
+
+/* 접혔을 때도 하단 메뉴 공간 안 남기기 */
+.panel.collapsed{
+  top:calc(100vh - 50px) !important;
+  bottom:0 !important;
+}
+
+/* 홈 화면 입력 카드 조금 압축 */
+.route-input-card{
+  padding:14px 16px 16px !important;
+}
+
+.end-label{
+  margin-top:16px !important;
+}
+
+.popular-title{
+  margin-top:16px !important;
+  margin-bottom:10px !important;
+}
+
+.analyze-btn{
+  margin-top:12px !important;
+  margin-bottom:20px !important;
+}
+  .popular-photo{
+  height:58px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:28px;
+  background:linear-gradient(135deg,#e0f7f4,#f8fafc);
+}
 </style>
 </head>
 
@@ -1406,22 +1450,22 @@ select{
 
   <div class="popular-grid">
     <button type="button" class="popular-item" onclick="setPopularEnd('성산일출봉','126.9347,33.4589')">
-      <img src="seongsan.jpg">
+     <div class="popular-photo">🌅</div>
       <span>성산일출봉</span>
     </button>
 
     <button type="button" class="popular-item" onclick="setPopularEnd('천지연폭포','126.5544,33.2448')">
-      <img src="cheonjiyeon.jpg">
+      <div class="popular-photo">💧</div>
       <span>천지연폭포</span>
     </button>
 
     <button type="button" class="popular-item" onclick="setPopularEnd('협재해수욕장','126.2412,33.3938')">
-      <img src="hyeopjae.jpg">
+      <div class="popular-photo">🏖️</div>
       <span>협재해수욕장</span>
     </button>
 
     <button type="button" class="popular-item" onclick="setPopularEnd('우도','126.9575,33.5067')">
-      <img src="udo.jpg">
+      <div class="popular-photo">⛴️</div>
       <span>우도</span>
     </button>
   </div>
@@ -1438,13 +1482,6 @@ select{
     ※ TAAS 사고데이터 및 사고밀집권역 분석 기반 안전경로 추천
   </div>
 </div>
-<div class="bottom-tab">
-  <div><span>🏠</span>홈</div>
-  <div><span>📍</span>지도</div>
-  <div><span>🔔</span>알림</div>
-  <div><span>⚙️</span>설정</div>
-</div>
-
 
 <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
   <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
