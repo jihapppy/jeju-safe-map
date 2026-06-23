@@ -623,7 +623,8 @@ html, body{
 .popular-item{
   width:100% !important;
   min-width:0 !important;
-  height:116px !important;
+  height:auto !important;
+  aspect-ratio:2 / 1 !important;
   box-sizing:border-box !important;
   overflow:hidden !important;
 }
@@ -631,7 +632,8 @@ html, body{
 .popular-item img{
   width:100% !important;
   height:100% !important;
-  object-fit:cover !important;
+  object-fit:contain !important;
+  display:block !important;
 }
 
 .popular-item span{
