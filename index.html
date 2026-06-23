@@ -553,6 +553,7 @@ html, body{
 
 .analyze-main{
   font-size:18px !important;
+}
 </style>
 </head>
 
@@ -622,7 +623,7 @@ html, body{
     <span>1100고지</span>
   </button>
 </div>
-
+</div>
 <button class="analyze-btn" onclick="drawRoutes()">
   <div class="analyze-main"> 가장 최적의 안전경로 분석하기</div>
   <div class="analyze-sub"> 사고데이터 기반 경로 비교 </div>
@@ -646,8 +647,16 @@ if(window.Kakao){
   Kakao.init(kakaoJsKey);
 }
 
-const map = L.map('map').setView([33.33,126.54],8);
+const map = L.map('map').setView([33.33,126.54],9);
+function resetHomeMap(){
+  setTimeout(() => {
+    map.invalidateSize();
+    map.setView([33.36, 126.54], 9);
+    map.panBy([0, -120]);
+  }, 300);
+}
 
+resetHomeMap();
 L.tileLayer(
 'https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png',
 {
@@ -1369,8 +1378,11 @@ document.getElementById("info").appendChild(notice);
 
  setTimeout(() => {
   map.invalidateSize();
-  map.setView([33.33,126.54],8);
-}, 300);
+  map.fitBounds(L.latLngBounds(allCoords), {
+    paddingTopLeft:[30,80],
+    paddingBottomRight:[30,260]
+  });
+}, 350);
     
  }catch(error){
   document.getElementById("info").innerHTML =
