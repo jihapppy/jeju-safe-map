@@ -858,6 +858,7 @@ fetch("jeju_regions.geojson")
     }).addTo(map);
   });
 
+
 const legend = L.control({ position: "bottomright" });
 
 legend.onAdd = function () {
@@ -969,8 +970,6 @@ const dangerZones = [
   { name:"1100고지", lat:33.3580, lng:126.4625, label:false },
   { name:"오설록", lat:33.3059, lng:126.2895, label:false }
 ];
-  }).addTo(map);
-});
   
   touristSpots.forEach(spot=>{
 
