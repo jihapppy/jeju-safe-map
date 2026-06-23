@@ -646,7 +646,10 @@ if(window.Kakao){
   Kakao.init(kakaoJsKey);
 }
 
-const map = L.map('map').setView([33.38,126.54],9);
+const map = L.map('map').setView(
+  [33.38,126.53],
+  10
+);
 
 L.tileLayer(
 'https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png',
