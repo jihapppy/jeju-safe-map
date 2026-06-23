@@ -463,6 +463,114 @@ label,
   box-shadow:0 5px 12px rgba(15,23,42,.14);
   white-space:nowrap;
 }
+
+  .panel{
+  top:42vh !important;
+  padding:10px 18px 18px !important;
+  background:rgba(255,255,255,.98) !important;
+  box-shadow:0 -10px 26px rgba(15,23,42,.07) !important;
+}
+
+.header-box{
+  margin-bottom:10px !important;
+}
+
+.title{
+  font-size:21px !important;
+  font-weight:850 !important;
+}
+
+.subtitle{
+  font-size:12.5px !important;
+}
+
+.header-hodoongi{
+  width:48px !important;
+}
+
+.address-row{
+  height:48px !important;
+  margin-bottom:9px !important;
+  border:1px solid #f0f2f6 !important;
+  box-shadow:0 5px 14px rgba(15,23,42,.035) !important;
+}
+
+.location-btn{
+  height:28px !important;
+  top:10px !important;
+}
+
+.popular-title{
+  display:flex !important;
+  align-items:center !important;
+  margin:16px 0 10px !important;
+  font-size:18px !important;
+  font-weight:900 !important;
+  color:#0f172a !important;
+}
+
+.popular-title::before{
+  content:"📍";
+  margin-right:6px;
+  font-size:18px;
+}
+
+.popular-grid{
+  display:grid !important;
+  grid-template-columns:repeat(2, minmax(0,1fr)) !important;
+  gap:11px !important;
+}
+
+.popular-item{
+  position:relative !important;
+  height:108px !important;
+  padding:0 !important;
+  border:0 !important;
+  border-radius:18px !important;
+  overflow:hidden !important;
+  background:#fff !important;
+  box-shadow:0 8px 20px rgba(15,23,42,.08) !important;
+}
+
+.popular-item img{
+  width:100% !important;
+  height:100% !important;
+  object-fit:cover !important;
+  display:block !important;
+}
+
+.popular-item::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(
+    180deg,
+    rgba(0,0,0,0) 42%,
+    rgba(15,23,42,.58) 100%
+  );
+}
+
+.popular-item span{
+  position:absolute !important;
+  left:12px !important;
+  bottom:10px !important;
+  z-index:2 !important;
+  color:#fff !important;
+  font-size:15px !important;
+  font-weight:900 !important;
+  letter-spacing:-.5px !important;
+  text-shadow:0 2px 8px rgba(0,0,0,.35) !important;
+}
+
+.analyze-btn{
+  height:54px !important;
+  margin-top:14px !important;
+  border-radius:19px !important;
+}
+
+.analyze-main{
+  font-size:18px !important;
+}
 </style>
 </head>
 
@@ -508,6 +616,27 @@ label,
   </div>
 
   <div id="endResults"></div>
+    <div class="popular-grid">
+  <button type="button" class="popular-item" onclick="setPopularEnd('성산일출봉','126.9347,33.4589')">
+    <img src="seongsan.png">
+    <span>성산일출봉</span>
+  </button>
+
+  <button type="button" class="popular-item" onclick="setPopularEnd('협재해수욕장','126.2412,33.3938')">
+    <img src="hyeopjae.png">
+    <span>협재해수욕장</span>
+  </button>
+
+  <button type="button" class="popular-item" onclick="setPopularEnd('중문관광단지','126.4128,33.2498')">
+    <img src="jungmun.png">
+    <span>중문관광단지</span>
+  </button>
+
+  <button type="button" class="popular-item" onclick="setPopularEnd('1100고지','126.4625,33.3580')">
+    <img src="highland1100.png">
+    <span>1100고지</span>
+  </button>
+</div>
 
 <button class="analyze-btn" onclick="drawRoutes()">
   <div class="analyze-main"> 가장 최적의 안전경로 분석하기</div>
@@ -796,25 +925,6 @@ const dangerZones = [
   { name:"1100고지", lat:33.3580, lng:126.4625, label:false },
   { name:"오설록", lat:33.3059, lng:126.2895, label:false }
 ];
-
-  const regionLabels = [
-  { name:"성산", lat:33.4589, lng:126.9347 },
-  { name:"중문", lat:33.2498, lng:126.4128 },
-  { name:"함덕", lat:33.5435, lng:126.6695 },
-  { name:"협재", lat:33.3938, lng:126.2412 },
-  { name:"애월", lat:33.4620, lng:126.3260 },
-  { name:"공항", lat:33.4996, lng:126.5312 },
-  { name:"한라산", lat:33.3580, lng:126.4625 }
-];
-
-regionLabels.forEach(place=>{
-  L.marker([place.lat, place.lng], {
-    icon:L.divIcon({
-      className:"region-label-marker",
-      html:`<div class="region-label">${place.name}</div>`,
-      iconSize:[70,24],
-      iconAnchor:[35,12]
-    })
   }).addTo(map);
 });
   
