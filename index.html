@@ -646,7 +646,7 @@ if(window.Kakao){
   Kakao.init(kakaoJsKey);
 }
 
-const map = L.map('map').setView([33.24,126.54],9);
+const map = L.map('map').setView([33.33,126.54],8);
 
 L.tileLayer(
 'https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png',
@@ -1367,12 +1367,10 @@ document.getElementById("info").appendChild(notice);
       .addTo(routeLayer)
       .bindPopup("목적지: "+endName);
 
-  setTimeout(() => {
-  map.fitBounds(L.latLngBounds(allCoords), {
-    paddingTopLeft:[30,80],
-    paddingBottomRight:[30,260]
-  });
-}, 350);
+ setTimeout(() => {
+  map.invalidateSize();
+  map.setView([33.33,126.54],8);
+}, 300);
     
  }catch(error){
   document.getElementById("info").innerHTML =
