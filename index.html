@@ -525,13 +525,13 @@ button {
     flex-direction:column;
   }
 
-  #map{
+ #map{
   position:relative !important;
   top:auto !important;
   left:auto !important;
   width:100% !important;
-  height:30vh !important;
-  min-height:300px !important;
+  height:42vh !important;
+  min-height:320px !important;
   z-index:1 !important;
 }
 
@@ -1560,6 +1560,15 @@ const dangerZones = [
   { name:"한라산권", lat:33.3580, lng:126.4625, radiusKm:8, count:16, epdo:85, reason:"급커브, 안개, 기상변화 주의" },
   { name:"중문권", lat:33.2498, lng:126.4128, radiusKm:5, count:14, epdo:79, reason:"관광지 진출입 혼잡, 급감속·차로변경 주의" }
 ];
+
+  const fixedDestinationCoords = {
+  "성산일출봉": { lat:33.4589, lng:126.9347 },
+  "중문관광단지": { lat:33.2498, lng:126.4128 },
+  "협재해수욕장": { lat:33.3938, lng:126.2412 },
+  "함덕해수욕장": { lat:33.5435, lng:126.6695 },
+  "1100고지": { lat:33.3580, lng:126.4625 },
+  "오설록": { lat:33.3059, lng:126.2895 }
+};
   
   const touristSpots = [
   { name:"성산일출봉", lat:33.4589, lng:126.9347, label:true },
@@ -1684,6 +1693,7 @@ lastEnd = {
       [startLng,startLat],
       [endLng,endLat]
     ],
+    radiuses:[1000,1000],
     alternative_routes:{
       target_count:2,
       weight_factor:2,
@@ -2259,12 +2269,20 @@ resultBox.innerHTML = "검색중...";
         (place.road_address_name || place.address_name);
 
       div.onclick = function(){
-        customEnd = {
-          lat: parseFloat(place.y),
-          lng: parseFloat(place.x)
-        };
+        const fixedKey = Object.keys(fixedDestinationCoords).find(key =>
+  place.place_name.includes(key) || keyword.includes(key)
+);
 
-        customEndName = place.place_name;
+if(fixedKey){
+  customEnd = fixedDestinationCoords[fixedKey];
+  customEndName = fixedKey;
+}else{
+  customEnd = {
+    lat: parseFloat(place.y),
+    lng: parseFloat(place.x)
+  };
+  customEndName = place.place_name;
+}
 
        document.getElementById("endInput").value = place.place_name;
 document.getElementById("endSelect").value = "";
