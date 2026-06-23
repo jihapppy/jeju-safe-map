@@ -607,6 +607,22 @@ html, body{
   font-weight:800;
   letter-spacing:-0.5px;
 }
+  .header-hodoongi{
+  width:38px !important;
+  opacity:.95;
+}
+  .popular-item::after{
+  background:linear-gradient(
+    180deg,
+    rgba(0,0,0,0) 38%,
+    rgba(15,23,42,.46) 100%
+  ) !important;
+}
+
+.popular-item span{
+  font-size:13.5px !important;
+  bottom:8px !important;
+}
 </style>
 </head>
 
@@ -984,11 +1000,10 @@ const dangerZones = [
   icon: L.divIcon({
     className:"tour-label-marker",
     html: (
-      spot.name === "성산일출봉" ||
-      spot.name === "중문관광단지"
-    )
-    ? `<div class="tour-label">📍 ${spot.name}</div>`
-: `<div class="tour-dot"></div>`,
+   false
+)
+? `<div class="tour-label">📍 ${spot.name}</div>`
+: `<div class="tour-dot"></div>`
     iconSize:[120,28],
     iconAnchor:[60,14]
   })
