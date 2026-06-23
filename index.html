@@ -701,11 +701,57 @@ html, body{
   font-size:16px !important;
   margin:4px 4px 12px !important;
 }
+  .risk-legend{
+  position:fixed;
+  top:90px;
+  right:12px;
+
+  z-index:999;
+
+  background:rgba(255,255,255,.92);
+  backdrop-filter:blur(8px);
+
+  padding:10px 12px;
+  border-radius:16px;
+
+  font-size:12px;
+  line-height:1.55;
+
+  box-shadow:0 4px 12px rgba(0,0,0,.08);
+}
+
+.legend-title{
+  font-weight:800;
+  margin-bottom:6px;
+  color:#111827;
+}
+
+.legend-foot{
+  margin-top:6px;
+  padding-top:6px;
+  border-top:1px solid #e5e7eb;
+  font-size:11px;
+  color:#6b7280;
+}
 </style>
 </head>
 
 <body>
 <div id="map"></div>
+
+  <div class="risk-legend">
+  <div class="legend-title">🚦 사고위험도</div>
+
+  <div>🔴 사고집중</div>
+  <div>🟠 사고다발</div>
+  <div>🟡 일반</div>
+  <div>🟢 안전</div>
+
+  <div class="legend-foot">
+    2025 렌터카 사고 반영
+  </div>
+</div>
+  
 <div class="panel">
  <div class="drag-handle" onclick="togglePanel()"></div>
   <div class="header-box">
