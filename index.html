@@ -608,8 +608,21 @@ html, body{
   font-size:20px !important;
 }
 
-  .panel{
+ .panel{
   top:36vh !important;
+}
+
+.panel.route-mode{
+  top:42vh !important;
+}
+
+.popular-grid{
+  display:grid !important;
+  grid-template-columns:repeat(2, minmax(0,1fr)) !important;
+  gap:12px !important;
+  width:100% !important;
+  box-sizing:border-box !important;
+  margin-top:12px !important;
 }
 </style>
 </head>
@@ -661,20 +674,24 @@ html, body{
 
 <div class="popular-grid">
   <button type="button" class="popular-item" onclick="setPopularEnd('성산일출봉','126.9347,33.4589')">
-    <img src="성산.png">
-  </button>
+  <img src="성산.png">
+  <span>성산일출봉</span>
+</button>
 
-  <button type="button" class="popular-item" onclick="setPopularEnd('협재해수욕장','126.2412,33.3938')">
-    <img src="협재.png">
-  </button>
+<button type="button" class="popular-item" onclick="setPopularEnd('협재해수욕장','126.2412,33.3938')">
+  <img src="협재.png">
+  <span>협재해수욕장</span>
+</button>
 
-  <button type="button" class="popular-item" onclick="setPopularEnd('중문관광단지','126.4128,33.2498')">
-    <img src="중문.png">
-  </button>
+<button type="button" class="popular-item" onclick="setPopularEnd('중문관광단지','126.4128,33.2498')">
+  <img src="중문.png">
+  <span>중문관광단지</span>
+</button>
 
-  <button type="button" class="popular-item" onclick="setPopularEnd('1100고지','126.4625,33.3580')">
-    <img src="1100고지.png">
-  </button>
+<button type="button" class="popular-item" onclick="setPopularEnd('1100고지','126.4625,33.3580')">
+  <img src="1100고지.png">
+  <span>1100고지</span>
+</button>
 </div>
 </div>
 <button class="analyze-btn" onclick="drawRoutes()">
