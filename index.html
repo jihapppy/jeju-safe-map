@@ -1400,6 +1400,129 @@ select{
   font-size:28px;
   background:linear-gradient(135deg,#e0f7f4,#f8fafc);
 }
+
+  /* ===== 최종 홈화면 세련화 ===== */
+
+.panel{
+  top:32vh !important;
+  bottom:0 !important;
+  padding:12px 18px 22px !important;
+  background:#ffffff !important;
+  border-radius:30px 30px 0 0 !important;
+}
+
+.drag-handle{
+  width:46px !important;
+  height:5px !important;
+  margin:0 auto 12px !important;
+  background:#d1d5db !important;
+}
+
+.car-icon{
+  display:none !important;
+}
+
+.title{
+  font-size:19px !important;
+  letter-spacing:-0.8px !important;
+}
+
+.subtitle{
+  font-size:12.5px !important;
+  color:#64748b !important;
+}
+
+.header-hodoongi{
+  width:54px !important;
+}
+
+.route-input-card{
+  padding:14px 15px 15px !important;
+  margin-top:10px !important;
+  border-radius:24px !important;
+  box-shadow:0 8px 24px rgba(15,23,42,.07) !important;
+}
+
+.route-input-card label{
+  font-size:14px !important;
+  margin-bottom:7px !important;
+}
+
+.end-label{
+  margin-top:14px !important;
+}
+
+.address-row input{
+  height:38px !important;
+  border-radius:14px !important;
+  font-size:13px !important;
+}
+
+.mini-btn{
+  width:58px !important;
+  height:38px !important;
+  border-radius:14px !important;
+  font-size:13px !important;
+  background:#14b8a6 !important;
+}
+
+.location-btn{
+  height:36px !important;
+  margin-top:8px !important;
+  border-radius:14px !important;
+  font-size:13px !important;
+}
+
+.popular-title{
+  margin-top:14px !important;
+  margin-bottom:9px !important;
+  font-size:14px !important;
+}
+
+.popular-grid{
+  grid-template-columns:repeat(4,1fr) !important;
+  gap:8px !important;
+}
+
+.popular-item{
+  border-radius:16px !important;
+  box-shadow:0 6px 18px rgba(15,23,42,.08) !important;
+}
+
+.popular-photo{
+  height:54px !important;
+  font-size:24px !important;
+  background:#eef7f6 !important;
+}
+
+.popular-item span{
+  font-size:10.5px !important;
+  padding:6px 1px !important;
+}
+
+.analyze-btn{
+  height:50px !important;
+  margin-top:10px !important;
+  margin-bottom:10px !important;
+  border-radius:18px !important;
+  box-shadow:0 8px 18px rgba(20,184,166,.22) !important;
+}
+
+.analyze-main{
+  font-size:17px !important;
+}
+
+.analyze-sub{
+  display:none !important;
+}
+
+.bottom-tab{
+  display:none !important;
+}
+
+.small{
+  display:none !important;
+}
 </style>
 </head>
 
@@ -1437,7 +1560,7 @@ select{
 
   <button class="location-btn" onclick="useCurrentLocation()">현재 위치 사용</button>
 
-  <label class="end-label">🚩 목적지</label>
+  <label class="end-label">목적지</label>
 
   <div class="address-row">
     <input id="endInput" type="text" placeholder="예: 성산일출봉, 협재해수욕장">
@@ -1446,7 +1569,7 @@ select{
 
   <div id="endResults"></div>
 
-  <div class="popular-title">⭐ 인기 관광지 선택</div>
+  <div class="popular-title"> 인기 관광지 선택</div>
 
   <div class="popular-grid">
     <button type="button" class="popular-item" onclick="setPopularEnd('성산일출봉','126.9347,33.4589')">
@@ -2529,7 +2652,7 @@ if(fixedKey){
 }
 
        document.getElementById("endInput").value = place.place_name;
-document.getElementById("endSelect").value = "";
+      
 resultBox.innerHTML = "";
 resultBox.style.display = "none";
 
