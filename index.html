@@ -1276,7 +1276,7 @@ if(window.Kakao){
   Kakao.init(kakaoJsKey);
 }
 
-const map = L.map('map').setView([33.26,126.54],9);
+const map = L.map('map').setView([33.42,126.54],9);
 
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
   attribution:'© OpenStreetMap contributors'
@@ -2059,7 +2059,7 @@ document.getElementById("info").appendChild(notice);
 
    map.fitBounds(L.latLngBounds(allCoords), {
   paddingTopLeft:[30,30],
-  paddingBottomRight:[30,260]
+  paddingBottomRight:[30,420]
 });
     
   }catch(error){
