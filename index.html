@@ -703,35 +703,56 @@ html, body{
 }
   .risk-legend{
   position:fixed;
-  top:90px;
-  right:12px;
-
+  left:16px;
+  right:16px;
+  top:39vh;
   z-index:999;
+  height:36px;
 
-  background:rgba(255,255,255,.92);
-  backdrop-filter:blur(8px);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:10px;
 
-  padding:10px 12px;
-  border-radius:16px;
+  background:rgba(255,255,255,.78);
+  backdrop-filter:blur(12px);
+  -webkit-backdrop-filter:blur(12px);
 
-  font-size:12px;
-  line-height:1.55;
+  border:1px solid rgba(255,255,255,.75);
+  border-radius:999px;
+  box-shadow:0 8px 22px rgba(15,23,42,.10);
 
-  box-shadow:0 4px 12px rgba(0,0,0,.08);
-}
-
-.legend-title{
+  font-size:11.5px;
   font-weight:800;
-  margin-bottom:6px;
-  color:#111827;
+  color:#334155;
 }
 
-.legend-foot{
-  margin-top:6px;
-  padding-top:6px;
-  border-top:1px solid #e5e7eb;
-  font-size:11px;
-  color:#6b7280;
+.risk-legend .legend-title{
+  color:#0f172a;
+  margin-right:2px;
+}
+
+.risk-legend span{
+  display:flex;
+  align-items:center;
+  gap:4px;
+  white-space:nowrap;
+}
+
+.risk-legend .dot{
+  width:8px;
+  height:8px;
+  border-radius:50%;
+  display:inline-block;
+}
+
+.risk-legend .red{ background:#ef4444; }
+.risk-legend .orange{ background:#fb923c; }
+.risk-legend .yellow{ background:#facc15; }
+.risk-legend .green-dot{ background:#22c55e; }
+
+.panel.route-mode + .risk-legend{
+  display:none;
 }
 </style>
 </head>
@@ -739,17 +760,12 @@ html, body{
 <body>
 <div id="map"></div>
 
-  <div class="risk-legend">
-  <div class="legend-title">🚦 사고위험도</div>
-
-  <div>🔴 사고집중</div>
-  <div>🟠 사고다발</div>
-  <div>🟡 일반</div>
-  <div>🟢 안전</div>
-
-  <div class="legend-foot">
-    2025 렌터카 사고 반영
-  </div>
+ <div class="risk-legend">
+  <span class="legend-title">사고위험도</span>
+  <span><b class="dot red"></b>집중</span>
+  <span><b class="dot orange"></b>다발</span>
+  <span><b class="dot yellow"></b>일반</span>
+  <span><b class="dot green-dot"></b>안전</span>
 </div>
   
 <div class="panel">
@@ -1214,6 +1230,7 @@ lastEnd = {
 
   document.getElementById("info").innerHTML = "경로를 불러오는 중입니다...";
     document.querySelector(".panel").classList.add("route-mode");
+    ocument.querySelector(".risk-legend").style.display = "none";
 
   const body = {
     coordinates:[
