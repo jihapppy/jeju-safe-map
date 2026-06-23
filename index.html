@@ -733,6 +733,12 @@ label{
 .analyze-main{
   font-size:18px !important;
 }
+
+  .leaflet-tile-pane{
+  filter:
+    brightness(1.05)
+    saturate(.88);
+}
 </style>
 </head>
 
@@ -831,11 +837,14 @@ if(window.Kakao){
 
 const map = L.map('map').setView([33.03,126.54],9);
 
-L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
-  attribution:'© OpenStreetMap © CARTO',
-  subdomains:'abcd',
-  maxZoom:19
-}).addTo(map);
+L.tileLayer(
+'https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png',
+{
+ attribution:'© OpenStreetMap © CARTO',
+ subdomains:'abcd',
+ maxZoom:20
+}
+).addTo(map);
   
 const regionRisk = {
   "공항권": { color:"#dc2626", level:"매우높음", count:53, epdo:261 },
