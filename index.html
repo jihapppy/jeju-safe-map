@@ -1427,26 +1427,7 @@ select{
   </div>
 </div>
   
-<div id="endResults"></div>
 
-  <div class="select-divider">
-  <span>🗻 또는 인기 관광지 선택</span>
-</div>
-
-  <select id="endSelect" onchange="clearCustomEnd()">
-    <option value="">-- 인기 관광지 선택 --</option>
-    <option value="126.9347,33.4589">성산일출봉</option>
-    <option value="126.4128,33.2498">중문관광단지</option>
-    <option value="126.2412,33.3938">협재해수욕장</option>
-    <option value="126.6695,33.5435">함덕해수욕장</option>
-    <option value="126.2895,33.3059">오설록</option>
-    <option value="126.3708,33.2896">카멜리아힐</option>
-    <option value="126.4625,33.3580">1100고지</option>
-    <option value="126.6206,33.3841">한라산 성판악 탐방안내소</option>
-    <option value="126.7146,33.4912">비자림</option>
-    <option value="126.6267,33.4386">사려니숲길</option>
-  </select>
-</div>
 <button class="analyze-btn" onclick="drawRoutes()">
   <div class="analyze-main"> 안전경로 분석하기</div>
   <div class="analyze-sub"> 사고데이터 기반 경로 비교 </div>
@@ -1862,8 +1843,8 @@ document.getElementById("info").innerHTML = "출발지가 현재 위치로 설�
 
    
   async function drawRoutes(){
-    if(!customEnd && document.getElementById("endSelect").value === ""){
-  alert("목적지를 선택해주세요.");
+    if(!customEnd){
+  alert("목적지를 검색하거나 인기 관광지를 선택해주세요.");
   return;
 }
   if(routeLayer){
