@@ -716,13 +716,13 @@ if(window.Kakao){
   Kakao.init(kakaoJsKey);
 }
 
-const map = L.map('map').setView([33.25,126.54],8.8);
+const map = L.map('map').setView([33.03,126.54],9);
 
 function resetHomeMap(){
  setTimeout(() => {
   map.invalidateSize();
-  map.setView([33.25,126.54],8.8);
- },300);
+  map.setView([33.03,126.54],9);
+}, 300);
 }
 
 resetHomeMap();
