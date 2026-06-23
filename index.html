@@ -965,30 +965,32 @@ html, body{
 }
 
 #map{
-  position:relative !important;
-  top:auto !important;
-  left:auto !important;
+  position:fixed !important;
+  top:0 !important;
+  left:0 !important;
   width:100% !important;
-  height:48vh !important;
-  min-height:320px !important;
+  height:100vh !important;
   z-index:1 !important;
 }
 
 .panel{
   position:fixed !important;
-  left:0;
-  right:0;
-  bottom:78px;
+  left:0 !important;
+  right:0 !important;
+  top:40vh !important;
+  bottom:78px !important;
 
-  max-height:65vh;
-  height:auto;
+  background:#fff !important;
+  border-radius:28px 28px 0 0 !important;
 
-  background:#fff;
-  border-radius:28px 28px 0 0;
+  z-index:9999 !important;
+  overflow-y:auto !important;
 
-  z-index:9999;
+  transition:top .35s ease !important;
+}
 
-  overflow-y:auto;
+.panel.route-mode{
+  top:60vh !important;
 }
   .panel.collapsed{
   height:120px !important;
@@ -1691,6 +1693,7 @@ lastEnd = {
   }
 
   document.getElementById("info").innerHTML = "경로를 불러오는 중입니다...";
+    document.querySelector(".panel").classList.add("route-mode");
 
   const body = {
     coordinates:[
@@ -2038,11 +2041,6 @@ document.getElementById("info").appendChild(notice);
       padding:[40,40]
     });
     
-    document.getElementById("map").scrollIntoView({
-  behavior: "smooth",
-  block: "start"
-});
-
   }catch(error){
     alert("오류가 발생했어요.\n\n"+error.message);
   }
