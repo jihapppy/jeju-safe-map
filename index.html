@@ -720,12 +720,12 @@ if(window.Kakao){
   Kakao.init(kakaoJsKey);
 }
 
-const map = L.map('map').setView([33.30,126.54],8.8);
+const map = L.map('map').setView([33.25,126.54],8.8);
 
 function resetHomeMap(){
  setTimeout(() => {
   map.invalidateSize();
-  map.setView([33.30,126.54],8.8);
+  map.setView([33.25,126.54],8.8);
  },300);
 }
 
@@ -999,12 +999,8 @@ const dangerZones = [
  const marker = L.marker([spot.lat, spot.lng], {
   icon: L.divIcon({
     className:"tour-label-marker",
-    html: (
-   false
-)
-? `<div class="tour-label">📍 ${spot.name}</div>`
-: `<div class="tour-dot"></div>`
-    iconSize:[120,28],
+   html: `<div class="tour-dot"></div>`,
+iconSize:[120,28],
     iconAnchor:[60,14]
   })
 }).addTo(map);
