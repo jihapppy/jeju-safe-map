@@ -325,9 +325,12 @@ label{
 }
 
 .tour-dot{
-  font-size:18px;
+  width:9px;
+  height:9px;
+  border-radius:50%;
+  background:#14b8a6;
+  box-shadow:0 0 0 5px rgba(20,184,166,.18);
 }
-
 .tour-label{
   background:#fff;
   padding:6px 11px;
@@ -748,97 +751,29 @@ if(window.Kakao){
 
 const map = L.map('map').setView([33.03,126.54],9);
 
-L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-  attribution:'© OpenStreetMap contributors'
+L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+  attribution:'© OpenStreetMap © CARTO',
+  subdomains:'abcd',
+  maxZoom:19
 }).addTo(map);
   
 const regionRisk = {
+  "공항권": { color:"#dc2626", level:"매우높음", count:53, epdo:261 },
+  "제주시도심권": { color:"#dc2626", level:"매우높음", count:132, epdo:581 },
+  "서귀포도심권": { color:"#dc2626", level:"매우높음", count:57, epdo:259 },
 
-  "공항권": {
-    color:"#e76f6f",
-    level:"매우높음",
-    count:53,
-    epdo:261
-  },
+  "애월권": { color:"#f97316", level:"높음", count:38, epdo:215 },
+  "서부중산간권": { color:"#f97316", level:"높음", count:35, epdo:223 },
 
-  "제주시도심권": {
-    color:"#e76f6f",
-    level:"매우높음",
-    count:132,
-    epdo:581
-  },
+  "동부중산간권": { color:"#facc15", level:"보통", count:30, epdo:162 },
+  "협재·한림권": { color:"#facc15", level:"보통", count:24, epdo:107 },
+  "함덕·조천권": { color:"#facc15", level:"보통", count:17, epdo:93 },
+  "김녕·월정권": { color:"#facc15", level:"보통", count:16, epdo:80 },
+  "성산권": { color:"#facc15", level:"보통", count:15, epdo:100 },
+  "한라산권": { color:"#facc15", level:"보통", count:16, epdo:85 },
 
-  "서귀포도심권": {
-    color:"#e76f6f",
-    level:"매우높음",
-    count:57,
-    epdo:259
-  },
-
-  "애월권": {
-    color:"#f4a261",
-    level:"높음",
-    count:38,
-    epdo:215
-  },
-
-  "서부중산간권": {
-    color:"#f4a261",
-    level:"높음",
-    count:35,
-    epdo:223
-  },
-
-  "동부중산간권": {
-    color:"#f6e58d",
-    level:"보통",
-    count:30,
-    epdo:162
-  },
-
-  "협재·한림권": {
-    color:"#f6e58d",
-    level:"보통",
-    count:24,
-    epdo:107
-  },
-
-  "함덕·조천권": {
-    color:"#f6e58d",
-    level:"보통",
-    count:17,
-    epdo:93
-  },
-
-  "김녕·월정권": {
-    color:"#f6e58d",
-    level:"보통",
-    count:16,
-    epdo:80
-  },
-
-  "성산권": {
-    color:"#f6e58d",
-    level:"보통",
-    count:15,
-    epdo:100
-  },
-
-  "한라산권": {
-    color:"#f6e58d",
-    level:"보통",
-    count:16,
-    epdo:85
-  },
-
-  "중문권": {
-    color:"#95d5b2",
-    level:"낮음",
-    count:14,
-    epdo:79
-  }
+  "중문권": { color:"#22c55e", level:"낮음", count:14, epdo:79 }
 };
-
 
 function getJejuRegion(name){
 
@@ -954,11 +889,12 @@ fetch("jeju_regions.geojson")
         const risk = regionRisk[region];
 
         return {
-          color:"#ffffff",
-          weight:1.2,
-          fillColor: risk ? risk.color : "#d1d5db",
-          fillOpacity: risk ? 0.82 : 0.18
-        };
+  color:"#ffffff",
+  weight:2.4,
+  opacity:1,
+  fillColor: risk ? risk.color : "#e5e7eb",
+  fillOpacity: risk ? 0.52 : 0.12
+};
       }
     }).addTo(map);
   });
@@ -1085,7 +1021,7 @@ const dangerZones = [
       spot.name === "중문관광단지"
     )
     ? `<div class="tour-label">📍 ${spot.name}</div>`
-    : `<div class="tour-dot">📍</div>`,
+: `<div class="tour-dot"></div>`,
     iconSize:[120,28],
     iconAnchor:[60,14]
   })
@@ -1278,11 +1214,13 @@ routeSummaries.forEach((summary,index)=>{
   const lineColor = isRecommended ? "#14b8a6" : "#ef4444";
   const labelClass = isRecommended ? "route-label-1" : "route-label-2";
 
-  L.polyline(coords,{
-    color: lineColor,
-    weight:7,
-    opacity:0.85
-  })
+ L.polyline(coords,{
+  color: lineColor,
+  weight:8,
+  opacity:0.92,
+  lineCap:"round",
+  lineJoin:"round"
+})
   .addTo(routeLayer)
   .bindPopup(
     "<b>"+(index+1)+"코스</b><br>"+
