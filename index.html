@@ -563,7 +563,7 @@ html, body{
   margin-top:12px !important;
 }
  .panel{
-  top:40vh !important;
+   top:45vh !important;
   border-radius:32px 32px 0 0 !important;
 }
 
@@ -704,12 +704,13 @@ if(window.Kakao){
   Kakao.init(kakaoJsKey);
 }
 
-const map = L.map('map').setView([33.12,126.54],9);
+const map = L.map('map').setView([33.30,126.54],8.8);
+
 function resetHomeMap(){
  setTimeout(() => {
   map.invalidateSize();
- map.setView([33.12,126.54],9);
-}, 300);
+  map.setView([33.30,126.54],8.8);
+ },300);
 }
 
 resetHomeMap();
