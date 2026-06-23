@@ -433,39 +433,22 @@ label,
   display:none;
 }
 
-  html, body{
+  /* ===== 최종 홈화면 정리본 ===== */
+
+html, body{
   background:#e8f7fb !important;
 }
 
 .leaflet-container{
-  background:#d9f2f7 !important;
+  background:#dff4f8 !important;
 }
 
 .leaflet-tile-pane{
-  filter:brightness(1.08) saturate(1.05) hue-rotate(6deg) !important;
+  filter:brightness(1.08) saturate(1.02) !important;
 }
 
-  .region-label-marker{
-  background:transparent !important;
-  border:none !important;
-}
-
-.region-label{
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  padding:5px 10px;
-  border-radius:999px;
-  background:rgba(255,255,255,.9);
-  color:#0f172a;
-  font-size:13px;
-  font-weight:900;
-  box-shadow:0 5px 12px rgba(15,23,42,.14);
-  white-space:nowrap;
-}
-
-  .panel{
-  top:42vh !important;
+.panel{
+  top:40vh !important;
   padding:10px 18px 18px !important;
   background:rgba(255,255,255,.98) !important;
   box-shadow:0 -10px 26px rgba(15,23,42,.07) !important;
@@ -489,7 +472,7 @@ label,
 }
 
 .address-row{
-  height:48px !important;
+  height:47px !important;
   margin-bottom:9px !important;
   border:1px solid #f0f2f6 !important;
   box-shadow:0 5px 14px rgba(15,23,42,.035) !important;
@@ -497,39 +480,37 @@ label,
 
 .location-btn{
   height:28px !important;
-  top:10px !important;
+  top:9px !important;
 }
 
 .popular-title{
   display:flex !important;
   align-items:center !important;
-
-  margin:12px 0 10px !important;
-
-  font-size:15px !important;
-  font-weight:800 !important;
-
-  color:#475569 !important;
-
+  margin:12px 0 9px !important;
+  font-size:16px !important;
+  font-weight:850 !important;
+  color:#334155 !important;
   letter-spacing:-0.3px !important;
 }
 
 .popular-title::before{
-  content:"📍" !important;
-  margin-right:6px !important;
-  font-size:14px !important;
+  content:"📍";
+  margin-right:6px;
+  font-size:14px;
 }
 
 .popular-grid{
-  margin-top:0 !important;
+  display:grid !important;
+  grid-template-columns:repeat(2, minmax(0,1fr)) !important;
   gap:10px !important;
 }
+
 .popular-item{
   position:relative !important;
-  height:108px !important;
+  height:98px !important;
   padding:0 !important;
   border:0 !important;
-  border-radius:18px !important;
+  border-radius:17px !important;
   overflow:hidden !important;
   background:#fff !important;
   box-shadow:0 8px 20px rgba(15,23,42,.08) !important;
@@ -556,13 +537,12 @@ label,
 .popular-item span{
   position:absolute !important;
   left:12px !important;
-  bottom:10px !important;
+  bottom:9px !important;
   z-index:2 !important;
   color:#fff !important;
-  font-size:15px !important;
+  font-size:14px !important;
   font-weight:900 !important;
-  letter-spacing:-.5px !important;
-  text-shadow:0 2px 8px rgba(0,0,0,.35) !important;
+  letter-spacing:-.4px !important;
 }
 
 .analyze-btn{
@@ -573,48 +553,6 @@ label,
 
 .analyze-main{
   font-size:18px !important;
-}
-
- .panel{
-  top:35vh !important;
-  padding:10px 18px 18px !important;
-}
-
-.popular-title{
-  display:flex !important;
-  margin:12px 0 9px !important;
-  font-size:18px !important;
-}
-
-.popular-grid{
-  display:grid !important;
-  grid-template-columns:repeat(2, minmax(0,1fr)) !important;
-  gap:10px !important;
-}
-
-.popular-item{
-  display:block !important;
-  height:92px !important;
-  border-radius:17px !important;
-  overflow:hidden !important;
-}
-
-.popular-item img{
-  display:block !important;
-  width:100% !important;
-  height:100% !important;
-  object-fit:cover !important;
-}
-
-.popular-item span{
-  display:block !important;
-  position:absolute !important;
-  left:12px !important;
-  bottom:9px !important;
-  font-size:14px !important;
-  color:#fff !important;
-  font-weight:900 !important;
-}
 </style>
 </head>
 
@@ -659,8 +597,11 @@ label,
     <button class="mini-btn" onclick="searchDestination()">검색</button>
   </div>
 
-  <div id="endResults"></div>
-    <div class="popular-grid">
+ <div id="endResults"></div>
+
+<div class="popular-title">인기 관광지 선택</div>
+
+<div class="popular-grid">
   <button type="button" class="popular-item" onclick="setPopularEnd('성산일출봉','126.9347,33.4589')">
     <img src="seongsan.png">
     <span>성산일출봉</span>
