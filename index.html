@@ -558,6 +558,92 @@ label{
     font-size:20px;
   }
 }
+
+  /* 첫 화면 한 화면 압축 */
+.panel{
+  top:38vh !important;
+  padding:10px 18px 18px !important;
+}
+
+.drag-handle{
+  margin-bottom:12px !important;
+}
+
+.header-box{
+  margin-bottom:14px !important;
+}
+
+.title{
+  font-size:22px !important;
+}
+
+.subtitle{
+  font-size:13px !important;
+}
+
+.header-hodoongi{
+  width:58px !important;
+}
+
+/* 출발지/목적지 동그라미 제거 */
+.address-row{
+  height:50px !important;
+  padding:0 8px 0 18px !important;
+  margin-bottom:10px !important;
+}
+
+.address-row::before{
+  display:none !important;
+  content:none !important;
+}
+
+.address-row input{
+  font-size:14px !important;
+}
+
+.mini-btn{
+  width:48px !important;
+  height:40px !important;
+}
+
+.location-btn{
+  right:64px !important;
+  top:8px !important;
+  height:32px !important;
+  font-size:12px !important;
+}
+
+/* 관광지 카드 압축 */
+.popular-title{
+  margin:16px 0 10px !important;
+  font-size:22px !important;
+}
+
+.popular-grid{
+  gap:10px !important;
+}
+
+.popular-item{
+  height:100px !important;
+  border-radius:18px !important;
+}
+
+.popular-item span{
+  font-size:15px !important;
+  bottom:10px !important;
+}
+
+/* 버튼 압축 */
+.analyze-btn{
+  height:56px !important;
+  margin-top:16px !important;
+  border-radius:20px !important;
+}
+
+.analyze-main{
+  font-size:20px !important;
+}
+  
 </style>
 </head>
 
@@ -632,7 +718,7 @@ label{
   
 
 <button class="analyze-btn" onclick="drawRoutes()">
-  <div class="analyze-main"> 안전경로 분석하기</div>
+  <div class="analyze-main"> 가장 최적의 안전경로 분석하기</div>
   <div class="analyze-sub"> 사고데이터 기반 경로 비교 </div>
 </button>
   <div id="info"></div>
