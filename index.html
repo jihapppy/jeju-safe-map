@@ -448,7 +448,7 @@ html, body{
 }
 
 .panel{
-  top:40vh !important;
+  top:43vh !important;
   padding:10px 18px 18px !important;
   background:rgba(255,255,255,.98) !important;
   box-shadow:0 -10px 26px rgba(15,23,42,.07) !important;
@@ -704,11 +704,11 @@ if(window.Kakao){
   Kakao.init(kakaoJsKey);
 }
 
-const map = L.map('map').setView([33.23,126.54],9);
+const map = L.map('map').setView([33.12,126.54],9);
 function resetHomeMap(){
  setTimeout(() => {
   map.invalidateSize();
- map.setView([33.23,126.54],9);
+ map.setView([33.12,126.54],9);
 }, 300);
 }
 
