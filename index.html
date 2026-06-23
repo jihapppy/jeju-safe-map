@@ -2125,11 +2125,12 @@ lastEnd = {
       }
     );
 
-    if(!response.ok){
-      const errorText = await response.text();
-      alert("경로 불러오기 실패!\n\n"+errorText);
-      return;
-    }
+   if(!response.ok){
+  document.getElementById("info").innerHTML =
+    "경로 분석 서버가 일시적으로 응답하지 않습니다. 잠시 후 다시 시도해주세요.";
+  alert("경로 분석 서버 오류입니다.\n잠시 후 다시 시도해주세요.");
+  return;
+}
 
     const data = await response.json();
 
@@ -2448,9 +2449,12 @@ document.getElementById("info").appendChild(notice);
   });
 }, 350);
     
-  }catch(error){
-    alert("오류가 발생했어요.\n\n"+error.message);
-  }
+ }catch(error){
+  document.getElementById("info").innerHTML =
+    "경로 분석 서버 연결이 일시적으로 불안정합니다. 잠시 후 다시 시도해주세요.";
+
+  alert("경로 분석 서버 연결이 불안정해요.\n잠시 후 다시 시도해주세요.");
+}
 }
 
 function analyzeRouteRisk(coords){
