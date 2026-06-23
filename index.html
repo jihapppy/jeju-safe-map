@@ -1528,6 +1528,42 @@ select{
 .small{
   display:none !important;
 }
+
+  .popular-grid{
+  display:grid !important;
+  grid-template-columns:repeat(4,1fr) !important;
+  gap:9px !important;
+}
+
+.popular-item{
+  padding:0 !important;
+  border:0 !important;
+  border-radius:16px !important;
+  overflow:hidden !important;
+  background:#fff !important;
+  box-shadow:0 6px 16px rgba(15,23,42,.10) !important;
+}
+
+.popular-item img{
+  width:100% !important;
+  height:62px !important;
+  display:block !important;
+  object-fit:cover !important;
+}
+
+.popular-item span{
+  display:flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  min-height:28px !important;
+  padding:5px 2px !important;
+  font-size:10.5px !important;
+  font-weight:800 !important;
+  color:#111827 !important;
+  background:#fff !important;
+  text-align:center !important;
+  line-height:1.15 !important;
+}
 </style>
 </head>
 
@@ -1576,29 +1612,27 @@ select{
 
   <div class="popular-title"> 인기 관광지 선택</div>
 
-  <div class="popular-grid">
-    <button type="button" class="popular-item" onclick="setPopularEnd('성산일출봉','126.9347,33.4589')">
-     <div class="popular-photo">🌅</div>
-      <span>성산일출봉</span>
-    </button>
+ <div class="popular-grid">
+  <button type="button" class="popular-item" onclick="setPopularEnd('성산일출봉','126.9347,33.4589')">
+    <img src="seongsan.png">
+    <span>성산일출봉</span>
+  </button>
 
+  <button type="button" class="popular-item" onclick="setPopularEnd('협재해수욕장','126.2412,33.3938')">
+    <img src="hyeopjae.png">
+    <span>협재해수욕장</span>
+  </button>
 
-    <button type="button" class="popular-item" onclick="setPopularEnd('협재해수욕장','126.2412,33.3938')">
-      <div class="popular-photo">🏖️</div>
-      <span>협재해수욕장</span>
-    </button>
-    
-      <button type="button" class="popular-item"
-onclick="setPopularEnd('중문관광단지','126.4128,33.2498')">
-  <div class="popular-photo">🏝️</div>
-  <span>중문관광단지</span>
-</button>
+  <button type="button" class="popular-item" onclick="setPopularEnd('중문관광단지','126.4128,33.2498')">
+    <img src="jungmun.png">
+    <span>중문관광단지</span>
+  </button>
 
-    <button type="button" class="popular-item"
-onclick="setPopularEnd('1100고지','126.4625,33.3580')">
-  <div class="popular-photo">⛰️</div>
-  <span>1100고지</span>
-</button>
+  <button type="button" class="popular-item" onclick="setPopularEnd('1100고지','126.4625,33.3580')">
+    <img src="highland1100.png">
+    <span>1100고지</span>
+  </button>
+</div>
 
   </div>
 </div>
