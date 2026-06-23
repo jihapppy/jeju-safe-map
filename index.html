@@ -207,7 +207,7 @@ label,
   margin-top:13px;
   border:0;
   border-radius:18px;
-  background:linear-gradient(90deg,#54d7ce,#6baef8);#18
+ background:linear-gradient(90deg,#54d7ce,#6baef8);
   color:#fff;
   font-weight:800;
   box-shadow:0 10px 22px rgba(37,132,245,.18);
@@ -554,6 +554,43 @@ html, body{
 .analyze-main{
   font-size:18px !important;
 }
+
+  .popular-title{
+  display:none !important;
+}
+
+.popular-grid{
+  margin-top:12px !important;
+}
+ .panel{
+  top:40vh !important;
+  border-radius:32px 32px 0 0 !important;
+}
+
+.title{
+  font-size:22px !important;
+  font-weight:900 !important;
+}
+
+.header-hodoongi{
+  width:46px !important;
+}
+
+.popular-item{
+  height:96px !important;
+  box-shadow:0 8px 18px rgba(15,23,42,.07) !important;
+}
+
+.analyze-btn{
+  height:52px !important;
+  background:linear-gradient(90deg,#54d7ce,#6baef8) !important;
+  box-shadow:0 8px 18px rgba(37,132,245,.12) !important;
+}
+
+.analyze-main{
+  font-size:18px !important;
+  font-weight:900 !important;
+} 
 </style>
 </head>
 
@@ -625,7 +662,7 @@ html, body{
 </div>
 </div>
 <button class="analyze-btn" onclick="drawRoutes()">
-  <div class="analyze-main"> 가장 최적의 안전경로 분석하기</div>
+  <div class="analyze-main"> 가장 안전한 길 찾</div>
   <div class="analyze-sub"> 사고데이터 기반 경로 비교 </div>
 </button>
   <div id="info"></div>
@@ -647,11 +684,11 @@ if(window.Kakao){
   Kakao.init(kakaoJsKey);
 }
 
-const map = L.map('map').setView([33.12,126.54],9);
+const map = L.map('map').setView([33.23,126.54],9);
 function resetHomeMap(){
  setTimeout(() => {
   map.invalidateSize();
-  map.setView([33.12,126.54],9);
+ map.setView([33.23,126.54],9);
 }, 300);
 }
 
