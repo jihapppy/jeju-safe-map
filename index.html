@@ -989,11 +989,6 @@ html, body{
   transition:top .35s ease !important;
 }
 
-
-  .panel.collapsed{
-  height:120px !important;
-}
-
 .drag-handle{
   width:52px !important;
   height:6px !important;
@@ -1181,6 +1176,28 @@ select{
 .panel.route-mode #info{
   margin-top:8px !important;
 }
+  /* 기본: 열려 있는 상태 */
+.panel{
+  top:43vh !important;
+}
+
+/* 경로 분석 후 */
+.panel.route-mode{
+  top:52vh !important;
+}
+
+/* 접힌 상태: 회색 바만 보이게 */
+.panel.collapsed{
+  top:calc(100vh - 120px) !important;
+  bottom:78px !important;
+  overflow:hidden !important;
+  padding-top:14px !important;
+}
+
+/* 접혔을 때 회색 바 제외 전부 숨김 */
+.panel.collapsed > :not(.drag-handle){
+  display:none !important;
+}
 </style>
 </head>
 
@@ -1276,7 +1293,7 @@ if(window.Kakao){
   Kakao.init(kakaoJsKey);
 }
 
-const map = L.map('map').setView([33.13,126.54],9);
+const map = L.map('map').setView([33.7,126.54],9);
 
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
   attribution:'© OpenStreetMap contributors'
@@ -2058,8 +2075,8 @@ document.getElementById("info").appendChild(notice);
       .bindPopup("목적지: "+endName);
 
    map.fitBounds(L.latLngBounds(allCoords), {
-  paddingTopLeft:[30,30],
-  paddingBottomRight:[30,420]
+  paddingTopLeft:[30,120],
+  paddingBottomRight:[30,160]
 });
     
   }catch(error){
