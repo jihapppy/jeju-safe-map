@@ -906,12 +906,12 @@ if(window.Kakao){
   Kakao.init(kakaoJsKey);
 }
 
-const map = L.map('map').setView([33.16,126.54],9.4);
+const map = L.map('map').setView([33.20,126.54],9.4);
 
 function resetHomeMap(){
  setTimeout(() => {
   map.invalidateSize();
-  map.setView([33.16,126.54],9.4);
+  map.setView([33.20,126.54],9.4);
  },300);
 }
 
