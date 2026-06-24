@@ -1105,18 +1105,208 @@ body.route-active .drag-handle{
 body.route-active .risk-legend{
   display:none !important;
 }
+
+  /* ===== 홈화면 시인성 개선 최종 덮어쓰기 ===== */
+
+html, body{
+  background:#ffffff !important;
+}
+
+.app-topbar{
+  height:64px !important;
+  padding:0 18px !important;
+  border-bottom:none !important;
+}
+
+.app-topbar .menu,
+.app-topbar .bell{
+  width:34px !important;
+  height:34px !important;
+  display:flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  font-size:26px !important;
+  font-weight:500 !important;
+  color:#0f172a !important;
+}
+
+.app-topbar .brand{
+  gap:8px !important;
+  font-size:17px !important;
+  font-weight:900 !important;
+  color:#0f9f91 !important;
+}
+
+.app-topbar .brand img{
+  width:18px !important;
+  height:18px !important;
+}
+
+.panel{
+  top:64px !important;
+  padding:10px 14px 24px !important;
+  background:#fff !important;
+}
+
+.hero-banner{
+  height:220px !important;
+  border-radius:12px 12px 28px 28px !important;
+  box-shadow:none !important;
+  background:
+    linear-gradient(
+      180deg,
+      rgba(15,23,42,.05) 0%,
+      rgba(15,23,42,.28) 45%,
+      rgba(15,23,42,.72) 100%
+    ),
+    url("성산.png") center 42%/cover no-repeat !important;
+}
+
+.hero-text{
+  left:20px !important;
+  right:20px !important;
+  bottom:24px !important;
+}
+
+.hero-title{
+  font-size:24px !important;
+  font-weight:900 !important;
+  line-height:1.22 !important;
+  letter-spacing:-1px !important;
+  color:#fff !important;
+  text-shadow:0 2px 8px rgba(0,0,0,.28) !important;
+}
+
+.hero-sub{
+  margin-top:10px !important;
+  font-size:15px !important;
+  font-weight:750 !important;
+  line-height:1.55 !important;
+  color:rgba(255,255,255,.96) !important;
+  text-shadow:0 2px 8px rgba(0,0,0,.25) !important;
+}
+
+.route-input-card{
+  margin:-24px 0 0 !important;
+  padding:16px 14px 18px !important;
+  border-radius:24px !important;
+  box-shadow:0 14px 34px rgba(15,23,42,.10) !important;
+}
+
+.address-row{
+  height:50px !important;
+  margin-bottom:12px !important;
+  padding:0 10px 0 18px !important;
+  border:1px solid #edf1f5 !important;
+  border-radius:18px !important;
+  background:#fff !important;
+}
+
+.address-row input{
+  font-size:14px !important;
+  font-weight:700 !important;
+  color:#0f172a !important;
+}
+
+.address-row input::placeholder{
+  color:#a7afbd !important;
+  font-weight:650 !important;
+}
+
+.mini-btn{
+  width:40px !important;
+  height:40px !important;
+  border-radius:16px !important;
+  background:#f7f9fb !important;
+}
+
+.mini-btn::before{
+  font-size:20px !important;
+}
+
+.location-btn{
+  top:18px !important;
+  right:64px !important;
+  height:28px !important;
+  padding:0 10px !important;
+  background:#f1f5f9 !important;
+  color:#64748b !important;
+  font-size:11px !important;
+  font-weight:850 !important;
+}
+
+.analyze-btn{
+  height:56px !important;
+  margin:14px 14px 0 !important;
+  width:calc(100% - 28px) !important;
+  border-radius:16px !important;
+  background:#13a89a !important;
+  box-shadow:0 12px 24px rgba(19,168,154,.22) !important;
+}
+
+.analyze-main{
+  font-size:17px !important;
+  font-weight:900 !important;
+  letter-spacing:-.4px !important;
+}
+
+.small{
+  margin:20px 14px 0 !important;
+  padding:18px 18px 18px !important;
+  border-radius:20px !important;
+  background:#f4f6ff !important;
+  color:#475569 !important;
+  font-size:13px !important;
+  line-height:1.55 !important;
+}
+
+.small::before{
+  content:"🛡️  EPDO 기반 위험도 분석" !important;
+  font-size:16px !important;
+  font-weight:900 !important;
+  color:#0f172a !important;
+  margin-bottom:8px !important;
+}
+
+/* 홈에서는 지도/범례/관광지 숨김 유지 */
+body:not(.route-active) #map,
+body:not(.route-active) .risk-legend,
+body:not(.route-active) .popular-title,
+body:not(.route-active) .popular-grid{
+  display:none !important;
+}
+
+/* 경로 분석 후는 기존 지도형 화면 */
+body.route-active #map{
+  display:block !important;
+}
+
+body.route-active .app-topbar,
+body.route-active .hero-banner,
+body.route-active .route-input-card,
+body.route-active .analyze-btn,
+body.route-active .small{
+  display:none !important;
+}
+
+body.route-active .panel{
+  top:39vh !important;
+  border-radius:30px 30px 0 0 !important;
+  padding:12px 18px 18px !important;
+  box-shadow:0 -10px 28px rgba(15,23,42,.08) !important;
+}
 </style>
 </head>
 
 <body>
 <div id="map"></div>
   <div class="app-topbar">
-  <span class="menu">☰</span>
+<span class="menu">‹</span>
   <div class="brand">
     <img src="pin.png">
     <b>Jeju Safe Map</b>
   </div>
-  <span class="bell">♧</span>
+  <span class="bell">☰</span>
 </div>
 
  <div class="risk-legend">
