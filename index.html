@@ -457,13 +457,13 @@ label,
   /* ===== 최종 홈화면 정리본 ===== */
 
 html, body{
-  background:#eaf8ff !important;
+ html, body{
+  background:#eefaff !important;
 }
 
 .leaflet-container{
-  background:#d8f2ff !important;
+  background:#dff5ff !important;
 }
-
 .leaflet-tile-pane{
   filter:
   brightness(1.12)
@@ -672,6 +672,8 @@ html, body{
   position:fixed;
   left:50%;
   top:43.5vh;
+    transform:translateX(-50%);
+
 
   z-index:9998;
 
@@ -758,7 +760,7 @@ html, body{
 
 .popular-item{
   width:100% !important;
-  height:148px !important;
+  height:144px !important;
   aspect-ratio:auto !important;
   padding:0 !important;
   border:0 !important;
@@ -770,7 +772,7 @@ html, body{
 
 .popular-item img{
   width:100% !important;
-  height:104px !important;
+  height:100px !important;
   object-fit:cover !important;
   display:block !important;
 }
@@ -780,7 +782,7 @@ html, body{
   display:flex !important;
   align-items:center !important;
 
-  height:48px !important;
+  height:44px !important;
   padding:0 14px !important;
 
   background:#fff !important;
@@ -905,12 +907,12 @@ if(window.Kakao){
   Kakao.init(kakaoJsKey);
 }
 
-const map = L.map('map').setView([33.24,126.54],9.4);
+const map = L.map('map').setView([33.08,126.54],9.4);
 
 function resetHomeMap(){
  setTimeout(() => {
   map.invalidateSize();
-  map.setView([33.24,126.54],9.4);
+ map.setView([33.08,126.54],9.4);
  },300);
 }
 
