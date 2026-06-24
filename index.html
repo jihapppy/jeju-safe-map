@@ -916,7 +916,7 @@ body.route-active .bottom-nav{
 </div>
 
   <div class="bottom-nav">
-  <button class="bottom-item active">
+  <button class="bottom-item active" onclick="goHome()">
     <span>🏠</span>
     <b>홈</b>
   </button>
@@ -1986,6 +1986,40 @@ document.getElementById("info").innerHTML =
   document.getElementById("endResults").style.display = "none";
   document.getElementById("info").innerHTML =
     "목적지가 '" + name + "'(으)로 설정되었습니다.";
+}
+
+  function goHome(){
+
+  document.body.classList.remove("route-active");
+
+  document.querySelector(".panel")
+    .classList.remove("route-mode");
+
+  document.getElementById("info").innerHTML = "";
+
+  document.getElementById("startInput").value = "";
+  document.getElementById("endInput").value = "";
+
+  document.getElementById("startResults").innerHTML = "";
+  document.getElementById("endResults").innerHTML = "";
+
+  customStart = null;
+  customEnd = null;
+  customStartName = null;
+  customEndName = null;
+
+  if(routeLayer){
+    map.removeLayer(routeLayer);
+    routeLayer = null;
+  }
+
+  resetHomeMap();
+
+  document.getElementById("startInput").placeholder =
+  "제주국제공항";
+
+  document.getElementById("endInput").placeholder =
+  "성산일출봉";
 }
 </script>
 
