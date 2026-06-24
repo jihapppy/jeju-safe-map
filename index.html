@@ -990,10 +990,10 @@ body.risk-map-mode .risk-legend{
     <b>홈</b>
   </button>
 
-  <button class="bottom-item">
-    <span>🔗</span>
-    <b>위험지도</b>
-  </button>
+<button class="bottom-item" onclick="showRiskMap()">
+  <span>🚦</span>
+  <b>위험지도</b>
+</button>
 
   <button class="bottom-item">
     <span>🗺️</span>
@@ -2174,11 +2174,18 @@ document.getElementById("info").innerHTML =
 
   resetHomeMap();
 
-  document.getElementById("startInput").placeholder =
-  "제주국제공항";
+document.getElementById("startInput").placeholder =
+"제주국제공항";
 
-  document.getElementById("endInput").placeholder =
-  "성산일출봉";
+document.getElementById("endInput").placeholder =
+"성산일출봉";
+
+/* 홈 메뉴 활성화 */
+document.querySelectorAll(".bottom-item").forEach(btn=>{
+  btn.classList.remove("active");
+});
+document.querySelectorAll(".bottom-item")[0].classList.add("active");
+
 }
   function showRiskMap(){
 
