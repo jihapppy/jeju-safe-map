@@ -1039,7 +1039,7 @@ body.risk-map-mode .risk-map-page{
 
   /* ===== 결과화면 4번 시안형 최종 ===== */
 body.route-active .panel{
-  top:43vh !important;
+  top:48vh !important;
   border-radius:28px 28px 0 0 !important;
   padding:16px 16px 28px !important;
   background:#fff !important;
@@ -2008,6 +2008,46 @@ resultWrap.innerHTML = `
 document.getElementById("info").appendChild(resultWrap);
 
 const compactNavi = resultWrap.querySelector(".compact-navi");
+
+const safeBtn = document.createElement("button");
+safeBtn.className = "navi-btn";
+safeBtn.innerHTML = `
+  <span class="nav-icon naver">N</span>
+  <span class="nav-text">
+    <b>네이버지도</b>
+    <small>길안내</small>
+  </span>
+`;
+safeBtn.onclick = function(){
+  openNaverMap(recommendedIndex);
+};
+
+const tmapBtn = document.createElement("button");
+tmapBtn.className = "navi-btn";
+tmapBtn.innerHTML = `
+  <span class="nav-icon tmap">T</span>
+  <span class="nav-text">
+    <b>TMAP</b>
+    <small>길안내</small>
+  </span>
+`;
+tmapBtn.onclick = function(){
+  openTmap();
+};
+
+const kakaoBtn = document.createElement("button");
+kakaoBtn.className = "navi-btn";
+kakaoBtn.innerHTML = `
+  <span class="nav-icon kakao">K</span>
+  <span class="nav-text">
+    <b>카카오맵</b>
+    <small>길안내</small>
+  </span>
+`;
+kakaoBtn.onclick = function(){
+  openKakaoNavi();
+};
+
 compactNavi.appendChild(safeBtn);
 compactNavi.appendChild(tmapBtn);
 compactNavi.appendChild(kakaoBtn);
