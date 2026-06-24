@@ -825,10 +825,6 @@ body.route-active .bottom-nav{
 
   /* ===== 위험지도 모드 ===== */
 
-body.risk-map-mode #map{
-  display:block !important;
-}
-
 body.risk-map-mode .app-topbar,
 body.risk-map-mode .hero-banner,
 body.risk-map-mode .route-input-card,
@@ -836,31 +832,6 @@ body.risk-map-mode .analyze-btn,
 body.risk-map-mode .small,
 body.risk-map-mode .panel{
   display:none !important;
-}
-
-body.risk-map-mode .risk-legend{
-  position:fixed !important;
-  left:50% !important;
-  bottom:82px !important;
-  top:auto !important;
-  transform:translateX(-50%) !important;
-  z-index:10002 !important;
-
-  display:flex !important;
-  align-items:center !important;
-  justify-content:center !important;
-  gap:9px !important;
-
-  height:34px !important;
-  padding:0 14px !important;
-  border-radius:999px !important;
-  background:rgba(255,255,255,.92) !important;
-  backdrop-filter:blur(14px) !important;
-  box-shadow:0 10px 26px rgba(15,23,42,.14) !important;
-
-  font-size:10.5px !important;
-  font-weight:900 !important;
-  color:#334155 !important;
 }
 
 .region-popup{
@@ -890,6 +861,75 @@ body.risk-map-mode .risk-legend{
   font-size:13px;
   line-height:1.55;
   color:#334155;
+}
+  /* 위험지도 페이지 */
+
+.risk-map-page{
+  display:none;
+  position:fixed;
+  inset:64px 0 68px 0;
+  background:#fff;
+  z-index:10000;
+}
+
+body.risk-map-mode .risk-map-page{
+  display:block;
+}
+
+.risk-map-image{
+  width:100%;
+  max-width:420px;
+  display:block;
+  margin:20px auto;
+}
+
+.zone-btn{
+  position:absolute;
+  border:0;
+  background:transparent;
+}
+
+/* 임시 위치 */
+
+.airport{
+  left:42%;
+  top:63%;
+  width:60px;
+  height:40px;
+}
+
+.city{
+  left:43%;
+  top:38%;
+  width:80px;
+  height:45px;
+}
+
+.east{
+  left:66%;
+  top:42%;
+  width:80px;
+  height:60px;
+}
+
+.west{
+  left:30%;
+  top:48%;
+  width:80px;
+  height:60px;
+}
+
+#zoneInfoCard{
+  position:absolute;
+  left:14px;
+  right:14px;
+  bottom:12px;
+
+  background:#fff;
+  border-radius:22px;
+  padding:18px;
+
+  box-shadow:0 12px 30px rgba(0,0,0,.12);
 }
 </style>
 </head>
@@ -984,6 +1024,25 @@ body.risk-map-mode .risk-legend{
   </div>
 </div>
 
+  <div id="riskMapPage" class="risk-map-page">
+
+  <img src="risk-map.png" class="risk-map-image">
+
+  <button class="zone-btn airport"
+    onclick="showZoneCard('공항권')"></button>
+
+  <button class="zone-btn city"
+    onclick="showZoneCard('제주시도심권')"></button>
+
+  <button class="zone-btn east"
+    onclick="showZoneCard('동부중산간권')"></button>
+
+  <button class="zone-btn west"
+    onclick="showZoneCard('서부중산간권')"></button>
+
+  <div id="zoneInfoCard"></div>
+
+</div>
   <div class="bottom-nav">
   <button class="bottom-item active" onclick="goHome()">
     <span>🏠</span>
@@ -2198,6 +2257,10 @@ document.querySelectorAll(".bottom-item")[0].classList.add("active");
 
   document.querySelectorAll(".bottom-item")[1]
     .classList.add("active");
+}
+
+  document.querySelectorAll(".bottom-item")[1]
+    .classList.add("active");
 
   document.getElementById("info").innerHTML = "";
 
@@ -2210,6 +2273,30 @@ document.querySelectorAll(".bottom-item")[0].classList.add("active");
     map.invalidateSize();
     map.setView([33.36,126.54],9.3);
   },250);
+}
+  function showZoneCard(region){
+
+  const guide = regionGuide[region];
+
+  document.getElementById("zoneInfoCard").innerHTML = `
+    <div style="font-size:20px;font-weight:900;">
+      🚦 ${guide.title}
+    </div>
+
+    <div style="
+      margin-top:8px;
+      color:#0f766e;
+      font-weight:900;">
+      ${guide.level}
+    </div>
+
+    <div style="
+      margin-top:10px;
+      line-height:1.6;
+      color:#475569;">
+      ${guide.caution}
+    </div>
+  `;
 }
 </script>
 
