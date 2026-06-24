@@ -1295,6 +1295,79 @@ body.route-active .panel{
   padding:12px 18px 18px !important;
   box-shadow:0 -10px 28px rgba(15,23,42,.08) !important;
 }
+
+  /* ===== 출발지/목적지 입력칸 앱형 정리 ===== */
+
+.field-label{
+  display:block !important;
+  margin:0 0 7px 4px !important;
+  font-size:12px !important;
+  font-weight:900 !important;
+  color:#64748b !important;
+  letter-spacing:-.2px !important;
+}
+
+.address-row{
+  height:52px !important;
+  margin-bottom:14px !important;
+  padding:0 8px 0 14px !important;
+  border-radius:14px !important;
+  border:1px solid #e9eef5 !important;
+  background:#fff !important;
+  box-shadow:0 6px 16px rgba(15,23,42,.04) !important;
+  gap:8px !important;
+}
+
+.field-icon{
+  width:24px !important;
+  min-width:24px !important;
+  height:24px !important;
+  display:flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  font-size:15px !important;
+}
+
+.address-row input{
+  font-size:14px !important;
+  font-weight:800 !important;
+  color:#0f172a !important;
+}
+
+.address-row input::placeholder{
+  color:#94a3b8 !important;
+  font-weight:700 !important;
+}
+
+.clear-btn{
+  width:26px !important;
+  height:26px !important;
+  border:0 !important;
+  border-radius:50% !important;
+  background:#f1f5f9 !important;
+  color:#94a3b8 !important;
+  font-size:18px !important;
+  font-weight:700 !important;
+  line-height:1 !important;
+}
+
+.mini-btn{
+  width:34px !important;
+  height:34px !important;
+  border-radius:50% !important;
+  background:#f8fafc !important;
+}
+
+.mini-btn::before{
+  font-size:18px !important;
+}
+
+.location-btn{
+  top:38px !important;
+  right:62px !important;
+  height:26px !important;
+  font-size:10.5px !important;
+}
 </style>
 </head>
 
@@ -1330,23 +1403,25 @@ body.route-active .panel{
 
   <div class="input-card route-input-card">
 
-  <label><span class="dot-start"></span> 출발지</label>
-
-  <div class="address-row">
-    <input id="startInput" type="text" placeholder="예: 제주공항, 중문관광단지">
-    <button class="mini-btn" onclick="searchStartPlace()">검색</button>
-  </div>
+  <div class="field-label">출발지</div>
+<div class="address-row start-row">
+  <span class="field-icon">✈️</span>
+  <input id="startInput" type="text" placeholder="제주국제공항">
+  <button class="clear-btn" type="button" onclick="document.getElementById('startInput').value=''">×</button>
+  <button class="mini-btn" onclick="searchStartPlace()">검색</button>
+</div>
 
   <div id="startResults"></div>
 
   <button class="location-btn" onclick="useCurrentLocation()">현재 위치 사용</button>
 
-  <label class="end-label">목적지</label>
-
-  <div class="address-row">
-    <input id="endInput" type="text" placeholder="예: 성산일출봉, 협재해수욕장">
-    <button class="mini-btn" onclick="searchDestination()">검색</button>
-  </div>
+  <div class="field-label">목적지</div>
+<div class="address-row end-row">
+  <span class="field-icon">📍</span>
+  <input id="endInput" type="text" placeholder="성산일출봉">
+  <button class="clear-btn" type="button" onclick="document.getElementById('endInput').value=''">×</button>
+  <button class="mini-btn" onclick="searchDestination()">검색</button>
+</div>
 
  <div id="endResults"></div>
 
