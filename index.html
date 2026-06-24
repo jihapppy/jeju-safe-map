@@ -457,11 +457,11 @@ label,
   /* ===== 최종 홈화면 정리본 ===== */
 
 html, body{
-  background:#e8f7fb !important;
+  background:#eaf8ff !important;
 }
 
 .leaflet-container{
-  background:#dff4f8 !important;
+  background:#d8f2ff !important;
 }
 
 .leaflet-tile-pane{
@@ -671,8 +671,7 @@ html, body{
 .risk-legend{
   position:fixed;
   left:50%;
-  top:61vh;
-  transform:translateX(-50%);
+  top:43.5vh;
 
   z-index:9998;
 
@@ -759,7 +758,7 @@ html, body{
 
 .popular-item{
   width:100% !important;
-  height:164px !important;
+  height:148px !important;
   aspect-ratio:auto !important;
   padding:0 !important;
   border:0 !important;
@@ -771,7 +770,7 @@ html, body{
 
 .popular-item img{
   width:100% !important;
-  height:116px !important;
+  height:104px !important;
   object-fit:cover !important;
   display:block !important;
 }
@@ -906,12 +905,12 @@ if(window.Kakao){
   Kakao.init(kakaoJsKey);
 }
 
-const map = L.map('map').setView([33.20,126.54],9.4);
+const map = L.map('map').setView([33.24,126.54],9.4);
 
 function resetHomeMap(){
  setTimeout(() => {
   map.invalidateSize();
-  map.setView([33.20,126.54],9.4);
+  map.setView([33.24,126.54],9.4);
  },300);
 }
 
