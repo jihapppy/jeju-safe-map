@@ -2020,7 +2020,7 @@ routeSummaries.forEach((summary,index)=>{
   allCoords = allCoords.concat(coords);
 
   const isRecommended = index === recommendedIndex;
-  const lineColor = isRecommended ? "#14b8a6" : "#ef4444";
+  const lineColor = isRecommended ? "#14b8a6" : "#8b8f97";
   const labelClass = isRecommended ? "route-label-1" : "route-label-2";
 
  L.polyline(coords,{
@@ -2065,23 +2065,25 @@ const mainTip = matchedTipKey
   ? destinationTips[matchedTipKey][0]
   : "목적지를 놓쳤다면 급차로 변경하지 말고 다음 길로 이동하세요.";
 
-    const otherRoute =
-  routeSummaries[recommendedIndex === 0 ? 1 : 0];
+const altIndex = recommendedIndex === 0 ? 1 : 0;
+const alt = routeSummaries[altIndex] || routeSummaries[recommendedIndex];
 
 const riskDiff =
-  Math.round(
-    (1 - recommend.risk.score / otherRoute.risk.score) * 100
-  );
+  alt.risk.score > 0
+    ? Math.max(0, Math.round((1 - recommend.risk.score / alt.risk.score) * 100))
+    : 0;
 
-const distanceDiff =
-  Math.abs(
-    Number(recommend.distanceKm) -
-    Number(otherRoute.distanceKm)
-  ).toFixed(1);
-    
-const altIndex = recommendedIndex === 0 ? 1 : 0;
-const alt = routeSummaries[altIndex];
+const distanceGap =
+  Number(recommend.distanceKm) - Number(alt.distanceKm);
 
+const distanceDiff = Math.abs(distanceGap).toFixed(1);
+
+const distanceText =
+  distanceGap < 0
+    ? distanceDiff + "km 단축"
+    : distanceGap > 0
+      ? distanceDiff + "km 증가"
+      : "동일";
 const resultWrap = document.createElement("div");
 
 const recommendCourseName = (recommendedIndex + 1) + "코스";
@@ -2111,7 +2113,7 @@ resultWrap.innerHTML = `
         <div class="result-metric-icon">🛣️</div>
         <span>거리</span>
         <b>${recommend.distanceKm}km</b>
-        <div class="result-chip">${distanceDiff}km 단축</div>
+        <div class="result-chip">${distanceText}</div>
       </div>
 
       <div class="result-metric">
