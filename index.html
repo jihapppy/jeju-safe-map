@@ -57,10 +57,6 @@ html, body{
   z-index:400;
 }
 
-  pointer-events:none;
-  z-index:400;
-}
-
 .leaflet-tile-pane{
   filter:
     brightness(1.12)
@@ -731,7 +727,7 @@ html, body{
 .risk-legend{
   position:fixed;
   left:50%;
-  top:39vh;
+  top:40.5vh;
   transform:translateX(-50%);
 
   z-index:9998;
@@ -884,10 +880,11 @@ if(window.Kakao){
 }
 
 const map = L.map('map').setView([33.35,126.54],10);
+
 function resetHomeMap(){
  setTimeout(() => {
   map.invalidateSize();
-  map.setView([33.03,126.54],9);
+  map.setView([33.35,126.54],10);
 }, 300);
 }
 
@@ -1151,19 +1148,21 @@ const dangerZones = [
   { name:"중문관광단지", lat:33.2498, lng:126.4128, label:true },
 
   { name:"함덕해수욕장", lat:33.5435, lng:126.6695, label:false },
-  { name:"협재해수욕장", lat:33.3938, lng:126.2412, label:false },
-  { name:"1100고지", lat:33.3580, lng:126.4625, label:false },
+  { name:"협재해수욕장", lat:33.3938, lng:126.2412, label:true },
+  { name:"1100고지", lat:33.3580, lng:126.4625, label:true },
   { name:"오설록", lat:33.3059, lng:126.2895, label:false }
 ];
   
   touristSpots.forEach(spot=>{
 
- const marker = L.marker([spot.lat, spot.lng], {
+const marker = L.marker([spot.lat, spot.lng], {
   icon: L.divIcon({
     className:"tour-label-marker",
-   html: `<div class="tour-dot"></div>`,
-iconSize:[120,28],
-    iconAnchor:[60,14]
+    html: spot.label
+      ? `<div class="tour-label">📍 ${spot.name}</div>`
+      : `<div class="tour-dot"></div>`,
+    iconSize:[130,30],
+    iconAnchor:[65,15]
   })
 }).addTo(map);
 
