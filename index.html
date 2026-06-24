@@ -822,6 +822,75 @@ body.route-active .bottom-nav{
 
   white-space:nowrap !important;
 }
+
+  /* ===== 위험지도 모드 ===== */
+
+body.risk-map-mode #map{
+  display:block !important;
+}
+
+body.risk-map-mode .app-topbar,
+body.risk-map-mode .hero-banner,
+body.risk-map-mode .route-input-card,
+body.risk-map-mode .analyze-btn,
+body.risk-map-mode .small,
+body.risk-map-mode .panel{
+  display:none !important;
+}
+
+body.risk-map-mode .risk-legend{
+  position:fixed !important;
+  left:50% !important;
+  bottom:82px !important;
+  top:auto !important;
+  transform:translateX(-50%) !important;
+  z-index:10002 !important;
+
+  display:flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  gap:9px !important;
+
+  height:34px !important;
+  padding:0 14px !important;
+  border-radius:999px !important;
+  background:rgba(255,255,255,.92) !important;
+  backdrop-filter:blur(14px) !important;
+  box-shadow:0 10px 26px rgba(15,23,42,.14) !important;
+
+  font-size:10.5px !important;
+  font-weight:900 !important;
+  color:#334155 !important;
+}
+
+.region-popup{
+  min-width:190px;
+  font-family:'Pretendard','SUIT',sans-serif;
+}
+
+.region-popup-title{
+  font-size:16px;
+  font-weight:900;
+  color:#0f172a;
+  margin-bottom:7px;
+}
+
+.region-popup-level{
+  display:inline-block;
+  margin-bottom:9px;
+  padding:5px 10px;
+  border-radius:999px;
+  background:#f1f5f9;
+  color:#0f766e;
+  font-size:12px;
+  font-weight:900;
+}
+
+.region-popup-text{
+  font-size:13px;
+  line-height:1.55;
+  color:#334155;
+}
 </style>
 </head>
 
@@ -1083,10 +1152,80 @@ if(
   return "기타";
 }
 
+let regionLayer;
+
+const regionGuide = {
+  "공항권": {
+    title:"공항권",
+    level:"사고집중",
+    caution:"렌터카 인수 직후 초행운전이 많아 급차로 변경과 진출입 차량에 주의하세요."
+  },
+  "제주시도심권": {
+    title:"제주시 도심권",
+    level:"사고집중",
+    caution:"교차로와 보행자 통행이 많아 우회전·차로변경 시 주변 확인이 필요합니다."
+  },
+  "서귀포도심권": {
+    title:"서귀포 도심권",
+    level:"사고집중",
+    caution:"시내 교차로와 보행자 이동이 많아 신호 변경 구간에서 감속 운전하세요."
+  },
+  "애월권": {
+    title:"애월권",
+    level:"사고다발",
+    caution:"해안도로와 카페·관광지 진출입 차량이 많아 급정지와 끼어들기에 주의하세요."
+  },
+  "서부중산간권": {
+    title:"서부 중산간권",
+    level:"사고다발",
+    caution:"곡선도로와 경사구간이 많아 속도를 낮추고 내리막에서는 엔진브레이크를 활용하세요."
+  },
+  "동부중산간권": {
+    title:"동부 중산간권",
+    level:"일반",
+    caution:"중산간 도로 특성상 시야가 제한될 수 있어 교차로 진입 전 충분히 감속하세요."
+  },
+  "협재·한림권": {
+    title:"협재·한림권",
+    level:"일반",
+    caution:"해수욕장 주변 보행자와 주정차 차량이 많아 주차장 진출입부에서 서행하세요."
+  },
+  "함덕·조천권": {
+    title:"함덕·조천권",
+    level:"일반",
+    caution:"해수욕장과 마을도로가 연결되어 보행자·자전거·주정차 차량에 주의하세요."
+  },
+  "김녕·월정권": {
+    title:"김녕·월정권",
+    level:"일반",
+    caution:"해안도로 주행 중 경치에 시선이 분산되기 쉬우므로 전방주시를 유지하세요."
+  },
+  "성산권": {
+    title:"성산권",
+    level:"일반",
+    caution:"관광버스와 렌터카가 혼재되어 목적지를 놓쳐도 급차로 변경하지 마세요."
+  },
+  "한라산권": {
+    title:"한라산권",
+    level:"일반",
+    caution:"급커브·안개·기상변화가 잦아 전조등을 켜고 충분히 감속 운전하세요."
+  },
+  "중문권": {
+    title:"중문권",
+    level:"안전",
+    caution:"관광단지 진출입 차량과 보행자가 많으니 주차장 주변에서는 서행하세요."
+  },
+  "기타": {
+    title:"기타 권역",
+    level:"정보없음",
+    caution:"초행길에서는 내비 안내를 미리 확인하고 교차로에서 충분히 감속하세요."
+  }
+};
+
 fetch("jeju_regions.geojson")
   .then(res => res.json())
   .then(data => {
-    L.geoJSON(data, {
+    regionLayer = L.geoJSON(data, {
       style: function(feature){
         const name =
           feature.properties.adm_nm ||
@@ -1096,16 +1235,35 @@ fetch("jeju_regions.geojson")
           "";
 
         const region = getJejuRegion(name);
-        console.log(name + " → " + region);
         const risk = regionRisk[region];
 
         return {
-  color:"#ffffff",
-  weight:2.4,
-  opacity:1,
-  fillColor: risk ? risk.color : "#e5e7eb",
-  fillOpacity: risk ? 0.52 : 0.12
-};
+          color:"#ffffff",
+          weight:2.4,
+          opacity:1,
+          fillColor: risk ? risk.color : "#e5e7eb",
+          fillOpacity: risk ? 0.52 : 0.12
+        };
+      },
+
+      onEachFeature: function(feature, layer){
+        const name =
+          feature.properties.adm_nm ||
+          feature.properties.name ||
+          feature.properties.EMD_NM ||
+          feature.properties.SIG_KOR_NM ||
+          "";
+
+        const region = getJejuRegion(name);
+        const guide = regionGuide[region] || regionGuide["기타"];
+
+        layer.bindPopup(`
+          <div class="region-popup">
+            <div class="region-popup-title">🚦 ${guide.title}</div>
+            <div class="region-popup-level">${guide.level}</div>
+            <div class="region-popup-text">${guide.caution}</div>
+          </div>
+        `);
       }
     }).addTo(map);
   });
@@ -1990,6 +2148,7 @@ document.getElementById("info").innerHTML =
 
   function goHome(){
 
+  document.body.classList.remove("risk-map-mode");
   document.body.classList.remove("route-active");
 
   document.querySelector(".panel")
@@ -2020,6 +2179,30 @@ document.getElementById("info").innerHTML =
 
   document.getElementById("endInput").placeholder =
   "성산일출봉";
+}
+  function showRiskMap(){
+
+  document.body.classList.remove("route-active");
+  document.body.classList.add("risk-map-mode");
+
+  document.querySelectorAll(".bottom-item").forEach(btn=>{
+    btn.classList.remove("active");
+  });
+
+  document.querySelectorAll(".bottom-item")[1]
+    .classList.add("active");
+
+  document.getElementById("info").innerHTML = "";
+
+  if(routeLayer){
+    map.removeLayer(routeLayer);
+    routeLayer = null;
+  }
+
+  setTimeout(()=>{
+    map.invalidateSize();
+    map.setView([33.36,126.54],9.3);
+  },250);
 }
 </script>
 
