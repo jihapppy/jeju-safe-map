@@ -484,51 +484,6 @@ html, body{
   top:9px !important;
 }
 
-.popular-title{
-  display:flex !important;
-  align-items:center !important;
-  margin:12px 0 9px !important;
-  font-size:16px !important;
-  font-weight:850 !important;
-  color:#334155 !important;
-  letter-spacing:-0.3px !important;
-}
-
-.popular-title::before{
-  content:"📍";
-  margin-right:6px;
-  font-size:14px;
-}
-
-.popular-item{
-  position:relative !important;
-  height:150px !important;
-  padding:0 !important;
-  border:0 !important;
-  border-radius:24px !important;
-  overflow:hidden !important;
-  background:#fff !important;
-  box-shadow:0 8px 20px rgba(15,23,42,.08) !important;
-}
-
-.popular-item img{
-  width:100% !important;
-  height:100% !important;
-  object-fit:cover !important;
-  display:block !important;
-}
-
-.popular-item span{
-  position:absolute !important;
-  left:12px !important;
-  bottom:9px !important;
-  z-index:2 !important;
-  color:#fff !important;
-  font-size:14px !important;
-  font-weight:900 !important;
-  letter-spacing:-.4px !important;
-}
-
 .analyze-btn{
   height:54px !important;
   margin-top:14px !important;
@@ -562,11 +517,6 @@ html, body{
   .header-hodoongi{
   width:58px;
  margin-right:10px;
-}
-
-.popular-item span{
-  font-size:13.5px !important;
-  bottom:8px !important;
 }
 
   /* 관광지 카드 잘림 방지 */
@@ -635,10 +585,6 @@ html, body{
   top:53vh !important;
 }
 
-.panel.route-mode{
-  top:58vh !important;
-}
-
 .popular-grid{
   display:grid !important;
   grid-template-columns:repeat(2, minmax(0,1fr)) !important;
@@ -650,7 +596,7 @@ html, body{
   /* ===== 경로 분석 후 화면 압축 ===== */
 
 .panel.route-mode{
-  top:50vh !important;
+  top:48vh !important;
 }
 
 /* 추천 카드 전체 축소 */
@@ -727,7 +673,7 @@ html, body{
 .risk-legend{
   position:fixed;
   left:50%;
-  top:46vh;
+  top:49vh;
   transform:translateX(-50%);
 
   z-index:9998;
@@ -1122,25 +1068,6 @@ fetch("jeju_regions.geojson")
       }
     }).addTo(map);
   });
-
-
-const legend = L.control({ position: "bottomright" });
-
-legend.onAdd = function () {
-  const div = L.DomUtil.create("div", "risk-legend");
-
-  div.innerHTML = `
-    <div style="font-weight:bold;">위험도</div>
-    <div>🔴 매우높음</div>
-    <div>🟠 높음</div>
-    <div>🟡 보통</div>
-    <div>🟢 낮음</div>
-  `;
-
-  return div;
-};
-
-
 
 let routeLayer;
 let customStart = null;
