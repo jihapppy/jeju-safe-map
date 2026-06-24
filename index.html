@@ -749,6 +749,84 @@ body.route-active .routePath{
   font-size:16px !important;
   margin:4px 4px 12px !important;
 }
+
+  /* ===== 현재위치 버튼 위치 정리 ===== */
+
+.location-btn{
+  top:17px !important;
+  right:48px !important;
+  height:26px !important;
+  padding:0 8px !important;
+  font-size:10px !important;
+  background:#f1f5f9 !important;
+  color:#64748b !important;
+}
+
+/* ===== EPDO 카드 한 줄 정리 ===== */
+
+.small{
+  padding:17px 18px !important;
+  margin-bottom:76px !important;
+}
+
+.small::before{
+  font-size:16px !important;
+}
+
+.small{
+  font-size:11.7px !important;
+  line-height:1.45 !important;
+  letter-spacing:-0.45px !important;
+  white-space:nowrap !important;
+}
+
+/* ===== 하단 메뉴 ===== */
+
+.bottom-nav{
+  position:fixed;
+  left:0;
+  right:0;
+  bottom:0;
+  height:68px;
+  z-index:10001;
+  background:#fff;
+  border-top:1px solid #eef2f7;
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  padding:6px 8px 8px;
+  box-sizing:border-box;
+}
+
+.bottom-item{
+  border:0;
+  background:transparent;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:3px;
+  color:#94a3b8;
+  font-family:'Pretendard','SUIT',sans-serif;
+}
+
+.bottom-item span{
+  font-size:20px;
+  line-height:1;
+}
+
+.bottom-item b{
+  font-size:11px;
+  font-weight:800;
+}
+
+.bottom-item.active{
+  color:#13a89a;
+}
+
+/* 경로 분석 후에는 하단 메뉴 숨김 */
+body.route-active .bottom-nav{
+  display:none !important;
+}
 </style>
 </head>
 
@@ -839,6 +917,28 @@ body.route-active .routePath{
   <div class="small">
     ※ TAAS 사고데이터 및 사고밀집권역 분석 기반 안전경로 추천
   </div>
+</div>
+
+  <div class="bottom-nav">
+  <button class="bottom-item active">
+    <span>🏠</span>
+    <b>홈</b>
+  </button>
+
+  <button class="bottom-item">
+    <span>🔗</span>
+    <b>경로탐색</b>
+  </button>
+
+  <button class="bottom-item">
+    <span>🗺️</span>
+    <b>관광지</b>
+  </button>
+
+  <button class="bottom-item">
+    <span>⚙️</span>
+    <b>설정</b>
+  </button>
 </div>
 
 <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
