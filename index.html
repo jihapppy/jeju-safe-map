@@ -931,6 +931,21 @@ body.risk-map-mode .risk-map-page{
 
   box-shadow:0 12px 30px rgba(0,0,0,.12);
 }
+  .bottom-item img{
+  width:24px;
+  height:24px;
+  object-fit:contain;
+  opacity:.45;
+}
+
+.bottom-item.active img{
+  opacity:1;
+  filter:invert(51%) sepia(79%) saturate(523%) hue-rotate(131deg) brightness(88%) contrast(90%);
+}
+
+.bottom-item span{
+  display:none;
+}
 </style>
 </head>
 
@@ -1045,22 +1060,22 @@ body.risk-map-mode .risk-map-page{
 </div>
   <div class="bottom-nav">
   <button class="bottom-item active" onclick="goHome()">
-    <span>🏠</span>
+    <img src="home-hand.png">
     <b>홈</b>
   </button>
 
-<button class="bottom-item" onclick="showRiskMap()">
-  <span>🚦</span>
-  <b>위험지도</b>
-</button>
+  <button class="bottom-item" onclick="showRiskMap()">
+    <img src="heart-plus.png">
+    <b>위험지도</b>
+  </button>
 
   <button class="bottom-item">
-    <span>🗺️</span>
+    <img src="map-2.png">
     <b>관광지</b>
   </button>
 
   <button class="bottom-item">
-    <span>⚙️</span>
+    <img src="settings.png">
     <b>설정</b>
   </button>
 </div>
