@@ -1037,189 +1037,324 @@ body.risk-map-mode .risk-map-page{
 .west{ left:21%; top:50%; width:23%; height:15%; }
 .airport{ left:21%; top:67%; width:22%; height:13%; }
 
-  /* ===== 결과화면 4번 시안형 최종 ===== */
+  /* ===== 결과화면 최종 리뉴얼 ===== */
 body.route-active .panel{
-  top:48vh !important;
+  top:45vh !important;
   border-radius:28px 28px 0 0 !important;
-  padding:16px 16px 28px !important;
-  background:#fff !important;
+  padding:14px 14px 28px !important;
+  background:#f8fafc !important;
 }
 
-.route-tabs{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:8px;
-  margin:4px 0 14px;
+.routePath{
+  font-size:15px !important;
+  font-weight:900 !important;
+  color:#64748b !important;
+  margin:4px 4px 12px !important;
 }
 
-.route-tab{
-  height:44px;
-  border:0;
-  border-radius:14px;
-  background:#eef8f6;
-  color:#0f766e;
-  font-size:14px;
-  font-weight:900;
-}
-
-.route-tab.active{
-  background:#13a89a;
-  color:#fff;
-}
-
-.safe-summary-card{
-  border:1px solid #d9eeea;
-  border-radius:22px;
-  padding:18px;
+.result-hero-card,
+.ai-card,
+.tip-card-new,
+.compare-detail-new{
   background:#fff;
-  box-shadow:0 8px 22px rgba(15,23,42,.06);
+  border-radius:22px;
+  box-shadow:0 8px 24px rgba(15,23,42,.07);
+  border:1px solid #edf2f7;
 }
 
-.safe-title{
-  display:flex;
+.result-hero-card{
+  padding:18px;
+}
+
+.result-main-grid{
+  display:grid;
+  grid-template-columns:1.3fr .85fr .85fr;
   align-items:center;
   gap:10px;
-  font-size:18px;
-  font-weight:900;
-  color:#0f766e;
 }
 
-.safe-title .shield{
-  width:38px;
-  height:38px;
-  border-radius:14px;
-  background:#e7f7f4;
+.result-course{
+  display:flex;
+  gap:12px;
+  align-items:center;
+}
+
+.result-shield{
+  width:52px;
+  height:52px;
+  border-radius:50%;
+  background:#e8f8f5;
   display:flex;
   align-items:center;
   justify-content:center;
-  font-size:22px;
+  font-size:26px;
 }
 
-.safe-metrics{
+.result-title{
+  font-size:24px;
+  font-weight:950;
+  color:#0f766e;
+  letter-spacing:-1px;
+}
+
+.result-sub{
+  margin-top:8px;
+  font-size:13px;
+  font-weight:750;
+  color:#334155;
+  line-height:1.45;
+}
+
+.result-sub b{
+  display:block;
+  margin-top:3px;
+  font-size:18px;
+  color:#0f766e;
+}
+
+.result-metric{
+  text-align:center;
+  border-left:1px solid #e5e7eb;
+}
+
+.result-metric-icon{
+  width:42px;
+  height:42px;
+  margin:0 auto 7px;
+  border-radius:50%;
+  background:#e8f8f5;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:20px;
+}
+
+.result-metric span{
+  font-size:12px;
+  color:#64748b;
+  font-weight:800;
+}
+
+.result-metric b{
+  display:block;
+  margin-top:4px;
+  font-size:22px;
+  color:#0f172a;
+  font-weight:950;
+}
+
+.result-chip{
+  display:inline-block;
+  margin-top:5px;
+  padding:4px 9px;
+  border-radius:999px;
+  background:#e8f8f5;
+  color:#0f766e;
+  font-size:11px;
+  font-weight:900;
+}
+
+.score-strip{
+  margin-top:16px;
+  padding:12px;
+  border-radius:16px;
+  background:#f0fbf9;
+  border:1px solid #cdeee8;
+  display:grid;
+  grid-template-columns:1fr 1fr 36px;
+  gap:10px;
+  align-items:center;
+}
+
+.score-item small{
+  display:block;
+  font-size:11px;
+  color:#64748b;
+  font-weight:800;
+}
+
+.score-item b{
+  display:block;
+  margin-top:3px;
+  font-size:20px;
+  color:#0f172a;
+  font-weight:950;
+}
+
+.score-item.safe b{
+  color:#0f766e;
+}
+
+.down-circle{
+  width:34px;
+  height:34px;
+  border-radius:50%;
+  background:#14b8a6;
+  color:#fff;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:20px;
+  font-weight:900;
+}
+
+.navi-grid.final-navi{
+  margin:12px 0 !important;
+  gap:9px !important;
+}
+
+.final-navi .navi-btn{
+  height:56px !important;
+  border-radius:18px !important;
+}
+
+.info-two-grid{
   display:grid;
   grid-template-columns:1fr 1fr;
-  margin:18px 0;
-  border-top:1px solid #eef2f7;
-  border-bottom:1px solid #eef2f7;
+  gap:10px;
 }
 
-.metric{
-  padding:14px 4px;
+.ai-card,
+.tip-card-new{
+  padding:15px;
 }
 
-.metric:first-child{
-  border-right:1px solid #eef2f7;
-}
-
-.metric span{
-  display:block;
-  font-size:12px;
-  font-weight:800;
-  color:#94a3b8;
-}
-
-.metric b{
-  display:block;
-  margin-top:5px;
-  font-size:24px;
-  color:#111827;
-}
-
-.risk-bar-wrap{
-  margin-top:4px;
-}
-
-.risk-bar-label{
-  font-size:14px;
-  font-weight:900;
+.ai-card h3,
+.tip-card-new h3{
+  margin:0 0 12px;
+  font-size:17px;
+  font-weight:950;
   color:#0f766e;
-  margin-bottom:8px;
 }
 
-.risk-bar{
-  height:9px;
-  border-radius:999px;
-  background:#e5e7eb;
-  overflow:hidden;
+.tip-card-new h3{
+  color:#ea7800;
 }
 
-.risk-bar-fill{
-  height:100%;
-  width:58%;
-  border-radius:999px;
-  background:#13a89a;
-}
-
-.safe-reason{
-  margin-top:18px;
-}
-
-.safe-reason h3{
-  font-size:15px;
-  margin:0 0 10px;
-}
-
-.safe-reason p{
-  margin:8px 0;
-  font-size:14px;
-  line-height:1.55;
-  color:#334155;
-}
-
-.compact-navi{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:8px;
-  margin-top:16px;
-}
-
-.compact-navi .navi-btn{
-  height:54px !important;
-  border-radius:14px !important;
-}
-
-.alt-route-card{
-  margin-top:12px;
-  padding:16px;
-  border:1px solid #eef2f7;
-  border-radius:18px;
-  background:#fff;
-  box-shadow:0 6px 16px rgba(15,23,42,.05);
-}
-
-.alt-top{
+.info-line{
   display:flex;
-  justify-content:space-between;
   align-items:center;
-  font-weight:900;
-  font-size:16px;
+  gap:9px;
+  margin:10px 0;
+  font-size:13px;
+  font-weight:750;
+  color:#334155;
+  line-height:1.35;
 }
 
-.alt-risk{
-  margin-top:12px;
+.info-badge{
+  width:24px;
+  height:24px;
+  min-width:24px;
+  border-radius:50%;
+  background:#14b8a6;
+  color:#fff;
+  display:flex;
+  align-items:center;
+  justify-content:center;
   font-size:13px;
   font-weight:900;
 }
 
-.alt-bar{
-  margin-top:8px;
-  height:8px;
-  border-radius:999px;
-  background:#e5e7eb;
-  overflow:hidden;
+.tip-card-new .info-badge{
+  background:#fff1d6;
+  color:#9a5b00;
 }
 
-.alt-bar-fill{
-  height:100%;
-  width:75%;
-  border-radius:999px;
-  background:#f97316;
+.compare-detail-new{
+  margin-top:12px;
+  padding:14px;
 }
 
-.result-card.tip-card,
-.result-card.detail-card,
-.card.green{
-  display:none !important;
+.compare-detail-new summary{
+  cursor:pointer;
+  list-style:none;
+  font-size:18px;
+  font-weight:950;
+  color:#0f172a;
+}
+
+.compare-detail-new summary::-webkit-details-marker{
+  display:none;
+}
+
+.compare-cards{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+  margin-top:14px;
+}
+
+.compare-mini{
+  border-radius:17px;
+  padding:13px;
+  border:1px solid #d1d5db;
+  background:#fff;
+}
+
+.compare-mini.recommend{
+  border-color:#7dd3c7;
+  background:#f3fffd;
+}
+
+.compare-head{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:10px;
+  font-weight:950;
+}
+
+.compare-tag{
+  padding:4px 9px;
+  border-radius:8px;
+  background:#14b8a6;
+  color:#fff;
+  font-size:12px;
+}
+
+.compare-mini.alt .compare-tag{
+  background:#8b8f97;
+}
+
+.compare-row2{
+  display:flex;
+  justify-content:space-between;
+  padding:7px 0;
+  border-top:1px solid #edf2f7;
+  font-size:13px;
+  color:#475569;
+}
+
+.compare-row2 b{
+  color:#0f172a;
+}
+
+.compare-mini.recommend .compare-row2 b{
+  color:#0f766e;
+}
+
+.compare-mini.alt .risk-score b{
+  color:#e04f1a;
+}
+
+@media(max-width:420px){
+  .result-main-grid{
+    grid-template-columns:1.35fr .8fr .8fr;
+    gap:6px;
+  }
+
+  .result-title{
+    font-size:21px;
+  }
+
+  .result-metric b{
+    font-size:19px;
+  }
+
+  .info-line{
+    font-size:12px;
+  }
 }
 </style>
 </head>
@@ -1949,66 +2084,144 @@ const alt = routeSummaries[altIndex];
 
 const resultWrap = document.createElement("div");
 
+const recommendCourseName = (recommendedIndex + 1) + "코스";
+const altCourseName = (altIndex + 1) + "코스";
+
+const tips = destinationTips[endName] || [
+  "관광버스와 렌터카 통행이 많은 구간입니다.",
+  "목적지를 놓쳐도 급차로 변경하지 마세요.",
+  "교차로와 관광지 진출입 차량을 주의하세요."
+];
+
 resultWrap.innerHTML = `
-  <div class="route-tabs">
-    <button class="route-tab active">추천 경로</button>
-    <button class="route-tab">대안 경로 1</button>
-    <button class="route-tab">대안 경로 2</button>
-  </div>
-
-  <div class="safe-summary-card">
-    <div class="safe-title">
-      <span class="shield">🛡️</span>
-      <div>
-        <div>추천 경로</div>
-        <div style="font-size:16px;margin-top:4px;">가장 안전한 경로예요!</div>
+  <div class="result-hero-card">
+    <div class="result-main-grid">
+      <div class="result-course">
+        <div class="result-shield">🛡️</div>
+        <div>
+          <div class="result-title">${recommendCourseName} 추천</div>
+          <div class="result-sub">
+            대안 경로 대비
+            <b>위험도 ${riskDiff}% 낮음</b>
+          </div>
+        </div>
       </div>
-    </div>
 
-    <div class="safe-metrics">
-      <div class="metric">
-        <span>예상 시간</span>
-        <b>${recommend.durationMin}분</b>
-      </div>
-      <div class="metric">
+      <div class="result-metric">
+        <div class="result-metric-icon">🛣️</div>
         <span>거리</span>
         <b>${recommend.distanceKm}km</b>
+        <div class="result-chip">${distanceDiff}km 단축</div>
+      </div>
+
+      <div class="result-metric">
+        <div class="result-metric-icon">⏱️</div>
+        <span>시간</span>
+        <b>${recommend.durationMin}분</b>
+        <div class="result-chip">
+          ${Math.abs(recommend.durationMin - alt.durationMin)}분 ${recommend.durationMin > alt.durationMin ? "증가" : "단축"}
+        </div>
       </div>
     </div>
 
-    <div class="risk-bar-wrap">
-      <div class="risk-bar-label">위험도 ${recommend.risk.level}</div>
-      <div class="risk-bar">
-        <div class="risk-bar-fill"></div>
+    <div class="score-strip">
+      <div class="score-item">
+        <small>EPDO 기반 위험점수</small>
+        <b>${recommend.risk.riskScoreText}</b>
+      </div>
+      <div class="score-item safe">
+        <small>대안 경로 대비</small>
+        <b>${riskDiff}% 낮음</b>
+      </div>
+      <div class="down-circle">↓</div>
+    </div>
+  </div>
+
+  <div class="navi-grid final-navi"></div>
+
+  <div class="info-two-grid">
+    <div class="ai-card">
+      <h3>🤖 AI 추천 이유</h3>
+      <div class="info-line">
+        <span class="info-badge">✓</span>
+        <span>사고집중구간 통과거리 감소</span>
+      </div>
+      <div class="info-line">
+        <span class="info-badge">✓</span>
+        <span>EPDO 높은 권역 노출 감소</span>
+      </div>
+      <div class="info-line">
+        <span class="info-badge">✓</span>
+        <span>전체 위험점수 ${riskDiff}% 감소</span>
       </div>
     </div>
 
-    <div class="safe-reason">
-      <h3>이 경로가 안전한 이유</h3>
-      <p>✓ 사고 위험점수가 더 낮은 구간을 우선 반영했어요.</p>
-      <p>✓ EPDO가 높은 권역 통과거리를 줄였어요.</p>
-      <p>✓ 목적지 주변 주의구간을 함께 고려했어요.</p>
-    </div>
-
-    <div class="compact-navi"></div>
-  </div>
-
-  <div class="alt-route-card">
-    <div class="alt-top">
-      <span>대안 경로 ${altIndex + 1}</span>
-      <span>${alt.durationMin}분</span>
-    </div>
-    <div class="alt-risk">위험도 ${alt.risk.level}</div>
-    <div class="alt-bar">
-      <div class="alt-bar-fill"></div>
+    <div class="tip-card-new">
+      <h3>⭐ ${endName} 맞춤 안전팁</h3>
+      <div class="info-line">
+        <span class="info-badge">🚌</span>
+        <span>${tips[0]}</span>
+      </div>
+      <div class="info-line">
+        <span class="info-badge">↔</span>
+        <span>${tips[1]}</span>
+      </div>
+      <div class="info-line">
+        <span class="info-badge">🚦</span>
+        <span>${tips[2]}</span>
+      </div>
     </div>
   </div>
+
+  <details class="compare-detail-new">
+    <summary>📊 경로 상세 비교</summary>
+
+    <div class="compare-cards">
+      <div class="compare-mini recommend">
+        <div class="compare-head">
+          <span class="compare-tag">추천</span>
+          <b>${recommendCourseName}</b>
+        </div>
+
+        <div class="compare-row2">
+          <span>거리</span>
+          <b>${recommend.distanceKm}km</b>
+        </div>
+        <div class="compare-row2">
+          <span>시간</span>
+          <b>${recommend.durationMin}분</b>
+        </div>
+        <div class="compare-row2 risk-score">
+          <span>위험점수</span>
+          <b>${recommend.risk.riskScoreText}</b>
+        </div>
+      </div>
+
+      <div class="compare-mini alt">
+        <div class="compare-head">
+          <span class="compare-tag">대안</span>
+          <b>${altCourseName}</b>
+        </div>
+
+        <div class="compare-row2">
+          <span>거리</span>
+          <b>${alt.distanceKm}km</b>
+        </div>
+        <div class="compare-row2">
+          <span>시간</span>
+          <b>${alt.durationMin}분</b>
+        </div>
+        <div class="compare-row2 risk-score">
+          <span>위험점수</span>
+          <b>${alt.risk.riskScoreText}</b>
+        </div>
+      </div>
+    </div>
+  </details>
 `;
-
 document.getElementById("info").appendChild(resultWrap);
 
-const compactNavi = resultWrap.querySelector(".compact-navi");
-
+const compactNavi = resultWrap.querySelector(".final-navi");
 const safeBtn = document.createElement("button");
 safeBtn.className = "navi-btn";
 safeBtn.innerHTML = `
