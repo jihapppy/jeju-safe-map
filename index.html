@@ -1036,6 +1036,191 @@ body.risk-map-mode .risk-map-page{
 .east{ left:58%; top:32%; width:32%; height:20%; }
 .west{ left:21%; top:50%; width:23%; height:15%; }
 .airport{ left:21%; top:67%; width:22%; height:13%; }
+
+  /* ===== 결과화면 4번 시안형 최종 ===== */
+body.route-active .panel{
+  top:43vh !important;
+  border-radius:28px 28px 0 0 !important;
+  padding:16px 16px 28px !important;
+  background:#fff !important;
+}
+
+.route-tabs{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:8px;
+  margin:4px 0 14px;
+}
+
+.route-tab{
+  height:44px;
+  border:0;
+  border-radius:14px;
+  background:#eef8f6;
+  color:#0f766e;
+  font-size:14px;
+  font-weight:900;
+}
+
+.route-tab.active{
+  background:#13a89a;
+  color:#fff;
+}
+
+.safe-summary-card{
+  border:1px solid #d9eeea;
+  border-radius:22px;
+  padding:18px;
+  background:#fff;
+  box-shadow:0 8px 22px rgba(15,23,42,.06);
+}
+
+.safe-title{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  font-size:18px;
+  font-weight:900;
+  color:#0f766e;
+}
+
+.safe-title .shield{
+  width:38px;
+  height:38px;
+  border-radius:14px;
+  background:#e7f7f4;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:22px;
+}
+
+.safe-metrics{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  margin:18px 0;
+  border-top:1px solid #eef2f7;
+  border-bottom:1px solid #eef2f7;
+}
+
+.metric{
+  padding:14px 4px;
+}
+
+.metric:first-child{
+  border-right:1px solid #eef2f7;
+}
+
+.metric span{
+  display:block;
+  font-size:12px;
+  font-weight:800;
+  color:#94a3b8;
+}
+
+.metric b{
+  display:block;
+  margin-top:5px;
+  font-size:24px;
+  color:#111827;
+}
+
+.risk-bar-wrap{
+  margin-top:4px;
+}
+
+.risk-bar-label{
+  font-size:14px;
+  font-weight:900;
+  color:#0f766e;
+  margin-bottom:8px;
+}
+
+.risk-bar{
+  height:9px;
+  border-radius:999px;
+  background:#e5e7eb;
+  overflow:hidden;
+}
+
+.risk-bar-fill{
+  height:100%;
+  width:58%;
+  border-radius:999px;
+  background:#13a89a;
+}
+
+.safe-reason{
+  margin-top:18px;
+}
+
+.safe-reason h3{
+  font-size:15px;
+  margin:0 0 10px;
+}
+
+.safe-reason p{
+  margin:8px 0;
+  font-size:14px;
+  line-height:1.55;
+  color:#334155;
+}
+
+.compact-navi{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:8px;
+  margin-top:16px;
+}
+
+.compact-navi .navi-btn{
+  height:54px !important;
+  border-radius:14px !important;
+}
+
+.alt-route-card{
+  margin-top:12px;
+  padding:16px;
+  border:1px solid #eef2f7;
+  border-radius:18px;
+  background:#fff;
+  box-shadow:0 6px 16px rgba(15,23,42,.05);
+}
+
+.alt-top{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  font-weight:900;
+  font-size:16px;
+}
+
+.alt-risk{
+  margin-top:12px;
+  font-size:13px;
+  font-weight:900;
+}
+
+.alt-bar{
+  margin-top:8px;
+  height:8px;
+  border-radius:999px;
+  background:#e5e7eb;
+  overflow:hidden;
+}
+
+.alt-bar-fill{
+  height:100%;
+  width:75%;
+  border-radius:999px;
+  background:#f97316;
+}
+
+.result-card.tip-card,
+.result-card.detail-card,
+.card.green{
+  display:none !important;
+}
 </style>
 </head>
 
@@ -1759,185 +1944,73 @@ const distanceDiff =
     Number(otherRoute.distanceKm)
   ).toFixed(1);
     
-guide.innerHTML =
+const altIndex = recommendedIndex === 0 ? 1 : 0;
+const alt = routeSummaries[altIndex];
 
-"<div style='font-size:28px;font-weight:900;color:#111827;'>" +
-(recommendedIndex + 1) + "코스 추천</div>" +
+const resultWrap = document.createElement("div");
 
-"<div style='margin-top:16px;padding:16px;border-radius:18px;background:#f0faf8;border:1px solid #d8eeea;'>" +
+resultWrap.innerHTML = `
+  <div class="route-tabs">
+    <button class="route-tab active">추천 경로</button>
+    <button class="route-tab">대안 경로 1</button>
+    <button class="route-tab">대안 경로 2</button>
+  </div>
 
-"<div style='font-size:18px;font-weight:900;color:#0f766e;margin-bottom:8px;'>🤖 AI 안전 추천 이유</div>" +
-
-"<div style='font-size:15px;line-height:1.7;color:#334155;'>" +
-(recommendedIndex + 1) +
-"코스는 사고심각도(EPDO)가 높은 권역 통과거리가 상대적으로 짧고,<br>" +
-"전체 위험점수가 더 낮게 분석되어 안전경로로 추천됩니다." +
-"</div>" +
-
-"<div style='display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:16px;'>" +
-
-"<div style='background:#fff;border-radius:14px;padding:12px;border:1px solid #e5e7eb;'>" +
-"<div style='font-size:14px;font-weight:800;color:#0f766e;'>🛣 거리 비교</div>" +
-"<div style='margin-top:6px;font-size:15px;font-weight:700;color:#334155;'>" +
-distanceDiff + "km 차이" +
-"</div>" +
-"</div>" +
-
-"<div style='background:#fff;border-radius:14px;padding:12px;border:1px solid #e5e7eb;'>" +
-"<div style='font-size:14px;font-weight:800;color:#0f766e;'>🛡 위험도 비교</div>" +
-"<div style='margin-top:6px;font-size:15px;font-weight:700;color:#334155;'>" +
-riskDiff + "% 낮음" +
-"</div>" +
-"</div>" +
-
-"</div>" +
-"</div>";
-    
-document.getElementById("info").appendChild(guide);
-const tips = destinationTips[endName] || [
-  "초행길에서는 내비 안내를 미리 확인하세요.",
-  "목적지를 놓쳐도 급차로 변경하지 마세요.",
-  "교차로와 진출입 차량을 주의하세요."
-];
-
-const tipCard = document.createElement("div");
-tipCard.className = "result-card tip-card";
-
-tipCard.innerHTML = `
-  <h3>🌟 ${endName} 맞춤 안전팁</h3>
-  <p>• ${tips[0]}</p>
-  <p>• ${tips[1]}</p>
-  <p>• ${tips[2]}</p>
-`;
-
-document.getElementById("info").appendChild(tipCard);
-
-
-const naviBox = document.createElement("div");
-naviBox.className = "navi-grid";
-
-const safeBtn = document.createElement("button");
-safeBtn.className = "navi-btn";
-safeBtn.innerHTML = `
-  <span class="nav-icon naver">N</span>
-  <span class="nav-text">
-    <b>네이버지도</b>
-    <small>길안내</small>
-  </span>
-`;
-safeBtn.onclick = function(){
-  openNaverMap(recommendedIndex);
-};
-
-const tmapBtn = document.createElement("button");
-tmapBtn.className = "navi-btn";
-tmapBtn.innerHTML = `
-  <span class="nav-icon tmap">T</span>
-  <span class="nav-text">
-    <b>TMAP</b>
-    <small>길안내</small>
-  </span>
-`;
-tmapBtn.onclick = function(){
-  openTmap();
-};
-
-const kakaoBtn = document.createElement("button");
-kakaoBtn.className = "navi-btn";
-kakaoBtn.innerHTML = `
-  <span class="nav-icon kakao">K</span>
-  <span class="nav-text">
-    <b>카카오맵</b>
-    <small>길안내</small>
-  </span>
-`;
-kakaoBtn.onclick = function(){
-  openKakaoNavi();
-};
-
-
-naviBox.appendChild(safeBtn);
-naviBox.appendChild(tmapBtn);
-naviBox.appendChild(kakaoBtn);
-
-document.getElementById("info").appendChild(naviBox);
-
-
-const detailBox = document.createElement("details");
-detailBox.className = "result-card detail-card";
-
-const detailSummary = document.createElement("summary");
-detailSummary.innerHTML = "<b>📊 경로 상세 비교</b>";
-detailSummary.style.cursor = "pointer";
-detailBox.appendChild(detailSummary);
-
-const r1 = routeSummaries[0];
-const r2 = routeSummaries[1];
-   const r1Class = recommendedIndex === 0 ? "compare-green" : "compare-red";
-const r2Class = recommendedIndex === 1 ? "compare-green" : "compare-red";
-
-const r1Name = recommendedIndex === 0 ? "1코스 추천" : "1코스";
-const r2Name = recommendedIndex === 1 ? "2코스 추천" : "2코스";
-
-const compareTable = document.createElement("div");
-compareTable.className = "compare-table-box";
-
-compareTable.innerHTML = `
-  <div class="compare-row">
-    <div class="compare-label">거리</div>
-    <div class="${r1Class}">
-      ${r1Name}<br>${r1.distanceKm}km
+  <div class="safe-summary-card">
+    <div class="safe-title">
+      <span class="shield">🛡️</span>
+      <div>
+        <div>추천 경로</div>
+        <div style="font-size:16px;margin-top:4px;">가장 안전한 경로예요!</div>
+      </div>
     </div>
-   <div class="${r2Class}">
-  ${r2Name}<br>${r2.distanceKm}km
-</div>
-  </div>
 
-  <div class="compare-row">
-    <div class="compare-label">시간</div>
-    <div class="${r1Class}">
-      ${r1Name}<br>${r1.durationMin}분
+    <div class="safe-metrics">
+      <div class="metric">
+        <span>예상 시간</span>
+        <b>${recommend.durationMin}분</b>
+      </div>
+      <div class="metric">
+        <span>거리</span>
+        <b>${recommend.distanceKm}km</b>
+      </div>
     </div>
-   <div class="${r2Class}">
-  ${r2Name}<br>${r2.durationMin}분
-</div>
-</div>
 
-<div class="compare-row">
-  <div class="compare-label">위험도</div>
-  <div>
-    <span class="risk-badge high">${r1.risk.level}</span><br>
-    ${r1.risk.riskScoreText}
-  </div>
-  <div>
-    <span class="risk-badge high">${r2.risk.level}</span><br>
-    ${r2.risk.riskScoreText}
-  </div>
-</div>
+    <div class="risk-bar-wrap">
+      <div class="risk-bar-label">위험도 ${recommend.risk.level}</div>
+      <div class="risk-bar">
+        <div class="risk-bar-fill"></div>
+      </div>
+    </div>
 
+    <div class="safe-reason">
+      <h3>이 경로가 안전한 이유</h3>
+      <p>✓ 사고 위험점수가 더 낮은 구간을 우선 반영했어요.</p>
+      <p>✓ EPDO가 높은 권역 통과거리를 줄였어요.</p>
+      <p>✓ 목적지 주변 주의구간을 함께 고려했어요.</p>
+    </div>
 
-  <div class="compare-row">
-  <div class="compare-label">추천 사유</div>
-  <div class="${r1Class}">
-    ${recommendedIndex === 0 ? "EPDO와 통과거리를 반영한 위험점수가 더 낮아 추천" : "비교 경로"}
+    <div class="compact-navi"></div>
   </div>
-  <div class="${r2Class}">
-    ${recommendedIndex === 1 ? "EPDO와 통과거리를 반영한 위험점수가 더 낮아 추천" : "비교 경로"}
-  </div>
-</div>
 
-<div class="compare-row">
-  <div class="compare-label">계산근거</div>
-  <div style="font-size:12px;line-height:1.6;color:#475569;">
-    ${r1.risk.zoneDetailText}
+  <div class="alt-route-card">
+    <div class="alt-top">
+      <span>대안 경로 ${altIndex + 1}</span>
+      <span>${alt.durationMin}분</span>
+    </div>
+    <div class="alt-risk">위험도 ${alt.risk.level}</div>
+    <div class="alt-bar">
+      <div class="alt-bar-fill"></div>
+    </div>
   </div>
-  <div style="font-size:12px;line-height:1.6;color:#475569;">
-    ${r2.risk.zoneDetailText}
-  </div>
-</div>
 `;
-detailBox.appendChild(compareTable);
-document.getElementById("info").appendChild(detailBox);
+
+document.getElementById("info").appendChild(resultWrap);
+
+const compactNavi = resultWrap.querySelector(".compact-navi");
+compactNavi.appendChild(safeBtn);
+compactNavi.appendChild(tmapBtn);
+compactNavi.appendChild(kakaoBtn);
     
     const notice = document.createElement("div");
 
