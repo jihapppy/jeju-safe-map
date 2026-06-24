@@ -2255,26 +2255,12 @@ document.querySelectorAll(".bottom-item")[0].classList.add("active");
     btn.classList.remove("active");
   });
 
-  document.querySelectorAll(".bottom-item")[1]
-    .classList.add("active");
+  document.querySelectorAll(".bottom-item")[1].classList.add("active");
+
+  document.getElementById("zoneInfoCard").innerHTML = "";
 }
 
-  document.querySelectorAll(".bottom-item")[1]
-    .classList.add("active");
-
-  document.getElementById("info").innerHTML = "";
-
-  if(routeLayer){
-    map.removeLayer(routeLayer);
-    routeLayer = null;
-  }
-
-  setTimeout(()=>{
-    map.invalidateSize();
-    map.setView([33.36,126.54],9.3);
-  },250);
-}
-  function showZoneCard(region){
+function showZoneCard(region){
 
   const guide = regionGuide[region];
 
@@ -2283,17 +2269,11 @@ document.querySelectorAll(".bottom-item")[0].classList.add("active");
       🚦 ${guide.title}
     </div>
 
-    <div style="
-      margin-top:8px;
-      color:#0f766e;
-      font-weight:900;">
+    <div style="margin-top:8px;color:#0f766e;font-weight:900;">
       ${guide.level}
     </div>
 
-    <div style="
-      margin-top:10px;
-      line-height:1.6;
-      color:#475569;">
+    <div style="margin-top:10px;line-height:1.6;color:#475569;">
       ${guide.caution}
     </div>
   `;
