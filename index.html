@@ -48,10 +48,14 @@ html, body{
   background:
   radial-gradient(
     circle at center,
-    rgba(255,255,255,0) 45%,
-    rgba(255,255,255,.22) 75%,
-    rgba(255,255,255,.45) 100%
+    rgba(255,255,255,0) 38%,
+    rgba(255,255,255,.22) 62%,
+    rgba(255,255,255,.70) 100%
   );
+
+  pointer-events:none;
+  z-index:400;
+}
 
   pointer-events:none;
   z-index:400;
@@ -465,9 +469,11 @@ html, body{
 }
 
 .leaflet-tile-pane{
-  filter:brightness(1.08) saturate(1.02) !important;
+  filter:
+  brightness(1.12)
+  saturate(.82)
+  contrast(.92) !important;
 }
-
 .title{
   font-size:21px !important;
   font-weight:850 !important;
@@ -630,7 +636,7 @@ html, body{
 }
 
  .panel{
-  top:47vh !important;
+  top:44vh !important;
 }
 
 .panel.route-mode{
@@ -725,32 +731,34 @@ html, body{
 .risk-legend{
   position:fixed;
   left:50%;
-  top:42vh;
+  top:39vh;
   transform:translateX(-50%);
+
   z-index:9998;
 
   display:flex;
   align-items:center;
   justify-content:center;
-  gap:8px;
+  gap:10px;
 
-  width:max-content;
-  max-width:calc(100vw - 40px);
-  height:34px;
+  height:30px;
   padding:0 14px;
 
-  background:rgba(255,255,255,.86);
-  backdrop-filter:blur(14px);
-  -webkit-backdrop-filter:blur(14px);
+  background:rgba(255,255,255,.82);
+  backdrop-filter:blur(18px);
+  -webkit-backdrop-filter:blur(18px);
 
-  border:1px solid rgba(255,255,255,.9);
+  border:none;
+
   border-radius:999px;
-  box-shadow:0 8px 20px rgba(15,23,42,.08);
 
-  font-size:10.5px;
+  box-shadow:
+  0 12px 30px rgba(15,23,42,.08);
+
+  font-size:10px;
   font-weight:800;
+
   color:#334155;
-  white-space:nowrap;
 }
 
 .risk-legend .legend-title{
@@ -875,8 +883,7 @@ if(window.Kakao){
   Kakao.init(kakaoJsKey);
 }
 
-const map = L.map('map').setView([33.03,126.54],9);
-
+const map = L.map('map').setView([33.35,126.54],10);
 function resetHomeMap(){
  setTimeout(() => {
   map.invalidateSize();
