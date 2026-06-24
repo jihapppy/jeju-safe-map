@@ -814,6 +814,102 @@ html, body{
 .panel.route-mode #info{
   margin-top:6 !important;
 }
+
+  /* ===== 2026 앱형 첫 화면 배너 ===== */
+
+.panel{
+  top:36vh !important;
+  padding:12px 18px 16px !important;
+  background:#ffffff !important;
+}
+
+.hero-banner{
+  position:relative;
+  height:210px;
+  margin:0 0 0;
+  border-radius:26px;
+  overflow:hidden;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(15,23,42,.12) 0%,
+      rgba(15,23,42,.32) 45%,
+      rgba(15,23,42,.55) 100%
+    ),
+    url("jeju-hero-banner.png") center/cover no-repeat;
+
+  box-shadow:0 14px 32px rgba(15,23,42,.14);
+}
+
+.hero-text{
+  position:absolute;
+  left:22px;
+  right:18px;
+  bottom:32px;
+  color:#fff;
+}
+
+.hero-title{
+  font-size:25px;
+  font-weight:900;
+  line-height:1.2;
+  letter-spacing:-1px;
+}
+
+.hero-sub{
+  margin-top:14px;
+  font-size:15px;
+  font-weight:700;
+  line-height:1.65;
+  letter-spacing:-.35px;
+}
+
+.route-input-card{
+  position:relative !important;
+  margin-top:-34px !important;
+  padding:18px 14px 16px !important;
+  background:#fff !important;
+  border-radius:24px !important;
+  box-shadow:0 16px 36px rgba(15,23,42,.14) !important;
+  z-index:5 !important;
+}
+
+.address-row{
+  height:48px !important;
+  border-radius:15px !important;
+  box-shadow:none !important;
+  border:1px solid #edf0f5 !important;
+  background:#fff !important;
+}
+
+.location-btn{
+  top:27px !important;
+  right:22px !important;
+  background:#f8fafc !important;
+  color:#64748b !important;
+}
+
+.analyze-btn{
+  height:50px !important;
+  margin-top:14px !important;
+  border-radius:14px !important;
+  background:#0f9f91 !important;
+  box-shadow:0 10px 20px rgba(15,159,145,.22) !important;
+}
+
+.analyze-main{
+  font-size:16px !important;
+  font-weight:850 !important;
+}
+
+.panel.route-mode .hero-banner{
+  display:none !important;
+}
+
+.panel.route-mode{
+  top:39vh !important;
+}
 </style>
 </head>
 
@@ -832,19 +928,14 @@ html, body{
  <div class="drag-handle" onclick="togglePanel()"></div>
   <div class="header-box">
 
-<div class="car-icon">🚗</div>
-  <div class="header-text">
-    <div class="title">
-      제주 렌터카 안전지도
-    </div>
-
-    <div class="subtitle">
-    사고데이터 기반으로 안전한 경로를 추천합니다.
+<div class="hero-banner">
+  <div class="hero-text">
+    <div class="hero-title">안전한 제주 여행의 시작</div>
+    <div class="hero-sub">
+      사고 위험도를 고려한<br>
+      최적의 경로를 안내해드려요
     </div>
   </div>
-
-  <img src="hodoongi.png" class="header-hodoongi">
-
 </div>
 
   <div class="input-card route-input-card">
