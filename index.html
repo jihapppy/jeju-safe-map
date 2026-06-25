@@ -1469,6 +1469,29 @@ body.safety-guide-mode .risk-map-page{
   color:#14b8a6;
   font-weight:900;
 }
+  .popular-select{
+
+  width:100%;
+  height:54px;
+
+  margin-top:10px;
+
+  padding:0 18px;
+
+  border:1px solid #e7edf4;
+  border-radius:18px;
+
+  background:#fff;
+
+  font-size:16px;
+  font-weight:700;
+
+  color:#0f172a;
+
+  box-shadow:0 6px 16px rgba(15,23,42,.05);
+
+  appearance:none;
+}
 </style>
 </head>
 
@@ -1527,29 +1550,34 @@ body.safety-guide-mode .risk-map-page{
 
  <div id="endResults"></div>
 
-<div class="popular-title">인기 관광지 선택</div>
-
-<div class="popular-grid">
- <button type="button" class="popular-item" onclick="setPopularEnd('성산일출봉','126.9347,33.4589')">
-  <img src="성산.png">
-  <span>성산일출봉</span>
-</button>
-
-<button type="button" class="popular-item" onclick="setPopularEnd('협재해수욕장','126.2412,33.3938')">
-  <img src="협재.png">
-  <span>협재해수욕장</span>
-</button>
-
-<button type="button" class="popular-item" onclick="setPopularEnd('중문관광단지','126.4128,33.2498')">
-  <img src="중문.png">
-  <span>중문관광단지</span>
-</button>
-
-<button type="button" class="popular-item" onclick="setPopularEnd('1100고지','126.4625,33.3580')">
-  <img src="1100고지.png">
-  <span>1100고지</span>
-</button>
+<div class="popular-title">
+  🗻 또는 추천 관광지 선택
 </div>
+
+<select
+  id="popularSelect"
+  class="popular-select"
+  onchange="selectPopularTour()">
+
+  <option value="">선택하세요</option>
+
+  <option value="성산일출봉|126.9347|33.4589">
+    성산일출봉
+  </option>
+
+  <option value="협재해수욕장|126.2412|33.3938">
+    협재해수욕장
+  </option>
+
+  <option value="중문관광단지|126.4128|33.2498">
+    중문관광단지
+  </option>
+
+  <option value="1100고지|126.4625|33.3580">
+    1100고지
+  </option>
+
+</select>
 </div>
 <button class="analyze-btn" onclick="drawRoutes()">
   <div class="analyze-main"> 안전 경로 탐색하기 </div>
@@ -2812,7 +2840,29 @@ document.getElementById("info").innerHTML =
   document.getElementById("info").innerHTML =
     "목적지가 '" + name + "'(으)로 설정되었습니다.";
 }
+function selectPopularTour(){
 
+  const value = document.getElementById("popularSelect").value;
+
+  if(!value) return;
+
+  const data = value.split("|");
+
+  customEnd = {
+    lng: parseFloat(data[1]),
+    lat: parseFloat(data[2])
+  };
+
+  customEndName = data[0];
+
+  document.getElementById("endInput").value = data[0];
+
+  document.getElementById("endResults").innerHTML = "";
+  document.getElementById("endResults").style.display = "none";
+
+  document.getElementById("info").innerHTML =
+    "목적지가 '" + data[0] + "'(으)로 설정되었습니다.";
+}
 function goHome(){
 
   document.body.classList.remove("risk-map-mode");
