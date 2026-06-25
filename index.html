@@ -1009,6 +1009,24 @@ body.safety-guide-mode .risk-map-page{
   width:100%;
   display:block;
 }
+
+  .loading-card{
+  margin-top:12px;
+  padding:18px;
+  border-radius:20px;
+  background:#f0fbf9;
+  border:1px solid #cdeee8;
+  color:#0f766e;
+  font-size:14px;
+  font-weight:800;
+}
+
+.loading-card p{
+  margin:6px 0 0;
+  color:#64748b;
+  font-size:12px;
+  font-weight:700;
+}
 </style>
 </head>
 
@@ -1600,7 +1618,12 @@ lastEnd = {
     return;
   }
 
-  document.getElementById("info").innerHTML = "경로를 불러오는 중입니다...";
+  document.getElementById("info").innerHTML = `
+  <div class="loading-card">
+    <b>안전경로를 분석하고 있어요</b>
+    <p>사고위험 권역과 대안경로를 비교 중입니다.</p>
+  </div>
+`;
     document.querySelector(".panel").classList.add("route-mode");
     document.body.classList.add("route-active");
     document.querySelector(".risk-legend").style.display = "none";
