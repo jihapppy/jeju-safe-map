@@ -1682,6 +1682,64 @@ body.route-active .panel{
 .compare-row2 b{
   font-size:14px !important;
 }
+  /* AI 추천 이유 / 맞춤 안전팁 가로 분할형 */
+.info-split-card{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:0;
+  margin-top:12px;
+  background:#fff;
+  border-radius:22px;
+  overflow:hidden;
+  box-shadow:0 8px 24px rgba(15,23,42,.07);
+  border:1px solid #edf2f7;
+}
+
+.info-split-col{
+  padding:16px 14px;
+}
+
+.info-split-col + .info-split-col{
+  border-left:1px solid #edf2f7;
+}
+
+.info-split-col h3{
+  margin:0 0 12px;
+  font-size:16px;
+  font-weight:900;
+  line-height:1.35;
+}
+
+.info-split-col.ai h3{
+  color:#0f766e;
+}
+
+.info-split-col.tip h3{
+  color:#ea7800;
+}
+
+.info-split-col p{
+  margin:8px 0;
+  font-size:13px;
+  font-weight:650;
+  line-height:1.55;
+  color:#334155;
+}
+
+/* 기존 카드형은 안 쓰이게 */
+.info-two-grid{
+  display:none !important;
+}
+
+/* 경로 상세 비교 글자 더 축소 */
+.compare-detail-new summary{
+  font-size:16px !important;
+}
+
+/* 하단 메뉴에 덜 잘리게 */
+body.route-active .panel{
+  padding-bottom:135px !important;
+}
 </style>
 </head>
 
@@ -2523,22 +2581,21 @@ resultWrap.innerHTML = `
 
   <div class="navi-grid final-navi"></div>
 
-  <div class="info-two-grid">
-    <div class="ai-card">
-      <h3>🤖 AI 추천 이유</h3>
-      <div class="info-line">
-        <span class="info-badge">✓</span>
-        <span>사고집중구간 통과거리 감소</span>
-      </div>
-      <div class="info-line">
-        <span class="info-badge">✓</span>
-        <span>EPDO 높은 권역 노출 감소</span>
-      </div>
-      <div class="info-line">
-        <span class="info-badge">✓</span>
-        <span>전체 위험점수 ${riskDiff}% 감소</span>
-      </div>
-    </div>
+ <div class="info-split-card">
+  <div class="info-split-col ai">
+    <h3>🤖 AI 추천 이유</h3>
+    <p>✔ 사고집중구간 통과거리 감소</p>
+    <p>✔ EPDO 높은 권역 노출 감소</p>
+    <p>✔ 전체 위험점수 ${riskDiff}% 감소</p>
+  </div>
+
+  <div class="info-split-col tip">
+    <h3>⭐ ${endName} 맞춤 안전팁</h3>
+    <p>✔ ${tips[0]}</p>
+    <p>✔ ${tips[1]}</p>
+    <p>✔ ${tips[2]}</p>
+  </div>
+</div>
 
     <div class="tip-card-new">
       <h3>⭐ ${endName} 맞춤 안전팁</h3>
