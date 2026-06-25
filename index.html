@@ -2829,14 +2829,13 @@ document.getElementById("info").innerHTML =
     "목적지가 '" + name + "'(으)로 설정되었습니다.";
 }
 
-  function goHome(){
+function goHome(){
 
   document.body.classList.remove("risk-map-mode");
   document.body.classList.remove("route-active");
-    document.body.classList.remove("safety-guide-mode");
+  document.body.classList.remove("safety-guide-mode");
 
-  document.querySelector(".panel")
-    .classList.remove("route-mode");
+  document.querySelector(".panel").classList.remove("route-mode");
 
   document.getElementById("info").innerHTML = "";
 
@@ -2858,20 +2857,16 @@ document.getElementById("info").innerHTML =
 
   resetHomeMap();
 
-document.getElementById("startInput").placeholder =
-"제주국제공항";
+  document.getElementById("startInput").placeholder = "제주국제공항";
+  document.getElementById("endInput").placeholder = "성산일출봉";
 
-document.getElementById("endInput").placeholder =
-"성산일출봉";
-
-/* 홈 메뉴 활성화 */
-document.querySelectorAll(".bottom-item").forEach(btn=>{
-  btn.classList.remove("active");
-});
-document.querySelectorAll(".bottom-item")[0].classList.add("active");
-
+  document.querySelectorAll(".bottom-item").forEach(btn=>{
+    btn.classList.remove("active");
+  });
+  document.querySelectorAll(".bottom-item")[0].classList.add("active");
 }
-  function showSafetyGuide(){
+
+function showSafetyGuide(){
 
   document.body.classList.remove("route-active");
   document.body.classList.remove("risk-map-mode");
@@ -2883,8 +2878,10 @@ document.querySelectorAll(".bottom-item")[0].classList.add("active");
 
   document.querySelectorAll(".bottom-item")[2].classList.add("active");
 }
- function showRiskMap(){
 
+function showRiskMap(){
+
+  document.body.classList.remove("route-active");
   document.body.classList.remove("safety-guide-mode");
   document.body.classList.add("risk-map-mode");
 
@@ -2892,19 +2889,6 @@ document.querySelectorAll(".bottom-item")[0].classList.add("active");
     btn.classList.remove("active");
   });
 
-    function showSafetyGuide(){
-
-  document.body.classList.remove("route-active");
-  document.body.classList.remove("risk-map-mode");
-  document.body.classList.add("safety-guide-mode");
-
-  document.querySelectorAll(".bottom-item").forEach(btn=>{
-    btn.classList.remove("active");
-  });
-
-  document.querySelectorAll(".bottom-item")[2].classList.add("active");
-}
-    
   document.querySelectorAll(".bottom-item")[1].classList.add("active");
 
   document.getElementById("zoneInfoCard").innerHTML = "";
