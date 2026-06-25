@@ -989,57 +989,25 @@ body.safety-guide-mode .risk-map-page{
   object-fit:cover;
 }
 
-.rule-grid{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:12px;
-  margin-top:16px;
-}
-
-.rule-card{
-  position:relative;
-  min-height:124px;
-  padding:16px 14px;
-  border-radius:18px;
-  box-sizing:border-box;
-}
-
-.rule-card b{
-  display:block;
-  font-size:16px;
-  font-weight:900;
-  letter-spacing:-.5px;
-}
-
-.rule-card p{
-  margin:12px 0 0;
-  font-size:13px;
-  font-weight:650;
-  line-height:1.55;
-  color:#0f172a;
-}
-
-.rule-card.mint{ background:#e9fbf7; }
-.rule-card.yellow{ background:#fff5df; }
-.rule-card.purple{ background:#f1efff; }
-.rule-card.blue{ background:#eaf4ff; }
-
-.rule-card.mint b{ color:#0f8f87; }
-.rule-card.yellow b{ color:#a45d00; }
-.rule-card.purple b{ color:#4338ca; }
-.rule-card.blue b{ color:#0369a1; }
-
-.check{
-  color:#14b8a6;
-  font-weight:900;
-}
-
 /* ===== 작은 화면 보정 ===== */
 @media(max-width:420px){
   .result-main-grid{
     grid-template-columns:1.35fr .8fr .8fr;
     gap:6px;
   }
+}
+  .guide-image-card{
+  margin-top:16px;
+  border-radius:22px;
+  overflow:hidden;
+  background:#fff;
+  box-shadow:0 10px 28px rgba(15,23,42,.08);
+  border:1px solid #edf2f7;
+}
+
+.guide-image-card img{
+  width:100%;
+  display:block;
 }
 </style>
 </head>
@@ -1172,43 +1140,11 @@ body.safety-guide-mode .risk-map-page{
       </video>
     </div>
 
-    <div class="rule-title">📖 제주 운전 안전 수칙</div>
-    <div class="section-sub">꼭 알아두면 사고를 예방할 수 있어요</div>
+   <div class="rule-title">📖 제주 렌터카 안전운전 가이드</div>
+<div class="section-sub">회전교차로와 엔진브레이크 사용법을 한눈에 확인하세요</div>
 
-<div class="rule-grid">
-
-  <div class="rule-card mint">
-    <b>🔄 회전교차로</b>
-    <p>
-      <span class="check">✔</span> 회전 차량 우선<br>
-      <span class="check">✔</span> 감속 후 좌우 확인
-    </p>
-  </div>
-
-  <div class="rule-card yellow">
-    <b>📍 목적지를 지나쳤다면</b>
-    <p>
-      <span class="check">✔</span> 급차선 변경 금지<br>
-      <span class="check">✔</span> 안전한 곳에서 돌아가기
-    </p>
-  </div>
-
-  <div class="rule-card purple">
-    <b>⛰️ 산악도로</b>
-    <p>
-      <span class="check">✔</span> 급커브·급경사 감속<br>
-      <span class="check">✔</span> 엔진브레이크 활용
-    </p>
-  </div>
-
-  <div class="rule-card blue">
-    <b>🌊 해안도로</b>
-    <p>
-      <span class="check">✔</span> 보행자·자전거 주의<br>
-      <span class="check">✔</span> 보도·차도 미구분 구간 서행
-    </p>
-  </div>
-
+<div class="guide-image-card">
+  <img src="safe-driving-guide.png" alt="제주 렌터카 안전운전 가이드">
 </div>
 
   </div>
