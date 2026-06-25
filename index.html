@@ -687,7 +687,6 @@ body.route-active #map{
 }
 
 body:not(.route-active) .risk-legend,
-body:not(.route-active) .popular-title,
 body:not(.route-active) .popular-grid{
   display:none !important;
 }
@@ -2875,6 +2874,7 @@ function goHome(){
 
   document.getElementById("startInput").value = "";
   document.getElementById("endInput").value = "";
+  document.getElementById("popularSelect").value = "";
 
   document.getElementById("startResults").innerHTML = "";
   document.getElementById("endResults").innerHTML = "";
