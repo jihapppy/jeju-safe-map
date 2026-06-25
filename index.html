@@ -1607,7 +1607,6 @@ body.safety-guide-mode .risk-map-page{
   </div>
 
   <div id="zoneInfoCard"></div>
-  <div id="zoneInfoCard"></div>
 
 </div>
 
@@ -1660,8 +1659,6 @@ body.safety-guide-mode .risk-map-page{
   </div>
 </div>
 
-<div class="bottom-nav">
-</div>
   <div class="bottom-nav">
   <button class="bottom-item active" onclick="goHome()">
     <img src="home-hand.png">
@@ -2886,15 +2883,28 @@ document.querySelectorAll(".bottom-item")[0].classList.add("active");
 
   document.querySelectorAll(".bottom-item")[2].classList.add("active");
 }
-  function showRiskMap(){
+ function showRiskMap(){
 
-  document.body.classList.remove("route-active");
+  document.body.classList.remove("safety-guide-mode");
   document.body.classList.add("risk-map-mode");
 
   document.querySelectorAll(".bottom-item").forEach(btn=>{
     btn.classList.remove("active");
   });
 
+    function showSafetyGuide(){
+
+  document.body.classList.remove("route-active");
+  document.body.classList.remove("risk-map-mode");
+  document.body.classList.add("safety-guide-mode");
+
+  document.querySelectorAll(".bottom-item").forEach(btn=>{
+    btn.classList.remove("active");
+  });
+
+  document.querySelectorAll(".bottom-item")[2].classList.add("active");
+}
+    
   document.querySelectorAll(".bottom-item")[1].classList.add("active");
 
   document.getElementById("zoneInfoCard").innerHTML = "";
