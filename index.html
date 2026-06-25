@@ -427,7 +427,7 @@ body.route-active .small{
 }
 
 body.route-active .panel{
-  top:46vh;
+  top:44vh;
   border-radius:28px 28px 0 0;
   background:#f8fafc;
   padding:12px 14px 135px;
@@ -2379,18 +2379,6 @@ document.getElementById("info").innerHTML =
   }catch(error){
     alert("출발지 검색 중 오류가 발생했어요.\n\n" + error.message);
   }
-}
- function togglePanel(){
-
-  const panel =
-    document.querySelector(".panel");
-
-  panel.classList.toggle("collapsed");
-
-  setTimeout(()=>{
-    map.invalidateSize();
-  },300);
-
 }
 
   function setPopularEnd(name, value){
