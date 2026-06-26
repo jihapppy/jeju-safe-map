@@ -1192,7 +1192,7 @@ body.safety-guide-mode .risk-map-page{
 
 <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
   <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
-
+<script src="accidents.js"></script>
 
 <script>
 const apiKey = "eyJvcmciOiI1YjNjZTM1OTc4NTExMTAwMDFjZjYyNDgiLCJpZCI6ImVkN2QwYzg1M2JlNjRhMjliZWY0ZGUxYTBhMGMzM2Q0IiwiaCI6Im11cm11cjY0In0=";
@@ -1513,11 +1513,6 @@ let lastEnd = null;
   ]
 };
 
-const accidentData = [
-  { lat:33.4996, lng:126.5312, epdo:12 },
-  { lat:33.5072, lng:126.4921, epdo:3 },
-  { lat:33.5060, lng:126.4928, epdo:50 }   // ← 테스트용
-];
   const fixedDestinationCoords = {
   "성산일출봉": { lat:33.4589, lng:126.9347 },
   "중문관광단지": { lat:33.2498, lng:126.4128 },
