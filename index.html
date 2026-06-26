@@ -1512,21 +1512,11 @@ let lastEnd = null;
     "급정거 차량에 대비해 안전거리를 확보하세요."
   ]
 };
-const dangerZones = [
-  { name:"공항권", lat:33.4996, lng:126.5312, radiusKm:4, count:53, epdo:261, reason:"렌터카 인수 직후 초행운전, 급차선 변경 주의" },
-  { name:"제주시도심권", lat:33.5000, lng:126.5200, radiusKm:5, count:132, epdo:581, reason:"도심 교차로 밀집, 보행자·차량 혼재" },
-  { name:"서귀포도심권", lat:33.2541, lng:126.5601, radiusKm:5, count:57, epdo:259, reason:"교차로와 보행자 사고 주의" },
-  { name:"애월권", lat:33.4620, lng:126.3260, radiusKm:6, count:38, epdo:215, reason:"해안도로·관광지 진출입 차량 주의" },
-  { name:"서부중산간권", lat:33.3059, lng:126.2895, radiusKm:8, count:35, epdo:223, reason:"중산간 도로, 곡선·경사 구간 주의" },
-  { name:"동부중산간권", lat:33.3500, lng:126.7200, radiusKm:9, count:30, epdo:162, reason:"중산간 도로와 교차로 통행 주의" },
-  { name:"협재·한림권", lat:33.3938, lng:126.2412, radiusKm:5, count:24, epdo:107, reason:"해수욕장 주변 보행자·주정차 차량 주의" },
-  { name:"함덕·조천권", lat:33.5435, lng:126.6682, radiusKm:5, count:17, epdo:93, reason:"해수욕장 주변 보행자·주정차 차량 혼재" },
-  { name:"김녕·월정권", lat:33.5560, lng:126.7950, radiusKm:5, count:16, epdo:80, reason:"해안도로 구간, 관광지 진출입 차량 주의" },
-  { name:"성산권", lat:33.4629, lng:126.9347, radiusKm:5, count:15, epdo:100, reason:"관광버스·렌터카 혼재, 교차로 통행 주의" },
-  { name:"한라산권", lat:33.3580, lng:126.4625, radiusKm:8, count:16, epdo:85, reason:"급커브, 안개, 기상변화 주의" },
-  { name:"중문권", lat:33.2498, lng:126.4128, radiusKm:5, count:14, epdo:79, reason:"관광지 진출입 혼잡, 급감속·차로변경 주의" }
-];
 
+const accidentData = [
+  { lat:33.4996, lng:126.5312, epdo:12 },
+  { lat:33.5072, lng:126.4921, epdo:3 }
+];
   const fixedDestinationCoords = {
   "성산일출봉": { lat:33.4589, lng:126.9347 },
   "중문관광단지": { lat:33.2498, lng:126.4128 },
@@ -1968,43 +1958,77 @@ document.getElementById("info").appendChild(notice);
 }
 
 function analyzeRouteRisk(coords){
-  let zoneStats = {};
+  const SEARCH_RADIUS_M = 100;
+
   let totalScore = 0;
+  let accidentCount = 0;
+  let totalEPDO = 0;
   let totalDistanceKm = 0;
+
+  const matchedAccidents = new Set();
 
   for(let i = 0; i < coords.length - 1; i++){
     const p1 = coords[i];
     const p2 = coords[i + 1];
 
-    const segmentKm = getDistanceKm(p1[0], p1[1], p2[0], p2[1]);
-    totalDistanceKm += segmentKm;
+    totalDistanceKm += getDistanceKm(p1[0], p1[1], p2[0], p2[1]);
+  }
 
-    const midLat = (p1[0] + p2[0]) / 2;
-    const midLng = (p1[1] + p2[1]) / 2;
+  coords.forEach(routePoint => {
+    const routeLat = routePoint[0];
+    const routeLng = routePoint[1];
 
-    dangerZones.forEach(zone=>{
-      const d = getDistanceKm(midLat, midLng, zone.lat, zone.lng);
+    accidentData.forEach((accident, index) => {
+      const distanceM = getDistanceKm(
+        routeLat,
+        routeLng,
+        accident.lat,
+        accident.lng
+      ) * 1000;
 
-      if(d <= zone.radiusKm){
-        const segmentScore = zone.epdo * segmentKm;
-        totalScore += segmentScore;
+      if(distanceM <= SEARCH_RADIUS_M && !matchedAccidents.has(index)){
+        matchedAccidents.add(index);
 
-        if(!zoneStats[zone.name]){
-          zoneStats[zone.name] = {
-            name: zone.name,
-            distanceKm: 0,
-            score: 0,
-            epdo: zone.epdo,
-            count: zone.count,
-            reason: zone.reason
-          };
-        }
+        const epdo = accident.epdo || 1;
 
-        zoneStats[zone.name].distanceKm += segmentKm;
-        zoneStats[zone.name].score += segmentScore;
+        totalEPDO += epdo;
+        totalScore += epdo;
+        accidentCount++;
       }
     });
+  });
+
+  let level = "낮음";
+  let icon = "🟢";
+
+  if(totalScore >= 80){
+    level = "매우높음";
+    icon = "🔴";
+  }else if(totalScore >= 40){
+    level = "높음";
+    icon = "🟠";
+  }else if(totalScore >= 15){
+    level = "보통";
+    icon = "🟡";
   }
+
+  return {
+    score: totalScore,
+    level: level,
+    icon: icon,
+    zoneNames: accidentCount > 0
+      ? "경로 주변 사고 " + accidentCount + "건"
+      : "경로 주변 사고 적음",
+    reasons: accidentCount > 0
+      ? "경로 반경 100m 이내 사고 데이터를 반영했습니다."
+      : "경로 주변 사고 데이터가 적은 구간입니다.",
+    totalCount: accidentCount,
+    totalEpdo: totalEPDO,
+    totalDistanceKm: totalDistanceKm,
+    riskScoreText: Math.round(totalScore).toLocaleString() + "점",
+    zoneDetailText: "경로 주변 사고 " + accidentCount + "건 / EPDO " + totalEPDO
+  };
+}
 
   const passedZones = Object.values(zoneStats)
     .sort((a,b)=>b.score - a.score);
