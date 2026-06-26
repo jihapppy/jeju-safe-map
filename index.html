@@ -1956,7 +1956,6 @@ document.getElementById("info").appendChild(notice);
   alert("경로 분석 서버 연결이 불안정해요.\n잠시 후 다시 시도해주세요.");
 }
 }
-
 function analyzeRouteRisk(coords){
   const SEARCH_RADIUS_M = 100;
 
@@ -2029,73 +2028,6 @@ function analyzeRouteRisk(coords){
     zoneDetailText: "경로 주변 사고 " + accidentCount + "건 / EPDO " + totalEPDO
   };
 }
-
-  const passedZones = Object.values(zoneStats)
-    .sort((a,b)=>b.score - a.score);
-
-  if(passedZones.length === 0){
-    return {
-      score:0,
-      level:"낮음",
-      icon:"🟢",
-      zoneNames:"사고밀집권역 통과 적음",
-      reasons:"비교적 단순한 경로",
-      totalCount:0,
-      totalEpdo:0,
-      totalDistanceKm: totalDistanceKm,
-      riskScoreText:"0점",
-      zoneDetailText:"사고밀집권역 통과 적음"
-    };
-  }
-
-  let level = "낮음";
-  let icon = "🟢";
-
-  if(totalScore >= 2500){
-    level = "매우높음";
-    icon = "🔴";
-  }else if(totalScore >= 1200){
-    level = "높음";
-    icon = "🟠";
-  }else if(totalScore >= 500){
-    level = "보통";
-    icon = "🟡";
-  }
-
-  const totalCount = passedZones.reduce((sum,z)=>sum + z.count, 0);
-  const totalEpdo = passedZones.reduce((sum,z)=>sum + z.epdo, 0);
-
-  const zoneNames = passedZones
-    .map(z => z.name + " " + z.distanceKm.toFixed(1) + "km")
-    .join(", ");
-
-  const zoneDetailText = passedZones
-    .map(z =>
-      z.name +
-      " " +
-      z.distanceKm.toFixed(1) +
-      "km × EPDO " +
-      z.epdo +
-      " = " +
-      Math.round(z.score).toLocaleString() +
-      "점"
-    )
-    .join("<br>");
-
-  return {
-    score: totalScore,
-    level: level,
-    icon: icon,
-    zoneNames: zoneNames,
-    reasons: passedZones.map(z=>z.reason).join(" / "),
-    totalCount: totalCount,
-    totalEpdo: totalEpdo,
-    totalDistanceKm: totalDistanceKm,
-    riskScoreText: Math.round(totalScore).toLocaleString() + "점",
-    zoneDetailText: zoneDetailText
-  };
-}
-
 function getDistanceKm(lat1,lng1,lat2,lng2){
   const R = 6371;
   const dLat = deg2rad(lat2-lat1);
