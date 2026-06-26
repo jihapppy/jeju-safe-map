@@ -1027,6 +1027,144 @@ body.safety-guide-mode .risk-map-page{
   font-size:12px;
   font-weight:700;
 }
+  #riskMiniMap{
+  width:100%;
+  height:420px;
+  border-radius:24px;
+  overflow:hidden;
+}
+
+.risk-map-card{
+  margin-top:18px;
+  padding:10px;
+  border-radius:28px;
+  background:#eaf7ff;
+  box-shadow:0 12px 30px rgba(15,23,42,.10);
+}
+
+.risk-map-legend{
+  margin-top:10px;
+  padding:12px;
+  border-radius:18px;
+  background:#fff;
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:8px;
+  font-size:11px;
+  font-weight:900;
+  color:#334155;
+  text-align:center;
+}
+
+.risk-map-legend small{
+  font-size:9px;
+  color:#64748b;
+  font-weight:700;
+}
+
+.risk-dot{
+  display:block;
+  width:14px;
+  height:14px;
+  border-radius:50%;
+  margin:0 auto 4px;
+}
+
+.risk-dot.high{ background:#ef4444; }
+.risk-dot.midhigh{ background:#f97316; }
+.risk-dot.mid{ background:#facc15; }
+.risk-dot.low{ background:#10b981; }
+
+.risk-dashboard{
+  margin-top:14px;
+  display:grid;
+  grid-template-columns:1fr;
+  gap:12px;
+  padding-bottom:90px;
+}
+
+.risk-info-card{
+  background:#fff;
+  border-radius:22px;
+  padding:16px;
+  box-shadow:0 8px 22px rgba(15,23,42,.07);
+  border:1px solid #edf2f7;
+}
+
+.risk-info-card h3{
+  margin:0 0 12px;
+  font-size:17px;
+  font-weight:900;
+  color:#0f172a;
+}
+
+.risk-info-card p{
+  margin:8px 0;
+  font-size:13px;
+  font-weight:700;
+  line-height:1.45;
+  color:#334155;
+}
+
+.risk-question{
+  margin-bottom:10px;
+  font-size:13px;
+  font-weight:900;
+  color:#0f172a;
+}
+
+.type-row{
+  display:grid;
+  grid-template-columns:80px 1fr 44px;
+  align-items:center;
+  gap:8px;
+  margin:9px 0;
+  font-size:12px;
+  font-weight:800;
+}
+
+.type-row div{
+  height:8px;
+  border-radius:999px;
+  background:#edf2f7;
+  overflow:hidden;
+}
+
+.type-row i{
+  display:block;
+  height:100%;
+  border-radius:999px;
+}
+
+.type-row b{
+  font-size:12px;
+  text-align:right;
+}
+
+.stat-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+}
+
+.stat-grid div{
+  padding:14px;
+  border-radius:18px;
+  background:#f8fafc;
+  text-align:center;
+}
+
+.stat-grid b{
+  display:block;
+  color:#0f9f91;
+  font-size:20px;
+}
+
+.stat-grid span{
+  font-size:11px;
+  color:#64748b;
+  font-weight:800;
+}
 </style>
 </head>
 
@@ -1119,34 +1257,74 @@ body.safety-guide-mode .risk-map-page{
   </div>
 </div>
 
- <div id="riskMapPage" class="risk-map-page">
+<div id="riskMapPage" class="risk-map-page">
 
-  <div class="risk-map-title">제주 렌터카 상대위험지도</div>
+  <div class="risk-map-title">사고 위험 지도</div>
   <div class="risk-map-sub">
-    EPDO와 통행량을 함께 반영한 권역별 사고위험도입니다.
+    2025년 렌터카 사고 기반 위험도 표시
   </div>
 
-  <div class="risk-map-wrap">
-    <img src="risk-map.png?v=3" class="risk-map-image">
+  <div class="risk-map-card">
+    <div id="riskMiniMap"></div>
 
-    <button class="zone-btn city" onclick="showZoneCard('제주시도심권')"></button>
-    <button class="zone-btn east" onclick="showZoneCard('동부중산간권')"></button>
-    <button class="zone-btn west" onclick="showZoneCard('서부중산간권')"></button>
-    <button class="zone-btn airport" onclick="showZoneCard('공항권')"></button>
+    <div class="risk-map-legend">
+      <span><b class="risk-dot high"></b>높음<br><small>EPDO 12점~</small></span>
+      <span><b class="risk-dot midhigh"></b>보통 높음<br><small>EPDO 6~11점</small></span>
+      <span><b class="risk-dot mid"></b>보통<br><small>EPDO 3~5점</small></span>
+      <span><b class="risk-dot low"></b>낮음<br><small>EPDO 0~2점</small></span>
+    </div>
   </div>
 
-  <div class="risk-chip-row">
-    <span class="risk-chip">🔴 매우높음</span>
-    <span class="risk-chip">🟠 높음</span>
-    <span class="risk-chip">🟡 주의</span>
-    <span class="risk-chip">🟢 보통</span>
+  <div class="risk-dashboard">
+
+    <div class="risk-info-card">
+      <h3>📊 사고 정보 요약</h3>
+
+      <div class="risk-question">어떤 유형의 사고가 많았나요?</div>
+
+      <div class="type-row">
+        <span>🚗 차대차</span>
+        <div><i style="width:62%; background:#ef4444;"></i></div>
+        <b>62.2%</b>
+      </div>
+
+      <div class="type-row">
+        <span>🚙 차량 단독</span>
+        <div><i style="width:18%; background:#f97316;"></i></div>
+        <b>18.1%</b>
+      </div>
+
+      <div class="type-row">
+        <span>🚶 차대사람</span>
+        <div><i style="width:13%; background:#facc15;"></i></div>
+        <b>13.4%</b>
+      </div>
+
+      <div class="type-row">
+        <span>기타</span>
+        <div><i style="width:6%; background:#10b981;"></i></div>
+        <b>6.3%</b>
+      </div>
+    </div>
+
+    <div class="risk-info-card">
+      <h3>📌 특이한 점은?</h3>
+      <p>✔ 제주시 도심·공항·연동·노형동 일대 사고 밀집</p>
+      <p>✔ 해안도로 관광지 주변 사고 다발</p>
+      <p>✔ 교차로 및 관광지 진출입 구간 사고 비율 높음</p>
+      <p>✔ 야간·주말 운전 시 주의 필요</p>
+    </div>
+
+    <div class="risk-info-card">
+      <h3>핵심 통계</h3>
+      <div class="stat-grid">
+        <div><b>447건</b><span>총 사고 건수</span></div>
+        <div><b>2,245점</b><span>EPDO 합계</span></div>
+      </div>
+    </div>
+
   </div>
-
-  <div id="zoneInfoCard"></div>
-
 </div>
-
-<div id="safetyGuidePage" class="safety-guide-page">
   <div class="safety-guide-card">
 
     <div class="section-title">🎥 렌터카 안전운전 영상</div>
@@ -2331,7 +2509,70 @@ function showSafetyGuide(){
 
   document.querySelectorAll(".bottom-item")[2].classList.add("active");
 }
+let riskMiniMap = null;
+let riskMiniLayer = null;
 
+function getRiskColor(epdo){
+  if(epdo >= 12) return "#ef4444";
+  if(epdo >= 6) return "#f97316";
+  if(epdo >= 3) return "#facc15";
+  return "#10b981";
+}
+
+function getRiskRadius(epdo){
+  if(epdo >= 12) return 7;
+  if(epdo >= 6) return 6;
+  if(epdo >= 3) return 5;
+  return 4;
+}
+
+function initRiskMiniMap(){
+  if(riskMiniMap){
+    setTimeout(() => {
+      riskMiniMap.invalidateSize();
+    }, 200);
+    return;
+  }
+
+  riskMiniMap = L.map("riskMiniMap", {
+    zoomControl:true,
+    attributionControl:false
+  }).setView([33.38,126.55], 10);
+
+  L.tileLayer(
+    "https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png",
+    {
+      subdomains:"abcd",
+      maxZoom:20
+    }
+  ).addTo(riskMiniMap);
+
+  riskMiniLayer = L.layerGroup().addTo(riskMiniMap);
+
+  accidentData.forEach(accident => {
+    const epdo = accident.epdo || 1;
+    const color = getRiskColor(epdo);
+
+    L.circleMarker([accident.lat, accident.lng], {
+      radius:getRiskRadius(epdo),
+      color:color,
+      fillColor:color,
+      fillOpacity:.72,
+      weight:1
+    })
+    .bindPopup(
+      "<b>사고 위험도</b><br>" +
+      "EPDO: " + epdo + "점<br>" +
+      "사고번호: " + (accident.accidentNo || "-")
+    )
+    .addTo(riskMiniLayer);
+  });
+
+  setTimeout(() => {
+    riskMiniMap.invalidateSize();
+  }, 300);
+}
+  
 function showRiskMap(){
 
   document.body.classList.remove("route-active");
@@ -2345,6 +2586,8 @@ function showRiskMap(){
   document.querySelectorAll(".bottom-item")[1].classList.add("active");
 
   document.getElementById("zoneInfoCard").innerHTML = "";
+
+  setTimeout(initRiskMiniMap, 200);
 }
 
 function showZoneCard(region){
