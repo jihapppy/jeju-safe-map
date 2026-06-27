@@ -2539,7 +2539,16 @@ function initRiskMiniMap(){
   riskMiniMap = L.map("riskMiniMap", {
     zoomControl:true,
     attributionControl:false
-  }).setView([33.38,126.55], 10);
+  }).setView([33.38,126.55], 9);
+
+  const jejuBounds = L.latLngBounds(
+  [33.08, 126.10],
+  [33.62, 127.05]
+);
+
+riskMiniMap.fitBounds(jejuBounds, {
+  padding:[20,20]
+});
 
   L.tileLayer(
     "https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png",
@@ -2562,11 +2571,12 @@ function initRiskMiniMap(){
       fillOpacity:.72,
       weight:1
     })
-    .bindPopup(
-      "<b>사고 위험도</b><br>" +
-      "EPDO: " + epdo + "점<br>" +
-      "사고번호: " + (accident.accidentNo || "-")
-    )
+   .bindPopup(
+  "<b>사고 정보</b><br>" +
+  "피해정도: " + (accident.severity || "-") + "<br>" +
+  "법규위반: " + (accident.violation || "-") + "<br>" +
+  "EPDO: " + epdo + "점"
+)
     .addTo(riskMiniLayer);
   });
 
