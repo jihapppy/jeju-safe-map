@@ -1379,7 +1379,8 @@ body.safety-guide-mode .risk-map-page{
 </div>
 
 <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-  <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+<script src="https://unpkg.com/leaflet.heat/dist/leaflet-heat.js"></script>
+<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 <script src="accidents.js"></script>
 
 <script>
@@ -2553,7 +2554,8 @@ function showSafetyGuide(){
 }
 let riskMiniMap = null;
 let riskMiniLayer = null;
-
+let riskHeatLayer = null;
+  
 function getRiskColor(epdo){
   if(epdo >= 12) return "#ef4444";
   if(epdo >= 6) return "#f97316";
@@ -2599,7 +2601,27 @@ L.tileLayer(
 ).addTo(riskMiniMap);
 
 riskMiniLayer = L.layerGroup().addTo(riskMiniMap);
+const heatPoints = accidentData.map(accident => {
+  const epdo = accident.epdo || 1;
+  return [
+    accident.lat,
+    accident.lng,
+    Math.min(epdo / 20, 1)
+  ];
+});
 
+riskHeatLayer = L.heatLayer(heatPoints, {
+  radius:22,
+  blur:18,
+  maxZoom:13,
+  minOpacity:0.35,
+  gradient:{
+    0.2:"#22c55e",
+    0.45:"#facc15",
+    0.7:"#f97316",
+    1.0:"#ef4444"
+  }
+}).addTo(riskMiniMap);
 accidentData.forEach(accident => {
   const epdo = accident.epdo || 1;
   const color = getRiskColor(epdo);
