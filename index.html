@@ -1903,14 +1903,45 @@ routeSummaries.forEach((summary,index)=>{
   lineJoin:"round"
 })
   .addTo(routeLayer)
-  .bindPopup(
-  "<b>사고 정보</b><br>" +
-  "피해정도: " + (accident.severity || "-") + "<br>" +
-  "사고유형: " + (accident.accidentType || "-") + "<br>" +
-  "법규위반: " + (accident.violation || "-") + "<br>" +
-  "도로형태: " + (accident.roadType || "-") + "<br>" +
-  "EPDO: " + epdo + "점"
-)
+  .bindPopup(`
+<div style="min-width:210px">
+
+<div style="
+font-size:16px;
+font-weight:900;
+margin-bottom:10px;
+color:#0f172a;">
+🚨 사고 정보
+</div>
+
+<div style="margin:6px 0;">
+<b>피해정도</b><br>
+${accident.severity}
+</div>
+
+<div style="margin:6px 0;">
+<b>사고유형</b><br>
+${accident.accidentType}
+</div>
+
+<div style="margin:6px 0;">
+<b>법규위반</b><br>
+${accident.violation}
+</div>
+
+<div style="margin:6px 0;">
+<b>도로형태</b><br>
+${accident.roadType}
+</div>
+
+<hr>
+
+<div>
+<b>EPDO</b> ${epdo}점
+</div>
+
+</div>
+`)
 
  const middleIndex = Math.floor(coords.length / 2);
 const labelPoint = coords[middleIndex];
