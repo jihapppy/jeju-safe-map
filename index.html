@@ -1379,7 +1379,6 @@ body.safety-guide-mode .risk-map-page{
 </div>
 
 <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-<script src="https://unpkg.com/leaflet.heat/dist/leaflet-heat.js"></script>
 <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 <script src="accidents.js"></script>
 
@@ -2523,7 +2522,6 @@ function showSafetyGuide(){
 }
 let riskMiniMap = null;
 let riskMiniLayer = null;
-let riskHeatLayer = null;
   
 function getRiskColor(epdo){
   if(epdo >= 12) return "#ef4444";
@@ -2533,10 +2531,10 @@ function getRiskColor(epdo){
 }
 
 function getRiskRadius(epdo){
-  if(epdo >= 12) return 7;
-  if(epdo >= 6) return 6;
-  if(epdo >= 3) return 5;
-  return 4;
+  if(epdo >= 12) return 12;
+  if(epdo >= 6) return 9;
+  if(epdo >= 3) return 7;
+  return 5;
 }
 
 function initRiskMiniMap(){
@@ -2570,27 +2568,6 @@ L.tileLayer(
 ).addTo(riskMiniMap);
 
 riskMiniLayer = L.layerGroup().addTo(riskMiniMap);
-const heatPoints = accidentData.map(accident => {
-  const epdo = accident.epdo || 1;
-  return [
-    accident.lat,
-    accident.lng,
-    Math.min(epdo / 20, 1)
-  ];
-});
-
-riskHeatLayer = L.heatLayer(heatPoints, {
-  radius:22,
-  blur:18,
-  maxZoom:13,
-  minOpacity:0.35,
-  gradient:{
-    0.2:"#22c55e",
-    0.45:"#facc15",
-    0.7:"#f97316",
-    1.0:"#ef4444"
-  }
-}).addTo(riskMiniMap);
 accidentData.forEach(accident => {
   const epdo = accident.epdo || 1;
   const color = getRiskColor(epdo);
@@ -2599,8 +2576,8 @@ accidentData.forEach(accident => {
     radius:getRiskRadius(epdo),
     color:color,
     fillColor:color,
-    fillOpacity:.72,
-    weight:1
+   fillOpacity:.88,
+weight:1.5
   })
   .bindPopup(
     "<b>사고 정보</b><br>" +
