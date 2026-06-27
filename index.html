@@ -1266,6 +1266,12 @@ body.safety-guide-mode .risk-map-page{
   line-height:1.55;
   color:#475569;
 }
+  .brief-intro{
+  margin-bottom:10px !important;
+  color:#64748b !important;
+  font-size:13px !important;
+  font-weight:800 !important;
+}
 </style>
 </head>
 
@@ -2105,10 +2111,12 @@ resultWrap.innerHTML = `
 
  <div class="info-split-card">
   <div class="info-split-col ai">
-    <h3>🤖 AI 추천 이유</h3>
-    <p>✔ 경로 주변 사고지점이 더 적은 경로입니다.</p>
-<p>✔ 중상·고위험 사고 구간을 우회했습니다.</p>
-<p>✔ 전체 위험도가 약 ${riskDiff}% 낮습니다.</p>
+<h3>🤖 AI 안전 브리핑</h3>
+<p class="brief-intro">이번 경로에서는</p>
+<p>✔ 사고지점 ${alt.risk.totalCount}건 → ${recommend.risk.totalCount}건으로 감소했습니다.</p>
+<p>✔ EPDO 합계 ${alt.risk.totalEpdo}점 → ${recommend.risk.totalEpdo}점으로 낮췄습니다.</p>
+<p>✔ 관광지 진출입 구간 주의가 필요한 경로를 우회했습니다.</p>
+<p>✔ 대안 경로보다 위험도가 약 ${riskDiff}% 낮습니다.</p>
   </div>
 
   <div class="info-split-col tip">
