@@ -1196,6 +1196,28 @@ body.safety-guide-mode .risk-map-page{
   line-height:1.55;
   color:#475569;
 }
+  .epdo-desc{
+  margin:10px 4px 14px;
+  font-size:11.5px;
+  font-weight:700;
+  line-height:1.45;
+  color:#64748b;
+  text-align:center;
+}
+  .stat-grid.four{
+  grid-template-columns:repeat(4,1fr);
+}
+
+.feature-list{
+  margin-top:12px;
+}
+
+.feature-list p{
+  margin:7px 0;
+  font-size:12.5px;
+  font-weight:750;
+  color:#334155;
+}
 </style>
 </head>
 
@@ -1305,6 +1327,9 @@ body.safety-guide-mode .risk-map-page{
       <span><b class="risk-dot low"></b>낮음<br><small>EPDO 0~2점</small></span>
     </div>
   </div>
+ <div class="epdo-desc">
+    ※ EPDO는 사고 심각도를 반영한 위험도 지수입니다. 사망·중상사고일수록 높은 점수가 부여됩니다.
+  </div>
 
   <div class="risk-dashboard">
 
@@ -1347,12 +1372,22 @@ body.safety-guide-mode .risk-map-page{
     </div>
 
     <div class="risk-info-card">
-      <h3>핵심 통계</h3>
-      <div class="stat-grid">
-        <div><b>447건</b><span>총 사고 건수</span></div>
-        <div><b>2,245점</b><span>EPDO 합계</span></div>
-      </div>
-    </div>
+<div class="risk-info-card">
+  <h3>📊 2025년 렌터카 사고 특성</h3>
+
+  <div class="stat-grid four">
+    <div><b>447건</b><span>총 사고</span></div>
+    <div><b id="deathCount">-</b><span>사망</span></div>
+    <div><b id="seriousCount">-</b><span>중상</span></div>
+    <div><b id="minorCount">-</b><span>경상</span></div>
+  </div>
+
+  <div class="feature-list">
+    <p>✔ 차대차 사고 비중이 가장 높음</p>
+    <p>✔ 안전운전의무위반·기타 법규위반 사고 다수</p>
+    <p>✔ 공항·제주시 도심·관광지 진출입 구간 사고 집중</p>
+  </div>
+</div>
 
   </div>
 </div>
@@ -2565,12 +2600,11 @@ function getRiskColor(epdo){
 }
 
 function getRiskRadius(epdo){
-  if(epdo >= 12) return 12;
-  if(epdo >= 6) return 9;
-  if(epdo >= 3) return 7;
-  return 5;
+  if(epdo >= 12) return 8;
+  if(epdo >= 6) return 6;
+  if(epdo >= 3) return 5;
+  return 4;
 }
-
 function initRiskMiniMap(){
   if(riskMiniMap){
     setTimeout(() => {
@@ -2610,8 +2644,8 @@ accidentData.forEach(accident => {
     radius:getRiskRadius(epdo),
     color:color,
     fillColor:color,
-   fillOpacity:.88,
-weight:1.5
+   fillOpacity:.68,
+weight:1
   })
   .bindPopup(
     "<b>사고 정보</b><br>" +
@@ -2626,7 +2660,21 @@ weight:1.5
     riskMiniMap.invalidateSize();
   }, 300);
 }
-  
+  function updateAccidentStats(){
+  if(!Array.isArray(accidentData)) return;
+
+  const death = accidentData.filter(a => (a.severity || "").includes("사망")).length;
+  const serious = accidentData.filter(a => (a.severity || "").includes("중상")).length;
+  const minor = accidentData.filter(a => (a.severity || "").includes("경상")).length;
+
+  const deathEl = document.getElementById("deathCount");
+  const seriousEl = document.getElementById("seriousCount");
+  const minorEl = document.getElementById("minorCount");
+
+  if(deathEl) deathEl.textContent = death + "건";
+  if(seriousEl) seriousEl.textContent = serious + "건";
+  if(minorEl) minorEl.textContent = minor + "건";
+}
 function showRiskMap(){
 
   document.body.classList.remove("route-active");
@@ -2638,6 +2686,7 @@ function showRiskMap(){
   });
 
   document.querySelectorAll(".bottom-item")[1].classList.add("active");
+  updateAccidentStats();
 
   setTimeout(initRiskMiniMap, 200);
 }
