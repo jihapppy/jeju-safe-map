@@ -1173,6 +1173,29 @@ body.safety-guide-mode .risk-map-page{
   color:#64748b;
   font-weight:800;
 }
+  .risk-score-guide{
+  margin-top:12px;
+  padding:16px;
+  border-radius:20px;
+  background:#f8fafc;
+  border:1px solid #e5e7eb;
+  box-shadow:0 8px 22px rgba(15,23,42,.05);
+}
+
+.risk-score-guide h3{
+  margin:0 0 8px;
+  font-size:16px;
+  font-weight:900;
+  color:#0f172a;
+}
+
+.risk-score-guide p{
+  margin:6px 0;
+  font-size:12.8px;
+  font-weight:700;
+  line-height:1.55;
+  color:#475569;
+}
 </style>
 </head>
 
@@ -2005,9 +2028,9 @@ resultWrap.innerHTML = `
  <div class="info-split-card">
   <div class="info-split-col ai">
     <h3>🤖 AI 추천 이유</h3>
-    <p>✔ 경로 주변 사고 발생 지점 감소</p>
-    <p>✔ 사고 EPDO 합계가 낮은 경로 선택</p>
-    <p>✔ 전체 위험점수 ${riskDiff}% 감소</p>
+    <p>✔ 경로 주변 사고지점이 더 적은 경로입니다.</p>
+<p>✔ 중상·고위험 사고 구간을 우회했습니다.</p>
+<p>✔ 전체 위험도가 약 ${riskDiff}% 낮습니다.</p>
   </div>
 
   <div class="info-split-col tip">
@@ -2062,7 +2085,18 @@ resultWrap.innerHTML = `
         </div>
       </div>
     </div>
+    
   </details>
+    <div class="risk-score-guide">
+    <h3>위험점수란?</h3>
+    <p>
+      위험점수는 경로 주변의 실제 렌터카 사고 위치와
+      사고 심각도를 함께 분석하여 계산한 상대적 위험도입니다.
+    </p>
+    <p>
+      점수가 낮을수록 상대적으로 더 안전한 경로입니다.
+    </p>
+  </div>
 `;
 document.getElementById("info").appendChild(resultWrap);
 
