@@ -147,7 +147,7 @@ body.route-active #map{
 /* ===== 홈 화면 ===== */
 .hero-banner{
   position:relative;
-  height:200px;
+  height:220px;
   border-radius:12px 12px 28px 28px;
   overflow:hidden;
   background:
@@ -157,7 +157,7 @@ body.route-active #map{
       rgba(15,23,42,.28) 45%,
       rgba(15,23,42,.72) 100%
     ),
-   url("성산.png") center 63%/cover no-repeat;
+   url("성산.png") center 68%/cover no-repeat;
 }
 
 .hero-text{
@@ -824,7 +824,7 @@ body.risk-map-mode .panel{
   background:linear-gradient(180deg,#f8fffd 0%,#ffffff 55%);
   z-index:10000;
   overflow-y:auto;
-  padding:18px 16px 96px;
+  padding:18px 16px 32px;
   box-sizing:border-box;
 }
 
@@ -1088,7 +1088,7 @@ body.safety-guide-mode .risk-map-page{
   display:grid;
   grid-template-columns:1fr;
   gap:12px;
-  padding-bottom:90px;
+  padding-bottom:20px;
 }
 
 .risk-info-card{
@@ -1156,16 +1156,19 @@ body.safety-guide-mode .risk-map-page{
 }
 
 .stat-grid div{
-  padding:14px;
+  padding:12px 4px;
   border-radius:18px;
   background:#f8fafc;
   text-align:center;
+  min-width:0;
 }
 
 .stat-grid b{
   display:block;
   color:#0f9f91;
   font-size:20px;
+  line-height:1.1;
+  white-space:nowrap;
 }
 
 .stat-grid span{
@@ -1197,12 +1200,14 @@ body.safety-guide-mode .risk-map-page{
   color:#475569;
 }
   .epdo-desc{
-  margin:10px 4px 14px;
-  font-size:11.5px;
-  font-weight:700;
-  line-height:1.45;
+  margin:10px 2px 0;
+  padding:0 4px;
   color:#64748b;
-  text-align:center;
+  font-size:11.5px;
+  font-weight:750;
+  line-height:1.45;
+  text-align:left;
+  word-break:keep-all;
 }
   .stat-grid.four{
   grid-template-columns:repeat(4,1fr);
@@ -1328,7 +1333,7 @@ body.safety-guide-mode .risk-map-page{
     </div>
   </div>
  <div class="epdo-desc">
-    ※ EPDO는 사고 심각도를 반영한 위험도 지수입니다. 사망·중상사고일수록 높은 점수가 부여됩니다.
+   ※ EPDO: 사고 심각도 지수. 사망·중상사고일수록 점수가 높습니다.
   </div>
 
   <div class="risk-dashboard">
