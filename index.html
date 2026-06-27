@@ -2547,15 +2547,15 @@ function initRiskMiniMap(){
 riskMiniMap = L.map("riskMiniMap", {
   zoomControl:true,
   attributionControl:false
-});
+}).setView([33.36,126.55], 9);
 
 const jejuBounds = L.latLngBounds(
-  [33.08,126.08],
-  [33.62,127.02]
+  [33.18,126.15],
+  [33.58,126.98]
 );
 
-riskMiniMap.fitBounds(jejuBounds,{
-  padding:[15,15]
+riskMiniMap.fitBounds(jejuBounds, {
+  padding:[5,5]
 });
 
 L.tileLayer(
