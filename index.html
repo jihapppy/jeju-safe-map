@@ -2536,49 +2536,49 @@ function initRiskMiniMap(){
     return;
   }
 
-  riskMiniMap = L.map("riskMiniMap", {
-    zoomControl:true,
-    attributionControl:false
-  }).setView([33.38,126.55], 9);
-
-  const jejuBounds = L.latLngBounds(
-  [33.08, 126.10],
-  [33.62, 127.05]
-);
-
-riskMiniMap.fitBounds(jejuBounds, {
-  padding:[20,20]
+riskMiniMap = L.map("riskMiniMap", {
+  zoomControl:true,
+  attributionControl:false
 });
 
-  L.tileLayer(
-    "https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png",
-    {
-      subdomains:"abcd",
-      maxZoom:20
-    }
-  ).addTo(riskMiniMap);
+const jejuBounds = L.latLngBounds(
+  [33.08,126.08],
+  [33.62,127.02]
+);
 
-  riskMiniLayer = L.layerGroup().addTo(riskMiniMap);
+riskMiniMap.fitBounds(jejuBounds,{
+  padding:[15,15]
+});
 
-  accidentData.forEach(accident => {
-    const epdo = accident.epdo || 1;
-    const color = getRiskColor(epdo);
+L.tileLayer(
+  "https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png",
+  {
+    subdomains:"abcd",
+    maxZoom:20
+  }
+).addTo(riskMiniMap);
 
-    L.circleMarker([accident.lat, accident.lng], {
-      radius:getRiskRadius(epdo),
-      color:color,
-      fillColor:color,
-      fillOpacity:.72,
-      weight:1
-    })
-   .bindPopup(
-  "<b>사고 정보</b><br>" +
-  "피해정도: " + (accident.severity || "-") + "<br>" +
-  "법규위반: " + (accident.violation || "-") + "<br>" +
-  "EPDO: " + epdo + "점"
-)
-    .addTo(riskMiniLayer);
-  });
+riskMiniLayer = L.layerGroup().addTo(riskMiniMap);
+
+accidentData.forEach(accident => {
+  const epdo = accident.epdo || 1;
+  const color = getRiskColor(epdo);
+
+  L.circleMarker([accident.lat, accident.lng], {
+    radius:getRiskRadius(epdo),
+    color:color,
+    fillColor:color,
+    fillOpacity:.72,
+    weight:1
+  })
+  .bindPopup(
+    "<b>사고 정보</b><br>" +
+    "피해정도: " + (accident.severity || "-") + "<br>" +
+    "법규위반: " + (accident.violation || "-") + "<br>" +
+    "EPDO: " + epdo + "점"
+  )
+  .addTo(riskMiniLayer);
+});
 
   setTimeout(() => {
     riskMiniMap.invalidateSize();
