@@ -1252,16 +1252,6 @@ body.safety-guide-mode .risk-map-page{
   padding:14px 12px;
 }
 
-.risk-score-guide{
-  margin-top:12px;
-  margin-bottom:30px;
-  padding:18px;
-  border-radius:24px;
-  background:#fff;
-  box-shadow:0 8px 24px rgba(15,23,42,.07);
-  border:1px solid #edf2f7;
-}
-
 .risk-score-guide h3{
   margin:0 0 10px;
   font-size:18px;
@@ -1282,11 +1272,9 @@ body.safety-guide-mode .risk-map-page{
 <body>
 <div id="map"></div>
   <div class="app-topbar">
-<span class="menu">‹</span>
   <div class="brand">
     <img src="pin.png">
     <b>Jeju Safe Map</b>
-    <span class="menu">‹</span>
   </div>
 </div>
 
@@ -2650,9 +2638,9 @@ function getRiskColor(epdo){
 }
 
 function getRiskRadius(epdo){
-  if(epdo >= 12) return 8;
-  if(epdo >= 6) return 6;
-  if(epdo >= 3) return 5;
+  if(epdo >= 12) return 7;
+  if(epdo >= 6) return 5;
+  if(epdo >= 3) return 3;
   return 4;
 }
 function initRiskMiniMap(){
