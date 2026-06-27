@@ -1904,12 +1904,13 @@ routeSummaries.forEach((summary,index)=>{
 })
   .addTo(routeLayer)
   .bindPopup(
-    "<b>"+(index+1)+"코스</b><br>"+
-    "거리: "+summary.distanceKm+"km<br>"+
-    "예상시간: "+summary.durationMin+"분<br>"+
-    "위험도: "+summary.risk.icon+" "+summary.risk.level+"<br>"+
-    "통과 위험권역: "+summary.risk.zoneNames
-  );
+  "<b>사고 정보</b><br>" +
+  "피해정도: " + (accident.severity || "-") + "<br>" +
+  "사고유형: " + (accident.accidentType || "-") + "<br>" +
+  "법규위반: " + (accident.violation || "-") + "<br>" +
+  "도로형태: " + (accident.roadType || "-") + "<br>" +
+  "EPDO: " + epdo + "점"
+)
 
  const middleIndex = Math.floor(coords.length / 2);
 const labelPoint = coords[middleIndex];
