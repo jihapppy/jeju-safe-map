@@ -1223,6 +1223,59 @@ body.safety-guide-mode .risk-map-page{
   font-weight:750;
   color:#334155;
 }
+  .compare-detail-new.always-open{
+  margin-top:12px;
+  margin-bottom:12px;
+  padding:16px;
+  border-radius:24px;
+  background:#fff;
+  box-shadow:0 8px 24px rgba(15,23,42,.07);
+  border:1px solid #edf2f7;
+}
+
+.compare-title{
+  margin-bottom:12px;
+  font-size:18px;
+  font-weight:900;
+  color:#0f172a;
+}
+
+.compare-cards{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+  margin-top:0;
+}
+
+.compare-mini{
+  border-radius:18px;
+  padding:14px 12px;
+}
+
+.risk-score-guide{
+  margin-top:12px;
+  margin-bottom:30px;
+  padding:18px;
+  border-radius:24px;
+  background:#fff;
+  box-shadow:0 8px 24px rgba(15,23,42,.07);
+  border:1px solid #edf2f7;
+}
+
+.risk-score-guide h3{
+  margin:0 0 10px;
+  font-size:18px;
+  font-weight:900;
+  color:#0f172a;
+}
+
+.risk-score-guide p{
+  margin:7px 0;
+  font-size:13.5px;
+  font-weight:750;
+  line-height:1.55;
+  color:#475569;
+}
 </style>
 </head>
 
@@ -2078,62 +2131,57 @@ resultWrap.innerHTML = `
   </div>
 </div>
 
-  <details class="compare-detail-new">
-    <summary>📊 경로 상세 비교</summary>
+<div class="compare-detail-new always-open">
+  <div class="compare-title">📊 경로 상세 비교</div>
 
-    <div class="compare-cards">
-      <div class="compare-mini recommend">
-        <div class="compare-head">
-          <span class="compare-tag">추천</span>
-          <b>${recommendCourseName}</b>
-        </div>
-
-        <div class="compare-row2">
-          <span>거리</span>
-          <b>${recommend.distanceKm}km</b>
-        </div>
-        <div class="compare-row2">
-          <span>시간</span>
-          <b>${recommend.durationMin}분</b>
-        </div>
-        <div class="compare-row2 risk-score">
-          <span>위험점수</span>
-          <b>${recommend.risk.riskScoreText}</b>
-        </div>
+  <div class="compare-cards">
+    <div class="compare-mini recommend">
+      <div class="compare-head">
+        <span class="compare-tag">추천</span>
+        <b>${recommendCourseName}</b>
       </div>
 
-      <div class="compare-mini alt">
-        <div class="compare-head">
-          <span class="compare-tag">대안</span>
-          <b>${altCourseName}</b>
-        </div>
-
-        <div class="compare-row2">
-          <span>거리</span>
-          <b>${alt.distanceKm}km</b>
-        </div>
-        <div class="compare-row2">
-          <span>시간</span>
-          <b>${alt.durationMin}분</b>
-        </div>
-        <div class="compare-row2 risk-score">
-          <span>위험점수</span>
-          <b>${alt.risk.riskScoreText}</b>
-        </div>
+      <div class="compare-row2">
+        <span>거리</span>
+        <b>${recommend.distanceKm}km</b>
+      </div>
+      <div class="compare-row2">
+        <span>시간</span>
+        <b>${recommend.durationMin}분</b>
+      </div>
+      <div class="compare-row2 risk-score">
+        <span>위험점수</span>
+        <b>${recommend.risk.riskScoreText}</b>
       </div>
     </div>
-    
-  </details>
-    <div class="risk-score-guide">
-    <h3>위험점수란?</h3>
-    <p>
-      위험점수는 경로 주변의 실제 렌터카 사고 위치와
-      사고 심각도를 함께 분석하여 계산한 상대적 위험도입니다.
-    </p>
-    <p>
-      점수가 낮을수록 상대적으로 더 안전한 경로입니다.
-    </p>
+
+    <div class="compare-mini alt">
+      <div class="compare-head">
+        <span class="compare-tag">대안</span>
+        <b>${altCourseName}</b>
+      </div>
+
+      <div class="compare-row2">
+        <span>거리</span>
+        <b>${alt.distanceKm}km</b>
+      </div>
+      <div class="compare-row2">
+        <span>시간</span>
+        <b>${alt.durationMin}분</b>
+      </div>
+      <div class="compare-row2 risk-score">
+        <span>위험점수</span>
+        <b>${alt.risk.riskScoreText}</b>
+      </div>
+    </div>
   </div>
+</div>
+
+<div class="risk-score-guide">
+  <h3>위험점수란?</h3>
+  <p>경로 주변의 실제 렌터카 사고 위치와 사고 심각도(EPDO)를 함께 반영한 상대 위험도입니다.</p>
+  <p>점수가 낮을수록 상대적으로 더 안전한 경로입니다.</p>
+</div>
 `;
 document.getElementById("info").appendChild(resultWrap);
 
