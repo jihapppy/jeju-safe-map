@@ -1297,8 +1297,8 @@ body.safety-guide-mode .risk-map-page{
     <div class="hero-text">
       <div class="hero-title">안전한 제주 여행의 시작</div>
       <div class="hero-sub">
-        사고 위험도를 고려한<br>
-        최적의 경로를 안내해드려요
+        사고 이력과 도로 특성을 바탕으로<br>
+        주의가 필요한 구간을 안내해드려요
       </div>
     </div>
   </div>
@@ -1352,7 +1352,7 @@ body.safety-guide-mode .risk-map-page{
 </select>
 </div>
 <button class="analyze-btn" onclick="drawRoutes()">
-  <div class="analyze-main"> 안전 경로 탐색하기 </div>
+  <div class="analyze-main"> 안전운전 브리핑 보기 </div>
 </button>
 
 <div id="info"></div>
@@ -2113,10 +2113,12 @@ resultWrap.innerHTML = `
   <div class="info-split-col ai">
 <h3>🤖 AI 안전 브리핑</h3>
 <p class="brief-intro">이번 경로에서는</p>
-<p>✔ 사고지점 ${alt.risk.totalCount}건 → ${recommend.risk.totalCount}건으로 감소했습니다.</p>
-<p>✔ EPDO 합계 ${alt.risk.totalEpdo}점 → ${recommend.risk.totalEpdo}점으로 낮췄습니다.</p>
+<p>✔ 사고 이력 지점은 ${recommend.risk.totalCount}건 확인되었습니다.</p>
+<p>✔ 사고 심각도 지수(EPDO)는 ${recommend.risk.totalEpdo}점입니다.</p>
 <p>✔ 관광지 진출입 구간 주의가 필요한 경로를 우회했습니다.</p>
-<p>✔ 대안 경로보다 위험도가 약 ${riskDiff}% 낮습니다.</p>
+<p>✔ 목적지를 놓쳤다면 급차로 변경하지 말고 다음 경로로 이동하세요.</p>
+<p>✔ 이 정보는 사고 발생 가능성을 단정하는 것이 아니라, 주의가 필요한 구간을 안내하기 위한 참고자료입니다.</p>
+
   </div>
 
   <div class="info-split-col tip">
@@ -2176,7 +2178,8 @@ resultWrap.innerHTML = `
 <div class="risk-score-guide">
   <h3>위험점수란?</h3>
   <p>경로 주변의 실제 렌터카 사고 위치와 사고 심각도(EPDO)를 함께 반영한 상대 위험도입니다.</p>
-  <p>점수가 낮을수록 상대적으로 더 안전한 경로입니다.</p>
+  <p>점수가 낮을수록 사고 이력 지표가 상대적으로 낮은 경로입니다.</p>
+  <p>다만 실제 위험도는 날씨, 시간대, 운전자 행동, 교통상황에 따라 달라질 수 있습니다.</p>
 </div>
 `;
 document.getElementById("info").appendChild(resultWrap);
