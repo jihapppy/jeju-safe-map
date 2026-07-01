@@ -2492,6 +2492,18 @@ ${makeAiBriefing(recommend, alt, endName)}
   <p>다만 실제 위험도는 날씨, 시간대, 운전자 행동, 교통상황에 따라 달라질 수 있습니다.</p>
 </div>
 `;
+    lastRouteAnalysisHtml = `
+  <div class="routePath">${startName} <span class="arrow">→</span> ${endName}</div>
+
+  <div class="compare-detail-new always-open">
+    <div class="compare-title">📊 경로 상세 비교</div>
+    ${resultWrap.querySelector(".compare-cards") ? resultWrap.querySelector(".compare-cards").outerHTML : ""}
+  </div>
+
+  ${resultWrap.querySelector(".feedback-card") ? resultWrap.querySelector(".feedback-card").outerHTML : ""}
+
+  ${resultWrap.querySelector(".risk-score-guide") ? resultWrap.querySelector(".risk-score-guide").outerHTML : ""}
+`;
 document.getElementById("info").appendChild(resultWrap);
 
 const compactNavi = resultWrap.querySelector(".final-navi");
@@ -3051,7 +3063,32 @@ function showRiskMap(){
 
   setTimeout(initRiskMiniMap, 200);
 }
+function showRouteAnalysis(){
+  document.body.classList.remove("risk-map-mode", "safety-guide-mode");
+  document.body.classList.add("route-analysis-mode");
 
+  document.querySelectorAll(".bottom-item").forEach(btn => {
+    btn.classList.remove("active");
+  });
+
+  const buttons = document.querySelectorAll(".bottom-item");
+  if(buttons[1]) buttons[1].classList.add("active");
+
+  const box = document.getElementById("routeAnalysisContent");
+
+  if(!lastRouteAnalysisHtml){
+    box.innerHTML = `
+      <div class="route-analysis-empty">
+        <h3>아직 분석한 경로가 없어요</h3>
+        <p>홈에서 출발지와 목적지를 입력한 뒤<br>안전경로를 먼저 분석해주세요.</p>
+        <button type="button" onclick="goHome()">경로 분석하러 가기</button>
+      </div>
+    `;
+    return;
+  }
+
+  box.innerHTML = lastRouteAnalysisHtml;
+}
 function showZoneCard(region){
 
   const guide = regionGuide[region];
