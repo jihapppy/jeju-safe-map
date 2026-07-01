@@ -1852,6 +1852,7 @@ body.admin-mode .admin-floating-btn{
 <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 <script src="accidents.js"></script>
+  <script src="traffic_points.js"></script>
 
 <script>
 const apiKey = "eyJvcmciOiI1YjNjZTM1OTc4NTExMTAwMDFjZjYyNDgiLCJpZCI6ImVkN2QwYzg1M2JlNjRhMjliZWY0ZGUxYTBhMGMzM2Q0IiwiaCI6Im11cm11cjY0In0=";
@@ -2778,6 +2779,7 @@ document.getElementById("info").appendChild(notice);
 
       const sampleLat = p1[0] + (p2[0] - p1[0]) * t;
       const sampleLng = p1[1] + (p2[1] - p1[1]) * t;
+      const trafficFactor = getTrafficFactorByRoutePoint(sampleLat, sampleLng);
 
       accidentData.forEach((accident, index) => {
         const distanceM = getDistanceKm(
@@ -2792,9 +2794,11 @@ document.getElementById("info").appendChild(notice);
 
           const epdo = accident.epdo || 1;
 
-          totalEPDO += epdo;
-          totalScore += epdo;
-          accidentCount++;
+         const trafficFactor = getTrafficFactorByRoutePoint(sampleLat, sampleLng);
+
+totalEPDO += epdo;
+totalScore += epdo * trafficFactor;
+accidentCount++;
         }
       });
     }
@@ -2831,7 +2835,38 @@ document.getElementById("info").appendChild(notice);
     zoneDetailText: "경로 주변 사고 " + accidentCount + "건 / EPDO " + totalEPDO
   };
 }
-  
+const AVG_AADT = 12451;
+const TRAFFIC_MATCH_RADIUS_M = 2000;
+
+function clamp(value, min, max){
+  return Math.max(min, Math.min(max, value));
+}
+
+function getTrafficFactorByRoutePoint(lat, lng){
+  if(typeof TRAFFIC_POINTS === "undefined" || !Array.isArray(TRAFFIC_POINTS)){
+    return 1;
+  }
+
+  let nearest = null;
+  let nearestDist = Infinity;
+
+  TRAFFIC_POINTS.forEach(p => {
+    const d = getDistanceKm(lat, lng, p.lat, p.lng) * 1000;
+
+    if(d < nearestDist){
+      nearestDist = d;
+      nearest = p;
+    }
+  });
+
+  if(!nearest || nearestDist > TRAFFIC_MATCH_RADIUS_M){
+    return 1;
+  }
+
+  const rawFactor = AVG_AADT / nearest.aadt;
+
+  return clamp(rawFactor, 0.6, 1.8);
+}  
 function getDistanceKm(lat1,lng1,lat2,lng2){
   const R = 6371;
   const dLat = deg2rad(lat2-lat1);
