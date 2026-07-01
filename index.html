@@ -2239,8 +2239,8 @@ function makeAiBriefing(recommend, alt, endName){
     <p>${placeMessage}</p>
 
     <div class="briefing-note">
-      ※ 사고 데이터를 기반으로 분석한 참고 정보이며,
-      실제 도로 상황은 다를 수 있습니다.
+     ※ 사고 데이터를 기반으로 분석한 참고 정보이며,
+실시간 교통상황·날씨·공사 정보는 반영되지 않을 수 있습니다.
     </div>
   `;
 }
@@ -2336,7 +2336,7 @@ ${makeAiBriefing(recommend, alt, endName)}
     </div>
   </div>
 </div>
-
+</div>
 <div class="compare-detail-new always-open">
   <div class="compare-title">📊 경로 상세 비교</div>
 
@@ -2480,7 +2480,7 @@ document.getElementById("info").appendChild(notice);
   map.invalidateSize();
   map.fitBounds(L.latLngBounds(allCoords), {
   paddingTopLeft:[30,70],
-  paddingBottomRight:[30,360]
+  paddingBottomRight:[20,320]
 });
 }, 350);
     
