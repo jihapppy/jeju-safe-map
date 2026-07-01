@@ -1824,17 +1824,17 @@ body.admin-mode .admin-floating-btn{
     </div>
 
     <div class="admin-stat-card">
-      <span>의견 제출</span>
+      <span>평균 별</span>
       <b id="statGoodRate">-</b>
     </div>
 
     <div class="admin-stat-card">
-      <span>도움됨</span>
+      <span>평가 </span>
       <b id="statGood">-</b>
     </div>
 
     <div class="admin-stat-card">
-      <span>아쉬움</span>
+      <span>5점 비율</span>
       <b id="statBad">-</b>
     </div>
   </div>
@@ -3276,17 +3276,17 @@ function setRating(score){
   .then(res => res.json())
   .then(data => {
 
-    document.getElementById("statTotal").innerText =
-      data.totalRoute;
+   document.getElementById("statTotal").innerText =
+  data.totalRoute;
 
-    document.getElementById("statGood").innerText =
-      data.good;
+document.getElementById("statGoodRate").innerText =
+  "⭐ " + data.avgRating;
 
-    document.getElementById("statBad").innerText =
-      data.bad;
+document.getElementById("statGood").innerText =
+  data.ratingCount + "건";
 
-    document.getElementById("statGoodRate").innerText =
-      data.feedbackRate + "%";
+document.getElementById("statBad").innerText =
+  data.fiveStarRate + "%";
   });
 }
 function closeAdminStats(){
