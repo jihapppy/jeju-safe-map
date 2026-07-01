@@ -2504,6 +2504,14 @@ ${makeAiBriefing(recommend, alt, endName)}
 
   ${resultWrap.querySelector(".risk-score-guide") ? resultWrap.querySelector(".risk-score-guide").outerHTML : ""}
 `;
+    const homeCompareDetail = resultWrap.querySelector(".compare-detail-new");
+if(homeCompareDetail) homeCompareDetail.remove();
+
+const homeFeedback = resultWrap.querySelector(".feedback-card");
+if(homeFeedback) homeFeedback.remove();
+
+const homeRiskGuide = resultWrap.querySelector(".risk-score-guide");
+if(homeRiskGuide) homeRiskGuide.remove();
 document.getElementById("info").appendChild(resultWrap);
 
 const compactNavi = resultWrap.querySelector(".final-navi");
@@ -2917,6 +2925,7 @@ function goHome(){
   document.body.classList.remove("risk-map-mode");
   document.body.classList.remove("route-active");
   document.body.classList.remove("safety-guide-mode");
+  document.body.classList.remove("route-analysis-mode");
 
   document.querySelector(".panel").classList.remove("route-mode");
 
@@ -2952,9 +2961,10 @@ function goHome(){
 
 function showSafetyGuide(){
 
-  document.body.classList.remove("route-active");
-  document.body.classList.remove("risk-map-mode");
-  document.body.classList.add("safety-guide-mode");
+document.body.classList.remove("route-active");
+document.body.classList.remove("risk-map-mode");
+document.body.classList.remove("route-analysis-mode");
+document.body.classList.add("safety-guide-mode");
 
   document.querySelectorAll(".bottom-item").forEach(btn=>{
     btn.classList.remove("active");
@@ -3050,10 +3060,11 @@ weight:1
 }
 function showRiskMap(){
 
-  document.body.classList.remove("route-active");
-  document.body.classList.remove("safety-guide-mode");
-  document.body.classList.add("risk-map-mode");
-
+ document.body.classList.remove("route-active");
+document.body.classList.remove("safety-guide-mode");
+document.body.classList.remove("route-analysis-mode");
+document.body.classList.add("risk-map-mode");
+  
   document.querySelectorAll(".bottom-item").forEach(btn=>{
     btn.classList.remove("active");
   });
