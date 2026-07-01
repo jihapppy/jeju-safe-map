@@ -2106,7 +2106,7 @@ const altCourseName = (altIndex + 1) + "코스";
     messages.push(`✔ 초행길에서는 목적지를 놓쳐도 급차로 변경하지 말고 다음 경로로 이동하세요.`);
   }
 
-  messages.push(`✔ 이 정보는 사고 가능성을 단정하는 것이 아니라, 주의가 필요한 구간을 안내하기 위한 참고자료입니다.`);
+ messages.push(`✔ 이 정보는 사고 가능성을 단정하지 않으며, 주의가 필요한 구간을 안내하기 위한 참고자료입니다.`);
 
   return messages.map(msg => `<p>${msg}</p>`).join("");
 }
