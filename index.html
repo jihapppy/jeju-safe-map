@@ -2959,6 +2959,18 @@ function goHome(){
     map.removeLayer(routeLayer);
     routeLayer = null;
   }
+
+  resetHomeMap();
+
+  document.getElementById("startInput").placeholder = "제주국제공항";
+  document.getElementById("endInput").placeholder = "성산일출봉";
+
+  document.querySelectorAll(".bottom-item").forEach(btn=>{
+    btn.classList.remove("active");
+  });
+  document.querySelectorAll(".bottom-item")[0].classList.add("active");
+}
+
   function sendFeedback(feedback){
 
   fetch(feedbackApiUrl,{
@@ -2980,17 +2992,6 @@ function goHome(){
   });
 
   alert("소중한 의견 감사합니다 😊");
-}
-
-  resetHomeMap();
-
-  document.getElementById("startInput").placeholder = "제주국제공항";
-  document.getElementById("endInput").placeholder = "성산일출봉";
-
-  document.querySelectorAll(".bottom-item").forEach(btn=>{
-    btn.classList.remove("active");
-  });
-  document.querySelectorAll(".bottom-item")[0].classList.add("active");
 }
 
 function showSafetyGuide(){
