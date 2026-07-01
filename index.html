@@ -1408,6 +1408,20 @@ body.safety-guide-mode .risk-map-page{
   font-size:13px;
   font-weight:900;
 }
+  .result-appear{
+  animation: resultAppear .42s ease-out both;
+}
+
+@keyframes resultAppear{
+  from{
+    opacity:0;
+    transform:translateY(14px);
+  }
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
+}
 </style>
 </head>
 
@@ -2201,6 +2215,7 @@ const distanceText =
       ? distanceDiff + "km 증가"
       : "대안과 동일";
 const resultWrap = document.createElement("div");
+    resultWrap.className = "result-appear";
 
 const recommendCourseName = (recommendedIndex + 1) + "코스";
 const altCourseName = (altIndex + 1) + "코스";
