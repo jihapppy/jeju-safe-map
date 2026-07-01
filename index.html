@@ -2492,7 +2492,7 @@ ${makeAiBriefing(recommend, alt, endName)}
   <p>다만 실제 위험도는 날씨, 시간대, 운전자 행동, 교통상황에 따라 달라질 수 있습니다.</p>
 </div>
 `;
-    lastRouteAnalysisHtml = `
+lastRouteAnalysisHtml = `
   <div class="routePath">${startName} <span class="arrow">→</span> ${endName}</div>
 
   <div class="compare-detail-new always-open">
@@ -2500,9 +2500,9 @@ ${makeAiBriefing(recommend, alt, endName)}
     ${resultWrap.querySelector(".compare-cards") ? resultWrap.querySelector(".compare-cards").outerHTML : ""}
   </div>
 
-  ${resultWrap.querySelector(".feedback-card") ? resultWrap.querySelector(".feedback-card").outerHTML : ""}
-
   ${resultWrap.querySelector(".risk-score-guide") ? resultWrap.querySelector(".risk-score-guide").outerHTML : ""}
+
+  ${resultWrap.querySelector(".feedback-card") ? resultWrap.querySelector(".feedback-card").outerHTML : ""}
 `;
     const homeCompareDetail = resultWrap.querySelector(".compare-detail-new");
 if(homeCompareDetail) homeCompareDetail.remove();
