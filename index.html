@@ -1369,6 +1369,45 @@ body.safety-guide-mode .risk-map-page{
 .tip-item span{
   font-size:15px;
 }
+  .feedback-card{
+  margin-top:12px;
+  padding:16px;
+  border-radius:22px;
+  background:#fff;
+  box-shadow:0 8px 24px rgba(15,23,42,.07);
+  border:1px solid #edf2f7;
+  text-align:center;
+}
+
+.feedback-card h3{
+  margin:0 0 6px;
+  font-size:16px;
+  font-weight:900;
+  color:#0f172a;
+}
+
+.feedback-card p{
+  margin:0 0 12px;
+  font-size:12.5px;
+  font-weight:700;
+  color:#64748b;
+}
+
+.feedback-buttons{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:8px;
+}
+
+.feedback-buttons button{
+  height:42px;
+  border:0;
+  border-radius:14px;
+  background:#f1faf8;
+  color:#0f766e;
+  font-size:13px;
+  font-weight:900;
+}
 </style>
 </head>
 
@@ -2359,7 +2398,15 @@ ${makeAiBriefing(recommend, alt, endName)}
     </div>
   </div>
 </div>
+<div class="feedback-card">
+  <h3>이 추천이 도움이 되었나요?</h3>
+  <p>경로 추천 품질 개선을 위한 간단한 의견입니다.</p>
 
+  <div class="feedback-buttons">
+    <button type="button" onclick="alert('의견 감사합니다 😊')">👍 도움 됨</button>
+    <button type="button" onclick="alert('의견 감사합니다. 더 개선할게요!')">👎 아쉬움</button>
+  </div>
+</div>
 <div class="risk-score-guide">
   <h3>위험점수란?</h3>
   <p>경로 주변의 실제 렌터카 사고 위치와 사고 심각도(EPDO)를 함께 반영한 상대 위험도입니다.</p>
