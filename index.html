@@ -2377,21 +2377,23 @@ function deg2rad(deg){
 
   window.location.href = url;
 }
-  function openTmap(){
+ function openTmap(){
 
-  if(!lastEnd){
+  if(!lastStart || !lastEnd){
     alert("먼저 안전경로를 분석해주세요.");
     return;
   }
 
   const url =
     "tmap://route?" +
-    "goalx=" + lastEnd.lng +
+    "startx=" + lastStart.lng +
+    "&starty=" + lastStart.lat +
+    "&startname=" + encodeURIComponent(lastStart.name) +
+    "&goalx=" + lastEnd.lng +
     "&goaly=" + lastEnd.lat +
     "&goalname=" + encodeURIComponent(lastEnd.name);
 
   window.location.href = url;
-
 }
 function openKakaoNavi(){
 
