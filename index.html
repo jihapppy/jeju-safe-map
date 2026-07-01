@@ -1483,6 +1483,27 @@ body.route-analysis-mode .safety-guide-page{
   font-size:13px;
   font-weight:900;
 }
+
+  .admin-floating-btn{
+  display:none;
+  position:fixed;
+  right:16px;
+  bottom:82px;
+  z-index:10002;
+  height:42px;
+  padding:0 14px;
+  border:0;
+  border-radius:999px;
+  background:#0f766e;
+  color:#fff;
+  font-size:13px;
+  font-weight:900;
+  box-shadow:0 10px 24px rgba(15,118,110,.28);
+}
+
+body.admin-mode .admin-floating-btn{
+  display:block;
+}
 </style>
 </head>
 
@@ -1676,6 +1697,9 @@ body.route-analysis-mode .safety-guide-page{
 <div id="routeAnalysisPage" class="route-analysis-page">
   <div id="routeAnalysisContent"></div>
 </div>
+  <button class="admin-floating-btn" onclick="openAdminStats()">
+  📊 이용통계
+</button>
 <div class="bottom-nav">
   <button class="bottom-item active" onclick="goHome()">
     <img src="home-hand.png">
@@ -1705,6 +1729,14 @@ body.route-analysis-mode .safety-guide-page{
 <script>
 const apiKey = "eyJvcmciOiI1YjNjZTM1OTc4NTExMTAwMDFjZjYyNDgiLCJpZCI6ImVkN2QwYzg1M2JlNjRhMjliZWY0ZGUxYTBhMGMzM2Q0IiwiaCI6Im11cm11cjY0In0=";
   const feedbackApiUrl = "https://script.google.com/macros/s/AKfycbyV547EPHHqmzJXWAYaaLf6EDwUGG9Hr-VlM5RV_zQpoyvHxhRQv6HvxMmgisRkdfTO/exec";
+  const adminPassword = "JSM2026";
+
+const isAdmin =
+  new URLSearchParams(location.search).get("admin") === "1";
+
+if(isAdmin){
+  document.body.classList.add("admin-mode");
+}
   const kakaoKey = "0afebb6a8bf4c82114b49b25efea0399";
   const kakaoJsKey = "c244e1e25b12c9b2a6c68f6af9116b5b";
 if(window.Kakao){
@@ -2992,6 +3024,16 @@ function goHome(){
   });
 
   alert("소중한 의견 감사합니다 😊");
+}
+  function openAdminStats(){
+  const input = prompt("관리자 비밀번호를 입력하세요.");
+
+  if(input !== adminPassword){
+    alert("비밀번호가 올바르지 않습니다.");
+    return;
+  }
+
+  alert("관리자 통계 화면은 다음 단계에서 연결할게요.");
 }
 
 function showSafetyGuide(){
