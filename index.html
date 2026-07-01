@@ -3161,6 +3161,23 @@ function goHome(){
   }
 
   document.getElementById("adminStatsPage").classList.add("active");
+    fetch(feedbackApiUrl)
+  .then(res => res.json())
+  .then(data => {
+
+    document.getElementById("statTotal").innerText =
+      data.total;
+
+    document.getElementById("statGood").innerText =
+      data.good;
+
+    document.getElementById("statBad").innerText =
+      data.bad;
+
+    document.getElementById("statGoodRate").innerText =
+      data.goodRate + "%";
+
+  });
 }
 
 function closeAdminStats(){
