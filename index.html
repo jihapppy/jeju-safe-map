@@ -1704,6 +1704,7 @@ body.route-analysis-mode .safety-guide-page{
 
 <script>
 const apiKey = "eyJvcmciOiI1YjNjZTM1OTc4NTExMTAwMDFjZjYyNDgiLCJpZCI6ImVkN2QwYzg1M2JlNjRhMjliZWY0ZGUxYTBhMGMzM2Q0IiwiaCI6Im11cm11cjY0In0=";
+  const feedbackApiUrl = "https://script.google.com/macros/s/AKfycbyV547EPHHqmzJXWAYaaLf6EDwUGG9Hr-VlM5RV_zQpoyvHxhRQv6HvxMmgisRkdfTO/exec";
   const kakaoKey = "0afebb6a8bf4c82114b49b25efea0399";
   const kakaoJsKey = "c244e1e25b12c9b2a6c68f6af9116b5b";
 if(window.Kakao){
@@ -1968,6 +1969,7 @@ let customEndName = null;
 let lastStart = null;
 let lastEnd = null;
   let lastRouteAnalysisHtml = "";
+  let lastFeedbackData = {};
 
   const destinationTips = {
   "1100고지": [
@@ -2481,8 +2483,8 @@ ${makeAiBriefing(recommend, alt, endName)}
   <p>경로 추천 품질 개선을 위한 간단한 의견입니다.</p>
 
   <div class="feedback-buttons">
-    <button type="button" onclick="alert('의견 감사합니다 😊')">👍 도움 됨</button>
-    <button type="button" onclick="alert('의견 감사합니다. 더 개선할게요!')">👎 아쉬움</button>
+   <button type="button" onclick="sendFeedback('도움됨')">👍 도움 됨</button>
+<button type="button" onclick="sendFeedback('아쉬움')">👎 아쉬움</button>
   </div>
 </div>
 <div class="risk-score-guide">
@@ -2492,7 +2494,17 @@ ${makeAiBriefing(recommend, alt, endName)}
   <p>다만 실제 위험도는 날씨, 시간대, 운전자 행동, 교통상황에 따라 달라질 수 있습니다.</p>
 </div>
 `;
-lastRouteAnalysisHtml = `
+lastFeedbackData = {
+  start: startName,
+  end: endName,
+  route: recommendCourseName,
+  distance: recommend.distanceKm,
+  time: recommend.durationMin,
+  epdo: recommend.risk.totalEpdo,
+  risk: recommend.risk.riskScoreText
+};
+    
+    lastRouteAnalysisHtml = `
   <div class="routePath">${startName} <span class="arrow">→</span> ${endName}</div>
 
   <div class="compare-detail-new always-open">
@@ -2947,6 +2959,28 @@ function goHome(){
     map.removeLayer(routeLayer);
     routeLayer = null;
   }
+  function sendFeedback(feedback){
+
+  fetch(feedbackApiUrl,{
+    method:"POST",
+    mode:"no-cors",
+    headers:{
+      "Content-Type":"application/json"
+    },
+    body:JSON.stringify({
+      start:lastFeedbackData.start,
+      end:lastFeedbackData.end,
+      route:lastFeedbackData.route,
+      distance:lastFeedbackData.distance,
+      time:lastFeedbackData.time,
+      epdo:lastFeedbackData.epdo,
+      feedback:feedback,
+      risk:lastFeedbackData.risk
+    })
+  });
+
+  alert("소중한 의견 감사합니다 😊");
+}
 
   resetHomeMap();
 
