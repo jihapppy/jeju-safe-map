@@ -1598,7 +1598,7 @@ body.admin-mode .admin-floating-btn{
   .rating-stars{
   display:flex;
   justify-content:center;
-  gap:6px;
+  gap:4px;
   margin-top:12px;
 }
 
@@ -1606,10 +1606,17 @@ body.admin-mode .admin-floating-btn{
   border:0;
   background:transparent;
   color:#facc15;
-  font-size:34px;
+  font-size:36px;
   line-height:1;
-  padding:4px 2px;
+  padding:2px;
   cursor:pointer;
+}
+
+.rating-text{
+  margin-top:8px;
+  font-size:12.5px;
+  font-weight:800;
+  color:#64748b;
 }
 </style>
 </head>
@@ -2652,13 +2659,15 @@ ${makeAiBriefing(recommend, alt, endName)}
   <h3>이번 경로 추천은 어떠셨나요?</h3>
   <p>별점을 선택하면 평가가 저장됩니다.</p>
 
-  <div class="rating-stars">
-    <button type="button" onclick="sendRating(1)">★</button>
-    <button type="button" onclick="sendRating(2)">★</button>
-    <button type="button" onclick="sendRating(3)">★</button>
-    <button type="button" onclick="sendRating(4)">★</button>
-    <button type="button" onclick="sendRating(5)">★</button>
-  </div>
+  <div class="rating-stars" id="ratingStars">
+  <button type="button" onclick="setRating(1)">☆</button>
+  <button type="button" onclick="setRating(2)">☆</button>
+  <button type="button" onclick="setRating(3)">☆</button>
+  <button type="button" onclick="setRating(4)">☆</button>
+  <button type="button" onclick="setRating(5)">☆</button>
+</div>
+
+<div id="ratingText" class="rating-text">별점을 눌러주세요</div>
 </div>
 <div class="risk-score-guide">
   <h3>📊 위험점수 안내</h3>
@@ -3203,7 +3212,17 @@ function goHome(){
 
   alert("소중한 의견 감사합니다 😊");
 }
-  function sendRating(score){
+function setRating(score){
+  const buttons = document.querySelectorAll("#ratingStars button");
+
+  buttons.forEach((btn, index) => {
+    btn.textContent = index < score ? "★" : "☆";
+  });
+
+  const ratingText = document.getElementById("ratingText");
+  if(ratingText){
+    ratingText.innerText = score + "점 평가가 저장되었습니다.";
+  }
 
   fetch(feedbackApiUrl,{
     method:"POST",
@@ -3223,8 +3242,6 @@ function goHome(){
       feedback:"별점 " + score
     })
   });
-
-  alert(score + "점 평가가 저장되었습니다. 감사합니다 😊");
 }
   function sendRouteAnalysisLog(){
   fetch(feedbackApiUrl,{
