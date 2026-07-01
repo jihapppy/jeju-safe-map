@@ -1504,6 +1504,95 @@ body.route-analysis-mode .safety-guide-page{
 body.admin-mode .admin-floating-btn{
   display:block;
 }
+  .admin-stats-page{
+  display:none;
+  position:fixed;
+  inset:64px 0 68px 0;
+  z-index:10003;
+  background:#f8fafc;
+  overflow-y:auto;
+  padding:18px 14px 28px;
+  box-sizing:border-box;
+}
+
+.admin-stats-page.active{
+  display:block;
+}
+
+.admin-head{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:14px;
+}
+
+.admin-head h2{
+  margin:0;
+  font-size:22px;
+  font-weight:900;
+  color:#0f172a;
+}
+
+.admin-close{
+  border:0;
+  border-radius:999px;
+  background:#e2e8f0;
+  color:#334155;
+  height:34px;
+  padding:0 12px;
+  font-weight:900;
+}
+
+.admin-stat-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+}
+
+.admin-stat-card{
+  padding:16px;
+  border-radius:22px;
+  background:#fff;
+  box-shadow:0 8px 24px rgba(15,23,42,.07);
+  border:1px solid #edf2f7;
+}
+
+.admin-stat-card span{
+  font-size:12px;
+  font-weight:800;
+  color:#64748b;
+}
+
+.admin-stat-card b{
+  display:block;
+  margin-top:6px;
+  font-size:24px;
+  font-weight:900;
+  color:#0f766e;
+}
+
+.admin-list-card{
+  margin-top:12px;
+  padding:16px;
+  border-radius:22px;
+  background:#fff;
+  box-shadow:0 8px 24px rgba(15,23,42,.07);
+  border:1px solid #edf2f7;
+}
+
+.admin-list-card h3{
+  margin:0 0 10px;
+  font-size:17px;
+  font-weight:900;
+  color:#0f172a;
+}
+
+.admin-list-card p{
+  margin:8px 0;
+  font-size:13px;
+  font-weight:750;
+  color:#334155;
+}
 </style>
 </head>
 
@@ -1696,6 +1785,44 @@ body.admin-mode .admin-floating-btn{
 </div>
 <div id="routeAnalysisPage" class="route-analysis-page">
   <div id="routeAnalysisContent"></div>
+</div>
+  <div id="adminStatsPage" class="admin-stats-page">
+  <div class="admin-head">
+    <h2>📊 이용 통계</h2>
+    <button class="admin-close" onclick="closeAdminStats()">닫기</button>
+  </div>
+
+  <div class="admin-stat-grid">
+    <div class="admin-stat-card">
+      <span>총 의견 수</span>
+      <b id="statTotal">-</b>
+    </div>
+
+    <div class="admin-stat-card">
+      <span>도움됨 비율</span>
+      <b id="statGoodRate">-</b>
+    </div>
+
+    <div class="admin-stat-card">
+      <span>도움됨</span>
+      <b id="statGood">-</b>
+    </div>
+
+    <div class="admin-stat-card">
+      <span>아쉬움</span>
+      <b id="statBad">-</b>
+    </div>
+  </div>
+
+  <div class="admin-list-card">
+    <h3>인기 목적지 TOP</h3>
+    <p>Google Sheets 통계 연결 후 자동 표시됩니다.</p>
+  </div>
+
+  <div class="admin-list-card">
+    <h3>최근 이용 기록</h3>
+    <p>Google Sheets 통계 연결 후 자동 표시됩니다.</p>
+  </div>
 </div>
   <button class="admin-floating-btn" onclick="openAdminStats()">
   📊 이용통계
@@ -3033,9 +3160,12 @@ function goHome(){
     return;
   }
 
-  alert("관리자 통계 화면은 다음 단계에서 연결할게요.");
+  document.getElementById("adminStatsPage").classList.add("active");
 }
 
+function closeAdminStats(){
+  document.getElementById("adminStatsPage").classList.remove("active");
+}
 function showSafetyGuide(){
 
 document.body.classList.remove("route-active");
