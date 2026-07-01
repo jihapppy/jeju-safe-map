@@ -1347,6 +1347,28 @@ body.safety-guide-mode .risk-map-page{
   margin-top:2px;
   font-size:13px;
 }
+  .tip-list{
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+}
+
+.tip-item{
+  display:flex;
+  align-items:flex-start;
+  gap:8px;
+  padding:10px 11px;
+  border-radius:15px;
+  background:#fff8ef;
+  color:#334155;
+  font-size:13px;
+  font-weight:750;
+  line-height:1.45;
+}
+
+.tip-item span{
+  font-size:15px;
+}
 </style>
 </head>
 
@@ -2255,11 +2277,24 @@ resultWrap.innerHTML = `
 ${makeAiBriefing(recommend, alt, endName)}
   </div>
 
-  <div class="info-split-col tip">
-    <h3>⭐ ${endName} 맞춤 안전팁</h3>
-    <p>✔ ${tips[0]}</p>
-    <p>✔ ${tips[1]}</p>
-    <p>✔ ${tips[2]}</p>
+ <div class="info-split-col tip">
+  <h3>⭐ ${endName} 맞춤 안전팁</h3>
+
+  <div class="tip-list">
+    <div class="tip-item">
+      <span>🚗</span>
+      <div>${tips[0]}</div>
+    </div>
+
+    <div class="tip-item">
+      <span>⚠️</span>
+      <div>${tips[1]}</div>
+    </div>
+
+    <div class="tip-item">
+      <span>👀</span>
+      <div>${tips[2]}</div>
+    </div>
   </div>
 </div>
 
