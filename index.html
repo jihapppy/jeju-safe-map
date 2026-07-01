@@ -2086,7 +2086,7 @@ const distanceText =
     ? distanceDiff + "km 단축"
     : distanceGap > 0
       ? distanceDiff + "km 증가"
-      : "동일";
+      : "대안과 동일";
 const resultWrap = document.createElement("div");
 
 const recommendCourseName = (recommendedIndex + 1) + "코스";
@@ -2164,7 +2164,9 @@ resultWrap.innerHTML = `
         <span>시간</span>
         <b>${recommend.durationMin}분</b>
         <div class="result-chip">
-          ${Math.abs(recommend.durationMin - alt.durationMin)}분 ${recommend.durationMin > alt.durationMin ? "증가" : "단축"}
+         ${recommend.durationMin === alt.durationMin 
+  ? "대안과 동일" 
+  : Math.abs(recommend.durationMin - alt.durationMin) + "분 " + (recommend.durationMin > alt.durationMin ? "증가" : "단축")}
         </div>
       </div>
     </div>
@@ -2236,7 +2238,7 @@ ${makeAiBriefing(recommend, alt, endName)}
 <div class="risk-score-guide">
   <h3>위험점수란?</h3>
   <p>경로 주변의 실제 렌터카 사고 위치와 사고 심각도(EPDO)를 함께 반영한 상대 위험도입니다.</p>
-  <p>점수가 낮을수록 사고 이력 지표가 상대적으로 낮은 경로입니다.</p>
+  <p>점수가 낮을수록 해당 경로 주변의 사고 이력과 사고 심각도가 상대적으로 낮다는 의미입니다.</p>
   <p>다만 실제 위험도는 날씨, 시간대, 운전자 행동, 교통상황에 따라 달라질 수 있습니다.</p>
 </div>
 `;
