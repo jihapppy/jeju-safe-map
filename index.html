@@ -1794,12 +1794,12 @@ body.admin-mode .admin-floating-btn{
 
   <div class="admin-stat-grid">
     <div class="admin-stat-card">
-      <span>총 의견 수</span>
+      <span>총 경로분석</span>
       <b id="statTotal">-</b>
     </div>
 
     <div class="admin-stat-card">
-      <span>도움됨 비율</span>
+      <span>의견 제출</span>
       <b id="statGoodRate">-</b>
     </div>
 
@@ -3183,12 +3183,12 @@ function goHome(){
   }
 
   document.getElementById("adminStatsPage").classList.add("active");
-    fetch(feedbackApiUrl)
+   fetch(feedbackApiUrl)
   .then(res => res.json())
   .then(data => {
 
     document.getElementById("statTotal").innerText =
-      data.total;
+      data.totalRoute;
 
     document.getElementById("statGood").innerText =
       data.good;
@@ -3197,10 +3197,8 @@ function goHome(){
       data.bad;
 
     document.getElementById("statGoodRate").innerText =
-      data.goodRate + "%";
-
+      data.feedbackRate + "%";
   });
-}
 
 function closeAdminStats(){
   document.getElementById("adminStatsPage").classList.remove("active");
