@@ -1422,6 +1422,12 @@ body.safety-guide-mode .risk-map-page{
     transform:translateY(0);
   }
 }
+  .tip-item div{
+  flex:1;
+  font-size:13px;
+  font-weight:750;
+  line-height:1.45;
+}
 </style>
 </head>
 
@@ -2254,8 +2260,7 @@ function makeAiBriefing(recommend, alt, endName){
     <p>${placeMessage}</p>
 
     <div class="briefing-note">
-     ※ 사고 데이터를 기반으로 분석한 참고 정보이며,
-실시간 교통상황·날씨·공사 정보는 반영되지 않을 수 있습니다.
+   ※ 사고 데이터를 기반으로 분석한 참고 정보이며, 실시간 교통상황·날씨·공사 정보는 반영되지 않을 수 있습니다.
     </div>
   `;
 }
