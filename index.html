@@ -2009,27 +2009,27 @@ let regionLayer;
 const regionGuide = {
   "공항권": {
     title:"공항권",
-    level:"사고집중",
+    level:"주의 필요",
     caution:"렌터카 인수 직후 초행운전이 많아 급차로 변경과 진출입 차량에 주의하세요."
   },
   "제주시도심권": {
     title:"제주시 도심권",
-    level:"사고집중",
+    level:"주의 필요",
     caution:"교차로와 보행자 통행이 많아 우회전·차로변경 시 주변 확인이 필요합니다."
   },
   "서귀포도심권": {
     title:"서귀포 도심권",
-    level:"사고집중",
+    level:"주의 필요",
     caution:"시내 교차로와 보행자 이동이 많아 신호 변경 구간에서 감속 운전하세요."
   },
   "애월권": {
     title:"애월권",
-    level:"사고다발",
+    level:"다소 주의",
     caution:"해안도로와 카페·관광지 진출입 차량이 많아 급정지와 끼어들기에 주의하세요."
   },
   "서부중산간권": {
     title:"서부 중산간권",
-    level:"사고다발",
+   level:"다소 주의",
     caution:"곡선도로와 경사구간이 많아 속도를 낮추고 내리막에서는 엔진브레이크를 활용하세요."
   },
   "동부중산간권": {
@@ -2602,10 +2602,6 @@ ${makeAiBriefing(recommend, alt, endName)}
   <span>사고이력</span>
   <b>${recommend.risk.totalCount}건</b>
 </div>
-<div class="compare-row2">
-  <span>EPDO</span>
-  <b>${recommend.risk.totalEpdo}점</b>
-</div>
     </div>
 
     <div class="compare-mini alt">
@@ -2630,10 +2626,6 @@ ${makeAiBriefing(recommend, alt, endName)}
   <span>사고이력</span>
   <b>${alt.risk.totalCount}건</b>
 </div>
-<div class="compare-row2">
-  <span>EPDO</span>
-  <b>${alt.risk.totalEpdo}점</b>
-</div>
     </div>
   </div>
 </div>
@@ -2648,9 +2640,9 @@ ${makeAiBriefing(recommend, alt, endName)}
 </div>
 <div class="risk-score-guide">
   <h3>위험점수란?</h3>
-  <p>경로 주변의 실제 렌터카 사고 위치와 사고 심각도(EPDO)를 함께 반영한 상대 위험도입니다.</p>
-  <p>점수가 낮을수록 해당 경로 주변의 사고 이력과 사고 심각도가 상대적으로 낮다는 의미입니다.</p>
-  <p>다만 실제 위험도는 날씨, 시간대, 운전자 행동, 교통상황에 따라 달라질 수 있습니다.</p>
+  <p>경로 주변의 사고이력과 사고 심각도(EPDO)를 종합한 참고 지표입니다.</p>
+  <p><b>점수가 낮을수록 사고 이력이 상대적으로 적은 경로</b>를 의미합니다.</p>
+  <p>※ 실제 위험을 예측하거나 단정하는 값은 아닙니다.</p>
 </div>
 `;
 lastFeedbackData = {
