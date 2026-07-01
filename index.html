@@ -3099,6 +3099,7 @@ function goHome(){
   document.body.classList.remove("route-active");
   document.body.classList.remove("safety-guide-mode");
   document.body.classList.remove("route-analysis-mode");
+  document.getElementById("adminStatsPage").classList.remove("active");
 
   document.querySelector(".panel").classList.remove("route-mode");
 
@@ -3199,7 +3200,7 @@ function goHome(){
     document.getElementById("statGoodRate").innerText =
       data.feedbackRate + "%";
   });
-
+}
 function closeAdminStats(){
   document.getElementById("adminStatsPage").classList.remove("active");
 }
