@@ -1687,17 +1687,17 @@ body.admin-mode .admin-floating-btn{
 
   <div class="risk-map-title">사고 위험 지도</div>
   <div class="risk-map-sub">
-    2025년 렌터카 사고 기반 위험도 표시
+    2025년 렌터카 사고 이력을 바탕으로 주의가 필요한 구간을 표시합니다
   </div>
 
   <div class="risk-map-card">
     <div id="riskMiniMap"></div>
 
     <div class="risk-map-legend">
-      <span><b class="risk-dot high"></b>높음<br><small>EPDO 12점~</small></span>
-      <span><b class="risk-dot midhigh"></b>보통 높음<br><small>EPDO 6~11점</small></span>
-      <span><b class="risk-dot mid"></b>보통<br><small>EPDO 3~5점</small></span>
-      <span><b class="risk-dot low"></b>낮음<br><small>EPDO 0~2점</small></span>
+      <span><b class="risk-dot high"></b>주의<br><small>EPDO 12점~</small></span>
+<span><b class="risk-dot midhigh"></b>다소 주의<br><small>EPDO 6~11점</small></span>
+<span><b class="risk-dot mid"></b>보통<br><small>EPDO 3~5점</small></span>
+<span><b class="risk-dot low"></b>낮음<br><small>EPDO 0~2점</small></span>
     </div>
   </div>
  <div class="epdo-desc">
@@ -1709,7 +1709,7 @@ body.admin-mode .admin-floating-btn{
     <div class="risk-info-card">
       <h3>📊 사고 정보 요약</h3>
 
-      <div class="risk-question">어떤 유형의 사고가 많았나요?</div>
+      <div class="risk-question">어떤 사고 유형이 주로 확인되었나요?</div>
 
       <div class="type-row">
         <span>🚗 차대차</span>
@@ -3334,12 +3334,24 @@ function showRouteAnalysis(){
 
   if(!lastRouteAnalysisHtml){
     box.innerHTML = `
-      <div class="route-analysis-empty">
-        <h3>아직 분석한 경로가 없어요</h3>
-        <p>홈에서 출발지와 목적지를 입력한 뒤<br>안전경로를 먼저 분석해주세요.</p>
-        <button type="button" onclick="goHome()">경로 분석하러 가기</button>
-      </div>
-    `;
+      box.innerHTML = `
+<div class="route-analysis-empty">
+
+  <div class="empty-icon">🧭</div>
+
+  <h3>아직 경로를 분석하지 않았어요</h3>
+
+  <p>
+    홈에서 출발지와 목적지를 입력한 뒤<br>
+    <b>'사고이력 기반 경로 비교'</b> 버튼을 눌러주세요.
+  </p>
+
+  <button type="button" onclick="goHome()">
+    🏠 홈으로 이동
+  </button>
+
+</div>
+`;
     return;
   }
 
