@@ -2659,9 +2659,11 @@ lastFeedbackData = {
   route: recommendCourseName,
   distance: recommend.distanceKm,
   time: recommend.durationMin,
+  count: recommend.risk.totalCount,
   epdo: recommend.risk.totalEpdo,
   risk: recommend.risk.riskScoreText
 };
+    sendRouteAnalysisLog();
     
     lastRouteAnalysisHtml = `
   <div class="routePath">${startName} <span class="arrow">→</span> ${endName}</div>
@@ -3151,6 +3153,26 @@ function goHome(){
   });
 
   alert("소중한 의견 감사합니다 😊");
+}
+  function sendRouteAnalysisLog(){
+  fetch(feedbackApiUrl,{
+    method:"POST",
+    mode:"no-cors",
+    headers:{
+      "Content-Type":"application/json"
+    },
+    body:JSON.stringify({
+      start:lastFeedbackData.start,
+      end:lastFeedbackData.end,
+      route:lastFeedbackData.route,
+      distance:lastFeedbackData.distance,
+      time:lastFeedbackData.time,
+      count:lastFeedbackData.count,
+      epdo:lastFeedbackData.epdo,
+      risk:lastFeedbackData.risk,
+      feedback:"경로분석"
+    })
+  });
 }
   function openAdminStats(){
   const input = prompt("관리자 비밀번호를 입력하세요.");
