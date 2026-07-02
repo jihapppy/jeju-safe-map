@@ -2811,7 +2811,6 @@ document.getElementById("info").appendChild(notice);
 
       const sampleLat = p1[0] + (p2[0] - p1[0]) * t;
       const sampleLng = p1[1] + (p2[1] - p1[1]) * t;
-      const trafficFactor = getTrafficFactorByRoutePoint(sampleLat, sampleLng);
 
       accidentData.forEach((accident, index) => {
         const distanceM = getDistanceKm(
