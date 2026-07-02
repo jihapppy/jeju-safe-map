@@ -1618,6 +1618,46 @@ body.admin-mode .admin-floating-btn{
   font-weight:800;
   color:#64748b;
 }
+
+  .loading-steps{
+  margin-top:12px;
+  display:flex;
+  flex-direction:column;
+  gap:7px;
+}
+
+.loading-steps div{
+  padding:8px 10px;
+  border-radius:12px;
+  background:#fff;
+  color:#0f766e;
+  font-size:12px;
+  font-weight:900;
+}
+
+.ai-reason-box{
+  margin-top:10px;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:7px;
+}
+
+.ai-reason-box span{
+  padding:8px 9px;
+  border-radius:14px;
+  background:#f1faf8;
+  color:#0f766e;
+  font-size:11px;
+  font-weight:900;
+  text-align:center;
+}
+
+.risk-compare-note{
+  margin-top:4px;
+  font-size:10.5px;
+  font-weight:900;
+  color:#0f766e;
+}
 </style>
 </head>
 
@@ -1713,6 +1753,7 @@ body.admin-mode .admin-floating-btn{
   <div class="risk-map-title">사고 위험 지도</div>
   <div class="risk-map-sub">
     2025년 렌터카 사고 데이터를 기반으로 사고 위치와 사고 심각도를 시각화했습니다
+    <br>빨간색일수록 사고 심각도가 높은 구간입니다
   </div>
 
   <div class="risk-map-card">
@@ -2304,7 +2345,14 @@ lastEnd = {
   document.getElementById("info").innerHTML = `
 <div class="loading-card">
   <b>AI가 경로를 분석하고 있습니다</b>
-  <p>사고이력, EPDO, 교통량 보정값을 함께 비교 중입니다.</p>
+  <p>사고데이터와 교통량을 단계별로 비교 중입니다.</p>
+
+  <div class="loading-steps">
+    <div>☑ 사고데이터 분석 중</div>
+    <div>☑ EPDO 계산 중</div>
+    <div>☑ 교통량 보정 반영 중</div>
+    <div>☑ 추천경로 생성 중</div>
+  </div>
 </div>
 `;
     document.querySelector(".panel").classList.add("route-mode");
@@ -2454,6 +2502,10 @@ const riskDiff =
   alt.risk.score > 0
     ? Math.max(0, Math.round((1 - recommend.risk.score / alt.risk.score) * 100))
     : 0;
+    const riskCompareText =
+  riskDiff > 0
+    ? "대안보다 " + riskDiff + "% 낮음"
+    : "대안과 유사";
 
 const distanceGap =
   Number(recommend.distanceKm) - Number(alt.distanceKm);
@@ -2529,6 +2581,14 @@ resultWrap.innerHTML = `
 <div class="result-reason">
   <span class="reason-chip">사고 ${Math.max(0, alt.risk.totalCount - recommend.risk.totalCount)}곳↓</span>
   <span class="reason-chip">EPDO ${Math.max(0, alt.risk.totalEpdo - recommend.risk.totalEpdo)}점↓</span>
+  <span class="reason-chip">${riskCompareText}</span>
+</div>
+
+<div class="ai-reason-box">
+  <span>AI 분석 완료</span>
+  <span>교통량 보정 반영</span>
+  <span>EPDO 비교 완료</span>
+  <span>대안경로 비교</span>
 </div>
         </div>
       </div>
@@ -2619,9 +2679,10 @@ ${makeAiBriefing(recommend, alt, endName)}
         <b>${recommend.durationMin}분</b>
       </div>
       <div class="compare-row2 risk-score">
-        <span>위험점수</span>
-        <b>${recommend.risk.riskScoreText}</b>
-      </div>
+  <span>위험점수</span>
+  <b>${recommend.risk.riskScoreText}</b>
+</div>
+<div class="risk-compare-note">${riskCompareText}</div>
       <div class="compare-row2">
   <span>사고이력</span>
   <b>${recommend.risk.totalCount}건</b>
