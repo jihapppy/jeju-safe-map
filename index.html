@@ -1643,8 +1643,8 @@ body.admin-mode .admin-floating-btn{
     <div class="hero-text">
       <div class="hero-title">안전한 제주 여행의 시작</div>
       <div class="hero-sub">
-        사고 이력과 도로 특성을 바탕으로<br>
-        주의가 필요한 구간을 안내해드려요
+        사고데이터와 교통량을 분석하여<br>
+상대적으로 안전한 경로를 추천합니다
       </div>
     </div>
   </div>
@@ -1704,7 +1704,7 @@ body.admin-mode .admin-floating-btn{
 <div id="info"></div>
 
   <div class="small">
-    ※ TAAS 사고데이터 및 사고밀집권역 분석 기반 안전경로 추천
+    ※ 사고데이터·EPDO·교통량 보정값을 활용한 참고용 안전경로 안내
   </div>
 </div>
 
@@ -1712,7 +1712,7 @@ body.admin-mode .admin-floating-btn{
 
   <div class="risk-map-title">사고 위험 지도</div>
   <div class="risk-map-sub">
-    2025년 렌터카 사고 이력을 바탕으로 주의가 필요한 구간을 표시합니다
+    2025년 렌터카 사고 데이터를 기반으로 사고 위치와 사고 심각도를 시각화했습니다
   </div>
 
   <div class="risk-map-card">
@@ -2302,10 +2302,10 @@ lastEnd = {
   }
 
   document.getElementById("info").innerHTML = `
-  <div class="loading-card">
-    <b>안전경로를 분석하고 있어요</b>
-    <p>사고위험 권역과 대안경로를 비교 중입니다.</p>
-  </div>
+<div class="loading-card">
+  <b>AI가 경로를 분석하고 있습니다</b>
+  <p>사고이력, EPDO, 교통량 보정값을 함께 비교 중입니다.</p>
+</div>
 `;
     document.querySelector(".panel").classList.add("route-mode");
     document.body.classList.add("route-active");
@@ -2491,11 +2491,8 @@ function makeAiBriefing(recommend, alt, endName){
 
   return `
     <p>
-      추천 경로는 대안 경로보다 사고 이력 지점이
-      <b>${Math.max(0, countDiff)}곳 적고</b>,
-      사고 심각도(EPDO)도
-      <b>${Math.max(0, epdoDiff)}점 낮아</b>
-      상대적으로 안전한 것으로 분석되었습니다.
+      추천 경로는 사고이력, 사고 심각도(EPDO), 교통량 보정값을 함께 분석한 결과
+대안 경로보다 상대적으로 부담이 적은 경로로 판단되었습니다.
     </p>
 
     <p>
@@ -2525,8 +2522,8 @@ resultWrap.innerHTML = `
         <div>
 <div class="result-title">${recommendCourseName} <span class="recommend-badge">추천</span></div>
 <div class="result-sub">
-사고 이력이<br>
-상대적으로 적은 경로입니다.
+사고이력과 교통량을<br>
+함께 고려한 추천 경로입니다.
 </div>
 
 <div class="result-reason">
