@@ -1274,9 +1274,11 @@ body.safety-guide-mode .risk-map-page{
 }
 
  .briefing-note{
-  margin-top:16px;
+  margin-top:13px;
   padding:16px 18px;
   border-radius:18px;
+   line-height:1.7;
+font-weight:700;
   background:#e8f8f5;
   color:#0f766e;
 
@@ -2578,7 +2580,7 @@ function makeAiBriefing(recommend, alt, endName){
     <p>${placeMessage}</p>
 
     <div class="briefing-note">
-   ※ 사고 데이터를 기반으로 분석한 참고 정보이며, 실시간 교통상황·날씨 등은 반영되지 않을 수 있습니다.
+   ※ ※ 사고데이터 기반 참고 정보입니다. 실시간 교통상황 및 날씨는 반영되지 않을 수 있습니다.
     </div>
   `;
 }
