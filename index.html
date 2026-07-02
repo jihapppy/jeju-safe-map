@@ -1653,10 +1653,14 @@ body.admin-mode .admin-floating-btn{
 }
 
 .risk-compare-note{
-  margin-top:4px;
-  font-size:10.5px;
-  font-weight:900;
+  margin-top:8px;
+  padding:7px 10px;
+  border-radius:999px;
+  background:#e8f8f5;
   color:#0f766e;
+  font-size:12px;
+  font-weight:900;
+  text-align:center;
 }
 </style>
 </head>
@@ -2347,16 +2351,35 @@ lastEnd = {
   <b>AI가 경로를 분석하고 있습니다</b>
   <p>사고데이터와 교통량을 단계별로 비교 중입니다.</p>
 
-  <div class="loading-steps">
-    <div>☑ 사고데이터 분석 중</div>
-    <div>☑ EPDO 계산 중</div>
-    <div>☑ 교통량 보정 반영 중</div>
-    <div>☑ 추천경로 생성 중</div>
-  </div>
+<div class="loading-steps">
+  <div id="step1">⏳ 사고데이터 분석 중...</div>
+  <div id="step2">⏳ EPDO 계산 중...</div>
+  <div id="step3">⏳ 교통량 보정 반영 중...</div>
+  <div id="step4">⏳ 추천경로 생성 중...</div>
+</div>
 </div>
 `;
     document.querySelector(".panel").classList.add("route-mode");
     document.body.classList.add("route-active");
+    setTimeout(()=>{
+  const s=document.getElementById("step1");
+  if(s) s.innerHTML="✅ 사고데이터 분석 완료";
+},350);
+
+setTimeout(()=>{
+  const s=document.getElementById("step2");
+  if(s) s.innerHTML="✅ EPDO 계산 완료";
+},700);
+
+setTimeout(()=>{
+  const s=document.getElementById("step3");
+  if(s) s.innerHTML="✅ 교통량 보정 완료";
+},1050);
+
+setTimeout(()=>{
+  const s=document.getElementById("step4");
+  if(s) s.innerHTML="✅ 추천경로 생성 완료";
+},1400);
     document.querySelector(".risk-legend").style.display = "none";
 
   const body = {
@@ -2504,8 +2527,8 @@ const riskDiff =
     : 0;
     const riskCompareText =
   riskDiff > 0
-    ? "대안보다 " + riskDiff + "% 낮음"
-    : "대안과 유사";
+    ? "🟢 위험도 대안보다 " + riskDiff + "% 낮음"
+    : "🟡 대안과 유사";
 
 const distanceGap =
   Number(recommend.distanceKm) - Number(alt.distanceKm);
