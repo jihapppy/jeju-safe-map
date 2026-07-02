@@ -2155,6 +2155,7 @@ let lastStart = null;
 let lastEnd = null;
   let lastRouteAnalysisHtml = "";
   let lastFeedbackData = {};
+  let ratingSubmitted = false;
 
   const destinationTips = {
   "1100고지": [
@@ -2676,6 +2677,7 @@ ${makeAiBriefing(recommend, alt, endName)}
   <p>※ 실제 위험을 예측하거나 단정하는 값은 아닙니다.</p>
 </div>
 `;
+    ratingSubmitted = false;
 lastFeedbackData = {
   start: startName,
   end: endName,
@@ -3213,10 +3215,21 @@ function goHome(){
   alert("소중한 의견 감사합니다 😊");
 }
 function setRating(score){
+
+  if(ratingSubmitted){
+    alert("이번 경로 분석에 대한 평가는 이미 제출되었습니다.");
+    return;
+  }
+
+  ratingSubmitted = true;
+
   const buttons = document.querySelectorAll("#ratingStars button");
 
   buttons.forEach((btn, index) => {
     btn.textContent = index < score ? "★" : "☆";
+    btn.disabled = true;
+    btn.style.opacity = "0.55";
+    btn.style.cursor = "default";
   });
 
   const ratingText = document.getElementById("ratingText");
