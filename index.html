@@ -20,7 +20,6 @@
 <meta property="og:site_name" content="제주 렌터카 안전경로 안내">
 
 <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"/>
-<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 
 <style>
 /* ===== 기본 ===== */
@@ -875,35 +874,6 @@ body.risk-map-mode .risk-map-page{
   font-weight:900;
   color:#475569;
 }
-
-#zoneInfoCard{
-  display:none;
-  position:absolute;
-  left:16px;
-  right:16px;
-  bottom:18px;
-  background:#fff;
-  border-radius:24px;
-  padding:18px;
-  box-shadow:0 14px 34px rgba(15,23,42,.16);
-  border:1px solid #eef2f7;
-}
-
-#zoneInfoCard.active{
-  display:block;
-}
-
-.zone-btn{
-  position:absolute;
-  border:0;
-  background:rgba(20,184,166,.04);
-  border-radius:999px;
-}
-
-.city{ left:40%; top:17%; width:24%; height:14%; }
-.east{ left:58%; top:32%; width:32%; height:20%; }
-.west{ left:21%; top:50%; width:23%; height:15%; }
-.airport{ left:21%; top:67%; width:22%; height:13%; }
 
 /* ===== 지도 팝업 ===== */
 .region-popup{
@@ -1877,7 +1847,7 @@ body.admin-mode .admin-floating-btn{
     </div>
 
     <div class="admin-stat-card">
-      <span>평가 </span>
+      <span>평가 건 </span>
       <b id="statGood">-</b>
     </div>
 
@@ -2351,7 +2321,7 @@ lastEnd = {
 
   document.getElementById("info").innerHTML = `
 <div class="loading-card">
-  <b>AI가 경로를 분석하고 있습니다</b>
+<b>사고데이터 기반으로 경로를 분석하고 있습니다</b>
   <p>사고데이터와 교통량을 단계별로 비교 중입니다.</p>
 
 <div class="loading-steps">
@@ -3186,23 +3156,6 @@ document.getElementById("info").innerHTML =
     alert("출발지 검색 중 오류가 발생했어요.\n\n" + error.message);
   }
 }
-
-  function setPopularEnd(name, value){
-  const coords = value.split(",");
-
-  customEnd = {
-    lng: parseFloat(coords[0]),
-    lat: parseFloat(coords[1])
-  };
-
-  customEndName = name;
-
-  document.getElementById("endInput").value = name;
-  document.getElementById("endResults").innerHTML = "";
-  document.getElementById("endResults").style.display = "none";
-  document.getElementById("info").innerHTML =
-    "목적지가 '" + name + "'(으)로 설정되었습니다.";
-}
 function selectPopularTour(){
 
   const value = document.getElementById("popularSelect").value;
@@ -3531,25 +3484,7 @@ if(!lastRouteAnalysisHtml){
 
   box.innerHTML = lastRouteAnalysisHtml;
 }
-function showZoneCard(region){
 
-  const guide = regionGuide[region];
-
-  document.getElementById("zoneInfoCard").innerHTML = `
-    <div style="font-size:20px;font-weight:900;">
-      🚦 ${guide.title}
-    </div>
-
-    <div style="margin-top:8px;color:#0f766e;font-weight:900;">
-      ${guide.level}
-    </div>
-
-    <div style="margin-top:10px;line-height:1.6;color:#475569;">
-      ${guide.caution}
-    </div>
-  `;
-  document.getElementById("zoneInfoCard").classList.add("active");
-}
 </script>
 
 </body>
