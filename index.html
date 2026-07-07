@@ -1811,17 +1811,11 @@ body{
   display:block;
 }
 
-.location-btn img{
-  width:14px;
-  height:14px;
-  display:block;
-}
 
 .location-btn{
   display:flex;
   align-items:center;
   justify-content:center;
-  gap:4px;
 }
 
 .mini-btn::before{
@@ -1866,13 +1860,12 @@ body{
   <img src="plane.svg" alt="">
 </span>
   <input id="startInput" type="text" placeholder="예)제주국제공항">
-   <button class="location-btn" onclick="useCurrentLocation()">
-  <img src="location-search.svg" alt="">
+  <button class="location-btn" onclick="useCurrentLocation()">
   현재 위치 사용
 </button>
 
 <button class="clear-btn" type="button" onclick="document.getElementById('startInput').value=''">
-  <img src="xbox-x.svg" alt="">
+  <img src="x.svg" alt="">
 </button>
 
 <button class="mini-btn" onclick="searchStartPlace()">
@@ -1891,7 +1884,7 @@ body{
 </span>
   <input id="endInput" type="text" placeholder="예)성산일출봉">
   <button class="clear-btn" type="button" onclick="document.getElementById('endInput').value=''">
-  <img src="xbox-x.svg" alt="">
+ <img src="x.svg" alt="">
 </button>
 
 <button class="mini-btn" onclick="searchDestination()">
