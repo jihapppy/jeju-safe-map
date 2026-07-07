@@ -2199,6 +2199,19 @@ box-shadow:0 10px 24px rgba(20,184,166,.18);
     display:block;
     opacity:.9;
 }
+  .bottom-item img{
+    width:22px;
+    height:22px;
+    object-fit:contain;
+    opacity:.45;
+    transition:.2s;
+}
+
+.bottom-item.active img{
+    opacity:1;
+    filter:invert(51%) sepia(79%) saturate(523%)
+           hue-rotate(131deg) brightness(88%) contrast(90%);
+}
 </style>
 </head>
 
@@ -2549,7 +2562,7 @@ box-shadow:0 10px 24px rgba(20,184,166,.18);
 </button>
 <div class="bottom-nav">
   <button class="bottom-item active" onclick="goHome()">
-    <img src="home-hand.png">
+    <img src="home.svg">
     <b>홈</b>
   </button>
 
