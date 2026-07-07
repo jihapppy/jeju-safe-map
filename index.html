@@ -2318,18 +2318,50 @@ function useCurrentLocation(){
   document.getElementById("info").innerHTML = "현재 위치를 확인하는 중입니다...";
 
   navigator.geolocation.getCurrentPosition(
-    function(position){
+    async function(position){
+      const lng = position.coords.longitude;
+      const lat = position.coords.latitude;
+
       customStart = {
-        lng: position.coords.longitude,
-        lat: position.coords.latitude
+        lng: lng,
+        lat: lat
       };
 
-     customStartName = "현재 위치";
-document.getElementById("startInput").value = "";
-document.getElementById("startInput").placeholder = "현재 위치로 설정됨";
-document.getElementById("startResults").innerHTML = "";
-document.getElementById("startResults").style.display = "none";
-document.getElementById("info").innerHTML = "출발지가 현재 위치로 설정되었습니다.";
+      customStartName = "현재 위치";
+
+      try{
+        const response = await fetch(
+          "https://dapi.kakao.com/v2/local/geo/coord2address.json?x=" +
+          lng + "&y=" + lat,
+          {
+            headers:{
+              Authorization:"KakaoAK " + kakaoKey
+            }
+          }
+        );
+
+        const data = await response.json();
+
+        if(data.documents && data.documents.length > 0){
+          const address =
+            data.documents[0].road_address?.address_name ||
+            data.documents[0].address?.address_name;
+
+          if(address){
+            customStartName = address;
+          }
+        }
+      }catch(error){
+        customStartName = "현재 위치(" + lat.toFixed(5) + "," + lng.toFixed(5) + ")";
+      }
+
+      document.getElementById("startInput").value = customStartName;
+      document.getElementById("startInput").placeholder = "현재 위치로 설정됨";
+      document.getElementById("startResults").innerHTML = "";
+      document.getElementById("startResults").style.display = "none";
+
+      document.getElementById("info").innerHTML =
+        "출발지가 '" + customStartName + "'(으)로 설정되었습니다.";
     },
     function(){
       alert("현재 위치를 가져오지 못했어요. 위치 권한을 허용해주세요.");
