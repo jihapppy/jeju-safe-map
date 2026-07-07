@@ -1852,6 +1852,28 @@ body{
     line-height:1.6;
     color:#64748b;
 }
+  .result-shield img{
+    width:20px;
+    height:20px;
+}
+  .result-metric-icon img{
+    width:18px;
+    height:18px;
+}
+  .title-svg{
+    width:18px;
+    height:18px;
+    margin-right:7px;
+    vertical-align:-3px;
+}
+
+h3 .title-svg,
+.section-title .title-svg,
+.rule-title .title-svg,
+.compare-title .title-svg{
+    display:inline-block;
+}
+  
 </style>
 </head>
 
@@ -1999,8 +2021,10 @@ body{
   <div class="risk-dashboard">
 
     <div class="risk-info-card">
-      <h3>📊 사고 정보 요약</h3>
-
+      <h3>
+<img src="chart-dots.svg" class="title-svg">
+사고 정보 요약
+</h3>
       <div class="risk-question">어떤 사고 유형이 주로 확인되었나요?</div>
 
       <div class="type-row">
@@ -2029,7 +2053,10 @@ body{
     </div>
 
     <div class="risk-info-card">
-      <h3>📌 특이한 점은?</h3>
+     <h3>
+<img src="alert-triangle.svg" class="title-svg">
+특이한 점은?
+</h3>
       <p>✔ 제주시 도심·공항·연동·노형동 일대 사고 밀집</p>
       <p>✔ 해안도로 관광지 주변 사고 다발</p>
       <p>✔ 교차로 및 관광지 진출입 구간 사고 비율 높음</p>
@@ -2037,7 +2064,10 @@ body{
     </div>
 
 <div class="risk-info-card">
-  <h3>📊 2025년 렌터카 사고 특성</h3>
+ <h3>
+<img src="chart-bar.svg" class="title-svg">
+2025년 렌터카 사고 특성
+</h3>
 
   <div class="stat-grid four">
     <div><b>447건</b><span>총 사고</span></div>
@@ -2057,7 +2087,10 @@ body{
 <div id="safetyGuidePage" class="safety-guide-page">
   <div class="safety-guide-card">
 
-    <div class="section-title">🎥 렌터카 안전운전 영상</div>
+   <div class="section-title">
+<img src="video.svg" class="title-svg">
+렌터카 안전운전 영상
+</div>
     <div class="section-sub">제주 도로 특성을 반영한 안전운전 가이드</div>
 
     <div class="video-box">
@@ -2066,7 +2099,10 @@ body{
       </video>
     </div>
 
-   <div class="rule-title">📖 제주 렌터카 안전운전 가이드</div>
+  <div class="rule-title">
+<img src="info-circle.svg" class="title-svg">
+제주 렌터카 안전운전 가이드
+</div>
 <div class="section-sub">회전교차로와 엔진브레이크 사용법을 한눈에 확인하세요</div>
 
 <div class="guide-image-card">
@@ -2850,7 +2886,9 @@ resultWrap.innerHTML = `
   <div class="result-hero-card">
     <div class="result-main-grid">
       <div class="result-course">
-        <div class="result-shield">🛡️</div>
+        <div class="result-shield">
+    <img src="shield-check.svg">
+</div>
         <div>
 <div class="result-title">${recommendCourseName} <span class="recommend-badge">추천</span></div>
 <div class="result-sub">
@@ -2865,14 +2903,18 @@ resultWrap.innerHTML = `
       </div>
 
       <div class="result-metric">
-        <div class="result-metric-icon">🛣️</div>
+        <div class="result-metric-icon">
+    <img src="route.svg">
+</div>
         <span>거리</span>
         <b>${recommend.distanceKm}km</b>
         <div class="result-chip">${distanceText}</div>
       </div>
 
       <div class="result-metric">
-        <div class="result-metric-icon">⏱️</div>
+        <div class="result-metric-icon">
+    <img src="clock.svg">
+</div>
         <span>시간</span>
         <b>${recommend.durationMin}분</b>
         <div class="result-chip">
@@ -2927,7 +2969,10 @@ ${makeAiBriefing(recommend, alt, endName)}
   </div>
 
  <div class="info-split-col tip">
-  <h3>⭐ ${endName} 맞춤 안전팁</h3>
+  <h3>
+<img src="map-pin-check.svg" class="title-svg">
+${endName} 맞춤 안전팁
+</h3>
 
   <div class="tip-list">
     <div class="tip-item">
@@ -2948,7 +2993,10 @@ ${makeAiBriefing(recommend, alt, endName)}
 </div>
 </div>
 <div class="compare-detail-new always-open">
-  <div class="compare-title">📊 경로 상세 비교</div>
+  <div class="compare-title">
+<img src="chart-bar.svg" class="title-svg">
+경로 상세 비교
+</div>
 
   <div class="compare-cards">
     <div class="compare-mini recommend">
@@ -3016,7 +3064,10 @@ ${makeAiBriefing(recommend, alt, endName)}
 <div id="ratingText" class="rating-text">별점을 눌러주세요</div>
 </div>
 <div class="risk-score-guide">
-  <h3>📊 위험점수 안내</h3>
+  <h3>
+<img src="chart-bar.svg" class="title-svg">
+위험점수 안내
+</h3>
   <p>경로 주변 사고이력, 사고 심각도(EPDO), 주변 교통량 보정값을 함께 반영한 참고 지표입니다.</p>
   <p><b>점수가 낮을수록 사고 심각도와 교통량을 고려했을 때 상대적으로 부담이 적은 경로</b>를 의미합니다.</p>
   <p>※ 실제 위험을 예측하거나 단정하는 값은 아닙니다.</p>
