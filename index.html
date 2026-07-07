@@ -78,27 +78,7 @@ body.route-active #map{
   padding:0 18px;
   box-sizing:border-box;
 }
-  .app-topbar .menu,
-.app-topbar .bell{
-  display:none !important;
-}
-
-.app-topbar .brand{
-  justify-content:center;
-}
-
-.app-topbar .menu,
-.app-topbar .bell{
-  width:34px;
-  height:34px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:26px;
-  font-weight:500;
-  color:#0f172a;
-}
-
+ 
 .app-topbar .brand{
   display:flex;
   align-items:center;
@@ -144,9 +124,6 @@ body.route-active #map{
 }
 
 /* ===== 지도/경로 라벨 ===== */
-.risk-legend{
-  display:none;
-}
 
 .tour-label-marker,
 .route-label-marker{
@@ -550,34 +527,6 @@ body.risk-map-mode .risk-map-page{
   line-height:1.45;
 }
 
-.risk-map-wrap{
-  position:relative;
-  width:100%;
-  max-width:430px;
-  margin:24px auto 0;
-}
-
-.risk-map-image{
-  width:100%;
-  display:block;
-}
-
-.risk-chip-row{
-  display:flex;
-  gap:7px;
-  margin-top:14px;
-  flex-wrap:wrap;
-}
-
-.risk-chip{
-  padding:7px 10px;
-  border-radius:999px;
-  background:#fff;
-  box-shadow:0 6px 16px rgba(15,23,42,.06);
-  font-size:11px;
-  font-weight:900;
-  color:#475569;
-}
 
 /* ===== 지도 팝업 ===== */
 .region-popup{
@@ -1223,22 +1172,6 @@ body.admin-mode .admin-floating-btn{
   color:#64748b;
 }
 
-  .loading-steps{
-  margin-top:12px;
-  display:flex;
-  flex-direction:column;
-  gap:7px;
-}
-
-.loading-steps div{
-  padding:8px 10px;
-  border-radius:12px;
-  background:#fff;
-  color:#0f766e;
-  font-size:12px;
-  font-weight:900;
-}
-
 .ai-reason-box span{
   padding:5px 7px;
   border-radius:999px;
@@ -1555,39 +1488,17 @@ body{
 
 /* EPDO 카드 */
 
-.small::before{
-  content:"EPDO 기반 위험도 분석";
-  display:block;
-  margin-bottom:8px;
-  font-size:16px;
-  font-weight:900;
-  color:#0f172a;
-}
 .small{
-    display:flex;
-    align-items:center;
-    gap:16px;
-    min-height:86px;
-    padding:20px;
+  display:flex;
+  align-items:center;
+  gap:16px;
+  min-height:86px;
+  padding:20px;
 }
 
-.small::before{
-    display:none;
-}
-
+.small::before,
 .small::after{
-    display:none;
-}
-.small::after{
-  content:"";
-  position:absolute;
-  right:18px;
-  bottom:12px;
-  width:72px;
-  height:72px;
-  border-radius:50%;
-  background:linear-gradient(135deg,#dbeafe,#eef2ff);
-  opacity:.65;
+  display:none;
 }
 
 /* 하단 메뉴 */
@@ -1965,14 +1876,6 @@ box-shadow:0 10px 24px rgba(20,184,166,.18);
   </div>
 </div>
 
- <div class="risk-legend">
-  <span class="legend-title">사고위험도</span>
-  <span><b class="dot red"></b>집중</span>
-  <span><b class="dot orange"></b>다발</span>
-  <span><b class="dot yellow"></b>일반</span>
-  <span><b class="dot green-dot"></b>안전</span>
-</div>
-  
 <div class="panel">
   <div class="hero-banner">
     <div class="hero-text">
@@ -2792,7 +2695,6 @@ setTimeout(()=>{
     `;
   }
 },1400);
-    document.querySelector(".risk-legend").style.display = "none";
 
   const body = {
     coordinates:[
@@ -3324,7 +3226,7 @@ safeBtn.innerHTML = `
   </span>
 `;
 safeBtn.onclick = function(){
-  openNaverMap(selectedRouteIndex);
+  openNaverMap();
 };
 
 const tmapBtn = document.createElement("button");
@@ -3527,7 +3429,7 @@ function selectRouteCourse(index){
   lastFeedbackData.risk = selected.risk.riskScoreText;
 }
 
-  function openNaverMap(routeIndex){
+  function openNaverMap(){
   if(!lastStart || !lastEnd){
     alert("먼저 안전경로를 분석해주세요.");
     return;
@@ -3783,28 +3685,6 @@ function goHome(){
   document.querySelectorAll(".bottom-item")[0].classList.add("active");
 }
 
-  function sendFeedback(feedback){
-
-  fetch(feedbackApiUrl,{
-    method:"POST",
-    mode:"no-cors",
-    headers:{
-      "Content-Type":"application/json"
-    },
-    body:JSON.stringify({
-      start:lastFeedbackData.start,
-      end:lastFeedbackData.end,
-      route:lastFeedbackData.route,
-      distance:lastFeedbackData.distance,
-      time:lastFeedbackData.time,
-      epdo:lastFeedbackData.epdo,
-      feedback:feedback,
-      risk:lastFeedbackData.risk
-    })
-  });
-
-  alert("소중한 의견 감사합니다 😊");
-}
 function setRating(score){
 
   if(ratingSubmitted){
