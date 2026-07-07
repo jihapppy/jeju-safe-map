@@ -1727,7 +1727,21 @@ body{
   font-weight:900;
   color:#0f172a;
 }
+.small{
+    display:flex;
+    align-items:center;
+    gap:16px;
+    min-height:86px;
+    padding:20px;
+}
 
+.small::before{
+    display:none;
+}
+
+.small::after{
+    display:none;
+}
 .small::after{
   content:"";
   position:absolute;
@@ -1820,6 +1834,23 @@ body{
 
 .mini-btn::before{
   content:none !important;
+}
+  .epdo-icon{
+    width:46px;
+    height:46px;
+}
+
+.epdo-title{
+    font-size:20px;
+    font-weight:800;
+    color:#111827;
+}
+
+.epdo-desc2{
+    margin-top:6px;
+    font-size:13px;
+    line-height:1.6;
+    color:#64748b;
 }
 </style>
 </head>
@@ -1924,8 +1955,23 @@ body{
 <div id="info"></div>
 
   <div class="small">
-    ※ 사고데이터·EPDO·교통량 보정값을 활용한 참고용 안전경로 안내
-  </div>
+
+    <img src="chart-covariate.svg" class="epdo-icon">
+
+    <div>
+
+        <div class="epdo-title">
+            EPDO 위험도 분석
+        </div>
+
+        <div class="epdo-desc2">
+            사고데이터 · EPDO · 교통량을 반영하여
+            상대적으로 안전한 경로를 안내합니다.
+        </div>
+
+    </div>
+
+</div>
 </div>
 
 <div id="riskMapPage" class="risk-map-page">
