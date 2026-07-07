@@ -1930,6 +1930,18 @@ h3 .title-svg,
   font-weight:900;
   box-shadow:0 8px 18px rgba(15,118,110,.18);
 }
+  .result-note{
+  margin-top:8px;
+  padding:8px 10px;
+  border-radius:14px;
+  background:#ffffff;
+  border:1px solid #d9f3ef;
+  color:#0f766e;
+  font-size:11.5px;
+  font-weight:850;
+  line-height:1.45;
+  word-break:keep-all;
+}
 </style>
 </head>
 
@@ -2943,6 +2955,9 @@ resultWrap.innerHTML = `
           <div class="result-reason">
             <span class="reason-chip">${riskCompareText}</span>
           </div>
+          <div class="result-note">
+  사고이력·EPDO·교통량을 종합해 선택한 추천 경로입니다.
+</div>
         </div>
       </div>
 
@@ -3060,6 +3075,9 @@ lastRouteAnalysisHtml = `
           <div class="result-reason">
             <span class="reason-chip">${riskCompareText}</span>
           </div>
+          <div class="result-note">
+  사고이력·EPDO·교통량을 종합해 선택한 추천 경로입니다.
+</div>
         </div>
       </div>
 
