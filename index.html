@@ -1887,6 +1887,142 @@ h3 .title-svg,
     align-items:flex-start;
     justify-content:center;
 } 
+  /* ===== 결과화면 2026 스타일 ===== */
+
+.result-hero-card.new-result{
+  padding:18px;
+  border-radius:26px;
+  background:linear-gradient(180deg,#ffffff 0%,#f0fdfa 100%);
+}
+
+.safe-score{
+  margin-top:14px;
+}
+
+.safe-score-top{
+  display:flex;
+  justify-content:space-between;
+  font-size:12px;
+  font-weight:900;
+  color:#0f766e;
+}
+
+.safe-bar{
+  margin-top:7px;
+  height:9px;
+  border-radius:999px;
+  background:#d9f3ef;
+  overflow:hidden;
+}
+
+.safe-bar i{
+  display:block;
+  height:100%;
+  border-radius:999px;
+  background:#14b8a6;
+}
+
+.ai-mini-summary{
+  margin-top:12px;
+  padding:14px 15px;
+  border-radius:20px;
+  background:#fff;
+  box-shadow:0 8px 20px rgba(15,23,42,.06);
+  border:1px solid #edf2f7;
+}
+
+.ai-mini-summary h3{
+  margin:0 0 8px;
+  font-size:15px;
+  font-weight:900;
+  color:#0f172a;
+}
+
+.ai-mini-summary p{
+  margin:6px 0;
+  font-size:13px;
+  font-weight:800;
+  line-height:1.5;
+  color:#334155;
+}
+
+.ai-mini-summary b{
+  color:#0f766e;
+}
+
+.course-choice-btn strong{
+  display:block;
+  margin-top:6px;
+  font-size:22px;
+  font-weight:950;
+  color:#0f172a;
+}
+
+.route-analysis-page{
+  padding-top:14px;
+}
+
+.analysis-main-card{
+  background:#fff;
+  border-radius:24px;
+  padding:18px;
+  box-shadow:0 8px 24px rgba(15,23,42,.07);
+  border:1px solid #edf2f7;
+  margin-bottom:12px;
+}
+
+.analysis-main-card h3{
+  margin:0 0 12px;
+  font-size:18px;
+  font-weight:950;
+  color:#0f172a;
+}
+
+.analysis-point{
+  display:flex;
+  gap:10px;
+  padding:11px 0;
+  border-bottom:1px solid #edf2f7;
+}
+
+.analysis-point:last-child{
+  border-bottom:0;
+}
+
+.analysis-point b{
+  display:block;
+  font-size:13px;
+  color:#0f766e;
+  margin-bottom:3px;
+}
+
+.analysis-point span{
+  font-size:13px;
+  font-weight:750;
+  color:#334155;
+  line-height:1.45;
+}
+
+.detail-toggle{
+  margin-top:12px;
+  background:#fff;
+  border-radius:22px;
+  padding:16px;
+  border:1px solid #edf2f7;
+  box-shadow:0 8px 24px rgba(15,23,42,.07);
+}
+
+.detail-toggle summary{
+  list-style:none;
+  cursor:pointer;
+  font-size:16px;
+  font-weight:950;
+  color:#0f172a;
+}
+
+.detail-toggle summary::-webkit-details-marker{
+  display:none;
+}
 </style>
 </head>
 
@@ -2895,196 +3031,111 @@ const tips = destinationTips[endName] || [
   "교차로와 관광지 진출입 차량을 주의하세요."
 ];
 
+const safePercent = Math.max(55, Math.min(96, 100 - Math.round(recommend.risk.score)));
+
 resultWrap.innerHTML = `
-  <div class="result-hero-card">
+  <div class="result-hero-card new-result">
     <div class="result-main-grid">
       <div class="result-course">
         <div class="result-shield">
-    <img src="shield-check.svg">
-</div>
-        <div>
-<div class="result-title">${recommendCourseName} <span class="recommend-badge">추천</span></div>
-<div class="result-sub">
-사고이력과 교통량을<br>
-고려한 추천 경로입니다.
-</div>
+          <img src="shield-check.svg">
+        </div>
 
-<div class="result-reason">
-  <span class="reason-chip">${riskCompareText}</span>
-</div>
+        <div>
+          <div class="result-title">
+            ${recommendCourseName}
+            <span class="recommend-badge">추천</span>
+          </div>
+
+          <div class="result-sub">
+            사고이력과 교통량을 분석한<br>
+            추천 경로입니다.
+          </div>
+
+          <div class="result-reason">
+            <span class="reason-chip">${riskCompareText}</span>
+          </div>
         </div>
       </div>
 
       <div class="result-metric">
         <div class="result-metric-icon">
-    <img src="route.svg">
-</div>
+          <img src="route.svg">
+        </div>
         <span>거리</span>
         <b>${recommend.distanceKm}km</b>
-        <div class="result-chip">${distanceText}</div>
       </div>
 
       <div class="result-metric">
         <div class="result-metric-icon">
-    <img src="clock.svg">
-</div>
+          <img src="clock.svg">
+        </div>
         <span>시간</span>
         <b>${recommend.durationMin}분</b>
-        <div class="result-chip">
-         ${recommend.durationMin === alt.durationMin 
-  ? "대안과 동일" 
-  : Math.abs(recommend.durationMin - alt.durationMin) + "분 " + (recommend.durationMin > alt.durationMin ? "증가" : "단축")}
-        </div>
+      </div>
+    </div>
+
+    <div class="safe-score">
+      <div class="safe-score-top">
+        <span>안전도</span>
+        <b>${safePercent}%</b>
+      </div>
+      <div class="safe-bar">
+        <i style="width:${safePercent}%"></i>
       </div>
     </div>
   </div>
 
- <div class="course-choice-box">
-  <h3>원하는 코스를 선택하세요</h3>
-  <p>위험점수와 거리·시간을 비교한 뒤 원하는 코스로 길안내를 연결할 수 있습니다.</p>
-
-  <div class="course-choice-grid">
-    ${routeSummaries.map((r, i) => `
-      <button type="button"
-        class="course-choice-btn ${i === selectedRouteIndex ? "active" : ""}"
-        onclick="selectRouteCourse(${i})">
-        <b>${i + 1}코스 ${i === recommendedIndex ? "추천" : "대안"}</b>
-        <span>${r.distanceKm}km · ${r.durationMin}분</span>
-        <small>위험점수 ${r.risk.riskScoreText}</small>
-      </button>
-    `).join("")}
+  <div class="ai-mini-summary">
+    <h3>AI 한줄 요약</h3>
+    <p>추천 경로는 대안 경로보다 <b>위험점수가 낮고</b>, 예상 시간은 <b>${recommend.durationMin === alt.durationMin 
+      ? "비슷합니다" 
+      : Math.abs(recommend.durationMin - alt.durationMin) + "분 " + (recommend.durationMin > alt.durationMin ? "더 걸립니다" : "빠릅니다")}.</b></p>
   </div>
-</div>
+
+  <div class="course-choice-box">
+    <h3>코스 선택</h3>
+    <p>원하는 코스를 선택한 뒤 길안내를 연결할 수 있습니다.</p>
+
+    <div class="course-choice-grid">
+      ${routeSummaries.map((r, i) => `
+        <button type="button"
+          class="course-choice-btn ${i === selectedRouteIndex ? "active" : ""}"
+          onclick="selectRouteCourse(${i})">
+          <b>${i + 1}코스 ${i === recommendedIndex ? "추천" : "대안"}</b>
+          <strong>${r.durationMin}분</strong>
+          <span>${r.distanceKm}km</span>
+          <small>위험점수 ${r.risk.riskScoreText}</small>
+        </button>
+      `).join("")}
+    </div>
+  </div>
+
   <div class="navi-grid final-navi"></div>
 
- <div class="info-split-card">
-  <div class="info-split-col ai">
-<h3>🤖 AI 안전 브리핑</h3>
+  <div class="info-split-col tip">
+    <h3>
+      <img src="map-pin-check.svg" class="title-svg">
+      ${endName} 맞춤 안전팁
+    </h3>
 
-<div class="ai-summary-chips">
-  <div class="ai-summary-chip">
-    사고이력
-    <b>${Math.max(0, alt.risk.totalCount - recommend.risk.totalCount)}곳↓</b>
-  </div>
-  <div class="ai-summary-chip">
-    EPDO
-    <b>${Math.max(0, alt.risk.totalEpdo - recommend.risk.totalEpdo)}점↓</b>
-  </div>
-  <div class="ai-summary-chip">
-    시간
-    <b>${recommend.durationMin === alt.durationMin 
-      ? "동일" 
-      : Math.abs(recommend.durationMin - alt.durationMin) + "분 " + (recommend.durationMin > alt.durationMin ? "증가" : "단축")}</b>
-  </div>
-</div>
-
-${makeAiBriefing(recommend, alt, endName)}
-  </div>
-
- <div class="info-split-col tip">
-  <h3>
-<img src="map-pin-check.svg" class="title-svg">
-${endName} 맞춤 안전팁
-</h3>
-
-  <div class="tip-list">
-<div class="tip-item">
-  <span><img src="car.svg" class="tip-icon"></span>
-  <div>${tips[0]}</div>
-</div>
-
-<div class="tip-item">
-  <span><img src="alert-triangle.svg" class="tip-icon"></span>
-  <div>${tips[1]}</div>
-</div>
-
-<div class="tip-item">
-  <span><img src="eye.svg" class="tip-icon"></span>
-  <div>${tips[2]}</div>
-</div>
-  </div>
-</div>
-</div>
-<div class="compare-detail-new always-open">
-  <div class="compare-title">
-<img src="chart-bar.svg" class="title-svg">
-경로 상세 비교
-</div>
-
-  <div class="compare-cards">
-    <div class="compare-mini recommend">
-      <div class="compare-head">
-        <span class="compare-tag">추천</span>
-        <b>${recommendCourseName}</b>
+    <div class="tip-list">
+      <div class="tip-item">
+        <span><img src="car.svg" class="tip-icon"></span>
+        <div>${tips[0]}</div>
       </div>
 
-      <div class="compare-row2">
-        <span>거리</span>
-        <b>${recommend.distanceKm}km</b>
-      </div>
-      <div class="compare-row2">
-        <span>시간</span>
-        <b>${recommend.durationMin}분</b>
-      </div>
-      <div class="compare-row2 risk-score">
-  <span>위험점수</span>
-  <b>${recommend.risk.riskScoreText}</b>
-</div>
-<div class="risk-compare-note">${riskCompareText}</div>
-      <div class="compare-row2">
-  <span>사고이력</span>
-  <b>${recommend.risk.totalCount}건</b>
-</div>
-    </div>
-
-    <div class="compare-mini alt">
-      <div class="compare-head">
-        <span class="compare-tag">대안</span>
-        <b>${altCourseName}</b>
+      <div class="tip-item">
+        <span><img src="alert-triangle.svg" class="tip-icon"></span>
+        <div>${tips[1]}</div>
       </div>
 
-      <div class="compare-row2">
-        <span>거리</span>
-        <b>${alt.distanceKm}km</b>
+      <div class="tip-item">
+        <span><img src="eye.svg" class="tip-icon"></span>
+        <div>${tips[2]}</div>
       </div>
-      <div class="compare-row2">
-        <span>시간</span>
-        <b>${alt.durationMin}분</b>
-      </div>
-      <div class="compare-row2 risk-score">
-        <span>위험점수</span>
-        <b>${alt.risk.riskScoreText}</b>
-      </div>
-      <div class="compare-row2">
-  <span>사고이력</span>
-  <b>${alt.risk.totalCount}건</b>
-</div>
     </div>
   </div>
-</div>
-<div class="feedback-card">
-  <h3>이번 경로 추천은 어떠셨나요?</h3>
-  <p>별점을 선택하면 평가가 저장됩니다.</p>
-
-  <div class="rating-stars" id="ratingStars">
-  <button type="button" onclick="setRating(1)">☆</button>
-  <button type="button" onclick="setRating(2)">☆</button>
-  <button type="button" onclick="setRating(3)">☆</button>
-  <button type="button" onclick="setRating(4)">☆</button>
-  <button type="button" onclick="setRating(5)">☆</button>
-</div>
-
-<div id="ratingText" class="rating-text">별점을 눌러주세요</div>
-</div>
-<div class="risk-score-guide">
-  <h3>
-<img src="chart-bar.svg" class="title-svg">
-위험점수 안내
-</h3>
-  <p>경로 주변 사고이력, 사고 심각도(EPDO), 주변 교통량 보정값을 함께 반영한 참고 지표입니다.</p>
-  <p><b>점수가 낮을수록 사고 심각도와 교통량을 고려했을 때 상대적으로 부담이 적은 경로</b>를 의미합니다.</p>
-  <p>※ 실제 위험을 예측하거나 단정하는 값은 아닙니다.</p>
-</div>
 `;
     ratingSubmitted = false;
 lastFeedbackData = {
@@ -3103,26 +3154,121 @@ lastFeedbackData = {
 lastRouteAnalysisHtml = `
   <div class="routePath">${startName} <span class="arrow">→</span> ${endName}</div>
 
+  <div class="analysis-main-card">
+    <h3>🤖 AI 안전 브리핑</h3>
+
+    <div class="analysis-point">
+      <b>사고이력</b>
+      <span>추천 경로는 대안 경로보다 사고이력이 
+      ${Math.max(0, alt.risk.totalCount - recommend.risk.totalCount)}건 적게 분석되었습니다.</span>
+    </div>
+
+    <div class="analysis-point">
+      <b>EPDO</b>
+      <span>사고 심각도 지수는 대안보다 
+      ${Math.max(0, alt.risk.totalEpdo - recommend.risk.totalEpdo)}점 낮습니다.</span>
+    </div>
+
+    <div class="analysis-point">
+      <b>시간</b>
+      <span>예상 소요시간은 
+      ${recommend.durationMin === alt.durationMin 
+        ? "대안 경로와 거의 동일합니다." 
+        : "대안 경로보다 " + Math.abs(recommend.durationMin - alt.durationMin) + "분 " + (recommend.durationMin > alt.durationMin ? "더 걸립니다." : "빠릅니다.")}</span>
+    </div>
+  </div>
+
   <div class="compare-detail-new always-open">
     <div class="compare-title">
       <img src="chart-bar.svg" class="title-svg">
       경로 상세 비교
     </div>
-    ${resultWrap.querySelector(".compare-cards") ? resultWrap.querySelector(".compare-cards").outerHTML : ""}
+
+    <div class="compare-cards">
+      <div class="compare-mini recommend">
+        <div class="compare-head">
+          <span class="compare-tag">추천</span>
+          <b>${recommendCourseName}</b>
+        </div>
+
+        <div class="compare-row2">
+          <span>거리</span>
+          <b>${recommend.distanceKm}km</b>
+        </div>
+
+        <div class="compare-row2">
+          <span>시간</span>
+          <b>${recommend.durationMin}분</b>
+        </div>
+
+        <div class="compare-row2 risk-score">
+          <span>위험점수</span>
+          <b>${recommend.risk.riskScoreText}</b>
+        </div>
+
+        <div class="compare-row2">
+          <span>사고이력</span>
+          <b>${recommend.risk.totalCount}건</b>
+        </div>
+
+        <div class="risk-compare-note">${riskCompareText}</div>
+      </div>
+
+      <div class="compare-mini alt">
+        <div class="compare-head">
+          <span class="compare-tag">대안</span>
+          <b>${altCourseName}</b>
+        </div>
+
+        <div class="compare-row2">
+          <span>거리</span>
+          <b>${alt.distanceKm}km</b>
+        </div>
+
+        <div class="compare-row2">
+          <span>시간</span>
+          <b>${alt.durationMin}분</b>
+        </div>
+
+        <div class="compare-row2 risk-score">
+          <span>위험점수</span>
+          <b>${alt.risk.riskScoreText}</b>
+        </div>
+
+        <div class="compare-row2">
+          <span>사고이력</span>
+          <b>${alt.risk.totalCount}건</b>
+        </div>
+      </div>
+    </div>
   </div>
 
-  ${resultWrap.querySelector(".risk-score-guide") ? resultWrap.querySelector(".risk-score-guide").outerHTML : ""}
+  <div class="risk-score-guide">
+    <h3>
+      <img src="chart-bar.svg" class="title-svg">
+      위험점수 안내
+    </h3>
+    <p>경로 주변 사고이력, 사고 심각도(EPDO), 주변 교통량 보정값을 함께 반영한 참고 지표입니다.</p>
+    <p><b>점수가 낮을수록 사고 심각도와 교통량을 고려했을 때 상대적으로 부담이 적은 경로</b>를 의미합니다.</p>
+    <p>※ 실제 위험을 예측하거나 단정하는 값은 아닙니다.</p>
+  </div>
 
-  ${resultWrap.querySelector(".feedback-card") ? resultWrap.querySelector(".feedback-card").outerHTML : ""}
+  <div class="feedback-card">
+    <h3>이번 경로 추천은 어떠셨나요?</h3>
+    <p>별점을 선택하면 평가가 저장됩니다.</p>
+
+    <div class="rating-stars" id="ratingStars">
+      <button type="button" onclick="setRating(1)">☆</button>
+      <button type="button" onclick="setRating(2)">☆</button>
+      <button type="button" onclick="setRating(3)">☆</button>
+      <button type="button" onclick="setRating(4)">☆</button>
+      <button type="button" onclick="setRating(5)">☆</button>
+    </div>
+
+    <div id="ratingText" class="rating-text">별점을 눌러주세요</div>
+  </div>
 `;
-    const homeCompareDetail = resultWrap.querySelector(".compare-detail-new");
-if(homeCompareDetail) homeCompareDetail.remove();
-
-const homeFeedback = resultWrap.querySelector(".feedback-card");
-if(homeFeedback) homeFeedback.remove();
-
-const homeRiskGuide = resultWrap.querySelector(".risk-score-guide");
-if(homeRiskGuide) homeRiskGuide.remove();
+  
 document.getElementById("info").appendChild(resultWrap);
 
 const compactNavi = resultWrap.querySelector(".final-navi");
