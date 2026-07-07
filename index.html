@@ -1873,7 +1873,20 @@ h3 .title-svg,
 .compare-title .title-svg{
     display:inline-block;
 }
-  
+ .tip-icon{
+    width:18px;
+    height:18px;
+    display:block;
+    margin-top:1px;
+    flex-shrink:0;
+}
+
+.tip-item span{
+    width:20px;
+    display:flex;
+    align-items:flex-start;
+    justify-content:center;
+} 
 </style>
 </head>
 
@@ -2975,20 +2988,20 @@ ${endName} 맞춤 안전팁
 </h3>
 
   <div class="tip-list">
-    <div class="tip-item">
-      <span>🚗</span>
-      <div>${tips[0]}</div>
-    </div>
+<div class="tip-item">
+  <span><img src="car.svg" class="tip-icon"></span>
+  <div>${tips[0]}</div>
+</div>
 
-    <div class="tip-item">
-      <span>⚠️</span>
-      <div>${tips[1]}</div>
-    </div>
+<div class="tip-item">
+  <span><img src="alert-triangle.svg" class="tip-icon"></span>
+  <div>${tips[1]}</div>
+</div>
 
-    <div class="tip-item">
-      <span>👀</span>
-      <div>${tips[2]}</div>
-    </div>
+<div class="tip-item">
+  <span><img src="eye.svg" class="tip-icon"></span>
+  <div>${tips[2]}</div>
+</div>
   </div>
 </div>
 </div>
