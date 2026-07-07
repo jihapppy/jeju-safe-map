@@ -2023,6 +2023,18 @@ h3 .title-svg,
 .detail-toggle summary::-webkit-details-marker{
   display:none;
 }
+  .analysis-link-btn{
+  width:100%;
+  height:48px;
+  margin:10px 0 14px;
+  border:0;
+  border-radius:18px;
+  background:#0f766e;
+  color:#fff;
+  font-size:14px;
+  font-weight:900;
+  box-shadow:0 8px 18px rgba(15,118,110,.18);
+}
 </style>
 </head>
 
@@ -3112,7 +3124,14 @@ resultWrap.innerHTML = `
   </div>
 
   <div class="navi-grid final-navi"></div>
+<button
+  type="button"
+  class="analysis-link-btn"
+  onclick="showRouteAnalysis()">
 
+  📊 경로 상세분석 보기
+
+</button>
   <div class="info-split-col tip">
     <h3>
       <img src="map-pin-check.svg" class="title-svg">
@@ -3153,6 +3172,58 @@ lastFeedbackData = {
 
 lastRouteAnalysisHtml = `
   <div class="routePath">${startName} <span class="arrow">→</span> ${endName}</div>
+
+  <div class="result-hero-card new-result">
+    <div class="result-main-grid">
+      <div class="result-course">
+        <div class="result-shield">
+          <img src="shield-check.svg">
+        </div>
+
+        <div>
+          <div class="result-title">
+            ${recommendCourseName}
+            <span class="recommend-badge">추천</span>
+          </div>
+
+          <div class="result-sub">
+            사고이력과 교통량을 분석한<br>
+            추천 경로입니다.
+          </div>
+
+          <div class="result-reason">
+            <span class="reason-chip">${riskCompareText}</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="result-metric">
+        <div class="result-metric-icon">
+          <img src="route.svg">
+        </div>
+        <span>거리</span>
+        <b>${recommend.distanceKm}km</b>
+      </div>
+
+      <div class="result-metric">
+        <div class="result-metric-icon">
+          <img src="clock.svg">
+        </div>
+        <span>시간</span>
+        <b>${recommend.durationMin}분</b>
+      </div>
+    </div>
+
+    <div class="safe-score">
+      <div class="safe-score-top">
+        <span>안전도</span>
+        <b>${safePercent}%</b>
+      </div>
+      <div class="safe-bar">
+        <i style="width:${safePercent}%"></i>
+      </div>
+    </div>
+  </div>
 
   <div class="analysis-main-card">
     <h3>🤖 AI 안전 브리핑</h3>
