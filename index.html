@@ -2860,14 +2860,6 @@ safeBtn.onclick = function(){
   openNaverMap(selectedRouteIndex);
 };
 
-tmapBtn.onclick = function(){
-  openTmap(selectedRouteIndex);
-};
-
-kakaoBtn.onclick = function(){
-  openKakaoNavi(selectedRouteIndex);
-};
-
 const tmapBtn = document.createElement("button");
 tmapBtn.className = "navi-btn";
 tmapBtn.innerHTML = `
@@ -2878,7 +2870,7 @@ tmapBtn.innerHTML = `
   </span>
 `;
 tmapBtn.onclick = function(){
-  openTmap();
+  openTmap(selectedRouteIndex);
 };
 
 const kakaoBtn = document.createElement("button");
@@ -2891,7 +2883,7 @@ kakaoBtn.innerHTML = `
   </span>
 `;
 kakaoBtn.onclick = function(){
-  openKakaoNavi();
+  openKakaoNavi(selectedRouteIndex);
 };
 
 compactNavi.appendChild(safeBtn);
