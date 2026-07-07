@@ -297,17 +297,6 @@ body.route-active .bottom-nav{
   font-weight:700;
 }
 
-.result-chip{
-  display:inline-block;
-  margin-top:5px;
-  padding:4px 9px;
-  border-radius:999px;
-  background:#e8f8f5;
-  color:#0f766e;
-  font-size:10px;
-  font-weight:900;
-}
-
 /* ===== 네비 버튼 ===== */
 .navi-grid{
   display:grid;
@@ -373,16 +362,6 @@ body.route-active .bottom-nav{
 }
 
 /* ===== AI 추천 이유 / 안전팁 ===== */
-.info-split-card{
-  display:flex;
-  flex-direction:column;
-  gap:10px;
-  margin-top:12px;
-  background:transparent;
-  border:0;
-  box-shadow:none;
-  overflow:visible;
-}
 
 .info-split-col{
   border-radius:20px;
@@ -1042,29 +1021,7 @@ font-weight:700;
   font-weight:900;
   white-space:nowrap;
 }
-  .ai-summary-chips{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:7px;
-  margin:2px 0 14px;
-}
-
-.ai-summary-chip{
-  padding:10px 6px;
-  border-radius:16px;
-  background:#f1faf8;
-  text-align:center;
-  color:#0f766e;
-  font-size:10.5px;
-  font-weight:900;
-  line-height:1.35;
-}
-
-.ai-summary-chip b{
-  display:block;
-  margin-top:2px;
-  font-size:13px;
-}
+ 
   .tip-list{
   display:flex;
   flex-direction:column;
@@ -1111,21 +1068,6 @@ font-weight:700;
   color:#64748b;
 }
 
-.feedback-buttons{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:8px;
-}
-
-.feedback-buttons button{
-  height:42px;
-  border:0;
-  border-radius:14px;
-  background:#f1faf8;
-  color:#0f766e;
-  font-size:13px;
-  font-weight:900;
-}
   .result-appear{
   animation: resultAppear .42s ease-out both;
 }
@@ -2003,26 +1945,6 @@ h3 .title-svg,
   line-height:1.45;
 }
 
-.detail-toggle{
-  margin-top:12px;
-  background:#fff;
-  border-radius:22px;
-  padding:16px;
-  border:1px solid #edf2f7;
-  box-shadow:0 8px 24px rgba(15,23,42,.07);
-}
-
-.detail-toggle summary{
-  list-style:none;
-  cursor:pointer;
-  font-size:16px;
-  font-weight:950;
-  color:#0f172a;
-}
-
-.detail-toggle summary::-webkit-details-marker{
-  display:none;
-}
   .analysis-link-btn{
   width:100%;
   height:48px;
@@ -2961,16 +2883,9 @@ const labelPoint = coords[middleIndex];
 
 const recommend = routeSummaries[recommendedIndex];
 
-const guide = document.createElement("div");
-guide.className = "card green";
-
     const matchedTipKey = Object.keys(destinationTips).find(key =>
   endName.includes(key) || key.includes(endName)
 );
-
-const mainTip = matchedTipKey
-  ? destinationTips[matchedTipKey][0]
-  : "목적지를 놓쳤다면 급차로 변경하지 말고 다음 길로 이동하세요.";
 
 const altIndex = recommendedIndex === 0 ? 1 : 0;
 const alt = routeSummaries[altIndex] || routeSummaries[recommendedIndex];
@@ -2984,17 +2899,6 @@ const riskDiff =
     ? "대안경로 대비 위험도 " + riskDiff + "% 낮음"
     : "🟡 대안과 유사";
 
-const distanceGap =
-  Number(recommend.distanceKm) - Number(alt.distanceKm);
-
-const distanceDiff = Math.abs(distanceGap).toFixed(1);
-
-const distanceText =
-  distanceGap < 0
-    ? distanceDiff + "km 단축"
-    : distanceGap > 0
-      ? distanceDiff + "km 증가"
-      : "대안과 동일";
 const resultWrap = document.createElement("div");
     resultWrap.className = "result-appear";
 
@@ -3386,14 +3290,6 @@ compactNavi.appendChild(safeBtn);
 compactNavi.appendChild(tmapBtn);
 compactNavi.appendChild(kakaoBtn);
     
-    const notice = document.createElement("div");
-
-notice.style.fontSize = "13px";
-notice.style.color = "#666";
-notice.style.marginTop = "10px";
-
-
-document.getElementById("info").appendChild(notice);
     L.marker([startLat,startLng])
       .addTo(routeLayer)
       .bindPopup("출발지: "+startName);
