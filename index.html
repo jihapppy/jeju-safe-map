@@ -4049,7 +4049,7 @@ document.body.classList.add("risk-map-mode");
   setTimeout(initRiskMiniMap, 200);
 }
 function showRouteAnalysis(){
-  document.body.classList.remove("risk-map-mode", "safety-guide-mode");
+  document.body.classList.remove("risk-map-mode", "safety-guide-mode", "route-active");
   document.body.classList.add("route-analysis-mode");
 
   document.querySelectorAll(".bottom-item").forEach(btn => {
