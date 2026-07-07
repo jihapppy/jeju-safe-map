@@ -1976,15 +1976,197 @@ box-shadow:0 10px 24px rgba(20,184,166,.18);
   font-size:14px !important;
   line-height:1.45 !important;
 }
+  /* ===== 햄버거 사이드 메뉴 ===== */
+
+.app-topbar::before{
+  content:none !important;
+}
+
+.menu-btn{
+  position:absolute;
+  left:16px;
+  top:50%;
+  transform:translateY(-50%);
+  width:38px;
+  height:38px;
+  border:0;
+  background:transparent;
+  font-size:27px;
+  font-weight:800;
+  color:#0f172a;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.menu-backdrop{
+  display:none;
+  position:fixed;
+  inset:0;
+  z-index:20000;
+  background:rgba(15,23,42,.35);
+}
+
+.menu-backdrop.active{
+  display:block;
+}
+
+.side-menu{
+  position:fixed;
+  top:0;
+  left:0;
+  width:82%;
+  max-width:340px;
+  height:100vh;
+  z-index:20001;
+  background:#fff;
+  transform:translateX(-105%);
+  transition:.25s ease;
+  padding:22px 18px;
+  box-sizing:border-box;
+  box-shadow:18px 0 38px rgba(15,23,42,.18);
+}
+
+.side-menu.active{
+  transform:translateX(0);
+}
+
+.side-menu-head{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:20px;
+}
+
+.side-menu-title{
+  font-size:19px;
+  font-weight:950;
+  color:#0f172a;
+}
+
+.side-close{
+  width:34px;
+  height:34px;
+  border:0;
+  border-radius:50%;
+  background:#f1f5f9;
+  font-size:22px;
+  color:#0f172a;
+}
+
+.side-menu-list{
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+}
+
+.side-menu-item{
+  width:100%;
+  border:1px solid #edf2f7;
+  background:#fff;
+  border-radius:20px;
+  padding:16px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  text-align:left;
+  box-shadow:0 8px 22px rgba(15,23,42,.06);
+}
+
+.side-menu-main{
+  display:flex;
+  gap:12px;
+  align-items:center;
+}
+
+.side-menu-icon{
+  width:42px;
+  height:42px;
+  border-radius:50%;
+  background:#e8f8f5;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:22px;
+}
+
+.side-menu-text b{
+  display:block;
+  font-size:16px;
+  font-weight:950;
+  color:#0f172a;
+}
+
+.side-menu-text span{
+  display:block;
+  margin-top:4px;
+  font-size:12.5px;
+  font-weight:700;
+  color:#64748b;
+}
+
+.side-arrow{
+  font-size:24px;
+  font-weight:900;
+  color:#94a3b8;
+}
 </style>
 </head>
 
 <body>
 <div id="map"></div>
-  <div class="app-topbar">
+<div class="app-topbar">
+  <button class="menu-btn" type="button" onclick="openSideMenu()">☰</button>
+
   <div class="brand">
     <img src="pin.png">
     <b>Jeju Safe Map</b>
+  </div>
+</div>
+
+<div id="menuBackdrop" class="menu-backdrop" onclick="closeSideMenu()"></div>
+
+<div id="sideMenu" class="side-menu">
+  <div class="side-menu-head">
+    <div class="side-menu-title">Jeju Safe Map</div>
+    <button class="side-close" type="button" onclick="closeSideMenu()">×</button>
+  </div>
+
+  <div class="side-menu-list">
+
+    <button class="side-menu-item" type="button" onclick="openRiskMapFromMenu()">
+      <div class="side-menu-main">
+        <div class="side-menu-icon">🗺</div>
+        <div class="side-menu-text">
+          <b>위험지도</b>
+          <span>사고 많은 지역 확인하기</span>
+        </div>
+      </div>
+      <div class="side-arrow">›</div>
+    </button>
+
+    <button class="side-menu-item" type="button" onclick="openEpdoFromMenu()">
+      <div class="side-menu-main">
+        <div class="side-menu-icon">📊</div>
+        <div class="side-menu-text">
+          <b>EPDO 위험도</b>
+          <span>위험점수 계산 방식</span>
+        </div>
+      </div>
+      <div class="side-arrow">›</div>
+    </button>
+
+    <button class="side-menu-item" type="button" onclick="openNoticeFromMenu()">
+      <div class="side-menu-main">
+        <div class="side-menu-icon">📢</div>
+        <div class="side-menu-text">
+          <b>공지사항</b>
+          <span>업데이트 내역</span>
+        </div>
+      </div>
+      <div class="side-arrow">›</div>
+    </button>
+
   </div>
 </div>
 
@@ -4040,7 +4222,40 @@ if(!lastRouteAnalysisHtml){
 
   box.innerHTML = lastRouteAnalysisHtml;
 }
+function openSideMenu(){
+  document.getElementById("sideMenu").classList.add("active");
+  document.getElementById("menuBackdrop").classList.add("active");
+}
 
+function closeSideMenu(){
+  document.getElementById("sideMenu").classList.remove("active");
+  document.getElementById("menuBackdrop").classList.remove("active");
+}
+
+function openRiskMapFromMenu(){
+  closeSideMenu();
+  showRiskMap();
+}
+
+function openEpdoFromMenu(){
+  closeSideMenu();
+  goHome();
+
+  setTimeout(() => {
+    const epdoCard = document.querySelector(".small");
+    if(epdoCard){
+      epdoCard.scrollIntoView({
+        behavior:"smooth",
+        block:"center"
+      });
+    }
+  }, 200);
+}
+
+function openNoticeFromMenu(){
+  closeSideMenu();
+  alert("공지사항은 추후 업데이트 예정입니다.");
+}
 </script>
 
 </body>
