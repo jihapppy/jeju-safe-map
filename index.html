@@ -2212,6 +2212,44 @@ box-shadow:0 10px 24px rgba(20,184,166,.18);
     filter:invert(51%) sepia(79%) saturate(523%)
            hue-rotate(131deg) brightness(88%) contrast(90%);
 }
+  /* ===== 메뉴 팝업 글자 정리 ===== */
+
+.menu-popup-content .risk-info-card,
+.menu-popup-content .risk-score-guide{
+  padding:18px 20px !important;
+  border-radius:22px !important;
+}
+
+.menu-popup-content h3{
+  margin:0 0 12px !important;
+  font-size:18px !important;
+  font-weight:900 !important;
+  color:#0f172a !important;
+  letter-spacing:-0.4px !important;
+}
+
+.menu-popup-content p{
+  margin:8px 0 !important;
+  font-size:14px !important;
+  font-weight:650 !important;
+  line-height:1.65 !important;
+  color:#475569 !important;
+  word-break:keep-all !important;
+}
+
+.menu-popup-content p b{
+  font-weight:900 !important;
+  color:#334155 !important;
+}
+
+.menu-popup-content .risk-score-guide{
+  background:#fff !important;
+  border:1px solid #edf2f7 !important;
+}
+
+.menu-popup-content .risk-score-guide p{
+  font-size:14px !important;
+}
 </style>
 </head>
 
@@ -4475,20 +4513,34 @@ setTimeout(() => {
   if(type === "epdo"){
     title.innerText = "EPDO 위험도";
 
-    content.innerHTML = `
-      <div class="risk-info-card">
-        <h3>EPDO 위험도 분석</h3>
-        <p>EPDO는 사고 심각도 지수입니다. 사망·중상사고일수록 높은 점수를 부여합니다.</p>
-        <p>사고데이터, EPDO, 교통량 보정값을 함께 반영하여 상대적으로 안전한 경로를 안내합니다.</p>
-      </div>
+content.innerHTML = `
+  <div class="risk-info-card">
+    <h3>EPDO 위험도 분석</h3>
+    <p>
+      EPDO는 사고의 심각도를 점수화한 지표입니다.
+      사망·중상사고일수록 더 높은 점수가 부여됩니다.
+    </p>
+    <p>
+      이 서비스는 사고데이터, EPDO, 교통량 보정값을 함께 반영해
+      상대적으로 안전한 경로를 안내합니다.
+    </p>
+  </div>
 
-      <div class="risk-score-guide">
-        <h3>위험점수 안내</h3>
-        <p>경로 주변 사고이력, 사고 심각도, 주변 교통량 보정값을 함께 반영한 참고 지표입니다.</p>
-        <p><b>점수가 낮을수록 상대적으로 부담이 적은 경로</b>를 의미합니다.</p>
-        <p>※ 실제 위험을 예측하거나 단정하는 값은 아닙니다.</p>
-      </div>
-    `;
+  <div class="risk-score-guide">
+    <h3>위험점수 안내</h3>
+    <p>
+      위험점수는 경로 주변 사고이력, 사고 심각도, 주변 교통량 보정값을
+      함께 반영한 참고 지표입니다.
+    </p>
+    <p>
+      점수가 낮을수록 사고 심각도와 교통량을 고려했을 때
+      상대적으로 부담이 적은 경로를 의미합니다.
+    </p>
+    <p>
+      ※ 실제 위험을 예측하거나 단정하는 값은 아닙니다.
+    </p>
+  </div>
+`;
 
     popup.classList.add("active");
   }
