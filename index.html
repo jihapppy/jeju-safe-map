@@ -2220,6 +2220,16 @@ box-shadow:0 10px 24px rgba(20,184,166,.18);
 
   </div>
 </div>
+<div id="menuPopup" class="menu-popup">
+  <div class="menu-popup-card">
+    <div class="menu-popup-head">
+      <div id="menuPopupTitle">제목</div>
+      <button type="button" onclick="closeMenuPopup()">×</button>
+    </div>
+
+    <div id="menuPopupContent" class="menu-popup-content"></div>
+  </div>
+</div>
 
 <div class="panel">
   <div class="hero-banner">
@@ -4205,6 +4215,79 @@ weight:1
     riskMiniMap.invalidateSize();
   }, 300);
 }
+  let riskMiniMapPopup = null;
+let riskMiniLayerPopup = null;
+
+function initRiskMiniMapPopup(){
+  if(riskMiniMapPopup){
+    riskMiniMapPopup.remove();
+    riskMiniMapPopup = null;
+  }
+
+  riskMiniMapPopup = L.map("riskMiniMapPopup", {
+    zoomControl:true,
+    attributionControl:false
+  }).setView([33.36,126.55], 9);
+
+  const jejuBounds = L.latLngBounds(
+    [33.18,126.15],
+    [33.58,126.98]
+  );
+
+  riskMiniMapPopup.fitBounds(jejuBounds, {
+    padding:[5,5]
+  });
+
+  L.tileLayer(
+    "https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png",
+    {
+      subdomains:"abcd",
+      maxZoom:20
+    }
+  ).addTo(riskMiniMapPopup);
+
+  riskMiniLayerPopup = L.layerGroup().addTo(riskMiniMapPopup);
+
+  accidentData.forEach(accident => {
+    const epdo = accident.epdo || 1;
+    const color = getRiskColor(epdo);
+
+    L.circleMarker([accident.lat, accident.lng], {
+      radius:getRiskRadius(epdo),
+      color:color,
+      fillColor:color,
+      fillOpacity:.68,
+      weight:1
+    })
+    .bindPopup(
+      "<b>사고 정보</b><br>" +
+      "피해정도: " + (accident.severity || "-") + "<br>" +
+      "법규위반: " + (accident.violation || "-") + "<br>" +
+      "사고유형: " + (accident.type || accident.accidentType || accident.crashType || "-")
+    )
+    .addTo(riskMiniLayerPopup);
+  });
+
+  setTimeout(() => {
+    riskMiniMapPopup.invalidateSize();
+  }, 300);
+}
+
+function updateAccidentStatsPopup(content){
+  if(!Array.isArray(accidentData)) return;
+
+  const death = accidentData.filter(a => (a.severity || "").includes("사망")).length;
+  const serious = accidentData.filter(a => (a.severity || "").includes("중상")).length;
+  const minor = accidentData.filter(a => (a.severity || "").includes("경상")).length;
+
+  const deathEl = content.querySelector("#deathCount");
+  const seriousEl = content.querySelector("#seriousCount");
+  const minorEl = content.querySelector("#minorCount");
+
+  if(deathEl) deathEl.textContent = death + "건";
+  if(seriousEl) seriousEl.textContent = serious + "건";
+  if(minorEl) minorEl.textContent = minor + "건";
+}
   function updateAccidentStats(){
   if(!Array.isArray(accidentData)) return;
 
@@ -4294,9 +4377,70 @@ function openEpdoFromMenu(){
 
 function openNoticeFromMenu(){
   closeSideMenu();
-  alert("공지사항은 추후 업데이트 예정입니다.");
+  openMenuPopup("notice");
+}
+
+function openMenuPopup(type){
+  const popup = document.getElementById("menuPopup");
+  const title = document.getElementById("menuPopupTitle");
+  const content = document.getElementById("menuPopupContent");
+
+  if(type === "risk"){
+    title.innerText = "사고 위험 지도";
+    content.innerHTML = document.getElementById("riskMapPage").innerHTML;
+    popup.classList.add("active");
+
+    setTimeout(() => {
+      const mapBox = content.querySelector("#riskMiniMap");
+      if(mapBox){
+        mapBox.id = "riskMiniMapPopup";
+        initRiskMiniMapPopup();
+      }
+      updateAccidentStatsPopup(content);
+    }, 200);
+  }
+
+  if(type === "epdo"){
+    title.innerText = "EPDO 위험도";
+
+    content.innerHTML = `
+      <div class="risk-info-card">
+        <h3>EPDO 위험도 분석</h3>
+        <p>EPDO는 사고 심각도 지수입니다. 사망·중상사고일수록 높은 점수를 부여합니다.</p>
+        <p>사고데이터, EPDO, 교통량 보정값을 함께 반영하여 상대적으로 안전한 경로를 안내합니다.</p>
+      </div>
+
+      <div class="risk-score-guide">
+        <h3>위험점수 안내</h3>
+        <p>경로 주변 사고이력, 사고 심각도, 주변 교통량 보정값을 함께 반영한 참고 지표입니다.</p>
+        <p><b>점수가 낮을수록 상대적으로 부담이 적은 경로</b>를 의미합니다.</p>
+        <p>※ 실제 위험을 예측하거나 단정하는 값은 아닙니다.</p>
+      </div>
+    `;
+
+    popup.classList.add("active");
+  }
+
+  if(type === "notice"){
+    title.innerText = "공지사항";
+
+    content.innerHTML = `
+      <div class="risk-info-card">
+        <h3>업데이트 내역</h3>
+        <p>✔ 사고이력 기반 경로 비교 기능 제공</p>
+        <p>✔ EPDO 및 교통량 보정값 반영</p>
+        <p>✔ 제주 렌터카 안전운전 가이드 제공</p>
+        <p>※ 관광소식 연동은 추후 업데이트 예정입니다.</p>
+      </div>
+    `;
+
+    popup.classList.add("active");
+  }
+}
+
+function closeMenuPopup(){
+  document.getElementById("menuPopup").classList.remove("active");
 }
 </script>
-
 </body>
 </html>
