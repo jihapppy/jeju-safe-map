@@ -2109,6 +2109,23 @@ box-shadow:0 10px 24px rgba(20,184,166,.18);
 @keyframes spin{
   to{ transform:rotate(360deg); }
 }
+  .loading-step.done{
+    color:#0f766e;
+    background:#ffffff;
+    border:1px solid #d9f5ee;
+}
+
+.loading-step.done .step-spinner{
+    display:none;
+}
+
+.loading-step.done .step-dot{
+    display:block;
+}
+
+.step-dot{
+    display:none;
+}
 </style>
 </head>
 
@@ -2879,33 +2896,74 @@ lastEnd = {
   <p>사고데이터와 교통량을 단계별로 비교 중입니다.</p>
 
 <div class="loading-steps">
-  <div id="step1">⏳ 사고데이터 분석 중...</div>
-  <div id="step2">⏳ EPDO 계산 중...</div>
-  <div id="step3">⏳ 교통량 보정 반영 중...</div>
-  <div id="step4">⏳ 추천경로 생성 중...</div>
+
+  <div class="loading-step" id="step1">
+    <span class="step-spinner"></span>
+    <span>사고데이터 분석 중</span>
+  </div>
+
+  <div class="loading-step" id="step2">
+    <span class="step-spinner"></span>
+    <span>EPDO 계산 중</span>
+  </div>
+
+  <div class="loading-step" id="step3">
+    <span class="step-spinner"></span>
+    <span>교통량 보정 반영 중</span>
+  </div>
+
+  <div class="loading-step" id="step4">
+    <span class="step-spinner"></span>
+    <span>추천경로 생성 중</span>
+  </div>
+
 </div>
 </div>
 `;
     document.querySelector(".panel").classList.add("route-mode");
     document.body.classList.add("route-active");
-    setTimeout(()=>{
+   setTimeout(()=>{
   const s=document.getElementById("step1");
-  if(s) s.innerHTML="✅ 사고데이터 분석 완료";
+  if(s){
+    s.className="loading-step done";
+    s.innerHTML=`
+      <span class="step-dot"></span>
+      <span>사고데이터 분석 완료</span>
+    `;
+  }
 },350);
 
 setTimeout(()=>{
   const s=document.getElementById("step2");
-  if(s) s.innerHTML="✅ EPDO 계산 완료";
+  if(s){
+    s.className="loading-step done";
+    s.innerHTML=`
+      <span class="step-dot"></span>
+      <span>EPDO 계산 완료</span>
+    `;
+  }
 },700);
 
 setTimeout(()=>{
   const s=document.getElementById("step3");
-  if(s) s.innerHTML="✅ 교통량 보정 완료";
+  if(s){
+    s.className="loading-step done";
+    s.innerHTML=`
+      <span class="step-dot"></span>
+      <span>교통량 보정 완료</span>
+    `;
+  }
 },1050);
 
 setTimeout(()=>{
   const s=document.getElementById("step4");
-  if(s) s.innerHTML="✅ 추천경로 생성 완료";
+  if(s){
+    s.className="loading-step done";
+    s.innerHTML=`
+      <span class="step-dot"></span>
+      <span>추천경로 생성 완료</span>
+    `;
+  }
 },1400);
     document.querySelector(".risk-legend").style.display = "none";
 
