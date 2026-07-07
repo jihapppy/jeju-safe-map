@@ -1864,6 +1864,118 @@ box-shadow:0 10px 24px rgba(20,184,166,.18);
   height:9px !important;
   box-shadow:0 0 0 4px rgba(20,184,166,.12) !important;
 }
+  /* ===== 깨진 부분 복구용 CSS ===== */
+
+/* 1. 로딩화면 복구 */
+.loading-card{
+  margin:12px 0 14px !important;
+  padding:18px 16px !important;
+  border-radius:22px !important;
+  background:#eefdf9 !important;
+  border:1px solid #c9f1e9 !important;
+}
+
+.loading-card b{
+  display:block;
+  font-size:15px !important;
+  font-weight:900 !important;
+  color:#00796f !important;
+}
+
+.loading-card p{
+  margin:6px 0 0 !important;
+  font-size:12px !important;
+  font-weight:700 !important;
+  color:#64748b !important;
+}
+
+.loading-step{
+  display:flex !important;
+  align-items:center !important;
+  height:42px !important;
+  padding:0 14px !important;
+  border-radius:16px !important;
+  background:#fff !important;
+  border:1px solid #d9f5ee !important;
+  color:#00796f !important;
+  font-size:13.5px !important;
+  font-weight:900 !important;
+}
+
+.step-dot{
+  display:none;
+  width:9px;
+  height:9px;
+  border-radius:50%;
+  background:#14b8a6;
+}
+
+/* 2. AI 한줄요약 카드 복구 */
+.ai-mini-summary{
+  margin:12px 0 12px;
+  padding:16px 18px;
+  border-radius:22px;
+  background:#fff;
+  border:1px solid #edf2f7;
+  box-shadow:0 8px 24px rgba(15,23,42,.07);
+}
+
+.ai-mini-summary h3{
+  margin:0 0 10px;
+  font-size:16px;
+  font-weight:900;
+  color:#0f172a;
+}
+
+.ai-mini-summary p{
+  margin:0;
+  font-size:14.5px;
+  font-weight:750;
+  line-height:1.55;
+  color:#334155;
+}
+
+.ai-mini-summary b{
+  color:#0f766e;
+  font-weight:950;
+}
+
+/* 3. AI 안전브리핑 칸 축소 */
+.analysis-main-card{
+  padding:15px 17px !important;
+  border-radius:22px !important;
+}
+
+.analysis-main-card h3{
+  margin:0 0 8px !important;
+  font-size:18px !important;
+}
+
+.analysis-point{
+  padding:8px 0 !important;
+  gap:10px !important;
+}
+
+.analysis-icon{
+  width:36px !important;
+  height:36px !important;
+  min-width:36px !important;
+}
+
+.analysis-icon img{
+  width:18px !important;
+  height:18px !important;
+}
+
+.analysis-text b{
+  margin-bottom:3px !important;
+  font-size:15px !important;
+}
+
+.analysis-text span{
+  font-size:14px !important;
+  line-height:1.45 !important;
+}
 </style>
 </head>
 
