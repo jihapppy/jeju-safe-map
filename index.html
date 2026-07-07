@@ -1837,33 +1837,6 @@ h3 .title-svg,
   background:linear-gradient(180deg,#ffffff 0%,#f0fdfa 100%);
 }
 
-.safe-score{
-  margin-top:14px;
-}
-
-.safe-score-top{
-  display:flex;
-  justify-content:space-between;
-  font-size:12px;
-  font-weight:900;
-  color:#0f766e;
-}
-
-.safe-bar{
-  margin-top:7px;
-  height:9px;
-  border-radius:999px;
-  background:#d9f3ef;
-  overflow:hidden;
-}
-
-.safe-bar i{
-  display:block;
-  height:100%;
-  border-radius:999px;
-  background:#14b8a6;
-}
-
 .ai-mini-summary{
   margin-top:12px;
   padding:14px 15px;
@@ -2947,7 +2920,6 @@ const tips = destinationTips[endName] || [
   "교차로와 관광지 진출입 차량을 주의하세요."
 ];
 
-const safePercent = Math.max(55, Math.min(96, 100 - Math.round(recommend.risk.score)));
 
 resultWrap.innerHTML = `
   <div class="result-hero-card new-result">
@@ -2988,16 +2960,6 @@ resultWrap.innerHTML = `
         </div>
         <span>시간</span>
         <b>${recommend.durationMin}분</b>
-      </div>
-    </div>
-
-    <div class="safe-score">
-      <div class="safe-score-top">
-        <span>안전도</span>
-        <b>${safePercent}%</b>
-      </div>
-      <div class="safe-bar">
-        <i style="width:${safePercent}%"></i>
       </div>
     </div>
   </div>
@@ -3115,16 +3077,6 @@ lastRouteAnalysisHtml = `
         </div>
         <span>시간</span>
         <b>${recommend.durationMin}분</b>
-      </div>
-    </div>
-
-    <div class="safe-score">
-      <div class="safe-score-top">
-        <span>안전도</span>
-        <b>${safePercent}%</b>
-      </div>
-      <div class="safe-bar">
-        <i style="width:${safePercent}%"></i>
       </div>
     </div>
   </div>
