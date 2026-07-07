@@ -2167,7 +2167,12 @@ box-shadow:0 10px 24px rgba(20,184,166,.18);
   border-radius:24px;
   overflow:hidden;
 }
-
+.side-menu-icon img{
+  width:23px;
+  height:23px;
+  object-fit:contain;
+  display:block;
+}
 </style>
 </head>
 
@@ -2194,7 +2199,9 @@ box-shadow:0 10px 24px rgba(20,184,166,.18);
 
     <button class="side-menu-item" type="button" onclick="openRiskMapFromMenu()">
       <div class="side-menu-main">
-        <div class="side-menu-icon">🗺</div>
+        <div class="side-menu-icon">
+  <img src="map-2.png" alt="">
+</div>
         <div class="side-menu-text">
           <b>위험지도</b>
           <span>사고 많은 지역 확인하기</span>
@@ -2205,7 +2212,9 @@ box-shadow:0 10px 24px rgba(20,184,166,.18);
 
     <button class="side-menu-item" type="button" onclick="openEpdoFromMenu()">
       <div class="side-menu-main">
-        <div class="side-menu-icon">📊</div>
+ <div class="side-menu-icon">
+  <img src="chart-bar.svg" alt="">
+</div>
         <div class="side-menu-text">
           <b>EPDO 위험도</b>
           <span>위험점수 계산 방식</span>
@@ -2216,7 +2225,9 @@ box-shadow:0 10px 24px rgba(20,184,166,.18);
 
     <button class="side-menu-item" type="button" onclick="openNoticeFromMenu()">
       <div class="side-menu-main">
-        <div class="side-menu-icon">📢</div>
+        <div class="side-menu-icon">
+  <img src="alert-triangle.svg" alt="">
+</div>
         <div class="side-menu-text">
           <b>공지사항</b>
           <span>업데이트 내역</span>
