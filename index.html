@@ -2013,6 +2013,52 @@ box-shadow:0 10px 24px rgba(20,184,166,.18);
   line-height:1;
   margin-left:6px;
 }
+  .analysis-point{
+  display:flex;
+  align-items:flex-start;
+  gap:14px;
+  padding:15px 0;
+  border-bottom:1px solid #edf2f7;
+}
+
+.analysis-point:last-child{
+  border-bottom:none;
+}
+
+.analysis-icon{
+  width:42px;
+  height:42px;
+  min-width:42px;
+  border-radius:50%;
+  background:#eefcf9;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.analysis-icon img{
+  width:20px;
+  height:20px;
+}
+
+.analysis-text{
+  flex:1;
+}
+
+.analysis-text b{
+  display:block;
+  margin-bottom:5px;
+  font-size:16px;
+  font-weight:900;
+  color:#0f8f80;
+}
+
+.analysis-text span{
+  font-size:15px;
+  line-height:1.6;
+  font-weight:750;
+  color:#334155;
+}
 </style>
 </head>
 
@@ -3173,28 +3219,70 @@ lastRouteAnalysisHtml = `
   <div class="analysis-main-card">
     <h3>🤖 AI 안전 브리핑</h3>
 
-    <div class="analysis-point">
-  <b>사고이력</b>
-  <span>
-    대안 경로보다
-    <strong>${Math.max(0, alt.risk.totalCount - recommend.risk.totalCount)}건 적은 사고이력</strong>이
-    확인되었습니다.
-  </span>
+<div class="analysis-point">
+
+  <div class="analysis-icon">
+    <img src="shield-check.svg">
+  </div>
+
+  <div class="analysis-text">
+    <b>사고이력</b>
+
+    <span>
+      대안 경로보다
+      <strong>${Math.max(0, alt.risk.totalCount - recommend.risk.totalCount)}건 적은 사고</strong>가
+      확인되었습니다.
+    </span>
+
+  </div>
+
 </div>
 
-    <div class="analysis-point">
-      <b>EPDO</b>
-      <span>사고 심각도 지수는 대안보다 
-      ${Math.max(0, alt.risk.totalEpdo - recommend.risk.totalEpdo)}점 낮습니다.</span>
-    </div>
+   <div class="analysis-point">
 
-    <div class="analysis-point">
-      <b>시간</b>
-      <span>예상 소요시간은 
-      ${recommend.durationMin === alt.durationMin 
-        ? "대안 경로와 거의 동일합니다." 
-        : "대안 경로보다 " + Math.abs(recommend.durationMin - alt.durationMin) + "분 " + (recommend.durationMin > alt.durationMin ? "더 걸립니다." : "빠릅니다.")}</span>
-    </div>
+  <div class="analysis-icon">
+    <img src="chart-bar.svg">
+  </div>
+
+  <div class="analysis-text">
+
+    <b>EPDO</b>
+
+    <span>
+      사고 심각도 지수는
+      <strong>${Math.max(0, alt.risk.totalEpdo - recommend.risk.totalEpdo)}점 낮습니다.</strong>
+    </span>
+
+  </div>
+
+</div>
+
+ <div class="analysis-point">
+
+  <div class="analysis-icon">
+    <img src="clock.svg">
+  </div>
+
+  <div class="analysis-text">
+
+    <b>예상시간</b>
+
+    <span>
+
+${recommend.durationMin === alt.durationMin
+? "대안 경로와 거의 동일합니다."
+: "대안 경로보다 " +
+Math.abs(recommend.durationMin-alt.durationMin) +
+"분 " +
+(recommend.durationMin>alt.durationMin
+? "더 걸립니다."
+: "빠릅니다.")}
+
+    </span>
+
+  </div>
+
+</div>
   </div>
 
   <div class="compare-detail-new always-open">
