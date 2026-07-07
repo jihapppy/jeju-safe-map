@@ -1635,6 +1635,76 @@ body.admin-mode .admin-floating-btn{
   font-weight:900;
   text-align:center;
 }
+  .course-choice-box{
+  margin:12px 0;
+  padding:15px;
+  border-radius:22px;
+  background:#fff;
+  box-shadow:0 8px 24px rgba(15,23,42,.07);
+  border:1px solid #edf2f7;
+}
+
+.course-choice-box h3{
+  margin:0 0 5px;
+  font-size:16px;
+  font-weight:900;
+  color:#0f172a;
+}
+
+.course-choice-box p{
+  margin:0 0 12px;
+  font-size:12px;
+  font-weight:700;
+  color:#64748b;
+  line-height:1.45;
+}
+
+.course-choice-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:8px;
+}
+
+.course-choice-btn{
+  border:1px solid #e5e7eb;
+  border-radius:17px;
+  background:#f8fafc;
+  padding:12px 10px;
+  text-align:left;
+}
+
+.course-choice-btn b{
+  display:block;
+  font-size:14px;
+  font-weight:900;
+  color:#0f172a;
+}
+
+.course-choice-btn span{
+  display:block;
+  margin-top:5px;
+  font-size:12px;
+  font-weight:800;
+  color:#475569;
+}
+
+.course-choice-btn small{
+  display:block;
+  margin-top:4px;
+  font-size:11px;
+  font-weight:800;
+  color:#64748b;
+}
+
+.course-choice-btn.active{
+  border-color:#14b8a6;
+  background:#f0fdfa;
+}
+
+.course-choice-btn.active b,
+.course-choice-btn.active small{
+  color:#0f766e;
+}
 </style>
 </head>
 
@@ -2174,6 +2244,8 @@ let lastEnd = null;
   let lastRouteAnalysisHtml = "";
   let lastFeedbackData = {};
   let ratingSubmitted = false;
+  let selectedRouteIndex = 0;
+let lastRouteSummaries = [];
 
   const destinationTips = {
   "1100고지": [
@@ -2422,8 +2494,9 @@ routes.forEach((route,index)=>{
     durationMin: durationMin,
     risk: risk
   };
+  
 });
-
+lastRouteSummaries = routeSummaries;
 let recommendedIndex = 0;
 
 if(routeSummaries.length > 1){
@@ -2439,7 +2512,7 @@ if(routeSummaries.length > 1){
       return Number(a.distanceKm) - Number(b.distanceKm);
     })[0].index;
 }
-
+selectedRouteIndex = recommendedIndex;
 routeSummaries.forEach((summary,index)=>{
   const coords = summary.coords;
   allCoords = allCoords.concat(coords);
@@ -2600,6 +2673,22 @@ resultWrap.innerHTML = `
     </div>
   </div>
 
+ <div class="course-choice-box">
+  <h3>원하는 코스를 선택하세요</h3>
+  <p>위험점수와 거리·시간을 비교한 뒤 원하는 코스로 길안내를 연결할 수 있습니다.</p>
+
+  <div class="course-choice-grid">
+    ${routeSummaries.map((r, i) => `
+      <button type="button"
+        class="course-choice-btn ${i === selectedRouteIndex ? "active" : ""}"
+        onclick="selectRouteCourse(${i})">
+        <b>${i + 1}코스 ${i === recommendedIndex ? "추천" : "대안"}</b>
+        <span>${r.distanceKm}km · ${r.durationMin}분</span>
+        <small>위험점수 ${r.risk.riskScoreText}</small>
+      </button>
+    `).join("")}
+  </div>
+</div>
   <div class="navi-grid final-navi"></div>
 
  <div class="info-split-card">
@@ -2768,7 +2857,15 @@ safeBtn.innerHTML = `
   </span>
 `;
 safeBtn.onclick = function(){
-  openNaverMap(recommendedIndex);
+  openNaverMap(selectedRouteIndex);
+};
+
+tmapBtn.onclick = function(){
+  openTmap(selectedRouteIndex);
+};
+
+kakaoBtn.onclick = function(){
+  openKakaoNavi(selectedRouteIndex);
 };
 
 const tmapBtn = document.createElement("button");
@@ -2961,6 +3058,22 @@ function getDistanceKm(lat1,lng1,lat2,lng2){
 
 function deg2rad(deg){
   return deg * (Math.PI/180);
+}
+function selectRouteCourse(index){
+  selectedRouteIndex = index;
+
+  document.querySelectorAll(".course-choice-btn").forEach((btn, i) => {
+    btn.classList.toggle("active", i === index);
+  });
+
+  const selected = lastRouteSummaries[index];
+
+  lastFeedbackData.route = (index + 1) + "코스";
+  lastFeedbackData.distance = selected.distanceKm;
+  lastFeedbackData.time = selected.durationMin;
+  lastFeedbackData.count = selected.risk.totalCount;
+  lastFeedbackData.epdo = selected.risk.totalEpdo;
+  lastFeedbackData.risk = selected.risk.riskScoreText;
 }
 
   function openNaverMap(routeIndex){
