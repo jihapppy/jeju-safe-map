@@ -2173,14 +2173,41 @@ box-shadow:0 10px 24px rgba(20,184,166,.18);
   object-fit:contain;
   display:block;
 }
+  .menu-btn img{
+    width:24px;
+    height:24px;
+}
+  .side-arrow img{
+    width:18px;
+    height:18px;
+    opacity:.55;
+}
+  .route-analysis-empty button{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+}
+
+.route-analysis-empty button img{
+    width:18px;
+    height:18px;
+}
+  .empty-icon{
+    width:56px;
+    height:56px;
+    margin:0 auto 18px;
+    display:block;
+    opacity:.9;
+}
 </style>
 </head>
 
 <body>
 <div id="map"></div>
 <div class="app-topbar">
-  <button class="menu-btn" type="button" onclick="openSideMenu()">☰</button>
-
+  <button class="menu-btn" type="button" onclick="openSideMenu()">
+    <img src="menu-2.svg">
+</button>
   <div class="brand">
     <img src="pin.png">
     <b>Jeju Safe Map</b>
@@ -2207,7 +2234,9 @@ box-shadow:0 10px 24px rgba(20,184,166,.18);
           <span>사고 많은 지역 확인하기</span>
         </div>
       </div>
-      <div class="side-arrow">›</div>
+      <div class="side-arrow">
+    <img src="chevron-right.svg">
+</div>
     </button>
 
     <button class="side-menu-item" type="button" onclick="openEpdoFromMenu()">
@@ -2226,7 +2255,7 @@ box-shadow:0 10px 24px rgba(20,184,166,.18);
     <button class="side-menu-item" type="button" onclick="openNoticeFromMenu()">
       <div class="side-menu-main">
         <div class="side-menu-icon">
-  <img src="alert-triangle.svg" alt="">
+ <img src="bell.svg">
 </div>
         <div class="side-menu-text">
           <b>공지사항</b>
@@ -2508,7 +2537,8 @@ box-shadow:0 10px 24px rgba(20,184,166,.18);
   </div>
 </div>
   <button class="admin-floating-btn" onclick="openAdminStats()">
-  📊 이용통계
+ <img src="chart-bar.svg">
+이용통계
 </button>
 <div class="bottom-nav">
   <button class="bottom-item active" onclick="goHome()">
@@ -4354,7 +4384,7 @@ if(!lastRouteAnalysisHtml){
   box.innerHTML = `
 <div class="route-analysis-empty">
 
-  <div class="empty-icon">🧭</div>
+  <div class="empty-icon"><img src="route.svg" class="empty-icon"></div>
 
   <h3>아직 경로를 분석하지 않았어요</h3>
 
@@ -4364,9 +4394,10 @@ if(!lastRouteAnalysisHtml){
   </p>
 
   <button type="button" onclick="goHome()">
-    🏠 홈으로 이동
-  </button>
-
+    <button type="button" onclick="goHome()">
+    <img src="home.svg">
+    홈으로 이동
+</button>
 </div>
 `;
   return;
