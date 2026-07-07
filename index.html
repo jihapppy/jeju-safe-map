@@ -3087,10 +3087,14 @@ lastFeedbackData = {
     sendRouteAnalysisLog();
     
     lastRouteAnalysisHtml = `
+lastRouteAnalysisHtml = `
   <div class="routePath">${startName} <span class="arrow">→</span> ${endName}</div>
 
   <div class="compare-detail-new always-open">
-    <div class="compare-title">📊 경로 상세 비교</div>
+    <div class="compare-title">
+      <img src="chart-bar.svg" class="title-svg">
+      경로 상세 비교
+    </div>
     ${resultWrap.querySelector(".compare-cards") ? resultWrap.querySelector(".compare-cards").outerHTML : ""}
   </div>
 
