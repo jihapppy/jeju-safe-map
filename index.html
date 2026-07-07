@@ -2161,6 +2161,13 @@ box-shadow:0 10px 24px rgba(20,184,166,.18);
   padding:16px;
   background:#f8fafc;
 }
+  #riskMiniMapPopup{
+  width:100%;
+  height:330px;
+  border-radius:24px;
+  overflow:hidden;
+}
+
 </style>
 </head>
 
@@ -4389,15 +4396,19 @@ function openMenuPopup(type){
     title.innerText = "사고 위험 지도";
     content.innerHTML = document.getElementById("riskMapPage").innerHTML;
     popup.classList.add("active");
+setTimeout(() => {
+  const mapBox = content.querySelector("#riskMiniMap");
 
-    setTimeout(() => {
-      const mapBox = content.querySelector("#riskMiniMap");
-      if(mapBox){
-        mapBox.id = "riskMiniMapPopup";
-        initRiskMiniMapPopup();
-      }
-      updateAccidentStatsPopup(content);
-    }, 200);
+  if(mapBox){
+    mapBox.id = "riskMiniMapPopup";
+    mapBox.style.width = "100%";
+    mapBox.style.height = "330px";
+
+    initRiskMiniMapPopup();
+  }
+
+  updateAccidentStatsPopup(content);
+}, 300);
   }
 
   if(type === "epdo"){
