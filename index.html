@@ -3312,7 +3312,7 @@ let lastErrorText = "";
 for(const key of orsApiKeys){
   try{
     response = await fetch(
-      "https://api.heigit.org/openrouteservice/v2/directions/driving-car/geojson",
+     "https://api.openrouteservice.org/v2/directions/driving-car/geojson",
       {
         method:"POST",
         headers:{
@@ -3339,9 +3339,7 @@ for(const key of orsApiKeys){
 }
 
 if(!response || !response.ok){
-  document.body.classList.remove("route-active");
-  document.querySelector(".panel").classList.remove("route-mode");
-
+ 
   if(routeLayer){
     map.removeLayer(routeLayer);
     routeLayer = null;
@@ -3906,9 +3904,6 @@ compactNavi.appendChild(kakaoBtn);
     
  }catch(error){
   console.error("경로 분석 오류:", error);
-
-  document.body.classList.remove("route-active");
-  document.querySelector(".panel").classList.remove("route-mode");
 
   if(routeLayer){
     map.removeLayer(routeLayer);
