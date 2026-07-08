@@ -3395,8 +3395,6 @@ console.log("ORS 전체 응답:", data);
     if(routes.length < 2){
   console.warn("대안경로가 2개 생성되지 않았습니다.", routes.length);
 }
-    const hasAlternativeRoute = routes.length > 1;
-
     const routeRisks = routes.map(route => {
       const coords = route.geometry.coordinates.map(c => [c[1], c[0]]);
       return analyzeRouteRisk(coords);
@@ -3505,24 +3503,6 @@ const resultWrap = document.createElement("div");
 const recommendCourseName = (recommendedIndex + 1) + "코스";
 const altCourseName = (altIndex + 1) + "코스";
 
-function makeAiBriefing(recommend, alt, endName){
-  const countDiff = alt.risk.totalCount - recommend.risk.totalCount;
-  const epdoDiff = alt.risk.totalEpdo - recommend.risk.totalEpdo;
-  const timeDiff = alt.durationMin - recommend.durationMin;
-
-  let placeMessage = "";
-
-  if(endName.includes("1100") || endName.includes("한라산")){
-    placeMessage = "산악도로 특성상 급커브·경사·안개 구간에서는 속도를 충분히 줄여 운전하는 것이 좋습니다.";
-  }else if(endName.includes("성산") || endName.includes("함덕") || endName.includes("협재") || endName.includes("월정")){
-    placeMessage = "해안도로와 관광지 진출입 구간은 보행자와 차량이 많아 전방주시가 필요합니다.";
-  }else if(endName.includes("중문") || endName.includes("오설록") || endName.includes("카멜리아")){
-    placeMessage = "관광지 주차장 진출입부와 보행자 이동 구간에서는 서행 운전이 필요합니다.";
-  }else{
-    placeMessage = "초행길에서는 목적지를 놓쳐도 급차로 변경하지 말고 다음 경로로 이동하세요.";
-  }
-
-  return `
     <p>
       추천 경로는 사고이력, 사고 심각도(EPDO), 교통량 보정값을 함께 분석한 결과
 대안 경로보다 상대적으로 부담이 적은 경로로 판단되었습니다.
