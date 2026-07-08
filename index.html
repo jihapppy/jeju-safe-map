@@ -3503,24 +3503,6 @@ const resultWrap = document.createElement("div");
 const recommendCourseName = (recommendedIndex + 1) + "코스";
 const altCourseName = (altIndex + 1) + "코스";
 
-    <p>
-      추천 경로는 사고이력, 사고 심각도(EPDO), 교통량 보정값을 함께 분석한 결과
-대안 경로보다 상대적으로 부담이 적은 경로로 판단되었습니다.
-    </p>
-
-    <p>
-      예상 소요시간은 대안 경로보다
-      <b>${Math.abs(timeDiff)}분 ${timeDiff > 0 ? "빠릅니다" : timeDiff < 0 ? "더 걸립니다" : "차이가 거의 없습니다"}.</b>
-    </p>
-
-    <p>${placeMessage}</p>
-
-    <div class="briefing-note">
-   ※ 사고데이터 기반 참고 정보입니다. 실시간 교통상황 및 날씨는 반영되지 않을 수 있습니다.
-    </div>
-  `;
-}
-
 const tips = destinationTips[endName] || [
   "관광버스와 렌터카 통행이 많은 구간입니다.",
   "목적지를 놓쳐도 급차로 변경하지 마세요.",
