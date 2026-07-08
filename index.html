@@ -4226,7 +4226,7 @@ compactNavi.appendChild(kakaoBtn);
     const segmentKm = getDistanceKm(p1[0], p1[1], p2[0], p2[1]);
     totalDistanceKm += segmentKm;
 
-    const sampleCount = Math.max(1, Math.ceil((segmentKm * 1000) / 50));
+    const sampleCount = Math.max(1, Math.ceil((segmentKm * 1000) / 100));
 
     for(let s = 0; s <= sampleCount; s++){
       const t = s / sampleCount;
