@@ -3887,7 +3887,7 @@ safeBtn.innerHTML = `
   </span>
 `;
 safeBtn.onclick = function(){
-  openNaverMap();
+  openNaverMap(selectedRouteIndex);
 };
 
 const tmapBtn = document.createElement("button");
@@ -4082,6 +4082,28 @@ function getDistanceKm(lat1,lng1,lat2,lng2){
 function deg2rad(deg){
   return deg * (Math.PI/180);
 }
+  function getSelectedRoute(){
+  if(!lastRouteSummaries || lastRouteSummaries.length === 0){
+    return null;
+  }
+
+  return lastRouteSummaries[selectedRouteIndex] || lastRouteSummaries[0];
+}
+
+function getRouteViaPoint(route){
+  if(!route || !route.coords || route.coords.length < 3){
+    return null;
+  }
+
+  const middleIndex = Math.floor(route.coords.length / 2);
+  const point = route.coords[middleIndex];
+
+  return {
+    lat: point[0],
+    lng: point[1],
+    name: (selectedRouteIndex + 1) + "코스 경유지"
+  };
+}
 function selectRouteCourse(index){
   selectedRouteIndex = index;
 
@@ -4099,32 +4121,46 @@ function selectRouteCourse(index){
   lastFeedbackData.risk = selected.risk.riskScoreText;
 }
 
-  function openNaverMap(){
+  function openNaverMap(courseIndex = selectedRouteIndex){
   if(!lastStart || !lastEnd){
     alert("먼저 안전경로를 분석해주세요.");
     return;
   }
 
+  selectedRouteIndex = courseIndex;
+
+  const selectedRoute = getSelectedRoute();
+  const via = getRouteViaPoint(selectedRoute);
+
   const appname = "https://jihapppy.github.io/jeju-safe-map";
 
-  const url =
+  let url =
     "nmap://route/car?" +
     "slat=" + lastStart.lat +
     "&slng=" + lastStart.lng +
     "&sname=" + encodeURIComponent(lastStart.name) +
     "&dlat=" + lastEnd.lat +
     "&dlng=" + lastEnd.lng +
-    "&dname=" + encodeURIComponent(lastEnd.name) +
-    "&appname=" + encodeURIComponent(appname);
+    "&dname=" + encodeURIComponent(lastEnd.name);
+
+  if(via){
+    url +=
+      "&v1lat=" + via.lat +
+      "&v1lng=" + via.lng +
+      "&v1name=" + encodeURIComponent(via.name);
+  }
+
+  url += "&appname=" + encodeURIComponent(appname);
 
   window.location.href = url;
 }
- function openTmap(){
-
+ function openTmap(courseIndex = selectedRouteIndex){
   if(!lastStart || !lastEnd){
     alert("먼저 안전경로를 분석해주세요.");
     return;
   }
+
+  selectedRouteIndex = courseIndex;
 
   const url =
     "tmap://route?" +
@@ -4137,18 +4173,31 @@ function selectRouteCourse(index){
 
   window.location.href = url;
 }
-function openKakaoNavi(){
-
+function openKakaoNavi(courseIndex = selectedRouteIndex){
   if(!lastStart || !lastEnd){
     alert("먼저 안전경로를 분석해주세요.");
     return;
   }
 
-  const url =
-    "https://map.kakao.com/link/to/" +
-    encodeURIComponent(lastEnd.name) + "," +
-    lastEnd.lat + "," +
-    lastEnd.lng;
+  selectedRouteIndex = courseIndex;
+
+  const selectedRoute = getSelectedRoute();
+  const via = getRouteViaPoint(selectedRoute);
+
+  let url =
+    "kakaomap://route?" +
+    "sp=" + lastStart.lat + "," + lastStart.lng +
+    "&ep=" + lastEnd.lat + "," + lastEnd.lng +
+    "&by=car";
+
+  if(via){
+    url =
+      "kakaomap://route?" +
+      "sp=" + lastStart.lat + "," + lastStart.lng +
+      "&vp=" + via.lat + "," + via.lng +
+      "&ep=" + lastEnd.lat + "," + lastEnd.lng +
+      "&by=car";
+  }
 
   window.location.href = url;
 }
