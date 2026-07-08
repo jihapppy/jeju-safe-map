@@ -3297,8 +3297,13 @@ setTimeout(()=>{
     [endLng,endLat]
   ],
   radiuses:[1500,1500],
+  alternative_routes:{
+    target_count:2,
+    weight_factor:2,
+    share_factor:0.6
+  },
+  instructions:false
 };
-
   try{
    let response = null;
 let lastStatus = "";
@@ -3359,6 +3364,9 @@ if(!response || !response.ok){
     }
 
     const routes = data.features;
+    if(routes.length < 2){
+  console.warn("대안경로가 2개 생성되지 않았습니다.", routes.length);
+}
 
     const routeRisks = routes.map(route => {
       const coords = route.geometry.coordinates.map(c => [c[1], c[0]]);
