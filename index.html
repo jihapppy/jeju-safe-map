@@ -3464,7 +3464,7 @@ const riskDiff =
     : 0;
     const riskCompareText =
   riskDiff > 0
-    ? "대안경로 대비 위험도 " + riskDiff + "% 낮음"
+    ? "대안경로 대비<br><b>위험도 " + riskDiff + "% 감소</b>"
     : "대안 경로와 유사";
 
 const resultWrap = document.createElement("div");
@@ -4681,8 +4681,6 @@ setTimeout(() => {
   if(mapBox){
     mapBox.id = "riskMiniMapPopup";
     mapBox.style.width = "100%";
-    mapBox.style.height = "330px";
-
     initRiskMiniMapPopup();
   }
 
