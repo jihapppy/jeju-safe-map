@@ -3292,17 +3292,17 @@ setTimeout(()=>{
 },1400);
 
   const body = {
-    coordinates:[
-      [startLng,startLat],
-      [endLng,endLat]
-    ],
-    radiuses:[1000,1000],
-    alternative_routes:{
-  target_count:1,
-  weight_factor:1.8,
-  share_factor:0.6
-}
-  };
+  coordinates:[
+    [startLng,startLat],
+    [endLng,endLat]
+  ],
+  radiuses:[1500,1500],
+  alternative_routes:{
+    target_count:1,
+    weight_factor:2.5,
+    share_factor:0.85
+  }
+};
 
   try{
    let response = null;
