@@ -3183,10 +3183,26 @@ setTimeout(()=>{
       }
     );
 
-   if(!response.ok){
-  document.getElementById("info").innerHTML =
-    "경로 분석 서버가 일시적으로 응답하지 않습니다. 잠시 후 다시 시도해주세요.";
-  alert("경로 분석 서버 오류입니다.\n잠시 후 다시 시도해주세요.");
+if(!response.ok){
+  const errorText = await response.text();
+  console.error("ORS 응답 오류:", response.status, errorText);
+
+  document.body.classList.remove("route-active");
+  document.querySelector(".panel").classList.remove("route-mode");
+
+  if(routeLayer){
+    map.removeLayer(routeLayer);
+    routeLayer = null;
+  }
+
+  document.getElementById("info").innerHTML = `
+    <div class="loading-card">
+      <b>경로 분석 서버가 잠시 불안정합니다</b>
+      <p>출발지와 목적지는 유지되어 있어요. 잠시 후 다시 시도해주세요.</p>
+      <p style="margin-top:6px;">오류코드: ${response.status}</p>
+    </div>
+  `;
+
   return;
 }
 
@@ -3737,10 +3753,22 @@ compactNavi.appendChild(kakaoBtn);
 }, 350);
     
  }catch(error){
-  document.getElementById("info").innerHTML =
-    "경로 분석 서버 연결이 일시적으로 불안정합니다. 잠시 후 다시 시도해주세요.";
+  console.error("경로 분석 오류:", error);
 
-  alert("경로 분석 서버 연결이 불안정해요.\n잠시 후 다시 시도해주세요.");
+  document.body.classList.remove("route-active");
+  document.querySelector(".panel").classList.remove("route-mode");
+
+  if(routeLayer){
+    map.removeLayer(routeLayer);
+    routeLayer = null;
+  }
+
+  document.getElementById("info").innerHTML = `
+    <div class="loading-card">
+      <b>경로 분석 중 오류가 발생했습니다</b>
+      <p>일시적인 연결 문제일 수 있어요. 잠시 후 다시 시도해주세요.</p>
+    </div>
+  `;
 }
 }
   function analyzeRouteRisk(coords){
