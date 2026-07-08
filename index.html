@@ -2250,9 +2250,9 @@ box-shadow:0 10px 24px rgba(20,184,166,.18);
 .menu-popup-content .risk-score-guide p{
   font-size:14px !important;
 }
-  /* ===== 배포 전 디자인 통일 최종 보정 ===== */
+/* ===== 배포 전 최종 디자인 정리 ===== */
 
-/* 전체 카드 간격 통일 */
+/* 공통 카드 */
 .result-hero-card,
 .ai-mini-summary,
 .course-choice-box,
@@ -2262,302 +2262,83 @@ box-shadow:0 10px 24px rgba(20,184,166,.18);
 .risk-score-guide,
 .feedback-card,
 .risk-info-card{
+  background:#fff !important;
   border-radius:22px !important;
-  box-shadow:0 8px 22px rgba(15,23,42,.06) !important;
   border:1px solid #edf2f7 !important;
+  box-shadow:0 8px 22px rgba(15,23,42,.06) !important;
 }
 
-/* 결과화면 카드 간격 줄이기 */
-.result-hero-card.new-result{
+/* 경로분석 페이지 여백 */
+.route-analysis-page{
+  padding:14px 14px 110px !important;
+}
+
+/* 위험점수 안내 흰색 카드 */
+.risk-score-guide{
+  background:#fff !important;
+  padding:18px !important;
+}
+
+.risk-score-guide h3{
+  font-size:17px !important;
   margin-bottom:12px !important;
-  padding:15px !important;
 }
 
-.ai-mini-summary,
-.course-choice-box,
-.info-split-col.tip{
+.risk-score-guide p{
+  font-size:13.5px !important;
+  line-height:1.65 !important;
+  margin:10px 0 !important;
+}
+
+/* 경로 상세 비교 카드 */
+.compare-detail-new.always-open{
+  padding:16px !important;
   margin:12px 0 !important;
 }
 
-/* 로딩화면 축소 */
-body.route-active .loading-card{
-  padding:16px !important;
-  border-radius:22px !important;
-}
-
-.loading-card b{
-  font-size:15px !important;
-  line-height:1.35 !important;
-}
-
-.loading-card p{
-  font-size:12px !important;
-  line-height:1.45 !important;
-}
-
-.loading-step{
-  height:38px !important;
-  font-size:13px !important;
-  border-radius:15px !important;
-}
-
-/* 결과 추천 카드 글자 정리 */
-.result-title{
+.compare-title{
   font-size:17px !important;
-  font-weight:900 !important;
-}
-
-.result-sub{
-  font-size:12px !important;
-  line-height:1.45 !important;
-}
-
-.result-metric span{
-  font-size:11.5px !important;
-}
-
-.result-metric b{
-  font-size:15px !important;
-}
-
-/* AI 한줄 요약 */
-.ai-mini-summary h3{
-  font-size:16px !important;
-}
-
-.ai-mini-summary p{
-  font-size:14px !important;
-  line-height:1.55 !important;
-}
-
-/* 코스 선택 */
-.course-choice-box h3{
-  font-size:16px !important;
-}
-
-.course-choice-box p{
-  font-size:12px !important;
-}
-
-.course-choice-btn{
-  padding:11px 10px !important;
-  border-radius:17px !important;
-}
-
-.course-choice-btn b{
-  font-size:13.5px !important;
-}
-
-.course-choice-btn strong{
-  font-size:21px !important;
-}
-
-.course-choice-btn span,
-.course-choice-btn small{
-  font-size:11.5px !important;
-}
-
-/* 길안내 버튼 */
-.navi-btn{
-  height:50px !important;
-  border-radius:17px !important;
-}
-
-.nav-icon{
-  width:30px !important;
-  height:30px !important;
-  min-width:30px !important;
-}
-
-.nav-text b{
-  font-size:11.5px !important;
-}
-
-.nav-text small{
-  font-size:10px !important;
-}
-
-/* 경로 상세 분석 버튼 */
-.analysis-link-btn{
-  height:46px !important;
-  font-size:14.5px !important;
-  margin:10px 0 12px !important;
-}
-
-/* 안전팁 */
-.info-split-col.tip{
-  padding:15px !important;
-}
-
-.info-split-col.tip h3{
-  font-size:16px !important;
-  margin-bottom:10px !important;
-}
-
-.tip-item{
-  padding:10px 11px !important;
-  font-size:12.8px !important;
-  border-radius:15px !important;
-}
-
-/* 경로분석 탭 */
-.route-analysis-page{
-  padding:14px 14px 96px !important;
-}
-
-.analysis-main-card{
-  padding:15px !important;
-}
-
-.analysis-main-card h3,
-.compare-title,
-.risk-score-guide h3{
-  font-size:17px !important;
-}
-
-.analysis-text b{
-  font-size:14.5px !important;
-}
-
-.analysis-text span{
-  font-size:13.5px !important;
-  line-height:1.45 !important;
+  margin-bottom:12px !important;
 }
 
 .compare-mini{
   padding:12px 10px !important;
-}
-
-.compare-head b{
-  font-size:17px !important;
+  border-radius:18px !important;
 }
 
 .compare-row2{
-  font-size:12px !important;
+  padding:6px 0 !important;
+}
+
+.compare-row2 span{
+  font-size:12.5px !important;
 }
 
 .compare-row2 b{
   font-size:13.5px !important;
 }
 
-.risk-score-guide{
-  padding:18px !important;
+/* 대안경로 대비 문구 */
+.risk-compare-note{
+  margin-top:12px !important;
+  padding-top:8px !important;
+  border-top:1px solid #dcefed !important;
+  text-align:center !important;
+  font-size:12px !important;
+  line-height:1.35 !important;
+  font-weight:800 !important;
+  color:#0f766e !important;
+  word-break:keep-all !important;
 }
 
-.risk-score-guide p{
-  font-size:13.5px !important;
-  line-height:1.65 !important;
+.risk-compare-note b{
+  display:block;
+  margin-top:2px;
+  font-size:13px;
+  font-weight:950;
 }
 
-/* 별점 카드 */
-.feedback-card{
-  padding:16px !important;
-  margin-bottom:24px !important;
-}
-
-.rating-stars button{
-  font-size:34px !important;
-}
-
-/* 위험지도 페이지 */
-.risk-map-page{
-  padding:18px 14px 110px !important;
-}
-
-.risk-map-title{
-  font-size:21px !important;
-}
-
-.risk-map-sub{
-  font-size:12.5px !important;
-  line-height:1.55 !important;
-}
-
-#riskMiniMap{
-  height:285px !important;
-  border-radius:22px !important;
-}
-
-.risk-map-card{
-  padding:10px !important;
-  border-radius:26px !important;
-}
-
-.risk-map-legend{
-  padding:10px 6px !important;
-  gap:4px !important;
-  font-size:10.5px !important;
-}
-
-.risk-map-legend small{
-  font-size:8.5px !important;
-}
-
-.epdo-desc{
-  font-size:11px !important;
-  line-height:1.4 !important;
-}
-
-.risk-dashboard{
-  gap:12px !important;
-  padding-bottom:40px !important;
-}
-
-.risk-info-card{
-  padding:15px !important;
-}
-
-.risk-info-card h3{
-  font-size:17px !important;
-}
-
-.risk-info-card p{
-  font-size:12.8px !important;
-  line-height:1.5 !important;
-}
-
-.risk-question{
-  font-size:12.8px !important;
-}
-
-.type-row{
-  grid-template-columns:78px 1fr 42px !important;
-  gap:7px !important;
-  font-size:11.5px !important;
-}
-
-.type-row b{
-  font-size:11.5px !important;
-}
-
-.stat-grid div{
-  padding:10px 3px !important;
-}
-
-.stat-grid b{
-  font-size:18px !important;
-}
-
-.stat-grid span{
-  font-size:10px !important;
-}
-
-/* 하단바 안정화 */
-.bottom-nav{
-  height:66px !important;
-}
-
-.bottom-item img{
-  width:22px !important;
-  height:22px !important;
-}
-
-.bottom-item b{
-  font-size:11px !important;
-}
-  /* ===== 최종 보정: 위험지도/경로비교 모바일 정리 ===== */
-
-/* 1. 사고 위험지도 팝업 높이 줄이기 */
+/* 위험지도 팝업 축소 */
 .menu-popup{
   padding:78px 14px 96px !important;
 }
@@ -2571,58 +2352,19 @@ body.route-active .loading-card{
   padding:14px !important;
 }
 
-/* 팝업 안 제목/설명 축소 */
-.menu-popup-content .risk-map-title{
-  font-size:24px !important;
-  margin-bottom:6px !important;
-}
-
-.menu-popup-content .risk-map-sub{
-  font-size:13px !important;
-  line-height:1.45 !important;
-}
-
-/* 지도 카드 자체 줄이기 */
-.menu-popup-content .risk-map-card{
-  margin-top:12px !important;
-  padding:8px !important;
-  border-radius:22px !important;
-}
-
-/* 팝업 안 지도 높이 줄이기 */
 #riskMiniMapPopup{
   height:260px !important;
   border-radius:20px !important;
 }
 
-/* 범례도 작게 */
-.menu-popup-content .risk-map-legend{
-  margin-top:8px !important;
-  padding:10px 6px !important;
-  gap:4px !important;
-  font-size:10px !important;
+/* 위험지도 본페이지 */
+.risk-map-page{
+  padding:18px 14px 110px !important;
 }
 
-.menu-popup-content .risk-map-legend small{
-  font-size:8.5px !important;
-}
-
-.menu-popup-content .risk-dot{
-  width:11px !important;
-  height:11px !important;
-  margin-bottom:3px !important;
-}
-
-/* EPDO 설명 줄이기 */
-.menu-popup-content .epdo-desc{
-  margin-top:8px !important;
-  font-size:11px !important;
-  line-height:1.35 !important;
-}
-
-/* 2. 위험지도 본페이지도 살짝 줄이기 */
 #riskMiniMap{
   height:285px !important;
+  border-radius:22px !important;
 }
 
 .risk-map-card{
@@ -2632,41 +2374,12 @@ body.route-active .loading-card{
 
 .risk-map-legend{
   padding:10px 6px !important;
+  gap:4px !important;
   font-size:10px !important;
 }
 
-/* 3. 경로 상세 비교 안 '대안경로 대비 위험도' 글씨 축소 */
-.risk-compare-note{
-  margin-top:12px !important;
-  font-size:12px !important;
-  line-height:1.35 !important;
-  text-align:center !important;
-  font-weight:700 !important;
-  color:#0f766e !important;
-  word-break:keep-all !important;
-}
-
-/* 추천 카드 안에서 너무 커지는 것 방지 */
-.compare-mini .risk-compare-note{
-  font-size:12.5px !important;
-  line-height:1.35 !important;
-}
-
-/* 4. 비교 카드 내부 여백 조금 축소 */
-.compare-mini{
-  padding:13px 12px !important;
-}
-
-.compare-row2{
-  padding:6px 0 !important;
-}
-
-.compare-row2 span{
-  font-size:13px !important;
-}
-
-.compare-row2 b{
-  font-size:14px !important;
+.risk-map-legend small{
+  font-size:8.5px !important;
 }
 </style>
 </head>
