@@ -3364,6 +3364,8 @@ if(!response || !response.ok){
     }
 
     const routes = data.features;
+    console.log("경로 개수:", routes.length);
+console.log("ORS 전체 응답:", data);
     if(routes.length < 2){
   console.warn("대안경로가 2개 생성되지 않았습니다.", routes.length);
 }
