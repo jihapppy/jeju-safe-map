@@ -3298,10 +3298,10 @@ setTimeout(()=>{
     ],
     radiuses:[1000,1000],
     alternative_routes:{
-      target_count:2,
-      weight_factor:2,
-      share_factor:0.6
-    }
+  target_count:1,
+  weight_factor:1.8,
+  share_factor:0.6
+}
   };
 
   try{
@@ -3924,7 +3924,7 @@ compactNavi.appendChild(kakaoBtn);
 }
 }
   function analyzeRouteRisk(coords){
-  const SEARCH_RADIUS_M = 300;
+ const SEARCH_RADIUS_M = 250;
 
   let totalScore = 0;
   let accidentCount = 0;
@@ -3940,7 +3940,7 @@ compactNavi.appendChild(kakaoBtn);
     const segmentKm = getDistanceKm(p1[0], p1[1], p2[0], p2[1]);
     totalDistanceKm += segmentKm;
 
-    const sampleCount = Math.max(1, Math.ceil((segmentKm * 1000) / 100));
+    const sampleCount = Math.max(1, Math.ceil((segmentKm * 1000) / 250));
 
     for(let s = 0; s <= sampleCount; s++){
       const t = s / sampleCount;
