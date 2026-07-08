@@ -3479,22 +3479,40 @@ setTimeout(()=>{
   };
 
   try{
-    const response = await fetch(
+   let response = null;
+let lastStatus = "";
+let lastErrorText = "";
+
+for(const key of orsApiKeys){
+  try{
+    response = await fetch(
       "https://api.openrouteservice.org/v2/directions/driving-car/geojson",
       {
         method:"POST",
         headers:{
-          "Authorization":apiKey,
+          "Authorization":key,
           "Content-Type":"application/json"
         },
         body:JSON.stringify(body)
       }
     );
 
-if(!response.ok){
-  const errorText = await response.text();
-  console.error("ORS 응답 오류:", response.status, errorText);
+    if(response.ok){
+      console.log("ORS 경로 분석 성공");
+      break;
+    }
 
+    lastStatus = response.status;
+    lastErrorText = await response.text();
+    console.error("ORS 키 실패:", response.status, lastErrorText);
+
+  }catch(err){
+    lastErrorText = err.message;
+    console.error("ORS 요청 자체 실패:", err);
+  }
+}
+
+if(!response || !response.ok){
   document.body.classList.remove("route-active");
   document.querySelector(".panel").classList.remove("route-mode");
 
@@ -3507,7 +3525,7 @@ if(!response.ok){
     <div class="loading-card">
       <b>경로 분석 서버가 잠시 불안정합니다</b>
       <p>출발지와 목적지는 유지되어 있어요. 잠시 후 다시 시도해주세요.</p>
-      <p style="margin-top:6px;">오류코드: ${response.status}</p>
+      <p style="margin-top:6px;">오류코드: ${lastStatus || "-"}</p>
     </div>
   `;
 
