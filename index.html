@@ -2555,6 +2555,118 @@ body.route-active .loading-card{
 .bottom-item b{
   font-size:11px !important;
 }
+  /* ===== 최종 보정: 위험지도/경로비교 모바일 정리 ===== */
+
+/* 1. 사고 위험지도 팝업 높이 줄이기 */
+.menu-popup{
+  padding:78px 14px 96px !important;
+}
+
+.menu-popup-card{
+  height:78vh !important;
+  border-radius:24px !important;
+}
+
+.menu-popup-content{
+  padding:14px !important;
+}
+
+/* 팝업 안 제목/설명 축소 */
+.menu-popup-content .risk-map-title{
+  font-size:24px !important;
+  margin-bottom:6px !important;
+}
+
+.menu-popup-content .risk-map-sub{
+  font-size:13px !important;
+  line-height:1.45 !important;
+}
+
+/* 지도 카드 자체 줄이기 */
+.menu-popup-content .risk-map-card{
+  margin-top:12px !important;
+  padding:8px !important;
+  border-radius:22px !important;
+}
+
+/* 팝업 안 지도 높이 줄이기 */
+#riskMiniMapPopup{
+  height:260px !important;
+  border-radius:20px !important;
+}
+
+/* 범례도 작게 */
+.menu-popup-content .risk-map-legend{
+  margin-top:8px !important;
+  padding:10px 6px !important;
+  gap:4px !important;
+  font-size:10px !important;
+}
+
+.menu-popup-content .risk-map-legend small{
+  font-size:8.5px !important;
+}
+
+.menu-popup-content .risk-dot{
+  width:11px !important;
+  height:11px !important;
+  margin-bottom:3px !important;
+}
+
+/* EPDO 설명 줄이기 */
+.menu-popup-content .epdo-desc{
+  margin-top:8px !important;
+  font-size:11px !important;
+  line-height:1.35 !important;
+}
+
+/* 2. 위험지도 본페이지도 살짝 줄이기 */
+#riskMiniMap{
+  height:285px !important;
+}
+
+.risk-map-card{
+  padding:8px !important;
+  border-radius:24px !important;
+}
+
+.risk-map-legend{
+  padding:10px 6px !important;
+  font-size:10px !important;
+}
+
+/* 3. 경로 상세 비교 안 '대안경로 대비 위험도' 글씨 축소 */
+.risk-compare-note{
+  margin-top:10px !important;
+  font-size:13px !important;
+  line-height:1.35 !important;
+  font-weight:800 !important;
+  color:#0f766e !important;
+  word-break:keep-all !important;
+}
+
+/* 추천 카드 안에서 너무 커지는 것 방지 */
+.compare-mini .risk-compare-note{
+  font-size:12.5px !important;
+  line-height:1.35 !important;
+}
+
+/* 4. 비교 카드 내부 여백 조금 축소 */
+.compare-mini{
+  padding:13px 12px !important;
+}
+
+.compare-row2{
+  padding:6px 0 !important;
+}
+
+.compare-row2 span{
+  font-size:13px !important;
+}
+
+.compare-row2 b{
+  font-size:14px !important;
+}
 </style>
 </head>
 
