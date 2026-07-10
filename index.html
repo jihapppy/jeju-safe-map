@@ -3038,6 +3038,10 @@ let lastEnd = null;
   let ratingSubmitted = false;
   let selectedRouteIndex = 0;
 let lastRouteSummaries = [];
+  let lastRecommendedIndex = 0;
+let customStartArea = "기타";
+let lastNavigation = "";
+  
 
   const destinationTips = {
   "1100고지": [
@@ -3140,13 +3144,14 @@ function useCurrentLocation(){
             data.documents[0].address?.address_name;
 
           if(address){
-            customStartName = address;
-          }
+  customStartName = address;
+  customStartArea = getJejuRegion(address);
+}
         }
-      }catch(error){
-        customStartName = "현재 위치(" + lat.toFixed(5) + "," + lng.toFixed(5) + ")";
-      }
-
+     }catch(error){
+  customStartName = "현재 위치(" + lat.toFixed(5) + "," + lng.toFixed(5) + ")";
+  customStartArea = "기타";
+}
       document.getElementById("startInput").value = customStartName;
       document.getElementById("startInput").placeholder = "현재 위치로 설정됨";
       document.getElementById("startResults").innerHTML = "";
@@ -3439,6 +3444,7 @@ if(routeSummaries.length > 1){
     })[0].index;
 }
 selectedRouteIndex = recommendedIndex;
+    lastRecommendedIndex = recommendedIndex;
 routeSummaries.forEach((summary,index)=>{
   const coords = summary.coords;
   allCoords = allCoords.concat(coords);
@@ -3618,18 +3624,9 @@ onclick="showRouteAnalysis()">
   </div>
 `;
     ratingSubmitted = false;
-lastFeedbackData = {
-  start: startName,
-  end: endName,
-  route: recommendCourseName,
-  distance: recommend.distanceKm,
-  time: recommend.durationMin,
-  count: recommend.risk.totalCount,
-  epdo: recommend.risk.totalEpdo,
-  risk: recommend.risk.riskScoreText
-};
-    sendRouteAnalysisLog();
-    
+lastNavigation = "";
+updateLastFeedbackData(recommendedIndex);
+sendRouteAnalysisLog();
 
 lastRouteAnalysisHtml = `
   <div class="routePath">${startName} <span class="arrow">→</span> ${endName}</div>
@@ -4066,6 +4063,59 @@ function getRouteViaPoint(route){
     name: (selectedRouteIndex + 1) + "코스 경유지"
   };
 }
+  function updateLastFeedbackData(index){
+
+  if(!lastRouteSummaries || lastRouteSummaries.length === 0){
+    return;
+  }
+
+  const selected = lastRouteSummaries[index];
+
+  const otherIndex = lastRouteSummaries.length > 1
+    ? (index === 0 ? 1 : 0)
+    : index;
+
+  const other = lastRouteSummaries[otherIndex];
+
+  const selectedRisk = Math.round(selected.risk.score);
+  const otherRisk = Math.round(other.risk.score);
+
+  lastFeedbackData = {
+    start: lastStart?.name || "",
+    end: lastEnd?.name || "",
+
+    route: (index + 1) + "코스",
+
+    distance: Number(selected.distanceKm),
+    time: selected.durationMin,
+    count: selected.risk.totalCount,
+    epdo: selected.risk.totalEpdo,
+
+    // 숫자로 저장해야 나중에 평균·합계 계산 가능
+    risk: selectedRisk,
+
+    // 추천경로를 골랐는지 여부
+    routeChoice:
+      index === lastRecommendedIndex
+        ? "추천"
+        : "대안",
+
+    // 현재 선택경로와 비교되는 다른 경로
+    altRisk: otherRisk,
+
+    // 양수면 선택경로가 더 안전, 음수면 더 위험
+    riskDiff: otherRisk - selectedRisk,
+
+    altTime: other.durationMin,
+
+    // 양수면 선택경로가 더 오래 걸림
+    timeDiff: selected.durationMin - other.durationMin,
+
+    navigation: lastNavigation,
+
+    currentArea: customStartArea || "기타"
+  };
+}
 function selectRouteCourse(index){
   selectedRouteIndex = index;
 
@@ -4073,14 +4123,8 @@ function selectRouteCourse(index){
     btn.classList.toggle("active", i === index);
   });
 
-  const selected = lastRouteSummaries[index];
-
-  lastFeedbackData.route = (index + 1) + "코스";
-  lastFeedbackData.distance = selected.distanceKm;
-  lastFeedbackData.time = selected.durationMin;
-  lastFeedbackData.count = selected.risk.totalCount;
-  lastFeedbackData.epdo = selected.risk.totalEpdo;
-  lastFeedbackData.risk = selected.risk.riskScoreText;
+  lastNavigation = "";
+  updateLastFeedbackData(index);
 }
 
   function openNaverMap(courseIndex = selectedRouteIndex){
@@ -4114,6 +4158,8 @@ function selectRouteCourse(index){
 
   url += "&appname=" + encodeURIComponent(appname);
 
+    sendNavigationLog("네이버지도");
+  
   window.location.href = url;
 }
  function openTmap(courseIndex = selectedRouteIndex){
@@ -4132,7 +4178,8 @@ function selectRouteCourse(index){
     "&goalx=" + lastEnd.lng +
     "&goaly=" + lastEnd.lat +
     "&goalname=" + encodeURIComponent(lastEnd.name);
-
+   
+sendNavigationLog("TMAP");
   window.location.href = url;
 }
 function openKakaoNavi(courseIndex = selectedRouteIndex){
@@ -4160,7 +4207,7 @@ function openKakaoNavi(courseIndex = selectedRouteIndex){
       "&ep=" + lastEnd.lat + "," + lastEnd.lng +
       "&by=car";
   }
-
+sendNavigationLog("카카오맵");
   window.location.href = url;
 }
 
@@ -4287,6 +4334,11 @@ resultBox.innerHTML = "검색중...";
         };
 
         customStartName = place.place_name;
+        customStartArea = getJejuRegion(
+  place.road_address_name ||
+  place.address_name ||
+  place.place_name
+);
 
 document.getElementById("startInput").value = place.place_name;
 resultBox.innerHTML = "";
@@ -4349,6 +4401,8 @@ function goHome(){
   customEnd = null;
   customStartName = null;
   customEndName = null;
+  customStartArea = "기타";
+lastNavigation = "";
 
   if(routeLayer){
     map.removeLayer(routeLayer);
@@ -4395,23 +4449,33 @@ function setRating(score){
     headers:{
       "Content-Type":"application/json"
     },
-    body:JSON.stringify({
-      start:lastFeedbackData.start,
-      end:lastFeedbackData.end,
-      route:lastFeedbackData.route,
-      distance:lastFeedbackData.distance,
-      time:lastFeedbackData.time,
-      count:lastFeedbackData.count,
-      epdo:lastFeedbackData.epdo,
-      risk:lastFeedbackData.risk,
-      feedback:"별점 " + score
-    })
+body:JSON.stringify({
+  start:lastFeedbackData.start,
+  end:lastFeedbackData.end,
+  route:lastFeedbackData.route,
+  distance:lastFeedbackData.distance,
+  time:lastFeedbackData.time,
+  count:lastFeedbackData.count,
+  epdo:lastFeedbackData.epdo,
+  risk:lastFeedbackData.risk,
+  feedback:"별점 " + score,
+
+  routeChoice:lastFeedbackData.routeChoice,
+  altRisk:lastFeedbackData.altRisk,
+  riskDiff:lastFeedbackData.riskDiff,
+  altTime:lastFeedbackData.altTime,
+  timeDiff:lastFeedbackData.timeDiff,
+  navigation:lastFeedbackData.navigation,
+  currentArea:lastFeedbackData.currentArea
+})
   });
 }
-  function sendRouteAnalysisLog(){
+function sendRouteAnalysisLog(){
+
   fetch(feedbackApiUrl,{
     method:"POST",
     mode:"no-cors",
+    keepalive:true,
     headers:{
       "Content-Type":"application/json"
     },
@@ -4424,7 +4488,49 @@ function setRating(score){
       count:lastFeedbackData.count,
       epdo:lastFeedbackData.epdo,
       risk:lastFeedbackData.risk,
-      feedback:"경로분석"
+      feedback:"경로분석",
+
+      routeChoice:lastFeedbackData.routeChoice,
+      altRisk:lastFeedbackData.altRisk,
+      riskDiff:lastFeedbackData.riskDiff,
+      altTime:lastFeedbackData.altTime,
+      timeDiff:lastFeedbackData.timeDiff,
+      navigation:"",
+      currentArea:lastFeedbackData.currentArea
+    })
+  });
+}
+  function sendNavigationLog(navigationName){
+
+  lastNavigation = navigationName;
+  updateLastFeedbackData(selectedRouteIndex);
+
+  fetch(feedbackApiUrl,{
+    method:"POST",
+    mode:"no-cors",
+    keepalive:true,
+    headers:{
+      "Content-Type":"application/json"
+    },
+    body:JSON.stringify({
+      start:lastFeedbackData.start,
+      end:lastFeedbackData.end,
+      route:lastFeedbackData.route,
+      distance:lastFeedbackData.distance,
+      time:lastFeedbackData.time,
+      count:lastFeedbackData.count,
+      epdo:lastFeedbackData.epdo,
+      risk:lastFeedbackData.risk,
+
+      feedback:"길안내",
+
+      routeChoice:lastFeedbackData.routeChoice,
+      altRisk:lastFeedbackData.altRisk,
+      riskDiff:lastFeedbackData.riskDiff,
+      altTime:lastFeedbackData.altTime,
+      timeDiff:lastFeedbackData.timeDiff,
+      navigation:navigationName,
+      currentArea:lastFeedbackData.currentArea
     })
   });
 }
