@@ -2819,25 +2819,35 @@ function getJejuRegion(name){
 
   // ① 공항권
   if(
-    name.includes("용담1동") ||
-    name.includes("용담2동") ||
-    name.includes("도두동") ||
-    name.includes("이호동")
-  ) return "공항권";
+  name.includes("용담1동") ||
+  name.includes("용담2동") ||
+  name.includes("용담일동") ||
+  name.includes("용담이동") ||
+  name.includes("도두동") ||
+  name.includes("이호동")
+) return "공항권";
 
   // ② 제주시도심권
-  if(
-    name.includes("연동") ||
-    name.includes("노형동") ||
-    name.includes("건입동") ||
-    name.includes("일도1동") ||
-    name.includes("일도2동") ||
-    name.includes("이도1동") ||
-    name.includes("이도2동") ||
-    name.includes("삼도1동") ||
-    name.includes("삼도2동")
-  ) return "제주시도심권";
+if(
+  name.includes("연동") ||
+  name.includes("노형동") ||
+  name.includes("건입동") ||
 
+  name.includes("일도1동") ||
+  name.includes("일도2동") ||
+  name.includes("일도일동") ||
+  name.includes("일도이동") ||
+
+  name.includes("이도1동") ||
+  name.includes("이도2동") ||
+  name.includes("이도일동") ||
+  name.includes("이도이동") ||
+
+  name.includes("삼도1동") ||
+  name.includes("삼도2동") ||
+  name.includes("삼도일동") ||
+  name.includes("삼도이동")
+) return "제주시도심권";
   // ③ 함덕·조천권
   if(
     name.includes("조천읍") ||
@@ -3139,13 +3149,18 @@ function useCurrentLocation(){
         const data = await response.json();
 
         if(data.documents && data.documents.length > 0){
-          const address =
-            data.documents[0].road_address?.address_name ||
-            data.documents[0].address?.address_name;
+const address =
+  data.documents[0].road_address?.address_name ||
+  data.documents[0].address?.address_name;
 
-          if(address){
+const areaAddress =
+  data.documents[0].address?.address_name ||
+  data.documents[0].road_address?.address_name ||
+  "";
+
+if(address){
   customStartName = address;
-  customStartArea = getJejuRegion(address);
+  customStartArea = getJejuRegion(areaAddress);
 }
         }
      }catch(error){
